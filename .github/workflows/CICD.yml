@@ -11,11 +11,16 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Setup .NET
+    - name: (.NET) Setup
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: '3.1.x'
+        dotnet-version: '8.0.x'
 
+    - name: (.NET) Restore Dependencies
+      run: dotnet restore 
+
+    - name: (.NET) Build DeepDrunkTalks Backend
+      run: dotnet build DeepDrunkTalk.Backend/DeepDrunkTalk.Backend.sln --no-restore 
 
 
 

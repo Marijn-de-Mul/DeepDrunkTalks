@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DDT.BLL")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c0823c8a1292a7b060bc2a2f2604da4663e4f0f2")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+58407701c17a97210abe657115aca3037029986c")]
 [assembly: System.Reflection.AssemblyProductAttribute("DDT.BLL")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DDT.BLL")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -5,7 +5,7 @@ on:
     branches: [ main ]
 
 jobs: 
-  build: 
+  CI: 
     runs-on: ubuntu-latest 
 
     steps: 
@@ -14,8 +14,19 @@ jobs:
     - name: Set up .NET 
       uses: actions/setup-dotnet@v1 
       with: 
-        dotnet-version: 8.0 
-        
-         
+        dotnet-version: 1.2.*
+
+  CD: 
+    runs-on: ubuntu-latest 
+
+    steps: 
+    - uses: actions/checkout@v2
+
+    - name: Set up .NET 
+      uses: actions/setup-dotnet@v1 
+      with: 
+        dotnet-version: 1.2.*
+
+
 
 

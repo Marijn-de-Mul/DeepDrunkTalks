@@ -17,7 +17,7 @@ jobs:
         dotnet-version: '8.0.x'
 
     - name: (.NET) Restore Dependencies
-      run: dotnet restore 
+      run: dotnet restore DeepDrunkTalk.Backend/DeepDrunkTalk.Backend.sln
 
     - name: (.NET) Build DeepDrunkTalks Backend
       run: dotnet build DeepDrunkTalk.Backend/DeepDrunkTalk.Backend.sln --no-restore 

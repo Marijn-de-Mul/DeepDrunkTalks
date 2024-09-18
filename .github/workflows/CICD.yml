@@ -5,7 +5,7 @@ on:
     branches: [ main ]
 
 jobs: 
-  CICD: 
+  CICD-UserService: 
     runs-on: ubuntu-latest 
 
     steps:
@@ -18,13 +18,58 @@ jobs:
       with:
         dotnet-version: '8.0.x'
 
-    - name: (.NET) Restore DeepDrunkTalks Backend Dependencies
-      run: dotnet restore DeepDrunkTalk.Backend/DeepDrunkTalk.Backend.sln
+    - name: (.NET) Restore DeepDrunkTalks UserService Backend Dependencies
+      run: dotnet restore DeepDrunkTalk.Backend/DeepDrunkTalks.Backend.UserService/DeepDrunkTalks.Backend.UserService.sln
 
-    - name: (.NET) Build DeepDrunkTalks Backend
-      run: dotnet build DeepDrunkTalk.Backend/DeepDrunkTalk.Backend.sln --no-restore 
+    - name: (.NET) Build DeepDrunkTalks UserService Backend
+      run: dotnet build --no-restore DeepDrunkTalk.Backend/DeepDrunkTalks.Backend.UserService/DeepDrunkTalks.Backend.UserService.sln 
 
-    - name: (.NET) Test DeepDrunkTalks Backend
-      run: dotnet test --no-build --verbosity normal DeepDrunkTalk.Backend/DeepDrunkTalk.Backend.sln
+    - name: (.NET) Test DeepDrunkTalks UserService Backend
+      run: dotnet test --no-build --verbosity DeepDrunkTalk.Backend/DeepDrunkTalks.Backend.UserService/DeepDrunkTalks.Backend.UserService.sln
+  
+  CICD-AIService: 
+    runs-on: ubuntu-latest 
+
+    steps:
+
+    - name: (Github) Checkout Code
+      uses: actions/checkout@v4
+
+    - name: (.NET) Setup
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: (.NET) Restore DeepDrunkTalks AIService Backend Dependencies
+      run: dotnet restore DeepDrunkTalk.Backend/DeepDrunkTalks.Backend.AIService/DeepDrunkTalks.Backend.AIService.sln
+
+    - name: (.NET) Build DeepDrunkTalks AIService Backend
+      run: dotnet build --no-restore DeepDrunkTalk.Backend/DeepDrunkTalks.Backend.AIService/DeepDrunkTalks.Backend.AIService.sln
+
+    - name: (.NET) Test DeepDrunkTalks AIService Backend
+      run: dotnet test --no-build --verbosity DeepDrunkTalk.Backend/DeepDrunkTalks.Backend.AIService/DeepDrunkTalks.Backend.AIService.sln
+
+  CICD-QuestionService: 
+    runs-on: ubuntu-latest 
+
+    steps:
+
+    - name: (Github) Checkout Code
+      uses: actions/checkout@v4
+
+    - name: (.NET) Setup
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: (.NET) Restore DeepDrunkTalks QuestionService Backend Dependencies
+      run: dotnet restore DeepDrunkTalk.Backend/DeepDrunkTalks.Backend.QuestionService/DeepDrunkTalks.Backend.QuestionService.sln
+
+    - name: (.NET) Build DeepDrunkTalks QuestionService Backend
+      run: dotnet build --no-restore DeepDrunkTalk.Backend/DeepDrunkTalks.Backend.QuestionService/DeepDrunkTalks.Backend.QuestionService.sln
+
+    - name: (.NET) Test DeepDrunkTalks QuestionService Backend
+      run: dotnet test --no-build --verbosity DeepDrunkTalk.Backend/DeepDrunkTalks.Backend.QuestionService/DeepDrunkTalks.Backend.QuestionService.sln
+
 
 

@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDT.Backend.QuestionService.DAL", "DDT.Backend.QuestionService.DAL\DDT.Backend.QuestionService.DAL.csproj", "{526A1577-62F4-437A-9616-EFDEDBE7B431}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDT.Backend.QuestionService.BLL", "DDT.Backend.QuestionService.BLL\DDT.Backend.QuestionService.BLL.csproj", "{4A764062-5151-4E9A-A50A-B03BDA8D2F64}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDT.Backend.QuestionService.API", "DDT.Backend.QuestionService.API\DDT.Backend.QuestionService.API.csproj", "{93915FFA-66FA-4D7E-9DE5-22D51565BD84}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{526A1577-62F4-437A-9616-EFDEDBE7B431}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{526A1577-62F4-437A-9616-EFDEDBE7B431}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{526A1577-62F4-437A-9616-EFDEDBE7B431}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{526A1577-62F4-437A-9616-EFDEDBE7B431}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A764062-5151-4E9A-A50A-B03BDA8D2F64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A764062-5151-4E9A-A50A-B03BDA8D2F64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A764062-5151-4E9A-A50A-B03BDA8D2F64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A764062-5151-4E9A-A50A-B03BDA8D2F64}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93915FFA-66FA-4D7E-9DE5-22D51565BD84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93915FFA-66FA-4D7E-9DE5-22D51565BD84}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93915FFA-66FA-4D7E-9DE5-22D51565BD84}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93915FFA-66FA-4D7E-9DE5-22D51565BD84}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

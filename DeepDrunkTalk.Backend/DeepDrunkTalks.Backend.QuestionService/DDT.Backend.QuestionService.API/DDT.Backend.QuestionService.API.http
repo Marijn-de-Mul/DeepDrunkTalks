@@ -1,0 +1,6 @@
+@DDT.Backend.QuestionService.API_HostAddress = http://localhost:5240
+
+GET {{DDT.Backend.QuestionService.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

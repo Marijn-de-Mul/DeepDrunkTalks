@@ -1,10 +1,10 @@
-name: DDT.Backend
+name: Super-Linter
 
 on: push 
 
 jobs: 
-  DDT-Backend: 
-    name: DDT.Backend code base 
+  Super-Linter: 
+    name: Lint DeepDrunkTalks Code Base 
     runs-on: ubuntu-latest 
     steps: 
       - name: Checkout code 

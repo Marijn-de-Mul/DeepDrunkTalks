@@ -26,6 +26,19 @@ jobs:
 
     - name: (.NET) Test DeepDrunkTalks UserService Backend
       run: dotnet test --no-build --verbosity normal DeepDrunkTalk.Backend/DeepDrunkTalks.Backend.UserService/DeepDrunkTalks.Backend.UserService.sln
+
+    - name: (Docker) Build DeepDrunkTalks UserService Backend Docker Image 
+      working-directory: DeepDrunkTalk.Backend/DeepDrunkTalks.Backend.UserService/
+      run: docker build . -t MarijndeMul16/DDT.Backend.UserService:latest
+
+    - name: (Docker) Log Into Docker Hub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+    - name: (Docker) Push The DeepDrunkTalks UserService Backend Image To Docker Hub
+      run: docker push MarijndeMul16/DDT.Backend.UserService
   
   CICD-AIService: 
     runs-on: ubuntu-latest 

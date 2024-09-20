@@ -8,13 +8,16 @@ jobs:
   CICD-UserService: 
     runs-on: [self-hosted, Linux] 
 
+    env: 
+      DOTNET_INSTALL_DIR: "./.dotnet"
+
     steps:
 
     - name: (Github) Checkout Code
       uses: actions/checkout@v4
 
     - name: (.NET) Setup
-      uses: actions/setup-dotnet@v4
+      uses: actions/setup-dotnet@main
       with:
         dotnet-version: '8.0.x'
 

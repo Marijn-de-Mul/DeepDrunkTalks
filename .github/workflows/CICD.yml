@@ -6,7 +6,7 @@ on:
 
 jobs: 
   CICD-UserService: 
-    runs-on: ubuntu-latest 
+    runs-on: [self-hosted, ubuntu-latest]
 
     steps:
 
@@ -41,7 +41,7 @@ jobs:
       run: docker push marijndemul16/ddt.backend.userservice
   
   CICD-AIService: 
-    runs-on: ubuntu-latest 
+    runs-on: [self-hosted, ubuntu-latest]
 
     steps:
 
@@ -76,7 +76,7 @@ jobs:
       run: docker push marijndemul16/ddt.backend.aiservice
 
   CICD-QuestionService: 
-    runs-on: ubuntu-latest 
+    runs-on: [self-hosted, ubuntu-latest]
 
     steps:
 

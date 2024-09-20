@@ -6,7 +6,7 @@ on:
 
 jobs: 
   CICD-UserService: 
-    runs-on: [self-hosted, ubuntu-latest]
+    runs-on: self-hosted
 
     steps:
 

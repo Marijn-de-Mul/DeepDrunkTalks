@@ -7,8 +7,14 @@ export const meta: MetaFunction = () => {
   ];
 };
 
+export function Button() { 
+  return (
+    <button>Test</button>
+  );
+}
+
 export default function Index() {
   return (
-    <><p>Hello World</p><p>This is a test</p></>
+    <Button/>
   );
 }

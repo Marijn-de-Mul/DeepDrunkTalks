@@ -17,7 +17,7 @@ jobs:
       uses: docker/setup-buildx-action@v2
 
     - name: (Docker) Build DeepDrunkTalks Frontend Docker Image 
-      # working-directory: DeepDrunkTalk.Backend/DeepDrunkTalks.Backend.UserService/
+      working-directory: DeepDrunkTalk.Frontend/
       run: docker build . -t marijndemul16/ddt.frontend:latest
 
     - name: (Docker) Log Into Docker Hub

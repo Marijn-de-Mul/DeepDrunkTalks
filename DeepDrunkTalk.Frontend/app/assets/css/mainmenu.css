@@ -1,0 +1,37 @@
+.logodiv { 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 4vh;
+}
+
+.logo { 
+    max-width: 70vw;
+    width: auto;
+    margin-top: 10vh;
+}
+
+.menubuttonsdiv { 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.menubutton { 
+    margin-top: 2vh;
+}
+
+.divider { 
+    margin-top: 10vh;
+}
+
+.footerdiv { 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footertext { 
+    font-style: italic;
+}

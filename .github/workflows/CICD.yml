@@ -6,7 +6,7 @@ on:
 
 jobs: 
   CICD-Frontend: 
-    runs-on: [self-hosted, Linux] 
+    runs-on: ubuntu-latest 
 
     steps:
 
@@ -30,7 +30,7 @@ jobs:
       run: docker push marijndemul16/ddt.frontend
 
   CICD-UserService: 
-    runs-on: [self-hosted, Linux] 
+    runs-on: ubuntu-latest 
 
     env: 
       DOTNET_INSTALL_DIR: "./.dotnet"
@@ -68,7 +68,7 @@ jobs:
       run: docker push marijndemul16/ddt.backend.userservice
   
   CICD-AIService: 
-    runs-on: [self-hosted, Linux] 
+    runs-on: ubuntu-latest 
 
     env: 
       DOTNET_INSTALL_DIR: "./.dotnet"
@@ -106,7 +106,7 @@ jobs:
       run: docker push marijndemul16/ddt.backend.aiservice
 
   CICD-QuestionService: 
-    runs-on: [self-hosted, Linux] 
+    runs-on: ubuntu-latest  
 
     env: 
       DOTNET_INSTALL_DIR: "./.dotnet"

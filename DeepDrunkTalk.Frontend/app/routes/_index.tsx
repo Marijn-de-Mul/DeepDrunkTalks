@@ -1,4 +1,7 @@
 import type { MetaFunction } from "@remix-run/node";
+import { Button } from '@mantine/core';
+
+import logo from "../assets/img/logo.png"; 
 
 export const meta: MetaFunction = () => {
   return [
@@ -7,14 +10,17 @@ export const meta: MetaFunction = () => {
   ];
 };
 
-export function Button() { 
-  return (
-    <button>Test</button>
-  );
-}
-
 export default function Index() {
   return (
-    <Button/>
+    <> 
+
+    <div> 
+      <img src={logo}/>
+    </div>
+
+
+    <Button variant="outline" color="cyan">Button</Button>
+    
+    </>
   );
 }

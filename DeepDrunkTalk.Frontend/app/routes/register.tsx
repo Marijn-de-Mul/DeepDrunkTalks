@@ -2,16 +2,15 @@ import type { MetaFunction } from "@remix-run/node";
 import { Button, Box, Input, Image, Text, Divider } from '@mantine/core';
 
 import logo from "~/assets/img/logo.png"; 
-import ProtectedRoute from "~/components/layouts/ProtectedRoute";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "DeepDrunkTalks - Login" },
+    { title: "DeepDrunkTalks - Register" },
     { name: "description", content: "Welcome to DeepDrunkTalks" },
   ];
 };
 
-export default function Login() {
+export default function Register() {
 
   return (
 
@@ -23,7 +22,7 @@ export default function Login() {
         display: "flex",
         justifyContent: "center",
         alignItems: "center", 
-        marginBottom: "4vh"
+        marginBottom: "2vh"
       }}
     
     > 
@@ -42,6 +41,27 @@ export default function Login() {
 
     </Box>
 
+    <Box
+
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center", 
+        marginBottom: "2vh"
+      }}
+
+    > 
+
+        <Text
+        
+          style={{
+            fontWeight: "bolder",
+            fontSize: "2em"
+          }}
+        
+        >Register</Text>
+
+    </Box>
 
     <Box
     
@@ -53,6 +73,16 @@ export default function Login() {
       }}
     
     >
+
+        <Input variant="filled" placeholder="Username" 
+                
+                style={{
+                    margin: "2vw",
+                    width: "70vw" 
+                }}
+            
+          />
+
 
         <Input variant="filled" placeholder="E-Mail" 
         
@@ -72,6 +102,15 @@ export default function Login() {
         
         />
 
+        <Input variant="filled" placeholder="Repeat Password" 
+                
+                style={{
+                    margin: "2vw",
+                    width: "70vw" 
+                }}
+            
+        />
+
         <Button fullWidth color="rgba(0, 0, 0, 1)" size="lg" 
         
             style={{
@@ -79,14 +118,25 @@ export default function Login() {
                 width: "70vw"
             }}
         
-        >LOGIN</Button>
+        >REGISTER</Button>
+
+        <a href="./login"> 
+          <Button fullWidth color="rgba(0, 0, 0, 1)" size="lg" 
+                
+              style={{
+                  marginTop: "2vw",
+                  width: "70vw"
+              }}
+    
+          >LOGIN INSTEAD</Button>
+        </a>
 
     </Box>   
 
     <Divider color="black"
 
         style={{
-          marginTop: "27vh"
+          marginTop: "2vh"
         }}
 
       ></Divider>

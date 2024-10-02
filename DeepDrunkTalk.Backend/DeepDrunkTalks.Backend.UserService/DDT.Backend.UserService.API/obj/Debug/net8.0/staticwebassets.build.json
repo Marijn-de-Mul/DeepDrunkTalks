@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "CmQWa9IpZrvESRmbXs1eqZM524f1YtMLTP37l49eFHc=",
+  "Source": "DDT.Backend.UserService.API",
+  "BasePath": "_content/DDT.Backend.UserService.API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

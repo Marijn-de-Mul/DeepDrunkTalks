@@ -9,7 +9,7 @@ export const meta: MetaFunction = () => {
 };
 
 import { useState, useEffect } from "react";
-import Login from "~/routes/_login";
+import Login from "~/routes/login";
 
 enum AppState {
   AUTHENTICATED,
@@ -52,7 +52,7 @@ export default function ProtectedRoute({ children }: any) {
   }
   
   if (state === AppState.DENIED)
-    return Login()
+    return <Login></Login>
 
   return children
 }

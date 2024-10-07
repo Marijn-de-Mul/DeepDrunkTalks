@@ -16,12 +16,13 @@ export const meta: MetaFunction = () => {
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState<string | null>(null); 
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault(); 
+    event.preventDefault();
 
     try {
-      const response = await fetch("https://localhost:7108/api/auth/login", {
+      const response = await fetch("https://localhost:7108/api/Auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -32,20 +33,22 @@ export default function Login() {
         }),
       });
 
-
       if (response.ok) {
         const data = await response.json();
         console.log("Login successful!", data);
 
-        window.location.href = '/';
+        const token = data.token;
 
+        localStorage.setItem("authToken", token);
+
+        window.location.href = '/';
       } else {
-        console.error("Login failed");
-        // Optionally, handle error response here
+        const errorData = await response.json();
+        setError(errorData.message || "Login failed");
       }
     } catch (error) {
       console.error("Error during login:", error);
-      // Optionally, handle network or other errors here
+      setError("Network error during login");
     }
   };
 
@@ -144,6 +147,8 @@ export default function Login() {
 
         />
 
+        {error && <Text color="red" size="1em">{error}</Text>}
+
         <Button fullWidth color="rgba(0, 0, 0, 1)" size="lg" 
             
             type="submit"
@@ -163,7 +168,7 @@ export default function Login() {
 
               style={{
                   marginTop: "2vw",
-                  width: "70vw"
+                  height: "5vh"
               }}
     
           >REGISTER INSTEAD</Button>
@@ -176,7 +181,7 @@ export default function Login() {
     <Divider color="black"
 
         style={{
-          marginTop: "14vh"
+          marginTop: error ? "13.2vh" : "15vh"
         }}
 
       ></Divider>

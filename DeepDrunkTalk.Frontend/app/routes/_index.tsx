@@ -13,6 +13,12 @@ export const meta: MetaFunction = () => {
 
 export default function Index() {
 
+  const handleLogout = () => {
+    localStorage.removeItem("authToken");
+    
+    window.location.href = "/login";
+  };  
+
   return (
     <ProtectedRoute>
       <> 
@@ -55,7 +61,7 @@ export default function Index() {
         <Button variant="filled" color="rgba(0, 0, 0, 1)" size="xl"
         
           style={{
-            marginTop: "5vh"
+            marginTop: "3vh"
           }}
 
         >START GAME</Button>
@@ -63,7 +69,7 @@ export default function Index() {
         <Button variant="filled" color="rgba(0, 0, 0, 1)" size="xl"
         
           style={{
-            marginTop: "5vh"
+            marginTop: "3vh"
           }}
         
         >SOBER MODE</Button>
@@ -71,17 +77,28 @@ export default function Index() {
         <Button variant="filled" color="rgba(0, 0, 0, 1)" size="xl"
         
           style={{
-            marginTop: "5vh"
+            marginTop: "3vh"
           }}
 
         >SETTINGS</Button>
+
+        <Button
+
+            color="red"
+            onClick={handleLogout}
+            style={{ 
+              marginTop: "3vh",
+              height: "5vh"
+            }}
+          
+          >LOGOUT</Button>
 
       </Box>
 
       <Divider color="black"
 
         style={{
-          marginTop: "10vh"
+          marginTop: "8vh"
         }}
 
       ></Divider>

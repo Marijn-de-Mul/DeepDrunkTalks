@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "s/Y1fnE+UOA=",
+  "dgSpecHash": "dIxBqmbLbr4=",
   "success": true,
   "projectFilePath": "C:\\Users\\MarijndeMul\\OneDrive - Office 365 Fontys\\Fontys-HBO-ICT\\Semester3\\DeepDrunkTalks\\DeepDrunkTalk.Backend\\DeepDrunkTalks.Backend.UserService\\DDT.Backend.UserService.BLL\\DDT.Backend.UserService.BLL.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\MarijndeMul\\.nuget\\packages\\konscious.security.cryptography.argon2\\1.3.1\\konscious.security.cryptography.argon2.1.3.1.nupkg.sha512",
+    "C:\\Users\\MarijndeMul\\.nuget\\packages\\konscious.security.cryptography.blake2\\1.1.1\\konscious.security.cryptography.blake2.1.1.1.nupkg.sha512",
+    "C:\\Users\\MarijndeMul\\.nuget\\packages\\system.memory\\4.5.4\\system.memory.4.5.4.nupkg.sha512"
+  ],
   "logs": []
 }

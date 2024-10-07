@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "leWSCyr8/8w=",
+  "dgSpecHash": "pBGMnjLMkK8=",
   "success": true,
   "projectFilePath": "C:\\Users\\MarijndeMul\\OneDrive - Office 365 Fontys\\Fontys-HBO-ICT\\Semester3\\DeepDrunkTalks\\DeepDrunkTalk.Backend\\DeepDrunkTalks.Backend.UserService\\DDT.Backend.UserService.DAL\\DDT.Backend.UserService.DAL.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\MarijndeMul\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.0\\microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512",
+    "C:\\Users\\MarijndeMul\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\8.0.0\\microsoft.extensions.logging.abstractions.8.0.0.nupkg.sha512",
+    "C:\\Users\\MarijndeMul\\.nuget\\packages\\npgsql\\8.0.4\\npgsql.8.0.4.nupkg.sha512"
+  ],
   "logs": []
 }

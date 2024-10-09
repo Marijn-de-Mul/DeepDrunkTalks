@@ -11,4 +11,8 @@
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0"/>
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\DDT.Backend.UserService.BLL\DDT.Backend.UserService.BLL.csproj" />
+    </ItemGroup>
+
 </Project>

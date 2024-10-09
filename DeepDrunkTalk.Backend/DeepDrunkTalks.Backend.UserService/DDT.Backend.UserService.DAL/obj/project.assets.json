@@ -52,6 +52,16 @@
             "related": ".xml"
           }
         }
+      },
+      "DDT.Backend.UserService.Common/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/DDT.Backend.UserService.Common.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DDT.Backend.UserService.Common.dll": {}
+        }
       }
     }
   },
@@ -183,10 +193,16 @@
         "npgsql.nuspec",
         "postgresql.png"
       ]
+    },
+    "DDT.Backend.UserService.Common/1.0.0": {
+      "type": "project",
+      "path": "../DDT.Backend.UserService.Common/DDT.Backend.UserService.Common.csproj",
+      "msbuildProject": "../DDT.Backend.UserService.Common/DDT.Backend.UserService.Common.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
+      "DDT.Backend.UserService.Common >= 1.0.0",
       "Npgsql >= 8.0.4"
     ]
   },
@@ -222,7 +238,11 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\MarijndeMul\\OneDrive - Office 365 Fontys\\Fontys-HBO-ICT\\Semester3\\DeepDrunkTalks\\DeepDrunkTalk.Backend\\DeepDrunkTalks.Backend.UserService\\DDT.Backend.UserService.Common\\DDT.Backend.UserService.Common.csproj": {
+              "projectPath": "C:\\Users\\MarijndeMul\\OneDrive - Office 365 Fontys\\Fontys-HBO-ICT\\Semester3\\DeepDrunkTalks\\DeepDrunkTalk.Backend\\DeepDrunkTalks.Backend.UserService\\DDT.Backend.UserService.Common\\DDT.Backend.UserService.Common.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

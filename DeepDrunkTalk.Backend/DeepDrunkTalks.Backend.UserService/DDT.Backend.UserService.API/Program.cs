@@ -1,9 +1,19 @@
+using DDT.Backend.UserService.BLL.Helpers;
+using DDT.Backend.UserService.Common.Interfaces;
+using DDT.Backend.UserService.BLL.Services;
+using DDT.Backend.UserService.DAL.Repositories;
+
+EnvironmentVariables.LoadEnvironments();
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddControllers();
+
+builder.Services.AddScoped<IAuthRepository, AuthRepository>();
+builder.Services.AddScoped<AuthService>(); 
 
 builder.Services.AddCors(options =>
 {

@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDT.Backend.UserService.BLL
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDT.Backend.UserService.API", "DDT.Backend.UserService.API\DDT.Backend.UserService.API.csproj", "{23118C11-F9B3-46BB-8F6F-2BCA4D58F215}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDT.Backend.UserService.Common", "DDT.Backend.UserService.Common\DDT.Backend.UserService.Common.csproj", "{9957930A-7878-4571-B829-9E41E314B2CE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{23118C11-F9B3-46BB-8F6F-2BCA4D58F215}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{23118C11-F9B3-46BB-8F6F-2BCA4D58F215}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{23118C11-F9B3-46BB-8F6F-2BCA4D58F215}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9957930A-7878-4571-B829-9E41E314B2CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9957930A-7878-4571-B829-9E41E314B2CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9957930A-7878-4571-B829-9E41E314B2CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9957930A-7878-4571-B829-9E41E314B2CE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -1,5 +1,8 @@
-﻿using DDT.Backend.UserService.API.Models.Authentication;
+﻿using DDT.Backend.UserService.Common.Models; 
+using DDT.Backend.UserService.BLL.Services;
+using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
+using LoginRequest = DDT.Backend.UserService.Common.Models.Authentication.LoginRequest;
 
 namespace DDT.Backend.UserService.API.Authentication;
 
@@ -7,52 +10,45 @@ namespace DDT.Backend.UserService.API.Authentication;
 [ApiController]
 public class AuthController : Controller
 {
-    private static readonly List<RegisterRequest> RegisteredUsers = new List<RegisterRequest>();
+    private readonly AuthService _authService;
+    
+    public AuthController(AuthService authService)
+    {
+        _authService = authService;
+    }  
 
     [HttpPost("register")]
-    public IActionResult Register([FromBody] RegisterRequest request)
+    public IActionResult Register([FromBody] Common.Models.Authentication.RegisterRequest request)
     {
-        if (RegisteredUsers.Any(u => u.Email.Trim().ToLower() == request.Email.Trim().ToLower()))
+        if (string.IsNullOrWhiteSpace(request.Email) || string.IsNullOrWhiteSpace(request.Password))
         {
-            return Conflict(new { message = "User already exists" });
+            return Conflict(new { message = "No data received" });
         }
 
-        if (request.Email == "")
+        var token = _authService.RegisterUser(request);
+
+        if (token == null)
         {
-            return Conflict(new { message = "No data recieved" }); 
-        }
-        
-        if (request.Password == "")
-        {
-            return Conflict(new { message = "No data recieved" }); 
+            return Conflict(new { message = "User already exists or password mismatch" });
         }
 
-        RegisteredUsers.Add(request);
         Console.WriteLine($"User {request.Email} registered successfully.");
-
-        var loginRequest = new LoginRequest 
-        { 
-            Email = request.Email, 
-            Password = request.Password 
-        };
-        
-        return Login(loginRequest);
+    
+        return Ok(new { token });
     }
-
+    
     [HttpPost("login")]
     public IActionResult Login([FromBody] LoginRequest request)
     {
-        var user = RegisteredUsers.FirstOrDefault(u => 
-            u.Email.Trim().ToLower() == request.Email.Trim().ToLower() &&
-            u.Password.Trim() == request.Password.Trim());
+        var token = _authService.LoginUser(request);
 
-        if (user != null)
+        if (token != null)
         {
             Console.WriteLine("Login successful");
-            return Ok(new { token = "mock-token" });
+            return Ok(new { token });
         }
 
         Console.WriteLine("Unauthorized login attempt");
         return Unauthorized(new { message = "Invalid credentials" });
-    }
+    } 
 }

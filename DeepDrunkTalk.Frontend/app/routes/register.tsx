@@ -36,9 +36,10 @@ export default function Register() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          username: username,
+          name: username,
           email: email,
           password: password,
+          confirmPassword: confirmPassword,
         }),
       });
 
@@ -46,10 +47,11 @@ export default function Register() {
         const data = await response.json();
         console.log("Registration successful!", data);
 
-        localStorage.setItem("authToken", "mock-token");  
+        localStorage.setItem("authToken", data.token);  
         window.location.href = "/";  
       } else {
         const errorData = await response.json(); 
+        
         setError(errorData.message || "An error occurred during registration."); 
       }
     } catch (error) {

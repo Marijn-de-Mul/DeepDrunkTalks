@@ -4,10 +4,15 @@
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <RootNamespace>DDT.Backend.UserService.DAL</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
       <PackageReference Include="Npgsql" Version="8.0.4" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\DDT.Backend.UserService.Common\DDT.Backend.UserService.Common.csproj" />
     </ItemGroup>
 
 </Project>

@@ -1,4 +1,4 @@
-﻿namespace DDT.Backend.UserService.API.Models.Authentication;
+﻿namespace DDT.Backend.UserService.Common.Models.Authentication;
 
 public class LoginRequest
 {

@@ -1,7 +1,9 @@
 using DDT.Backend.UserService.BLL.Helpers;
 using DDT.Backend.UserService.Common.Interfaces;
 using DDT.Backend.UserService.BLL.Services;
+using DDT.Backend.UserService.Common;
 using DDT.Backend.UserService.DAL.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 EnvironmentVariables.LoadEnvironments();
 
@@ -11,6 +13,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddControllers();
+
+builder.Services.AddDbContext<UserDbContext>(options =>
+    options.UseNpgsql(ConnectionStringHelper.GetConnectionString()));
 
 builder.Services.AddScoped<IAuthRepository, AuthRepository>();
 builder.Services.AddScoped<AuthService>(); 

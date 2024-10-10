@@ -1,8 +1,21 @@
 {
   "version": 2,
-  "dgSpecHash": "Q6YoJAM9rtQ=",
+  "dgSpecHash": "XIHWEaDFWHk=",
   "success": true,
   "projectFilePath": "C:\\Users\\MarijndeMul\\OneDrive - Office 365 Fontys\\Fontys-HBO-ICT\\Semester3\\DeepDrunkTalks\\DeepDrunkTalk.Backend\\DeepDrunkTalks.Backend.UserService\\DDT.Backend.UserService.Common\\DDT.Backend.UserService.Common.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\MarijndeMul\\.nuget\\packages\\microsoft.entityframeworkcore\\9.0.0-rc.2.24474.1\\microsoft.entityframeworkcore.9.0.0-rc.2.24474.1.nupkg.sha512",
+    "C:\\Users\\MarijndeMul\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\9.0.0-rc.2.24474.1\\microsoft.entityframeworkcore.abstractions.9.0.0-rc.2.24474.1.nupkg.sha512",
+    "C:\\Users\\MarijndeMul\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\9.0.0-rc.2.24474.1\\microsoft.entityframeworkcore.analyzers.9.0.0-rc.2.24474.1.nupkg.sha512",
+    "C:\\Users\\MarijndeMul\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\9.0.0-rc.2.24473.5\\microsoft.extensions.caching.abstractions.9.0.0-rc.2.24473.5.nupkg.sha512",
+    "C:\\Users\\MarijndeMul\\.nuget\\packages\\microsoft.extensions.caching.memory\\9.0.0-rc.2.24473.5\\microsoft.extensions.caching.memory.9.0.0-rc.2.24473.5.nupkg.sha512",
+    "C:\\Users\\MarijndeMul\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\9.0.0-rc.2.24473.5\\microsoft.extensions.dependencyinjection.9.0.0-rc.2.24473.5.nupkg.sha512",
+    "C:\\Users\\MarijndeMul\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\9.0.0-rc.2.24473.5\\microsoft.extensions.dependencyinjection.abstractions.9.0.0-rc.2.24473.5.nupkg.sha512",
+    "C:\\Users\\MarijndeMul\\.nuget\\packages\\microsoft.extensions.logging\\9.0.0-rc.2.24473.5\\microsoft.extensions.logging.9.0.0-rc.2.24473.5.nupkg.sha512",
+    "C:\\Users\\MarijndeMul\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\9.0.0-rc.2.24473.5\\microsoft.extensions.logging.abstractions.9.0.0-rc.2.24473.5.nupkg.sha512",
+    "C:\\Users\\MarijndeMul\\.nuget\\packages\\microsoft.extensions.options\\9.0.0-rc.2.24473.5\\microsoft.extensions.options.9.0.0-rc.2.24473.5.nupkg.sha512",
+    "C:\\Users\\MarijndeMul\\.nuget\\packages\\microsoft.extensions.primitives\\9.0.0-rc.2.24473.5\\microsoft.extensions.primitives.9.0.0-rc.2.24473.5.nupkg.sha512",
+    "C:\\Users\\MarijndeMul\\.nuget\\packages\\system.diagnostics.diagnosticsource\\9.0.0-rc.2.24473.5\\system.diagnostics.diagnosticsource.9.0.0-rc.2.24473.5.nupkg.sha512"
+  ],
   "logs": []
 }

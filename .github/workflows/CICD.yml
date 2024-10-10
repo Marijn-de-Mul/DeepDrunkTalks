@@ -29,7 +29,7 @@ jobs:
     - name: (Docker) Push The DeepDrunkTalks Frontend Image To Docker Hub
       run: docker push marijndemul16/ddt.frontend
 
-  CICD-UserService: 
+  CICD-Backend: 
     runs-on: ubuntu-latest 
 
     env: 
@@ -45,18 +45,18 @@ jobs:
       with:
         dotnet-version: '8.0.x'
 
-    - name: (.NET) Restore DeepDrunkTalks UserService Backend Dependencies
-      run: dotnet restore DeepDrunkTalk.Backend/DeepDrunkTalks.Backend.UserService/DeepDrunkTalks.Backend.UserService.sln
+    - name: (.NET) Restore DeepDrunkTalks Backend Dependencies
+      run: dotnet restore DeepDrunkTalk.Backend/DeepDrunkTalks.Backend.sln
 
-    - name: (.NET) Build DeepDrunkTalks UserService Backend
-      run: dotnet build --no-restore DeepDrunkTalk.Backend/DeepDrunkTalks.Backend.UserService/DeepDrunkTalks.Backend.UserService.sln 
+    - name: (.NET) Build DeepDrunkTalks Backend
+      run: dotnet build --no-restore DeepDrunkTalk.Backend/DeepDrunkTalks.Backend.sln 
 
-    - name: (.NET) Test DeepDrunkTalks UserService Backend
-      run: dotnet test --no-build --verbosity normal DeepDrunkTalk.Backend/DeepDrunkTalks.Backend.UserService/DeepDrunkTalks.Backend.UserService.sln
+    - name: (.NET) Test DeepDrunkTalks Backend
+      run: dotnet test --no-build --verbosity normal DeepDrunkTalk.Backend/DeepDrunkTalks.Backend.sln
 
-    - name: (Docker) Build DeepDrunkTalks UserService Backend Docker Image 
-      working-directory: DeepDrunkTalk.Backend/DeepDrunkTalks.Backend.UserService/
-      run: docker build . -t marijndemul16/ddt.backend.userservice:latest
+    - name: (Docker) Build DeepDrunkTalks Backend Docker Image 
+      working-directory: DeepDrunkTalk.Backend/
+      run: docker build . -t marijndemul16/ddt.backend:latest
 
     - name: (Docker) Log Into Docker Hub
       uses: docker/login-action@v2
@@ -64,83 +64,6 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-    - name: (Docker) Push The DeepDrunkTalks UserService Backend Image To Docker Hub
-      run: docker push marijndemul16/ddt.backend.userservice
+    - name: (Docker) Push The DeepDrunkTalks Backend Image To Docker Hub
+      run: docker push marijndemul16/ddt.backend
   
-  CICD-AIService: 
-    runs-on: ubuntu-latest 
-
-    env: 
-      DOTNET_INSTALL_DIR: "./.dotnet"
-
-    steps:
-
-    - name: (Github) Checkout Code
-      uses: actions/checkout@v4
-
-    - name: (.NET) Setup
-      uses: actions/setup-dotnet@main
-      with:
-        dotnet-version: '8.0.x'
-
-    - name: (.NET) Restore DeepDrunkTalks AIService Backend Dependencies
-      run: dotnet restore DeepDrunkTalk.Backend/DeepDrunkTalks.Backend.AIService/DeepDrunkTalks.Backend.AIService.sln
-
-    - name: (.NET) Build DeepDrunkTalks AIService Backend
-      run: dotnet build --no-restore DeepDrunkTalk.Backend/DeepDrunkTalks.Backend.AIService/DeepDrunkTalks.Backend.AIService.sln
-
-    - name: (.NET) Test DeepDrunkTalks AIService Backend
-      run: dotnet test --no-build --verbosity normal DeepDrunkTalk.Backend/DeepDrunkTalks.Backend.AIService/DeepDrunkTalks.Backend.AIService.sln
-
-    - name: (Docker) Build DeepDrunkTalks AIService Backend Docker Image 
-      working-directory: DeepDrunkTalk.Backend/DeepDrunkTalks.Backend.AIService/
-      run: docker build . -t marijndemul16/ddt.backend.aiservice:latest
-
-    - name: (Docker) Log Into Docker Hub
-      uses: docker/login-action@v2
-      with:
-        username: ${{ secrets.DOCKERHUB_USERNAME }}
-        password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-    - name: (Docker) Push The DeepDrunkTalks AIService Backend Image To Docker Hub
-      run: docker push marijndemul16/ddt.backend.aiservice
-
-  CICD-QuestionService: 
-    runs-on: ubuntu-latest  
-
-    env: 
-      DOTNET_INSTALL_DIR: "./.dotnet"
-
-    steps:
-
-    - name: (Github) Checkout Code
-      uses: actions/checkout@v4
-
-    - name: (.NET) Setup
-      uses: actions/setup-dotnet@main
-      with:
-        dotnet-version: '8.0.x'
-
-    - name: (.NET) Restore DeepDrunkTalks QuestionService Backend Dependencies
-      run: dotnet restore DeepDrunkTalk.Backend/DeepDrunkTalks.Backend.QuestionService/DeepDrunkTalks.Backend.QuestionService.sln
-
-    - name: (.NET) Build DeepDrunkTalks QuestionService Backend
-      run: dotnet build --no-restore DeepDrunkTalk.Backend/DeepDrunkTalks.Backend.QuestionService/DeepDrunkTalks.Backend.QuestionService.sln
-
-    - name: (.NET) Test DeepDrunkTalks QuestionService Backend
-      run: dotnet test --no-build --verbosity normal DeepDrunkTalk.Backend/DeepDrunkTalks.Backend.QuestionService/DeepDrunkTalks.Backend.QuestionService.sln
-
-    - name: (Docker) Build DeepDrunkTalks QuestionService Backend Docker Image 
-      working-directory: DeepDrunkTalk.Backend/DeepDrunkTalks.Backend.QuestionService/
-      run: docker build . -t marijndemul16/ddt.backend.questionservice:latest
-
-    - name: (Docker) Log Into Docker Hub
-      uses: docker/login-action@v2
-      with:
-        username: ${{ secrets.DOCKERHUB_USERNAME }}
-        password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-    - name: (Docker) Push The DeepDrunkTalks QuestionService Backend Image To Docker Hub
-      run: docker push marijndemul16/ddt.backend.questionservice
-
-

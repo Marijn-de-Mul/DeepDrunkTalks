@@ -1,8 +1,8 @@
 {
   "Version": 1,
-  "Hash": "CmQWa9IpZrvESRmbXs1eqZM524f1YtMLTP37l49eFHc=",
-  "Source": "DDT.Backend.UserService.API",
-  "BasePath": "_content/DDT.Backend.UserService.API",
+  "Hash": "hfazCbY3n1TboR+dBf46GkIIhu77KpLc47R1HjgaAMw=",
+  "Source": "DDT.Backend.API",
+  "BasePath": "_content/DDT.Backend.API",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],

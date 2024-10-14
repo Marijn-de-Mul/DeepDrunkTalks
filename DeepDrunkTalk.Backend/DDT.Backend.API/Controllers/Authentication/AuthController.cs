@@ -1,54 +1,54 @@
-﻿using DDT.Backend.UserService.Common.Models; 
-using DDT.Backend.UserService.BLL.Services;
-using Microsoft.AspNetCore.Identity.Data;
+﻿using DDT.Backend.UserService.BLL.Services;
+using DDT.Backend.UserService.Common.Models.Authentication;
 using Microsoft.AspNetCore.Mvc;
-using LoginRequest = DDT.Backend.UserService.Common.Models.Authentication.LoginRequest;
 
-namespace DDT.Backend.UserService.API.Authentication;
-
-[Route("api/[controller]")]
-[ApiController]
-public class AuthController : Controller
+namespace API.Controllers
 {
-    private readonly AuthService _authService;
-    
-    public AuthController(AuthService authService)
+    [ApiController]
+    [Route("api/[controller]")]
+    public class AuthController : ControllerBase
     {
-        _authService = authService;
-    }  
+        private readonly UserService _userService;
 
-    [HttpPost("register")]
-    public IActionResult Register([FromBody] Common.Models.Authentication.RegisterRequest request)
-    {
-        if (string.IsNullOrWhiteSpace(request.Email) || string.IsNullOrWhiteSpace(request.Password))
+        public AuthController(UserService userService)
         {
-            return Conflict(new { message = "No data received" });
+            _userService = userService;
         }
 
-        var token = _authService.RegisterUser(request);
-
-        if (token == null)
+        [HttpPost("register")]
+        public async Task<IActionResult> Register([FromBody] RegisterRequest request)
         {
-            return Conflict(new { message = "User already exists or password mismatch" });
+            try
+            {
+                var result = await _userService.RegisterUserAsync(request);
+                return Ok(new { Token = result });
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new { Message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Error = "An error occurred while processing your request." });
+            }
         }
 
-        Console.WriteLine($"User {request.Email} registered successfully.");
-    
-        return Ok(new { token });
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] LoginRequest request)
+        {
+            try
+            {
+                var result = await _userService.LoginUserAsync(request);
+                return Ok(new { Token = result });
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new { Message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Error = "An error occurred while processing your request." });
+            }
+        }
     }
-    
-    [HttpPost("login")]
-    public IActionResult Login([FromBody] LoginRequest request)
-    {
-        var token = _authService.LoginUser(request);
-
-        if (token != null)
-        {
-            Console.WriteLine("Login successful");
-            return Ok(new { token });
-        }
-
-        Console.WriteLine("Unauthorized login attempt");
-        return Unauthorized(new { message = "Invalid credentials" });
-    } 
-}
+} 

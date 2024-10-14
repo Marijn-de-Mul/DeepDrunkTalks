@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\DDT.Backend.API.props" />
+</Project>

@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = DDT.Backend.UserService.BLL
-build_property.ProjectDir = C:\Users\MarijndeMul\OneDrive - Office 365 Fontys\Fontys-HBO-ICT\Semester3\DeepDrunkTalks\DeepDrunkTalk.Backend\DeepDrunkTalks.Backend.UserService\DDT.Backend.BLL\
+build_property.ProjectDir = C:\Users\MarijndeMul\OneDrive - Office 365 Fontys\Fontys-HBO-ICT\Semester3\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 

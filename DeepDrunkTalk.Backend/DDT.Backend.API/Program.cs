@@ -14,11 +14,11 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddControllers();
 
-builder.Services.AddDbContext<UserDbContext>(options =>
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(ConnectionStringHelper.GetConnectionString()));
 
-builder.Services.AddScoped<IAuthRepository, AuthRepository>();
-builder.Services.AddScoped<AuthService>(); 
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<UserService>(); 
 
 builder.Services.AddCors(options =>
 {

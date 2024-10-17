@@ -1,0 +1,6 @@
+@DDT.Backend.AIService.API_HostAddress = http://localhost:5098
+
+GET {{DDT.Backend.AIService.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

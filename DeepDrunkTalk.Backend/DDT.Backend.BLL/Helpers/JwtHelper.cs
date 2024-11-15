@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
@@ -29,6 +30,36 @@ namespace DDT.Backend.UserService.BLL.Helpers
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
+        }
+        
+        public static string GetUserEmailFromToken(string token, string secret)
+        {
+            if (string.IsNullOrEmpty(token) || string.IsNullOrEmpty(secret))
+            {
+                return null;
+            }
+
+            try
+            {
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var key = Encoding.ASCII.GetBytes(secret);
+                var validationParameters = new TokenValidationParameters
+                {
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ValidateLifetime = false
+                };
+
+                var principal = tokenHandler.ValidateToken(token, validationParameters, out _);
+                var userEmail = principal?.FindFirst(ClaimTypes.Email)?.Value;
+
+                return userEmail;
+            }
+            catch
+            {
+                return null;
+            }
         }
     }
 }

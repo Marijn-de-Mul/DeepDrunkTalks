@@ -1,3 +1,6 @@
+using DDT.Backend.ConversationService.Common.Interfaces;
+using DDT.Backend.ConversationService.DAL;
+using DDT.Backend.ConversationService.DAL.Repositories;
 using DDT.Backend.UserService.BLL.Helpers;
 using DDT.Backend.UserService.Common.Interfaces;
 using DDT.Backend.UserService.BLL.Services;
@@ -19,6 +22,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<UserService>(); 
+
+builder.Services.AddScoped<IConversationRepository, ConversationRepository>();
+builder.Services.AddScoped<ConversationService>(); 
 
 builder.Services.AddCors(options =>
 {

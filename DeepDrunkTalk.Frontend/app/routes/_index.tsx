@@ -1,5 +1,6 @@
 import type { MetaFunction } from "@remix-run/node";
 import { Button , Divider, Image, Box, Text } from '@mantine/core';
+import { Link } from '@remix-run/react';
 
 import logo from "~/assets/img/logo.png"; 
 import ProtectedRoute from "~/components/layouts/ProtectedRoute";
@@ -58,13 +59,15 @@ export default function Index() {
 
       > 
 
-        <Button variant="filled" color="rgba(0, 0, 0, 1)" size="xl"
-        
-          style={{
-            marginTop: "3vh"
-          }}
+        <Link to="/play">
+          <Button variant="filled" color="rgba(0, 0, 0, 1)" size="xl"
+          
+            style={{
+              marginTop: "3vh"
+            }}
 
-        >START GAME</Button>
+          >START GAME</Button>
+        </Link>
 
         <Button variant="filled" color="rgba(0, 0, 0, 1)" size="xl"
         

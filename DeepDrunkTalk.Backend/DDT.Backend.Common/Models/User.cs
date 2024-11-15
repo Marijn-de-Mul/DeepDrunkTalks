@@ -1,4 +1,6 @@
-﻿namespace DDT.Backend.UserService.Common.Models;
+﻿using DDT.Backend.ConversationService.Common.Models;
+
+namespace DDT.Backend.UserService.Common.Models;
 
 public class User
 {
@@ -10,5 +12,4 @@ public class User
     public DateTime UpdatedAt { get; set; } = DateTime.UtcNow; 
 
     public ICollection<Conversation> Conversations { get; set; }
-    public ICollection<Setting> Settings { get; set; }
 }

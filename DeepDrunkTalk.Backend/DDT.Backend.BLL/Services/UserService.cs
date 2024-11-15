@@ -1,8 +1,8 @@
-﻿using DDT.Backend.UserService.BLL.Helpers;
+﻿using DDT.Backend.ConversationService.Common.Models;
+using DDT.Backend.UserService.BLL.Helpers;
 using DDT.Backend.UserService.Common.Interfaces;
 using DDT.Backend.UserService.Common.Models;
 using DDT.Backend.UserService.Common.Models.Authentication;
-using Microsoft.Extensions.Configuration;
 
 namespace DDT.Backend.UserService.BLL.Services
 {
@@ -11,7 +11,7 @@ namespace DDT.Backend.UserService.BLL.Services
         private readonly IUserRepository _userRepository;
         private readonly string _jwtSecret;
 
-        public UserService(IUserRepository userRepository, IConfiguration configuration)
+        public UserService(IUserRepository userRepository)
         {
             _userRepository = userRepository;
             _jwtSecret = Environment.GetEnvironmentVariable("JWT_SECRET");
@@ -44,7 +44,6 @@ namespace DDT.Backend.UserService.BLL.Services
                 Password = EncryptionHelper.Encrypt(request.Password),
                 CreatedAt = DateTime.UtcNow, 
                 UpdatedAt = DateTime.UtcNow,
-                Settings = new List<Setting>(),
                 Conversations = new List<Conversation>()
             };
 

@@ -1,4 +1,5 @@
-﻿using DDT.Backend.UserService.Common;
+﻿using DDT.Backend.ConversationService.DAL;
+using DDT.Backend.UserService.Common;
 using DDT.Backend.UserService.Common.Interfaces;
 using DDT.Backend.UserService.Common.Models;
 using Microsoft.EntityFrameworkCore;

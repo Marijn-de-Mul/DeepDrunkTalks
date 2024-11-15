@@ -1,0 +1,44 @@
+Feedback 8-11-2024 
+
+Docent: Onno 
+
+Datum: 8-11-2024 
+
+Besproken: 
+
+Algemeen: 
+- Analysedocument ipv verslag 
+- Ontwerpdocument ipv verslag 
+- Beter articuleren 
+
+Analyseverslag: 
+- Inleiding & projectomschrijving goed 
+- Wireframes text toevoegen aan de buttons en field zodat het wel duidelijk is wat deze doen, eventueel user-stories eraan koppelen met een toelichting
+- Context diagram goed 
+- Bij het concept diagram moet je het vanaf het domein van je probleemwereld representeren, setting kan weg, dat is een property van user (persoon), verder gewoon kijken wat eventueel in de echte wereld relevant is.  
+- Uitleg toevoegen bij diagrammen
+
+Ontwerpverslag: 
+- Uitleg toevoegen bij diagrammen
+- Inleiding aanpassen, diagrammen zijn middelen geen doelen 
+- In het vervolg even beter kijken naar database keuzes 
+- C2 diagram goed 
+- C3 diagram, gewoon layers laten zien 
+- C4 diagram inzoomen op de layers en 1 entiteit erdoorheen volgen 
+- Database (diagram) Setting weghalen, TIMESTAMP is niet goed, logica handlen in de logica laag
+
+
+Research Report(s): 
+
+
+CI/CD: 
+- Goed 
+
+Code: 
+- Exceptions definieren in de PL zodat je weet wat er komt te staan en ook in de logic layer als het niet goed geimplementeerd is in de PL. 
+- Exceptions loggen binnen de hoogste of eventueel binnen het framework (.NET uitzoeken of dat kan) 
+
+
+
+Database: 
+- Settings integreren in User table 

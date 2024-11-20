@@ -79,5 +79,51 @@ namespace DDT.Backend.UserService.BLL.Services
 
             return null;
         }
+        
+        public async Task<UserSettings> GetUserSettingsAsync(string token)
+        {
+            var userEmail = JwtHelper.GetUserEmailFromToken(token, _jwtSecret);
+
+            if (string.IsNullOrEmpty(userEmail))
+            {
+                throw new UnauthorizedAccessException("Invalid or missing email in the token.");
+            }
+
+            var user = await _userRepository.GetUserByEmailAsync(userEmail);
+
+            if (user == null)
+            {
+                throw new UnauthorizedAccessException("User not found.");
+            }
+
+            return new UserSettings
+            {
+                VolumeLevel = user.VolumeLevel,
+                RefreshFrequency = user.RefreshFrequency
+            };
+        }
+
+
+        public async Task UpdateUserSettingsAsync(string token, UserSettings settings)
+        {
+            var userEmail = JwtHelper.GetUserEmailFromToken(token, _jwtSecret);
+
+            if (string.IsNullOrEmpty(userEmail))
+            {
+                throw new UnauthorizedAccessException("Invalid or missing email in the token.");
+            }
+
+            var user = await _userRepository.GetUserByEmailAsync(userEmail);
+
+            if (user == null)
+            {
+                throw new UnauthorizedAccessException("User not found.");
+            }
+
+            user.VolumeLevel = settings.VolumeLevel;
+            user.RefreshFrequency = settings.RefreshFrequency;
+
+            await _userRepository.UpdateUserAsync(user);
+        }
     }
 }

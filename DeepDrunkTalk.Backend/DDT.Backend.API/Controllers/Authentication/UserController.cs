@@ -50,5 +50,35 @@ namespace API.Controllers
                 return StatusCode(500, new { Error = "An error occurred while processing your request." });
             }
         }
+        
+        [HttpGet("settings")]
+        public async Task<IActionResult> GetUserSettings([FromHeader] string Authorization)
+        {
+            var token = Authorization?.Replace("Bearer ", string.Empty);
+        
+            if (string.IsNullOrEmpty(token))
+            {
+                return Unauthorized("Token is missing or invalid.");
+            }
+        
+            var settings = await _userService.GetUserSettingsAsync(token);
+        
+            return Ok(settings);
+        }
+        
+        [HttpPut("settings")]
+        public async Task<IActionResult> UpdateUserSettings([FromHeader] string Authorization, [FromBody] UserSettings settings)
+        {
+            var token = Authorization?.Replace("Bearer ", string.Empty);
+        
+            if (string.IsNullOrEmpty(token))
+            {
+                return Unauthorized("Token is missing or invalid.");
+            }
+        
+            await _userService.UpdateUserSettingsAsync(token, settings);
+        
+            return Ok();
+        }
     }
 } 

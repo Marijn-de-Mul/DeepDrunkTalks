@@ -18,4 +18,8 @@
         <ProjectReference Include="..\DDT.Backend.BLL\DDT.Backend.BLL.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Include="questions.json" />
+    </ItemGroup>
+
 </Project>

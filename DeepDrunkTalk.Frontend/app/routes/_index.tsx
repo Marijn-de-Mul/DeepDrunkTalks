@@ -69,21 +69,25 @@ export default function Index() {
           >START GAME</Button>
         </Link>
 
-        <Button variant="filled" color="rgba(0, 0, 0, 1)" size="xl"
-        
-          style={{
-            marginTop: "3vh"
-          }}
-        
-        >SOBER MODE</Button>
+        <Link to={"/conversations"}>
+            <Button variant="filled" color="rgba(0, 0, 0, 1)" size="xl"
+            
+            style={{
+              marginTop: "3vh"
+            }}
+          
+            >CONVERSATIONS</Button>
+        </Link>
 
-        <Button variant="filled" color="rgba(0, 0, 0, 1)" size="xl"
-        
-          style={{
-            marginTop: "3vh"
-          }}
+        <Link to={"/settings"}>
+            <Button variant="filled" color="rgba(0, 0, 0, 1)" size="xl"
+            
+              style={{
+                marginTop: "3vh"
+              }}
 
-        >SETTINGS</Button>
+            >SETTINGS</Button>
+        </Link>
 
         <Button
 

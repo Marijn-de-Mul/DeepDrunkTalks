@@ -8,5 +8,6 @@ namespace DDT.Backend.UserService.Common.Interfaces
         Task<bool> UserExistsAsync(string email);
         Task AddUserAsync(User user);
         Task<User> GetUserByEmailAsync(string email);
+        Task UpdateUserAsync(User user);
     }
 }

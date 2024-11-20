@@ -45,8 +45,6 @@ public class ConversationController : ControllerBase
             return Unauthorized("Token is missing or invalid.");
         }
         
-        Console.WriteLine("Connecting to DB");
-
         var result = await _conversationService.StopConversation(token);
         
         if (result)
@@ -55,5 +53,56 @@ public class ConversationController : ControllerBase
         }
 
         return BadRequest("Failed to stop conversation.");
+    }
+    
+    [HttpPost("random-question")]
+    public async Task<IActionResult> GetRandomQuestion([FromBody] QuestionRequest request)
+    {
+        string newQuestion;
+
+        if (string.IsNullOrEmpty(request.CurrentQuestion))
+        {
+            newQuestion = await _conversationService.GetRandomQuestionAsync(null); 
+        }
+        else
+        {
+            newQuestion = await _conversationService.GetRandomQuestionAsync(request.CurrentQuestion);
+        }
+
+        return Ok(new { question = newQuestion });
+    }
+
+    [HttpPost("get-conversations")]
+    public async Task<IActionResult> GetConversations([FromHeader] string Authorization)
+    {
+        var token = Authorization?.Replace("Bearer ", string.Empty);
+
+        if (string.IsNullOrEmpty(token))
+        {
+            return Unauthorized("Token is missing or invalid.");
+        }
+
+        var result = await _conversationService.GetConversations(token);
+
+        if (result == null)
+        {
+            return NotFound("No conversations found.");
+        }
+
+        return Ok(result);
+    } 
+    
+    // Still under construction
+    [HttpPost("audio")]
+    public async Task<IActionResult> UploadAudioChunk([FromHeader] string Authorization, IFormFile audio)
+    {
+        var token = Authorization?.Replace("Bearer ", string.Empty);
+
+        if (string.IsNullOrEmpty(token))
+        {
+            return Unauthorized("Token is missing or invalid.");
+        }
+
+        return Ok();
     }
 }

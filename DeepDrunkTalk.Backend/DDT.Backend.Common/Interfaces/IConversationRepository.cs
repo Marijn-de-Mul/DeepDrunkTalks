@@ -6,6 +6,7 @@ namespace DDT.Backend.ConversationService.Common.Interfaces
     {
         Task<bool> CreateConversationAsync(Conversation conversation);
         Task<Conversation> GetOngoingConversationAsync(int userId);
-        Task<bool> UpdateConversationAsync(Conversation conversation); 
+        Task<bool> UpdateConversationAsync(Conversation conversation);
+        Task<List<Conversation>> GetConversationsAsync(int userId); 
     }
 }

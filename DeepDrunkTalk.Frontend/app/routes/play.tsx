@@ -25,10 +25,7 @@ export default function Play() {
             if (!hasStartedRef.current) {
                 hasStartedRef.current = true;
                 console.info("Starting conversation...");
-                const initialQuestion = await fetchRandomQuestion(""); 
-                setQuestion(initialQuestion);
-                console.info("Initial question fetched:", initialQuestion);
-                await startConversation();
+                await startConversation(); 
             }
         };
 
@@ -74,6 +71,9 @@ export default function Play() {
             if (response.ok) {
                 conversationInProgressRef.current = true;
                 console.info("startConversation: Conversation started successfully.");
+
+                const questionData = await response.json(); 
+                setQuestion(questionData.question);
                 await startRecording();
             } else {
                 console.error("startConversation: Failed to start conversation.", response.status);
@@ -131,38 +131,11 @@ export default function Play() {
         console.info("nextQuestion: Stopping current conversation.");
         await stopConversation();
 
-        const newQuestion = await fetchRandomQuestion(question); 
-        setQuestion(newQuestion);
-        console.info("nextQuestion: Fetched new question:", newQuestion);
-
         console.info("nextQuestion: Starting new conversation.");
-        await startConversation();
+        await startConversation(); 
 
         setIsNextQuestionDisabled(false);
     }
-
-    async function fetchRandomQuestion(currentQuestion: string) {
-        try {
-            const response = await fetch("https://localhost:7108/api/Conversation/random-question", {
-                method: "POST", 
-                headers: {
-                    "Content-Type": "application/json", 
-                },
-                body: JSON.stringify({ currentQuestion }), 
-            });
-    
-            if (response.ok) {
-                const data = await response.json();
-                return data.question; 
-            } else {
-                console.error("Failed to fetch random question.");
-                return "Something went wrong. Please try again.";
-            }
-        } catch (error) {
-            console.error("Error fetching random question:", error);
-            return "Error fetching question. Please try again later."; 
-        }
-    }      
 
     async function startRecording() {
         console.info("startRecording: Invoked.");
@@ -225,6 +198,14 @@ export default function Play() {
         navigate("/"); 
     }
 
+    const calculateFontSize = (questionLength: number) => {
+        let fontSize = 2; 
+        if (questionLength > 50) fontSize = 1.8; 
+        if (questionLength > 100) fontSize = 1.6;
+        if (questionLength > 150) fontSize = 1.4; 
+        return fontSize + "em";
+    };
+
     return (
         <ProtectedRoute>
             <Box
@@ -265,8 +246,9 @@ export default function Play() {
                 >
                     <Text
                         style={{
-                            fontSize: "2em",
+                            fontSize: calculateFontSize(question.length), 
                             fontWeight: "800",
+                            wordWrap: "break-word", 
                         }}
                     >
                         {question}

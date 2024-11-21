@@ -1,6 +1,5 @@
-﻿using DDT.Backend.ConversationService.Common.Models;
-
-namespace DDT.Backend.UserService.Common.Models;
+﻿
+namespace DDT.Backend.Common.Models;
 
 public class User
 {

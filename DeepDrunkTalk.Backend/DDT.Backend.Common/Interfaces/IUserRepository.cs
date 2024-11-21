@@ -1,7 +1,7 @@
 ﻿
-using DDT.Backend.UserService.Common.Models;
+using DDT.Backend.Common.Models;
 
-namespace DDT.Backend.UserService.Common.Interfaces
+namespace DDT.Backend.Common.Interfaces
 {
     public interface IUserRepository
     {

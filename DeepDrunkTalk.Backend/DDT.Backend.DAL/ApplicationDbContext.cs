@@ -1,11 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using DDT.Backend.ConversationService.Common.Models;
-using DDT.Backend.UserService.Common.Models;
+using DDT.Backend.Common.Models;
+using DDT.Backend.Common.Models;
 
-namespace DDT.Backend.ConversationService.DAL
+namespace DDT.Backend.DAL
 {
     public class ApplicationDbContext : DbContext
     {
+        public DbSet<Question> Questions { get; set; } 
         public DbSet<Conversation> Conversations { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Topic> Topics { get; set; }

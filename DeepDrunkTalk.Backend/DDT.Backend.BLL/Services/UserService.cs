@@ -1,10 +1,9 @@
-﻿using DDT.Backend.ConversationService.Common.Models;
-using DDT.Backend.UserService.BLL.Helpers;
-using DDT.Backend.UserService.Common.Interfaces;
-using DDT.Backend.UserService.Common.Models;
-using DDT.Backend.UserService.Common.Models.Authentication;
+﻿using DDT.Backend.Common.Interfaces;
+using DDT.Backend.BLL.Helpers;
+using DDT.Backend.Common.Models;
+using DDT.Backend.Common.Models.Authentication;
 
-namespace DDT.Backend.UserService.BLL.Services
+namespace DDT.Backend.BLL.Services
 {
     public class UserService
     {

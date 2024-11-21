@@ -2,7 +2,7 @@
 using System.Text;
 using Konscious.Security.Cryptography;
 
-namespace DDT.Backend.UserService.BLL.Helpers;
+namespace DDT.Backend.BLL.Helpers;
 
 public class EncryptionHelper
 {

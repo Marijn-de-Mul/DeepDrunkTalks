@@ -1,8 +1,10 @@
-﻿using DDT.Backend.UserService.BLL;
-using DDT.Backend.UserService.BLL.Helpers;
-using DDT.Backend.UserService.BLL.Services;
-using DDT.Backend.UserService.Common.Models.Authentication;
+﻿using DDT.Backend.BLL;
+using DDT.Backend.BLL.Helpers;
+using DDT.Backend.BLL.Services;
+using DDT.Backend.Common.Models.Authentication;
 using Microsoft.AspNetCore.Mvc;
+
+namespace DDT.Backend.API.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
@@ -19,19 +21,23 @@ public class ConversationController : ControllerBase
     public async Task<IActionResult> StartConversation([FromHeader] string Authorization)
     {
         var token = Authorization?.Replace("Bearer ", string.Empty);
-
+    
         if (string.IsNullOrEmpty(token))
         {
             return Unauthorized("Token is missing or invalid.");
         }
-
+    
         var result = await _conversationService.StartConversation(token);
-
-        if (result)
+    
+        if (result.IsSuccess)
         {
-            return Ok("Conversation started successfully.");
+            return Ok(new 
+            {
+                message = "Conversation started successfully.",
+                question = result.QuestionText 
+            });
         }
-
+    
         return BadRequest("Failed to start conversation.");
     }
     
@@ -53,23 +59,6 @@ public class ConversationController : ControllerBase
         }
 
         return BadRequest("Failed to stop conversation.");
-    }
-    
-    [HttpPost("random-question")]
-    public async Task<IActionResult> GetRandomQuestion([FromBody] QuestionRequest request)
-    {
-        string newQuestion;
-
-        if (string.IsNullOrEmpty(request.CurrentQuestion))
-        {
-            newQuestion = await _conversationService.GetRandomQuestionAsync(null); 
-        }
-        else
-        {
-            newQuestion = await _conversationService.GetRandomQuestionAsync(request.CurrentQuestion);
-        }
-
-        return Ok(new { question = newQuestion });
     }
 
     [HttpPost("get-conversations")]

@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace DDT.Backend.UserService.BLL.Helpers;
+namespace DDT.Backend.BLL.Helpers;
 
 public static class ConnectionStringHelper
 {

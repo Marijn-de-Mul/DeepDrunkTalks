@@ -5,7 +5,7 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 
-namespace DDT.Backend.UserService.BLL.Helpers
+namespace DDT.Backend.BLL.Helpers
 {
     public static class JwtHelper
     {

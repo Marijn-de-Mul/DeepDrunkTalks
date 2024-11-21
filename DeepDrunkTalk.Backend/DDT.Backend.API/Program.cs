@@ -1,11 +1,8 @@
-using DDT.Backend.ConversationService.Common.Interfaces;
-using DDT.Backend.ConversationService.DAL;
-using DDT.Backend.ConversationService.DAL.Repositories;
-using DDT.Backend.UserService.BLL.Helpers;
-using DDT.Backend.UserService.Common.Interfaces;
-using DDT.Backend.UserService.BLL.Services;
-using DDT.Backend.UserService.Common;
-using DDT.Backend.UserService.DAL.Repositories;
+using DDT.Backend.Common.Interfaces;
+using DDT.Backend.DAL.Repositories;
+using DDT.Backend.BLL.Helpers;
+using DDT.Backend.BLL.Services;
+using DDT.Backend.DAL;
 using Microsoft.EntityFrameworkCore;
 
 EnvironmentVariables.LoadEnvironments();
@@ -24,7 +21,9 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<UserService>(); 
 
 builder.Services.AddScoped<IConversationRepository, ConversationRepository>();
-builder.Services.AddScoped<ConversationService>(); 
+builder.Services.AddScoped<ConversationService>();
+
+builder.Services.AddScoped<IQuestionRepository, QuestionRepository>();
 
 builder.Services.AddCors(options =>
 {

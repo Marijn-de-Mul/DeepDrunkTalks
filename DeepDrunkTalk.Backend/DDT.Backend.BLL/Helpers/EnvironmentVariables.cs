@@ -1,4 +1,4 @@
-﻿namespace DDT.Backend.UserService.BLL.Helpers;
+﻿namespace DDT.Backend.BLL.Helpers;
 
 public class EnvironmentVariables
 {

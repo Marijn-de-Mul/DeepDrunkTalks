@@ -1,8 +1,8 @@
-﻿using DDT.Backend.UserService.BLL.Services;
-using DDT.Backend.UserService.Common.Models.Authentication;
+﻿using DDT.Backend.BLL.Services;
+using DDT.Backend.Common.Models.Authentication;
 using Microsoft.AspNetCore.Mvc;
 
-namespace API.Controllers
+namespace DDT.Backend.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]

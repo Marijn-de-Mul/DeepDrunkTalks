@@ -1,4 +1,4 @@
-﻿namespace DDT.Backend.UserService.Common.Models.Authentication;
+﻿namespace DDT.Backend.Common.Models.Authentication;
 
 public class UserSettings
 {

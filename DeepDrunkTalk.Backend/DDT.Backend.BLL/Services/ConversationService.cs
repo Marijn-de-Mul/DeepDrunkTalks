@@ -1,60 +1,81 @@
-﻿using DDT.Backend.ConversationService.Common.Interfaces;
-using DDT.Backend.ConversationService.Common.Models;
-using DDT.Backend.UserService.BLL.Helpers;
-using DDT.Backend.UserService.Common.Interfaces;
+﻿using DDT.Backend.Common.Interfaces;
+using DDT.Backend.BLL.Helpers;
+using DDT.Backend.Common.Models;
 using Newtonsoft.Json;
 
-namespace DDT.Backend.UserService.BLL.Services;
+namespace DDT.Backend.BLL.Services;
 
 public class ConversationService
 {
     private readonly IConversationRepository _conversationRepository;
     private readonly IUserRepository _userRepository; 
+    private readonly IQuestionRepository _questionRepository;
     private readonly string _jwtSecret;
     
     private readonly string questionsFilePath = Path.Combine(Directory.GetCurrentDirectory(), "questions.json");
     private Random _random = new Random();
 
-    public ConversationService(IConversationRepository conversationRepository, IUserRepository userRepository)
+    public ConversationService(IConversationRepository conversationRepository, IUserRepository userRepository, IQuestionRepository questionRepository)
     {
         _conversationRepository = conversationRepository;
         _userRepository = userRepository;
+        _questionRepository = questionRepository;
         _jwtSecret = Environment.GetEnvironmentVariable("JWT_SECRET");
     }
     
-    public async Task<bool> StartConversation(string token)
+    public async Task<(bool IsSuccess, string QuestionText)> StartConversation(string token)
     {
         var userEmail = JwtHelper.GetUserEmailFromToken(token, _jwtSecret);
-
+    
         if (string.IsNullOrEmpty(userEmail))
         {
             throw new UnauthorizedAccessException("Invalid or missing email in the token.");
         }
-
-        Console.WriteLine(userEmail); 
-        
+    
+        Console.WriteLine(userEmail);
+    
         var user = await _userRepository.GetUserByEmailAsync(userEmail);
-
+    
         if (user == null)
         {
             throw new UnauthorizedAccessException("User not found.");
         }
-        
+    
+        var lastConversation = await _conversationRepository.GetLastConversationByUserIdAsync(user.UserId);
+    
+        Question question;
+        do
+        {
+            question = await _questionRepository.GetRandomQuestion();
+        }
+        while (lastConversation != null && lastConversation.QuestionId == question.QuestionId);
+    
+        if (question == null)
+        {
+            throw new Exception("No available questions to start the conversation.");
+        }
+
         var conversation = new Conversation
         {
-            UserId = user.UserId, 
-            TopicId = 1,                 
-            StartTime = DateTime.UtcNow, 
+            UserId = user.UserId,
+            TopicId = question.TopicId, 
+            QuestionId = question.QuestionId, 
+            StartTime = DateTime.UtcNow,
             EndTime = DateTime.UtcNow,
-            CreatedAt = DateTime.UtcNow, 
-            UpdatedAt = DateTime.UtcNow  
+            CreatedAt = DateTime.UtcNow,
+            UpdatedAt = DateTime.UtcNow
         };
-        
-        Console.WriteLine($"ConversationService - StartConversation: \n{conversation.ToString()}"); 
-        
+    
+        Console.WriteLine($"ConversationService - StartConversation: \n{conversation.ToString()}");
+    
         var result = await _conversationRepository.CreateConversationAsync(conversation);
-        
-        return result;
+    
+        if (result)
+        {
+            return (true, question.QuestionText);
+        }
+    
+        return (false, string.Empty);
     }
     
     public async Task<bool> StopConversation(string token)
@@ -95,26 +116,7 @@ public class ConversationService
         return true;
     }
 
-    public async Task<string> GetRandomQuestionAsync(string currentQuestion)
-    {
-        var questions = await ReadQuestionsFromFileAsync();
-        
-        string newQuestion;
-        do
-        {
-            newQuestion = questions[_random.Next(questions.Count)];
-        } while (newQuestion == currentQuestion); 
-
-        return newQuestion;
-    }
-
-    private async Task<List<string>> ReadQuestionsFromFileAsync()
-    {
-        var json = await File.ReadAllTextAsync(questionsFilePath);
-        return JsonConvert.DeserializeObject<List<string>>(json);
-    }
-
-    public async Task<List<Conversation>> GetConversations(string token)
+    public async Task<List<ConversationDTO>> GetConversations(string token)
     {
         var userEmail = JwtHelper.GetUserEmailFromToken(token, _jwtSecret);
 
@@ -132,6 +134,26 @@ public class ConversationService
 
         var conversations = await _conversationRepository.GetConversationsAsync(user.UserId);
 
-        return conversations;
+        var result = new List<ConversationDTO>();
+
+        foreach (var conversation in conversations)
+        {
+            var topic = await _questionRepository.GetTopicByIdAsync(conversation.TopicId);
+            var question = await _questionRepository.GetQuestionByIdAsync(conversation.QuestionId);
+
+            var conversationDto = new ConversationDTO
+            {
+                Id = conversation.ConversationId,
+                Topic = topic.TopicName ?? "Untitled Topic",  
+                Question = question.QuestionText ?? "No question available.",  
+                StartTime = conversation.StartTime.ToString("yyyy-MM-dd HH:mm"),  
+                EndTime = conversation.EndTime.ToString("yyyy-MM-dd HH:mm"),     
+                Audio = string.IsNullOrEmpty(conversation.AudioFilePath) ? "No audio available" : conversation.AudioFilePath  
+            };
+
+            result.Add(conversationDto);
+        }
+
+        return result;
     }
 }

@@ -1,10 +1,9 @@
-﻿using DDT.Backend.ConversationService.DAL;
-using DDT.Backend.ConversationService.Common.Interfaces;
-using DDT.Backend.ConversationService.Common.Models;
-using Microsoft.EntityFrameworkCore;
-using System;
+﻿using Microsoft.EntityFrameworkCore;
+using DDT.Backend.Common.Interfaces;
+using DDT.Backend.Common.Models;
+using DDT.Backend.DAL;
 
-namespace DDT.Backend.ConversationService.DAL.Repositories
+namespace DDT.Backend.DAL.Repositories
 {
     public class ConversationRepository : IConversationRepository
     {
@@ -51,6 +50,14 @@ namespace DDT.Backend.ConversationService.DAL.Repositories
             return await _context.Conversations
                 .Where(c => c.UserId == userId)
                 .ToListAsync();
+        }
+        
+        public async Task<Conversation> GetLastConversationByUserIdAsync(int userId)
+        {
+            return await _context.Conversations
+                .Where(c => c.UserId == userId)
+                .OrderByDescending(c => c.CreatedAt)
+                .FirstOrDefaultAsync();
         }
     } 
 }

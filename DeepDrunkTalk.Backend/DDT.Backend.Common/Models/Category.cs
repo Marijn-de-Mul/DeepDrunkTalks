@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DDT.Backend.ConversationService.Common.Models
+namespace DDT.Backend.Common.Models
 {
     public class Category
     {

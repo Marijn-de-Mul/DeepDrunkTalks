@@ -1,10 +1,9 @@
-﻿using DDT.Backend.ConversationService.DAL;
-using DDT.Backend.UserService.Common;
-using DDT.Backend.UserService.Common.Interfaces;
-using DDT.Backend.UserService.Common.Models;
+﻿using DDT.Backend.Common.Interfaces;
+using DDT.Backend.DAL;
+using DDT.Backend.Common.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace DDT.Backend.UserService.DAL.Repositories
+namespace DDT.Backend.DAL.Repositories
 {
     public class UserRepository : IUserRepository
     {

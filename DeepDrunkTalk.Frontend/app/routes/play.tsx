@@ -1,13 +1,11 @@
-import type { MetaFunction } from "@remix-run/node";
 import { Button, Divider, Image, Box, Text } from "@mantine/core";
 import { useNavigate } from "@remix-run/react";
 import { useEffect, useRef, useState } from "react";
-
 import ProtectedRoute from "~/components/layouts/ProtectedRoute";
 import logo from "~/assets/img/logo.png";
 
-let mediaRecorder: MediaRecorder | undefined;
-let audioChunks: Blob[] = [];
+let mediaRecorder: MediaRecorder | null = null;
+let recordedChunks: Blob[] = [];  
 
 export default function Play() {
     const [isRecording, setIsRecording] = useState(false);
@@ -136,20 +134,27 @@ export default function Play() {
 
         setIsNextQuestionDisabled(false);
     }
-
+    
     async function startRecording() {
         console.info("startRecording: Invoked.");
         try {
             const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-            mediaRecorder = new MediaRecorder(stream);
-
+            mediaRecorder = new MediaRecorder(stream, { mimeType: 'audio/webm;codecs=opus' });
+    
             mediaRecorder.ondataavailable = (event: BlobEvent) => {
                 if (event.data.size > 0) {
                     console.info("startRecording: Capturing audio chunk.");
-                    sendAudioChunk(event.data);
+                    recordedChunks.push(event.data);
                 }
             };
-
+    
+            mediaRecorder.onstop = () => {
+                console.info("startRecording: Recording stopped.");
+                const blob = new Blob(recordedChunks, { type: 'audio/webm' });
+                sendAudioChunk(blob);  
+                recordedChunks = [];  
+            };
+    
             mediaRecorder.start(1000);
             setIsRecording(true);
             console.info("startRecording: Recording started.");
@@ -157,16 +162,19 @@ export default function Play() {
             console.error("startRecording: Error accessing microphone:", error);
         }
     }
-
+    
+    // Stop the recording and trigger the onstop event
     function stopRecording() {
         console.info("stopRecording: Invoked.");
         if (mediaRecorder) {
-            mediaRecorder.stop();
+            mediaRecorder.stop();  
             setIsRecording(false);
             console.info("stopRecording: Recording stopped.");
+        } else {
+            console.error("stopRecording: MediaRecorder is not defined.");
         }
     }
-
+    
     async function sendAudioChunk(audioBlob: Blob) {
         console.info("sendAudioChunk: Sending audio chunk.");
         const token = localStorage.getItem("authToken");
@@ -174,23 +182,29 @@ export default function Play() {
             console.error("sendAudioChunk: No auth token found.");
             return;
         }
-
-        const formData = new FormData();
-        formData.append("audio", audioBlob);
-
+    
         try {
-            await fetch("https://localhost:7108/api/Conversation/audio", {
+            const formData = new FormData();
+            formData.append('audio', audioBlob, 'audio.webm');
+    
+            const response = await fetch("https://localhost:7108/api/Conversation/audio", {
                 method: "POST",
                 headers: {
-                    Authorization: `Bearer ${token}`,
+                    "Authorization": `Bearer ${token}`,
                 },
                 body: formData,
             });
-            console.info("sendAudioChunk: Audio chunk sent successfully.");
+    
+            if (response.ok) {
+                console.info("sendAudioChunk: Audio chunk sent successfully.");
+            } else {
+                console.error("sendAudioChunk: Failed to send audio chunk.", response.status);
+            }
         } catch (error) {
             console.error("sendAudioChunk: Error sending audio chunk:", error);
         }
     }
+    
 
     function handleBackToMainMenu() {
         console.info("handleBackToMainMenu: Navigating back to main menu.");

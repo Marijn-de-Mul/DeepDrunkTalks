@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "q1HlDgVb2pE=",
+  "dgSpecHash": "VDJkgdPddjs=",
   "success": true,
   "projectFilePath": "C:\\Users\\MarijndeMul\\OneDrive - Office 365 Fontys\\Fontys-HBO-ICT\\Semester3\\DeepDrunkTalks\\DeepDrunkTalk.Backend\\DDT.Backend.Common\\DDT.Backend.Common.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\MarijndeMul\\.nuget\\packages\\microsoft.aspnetcore.http.features\\6.0.0-preview.4.21253.5\\microsoft.aspnetcore.http.features.6.0.0-preview.4.21253.5.nupkg.sha512",
     "C:\\Users\\MarijndeMul\\.nuget\\packages\\microsoft.entityframeworkcore\\9.0.0-rc.2.24474.1\\microsoft.entityframeworkcore.9.0.0-rc.2.24474.1.nupkg.sha512",
     "C:\\Users\\MarijndeMul\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\9.0.0-rc.2.24474.1\\microsoft.entityframeworkcore.abstractions.9.0.0-rc.2.24474.1.nupkg.sha512",
     "C:\\Users\\MarijndeMul\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\9.0.0-rc.2.24474.1\\microsoft.entityframeworkcore.analyzers.9.0.0-rc.2.24474.1.nupkg.sha512",
@@ -15,7 +16,8 @@
     "C:\\Users\\MarijndeMul\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\9.0.0-rc.2.24473.5\\microsoft.extensions.logging.abstractions.9.0.0-rc.2.24473.5.nupkg.sha512",
     "C:\\Users\\MarijndeMul\\.nuget\\packages\\microsoft.extensions.options\\9.0.0-rc.2.24473.5\\microsoft.extensions.options.9.0.0-rc.2.24473.5.nupkg.sha512",
     "C:\\Users\\MarijndeMul\\.nuget\\packages\\microsoft.extensions.primitives\\9.0.0-rc.2.24473.5\\microsoft.extensions.primitives.9.0.0-rc.2.24473.5.nupkg.sha512",
-    "C:\\Users\\MarijndeMul\\.nuget\\packages\\system.diagnostics.diagnosticsource\\9.0.0-rc.2.24473.5\\system.diagnostics.diagnosticsource.9.0.0-rc.2.24473.5.nupkg.sha512"
+    "C:\\Users\\MarijndeMul\\.nuget\\packages\\system.diagnostics.diagnosticsource\\9.0.0-rc.2.24473.5\\system.diagnostics.diagnosticsource.9.0.0-rc.2.24473.5.nupkg.sha512",
+    "C:\\Users\\MarijndeMul\\.nuget\\packages\\system.io.pipelines\\6.0.0-preview.4.21253.7\\system.io.pipelines.6.0.0-preview.4.21253.7.nupkg.sha512"
   ],
   "logs": []
 }

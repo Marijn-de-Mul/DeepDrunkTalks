@@ -6,5 +6,5 @@ public interface IQuestionRepository
 {
     Task<Question> GetRandomQuestion();
     Task<Question> GetQuestionByIdAsync(int questionId);
-    Task<Topic> GetTopicByIdAsync(int topicId); 
+    Task<Topic> GetTopicByIdAsync(int topicId);
 }

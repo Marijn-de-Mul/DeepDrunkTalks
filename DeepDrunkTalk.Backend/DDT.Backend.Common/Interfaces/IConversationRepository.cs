@@ -1,13 +1,12 @@
 ﻿using DDT.Backend.Common.Models;
 
-namespace DDT.Backend.Common.Interfaces
+namespace DDT.Backend.Common.Interfaces;
+
+public interface IConversationRepository
 {
-    public interface IConversationRepository
-    {
-        Task<bool> CreateConversationAsync(Conversation conversation);
-        Task<Conversation> GetOngoingConversationAsync(int userId);
-        Task<bool> UpdateConversationAsync(Conversation conversation);
-        Task<List<Conversation>> GetConversationsAsync(int userId); 
-        Task<Conversation> GetLastConversationByUserIdAsync(int userId); 
-    }
+    Task<bool> CreateConversation(Conversation conversation);
+    Task<Conversation> GetOngoingConversation(int userId);
+    Task<Conversation> GetMostRecentNonOngoingConversation(int userId);
+    Task<bool> UpdateConversation(Conversation conversation);
+    Task<List<Conversation>> GetConversations(int userId);
 }

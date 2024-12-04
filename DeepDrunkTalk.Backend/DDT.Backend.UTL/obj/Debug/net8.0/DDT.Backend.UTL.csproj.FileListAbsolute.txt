@@ -98,3 +98,7 @@ C:\Users\MarijndeMul\OneDrive - Office 365 Fontys\Fontys-HBO-ICT\Semester3\DeepD
 C:\Users\MarijndeMul\OneDrive - Office 365 Fontys\Fontys-HBO-ICT\Semester3\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.UTL\obj\Debug\net8.0\DDT.Backend.UTL.pdb
 C:\Users\MarijndeMul\OneDrive - Office 365 Fontys\Fontys-HBO-ICT\Semester3\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.UTL\obj\Debug\net8.0\DDT.Backend.UTL.genruntimeconfig.cache
 C:\Users\MarijndeMul\OneDrive - Office 365 Fontys\Fontys-HBO-ICT\Semester3\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.UTL\obj\Debug\net8.0\ref\DDT.Backend.UTL.dll
+C:\Users\MarijndeMul\OneDrive - Office 365 Fontys\Fontys-HBO-ICT\Semester3\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.UTL\bin\Debug\net8.0\Serilog.dll
+C:\Users\MarijndeMul\OneDrive - Office 365 Fontys\Fontys-HBO-ICT\Semester3\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.UTL\bin\Debug\net8.0\Serilog.Formatting.Compact.dll
+C:\Users\MarijndeMul\OneDrive - Office 365 Fontys\Fontys-HBO-ICT\Semester3\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.UTL\bin\Debug\net8.0\Serilog.Sinks.Console.dll
+C:\Users\MarijndeMul\OneDrive - Office 365 Fontys\Fontys-HBO-ICT\Semester3\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.UTL\bin\Debug\net8.0\Serilog.Sinks.File.dll

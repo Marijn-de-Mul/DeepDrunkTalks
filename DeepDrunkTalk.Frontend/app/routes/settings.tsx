@@ -20,7 +20,7 @@ export default function Settings() {
       setLoading(true);
       setError(null);
 
-      const response = await fetch("https://localhost:7108/api/User/settings", {
+      const response = await fetch("https://localhost:7108/api/users/settings", {
         method: "GET",
         headers: {
           Authorization: `Bearer ${authToken}`,
@@ -47,7 +47,7 @@ export default function Settings() {
 
       setError(null);
 
-      const response = await fetch("https://localhost:7108/api/User/settings", {
+      const response = await fetch("https://localhost:7108/api/users/settings", {
         method: "PUT",
         headers: {
           Authorization: `Bearer ${authToken}`,

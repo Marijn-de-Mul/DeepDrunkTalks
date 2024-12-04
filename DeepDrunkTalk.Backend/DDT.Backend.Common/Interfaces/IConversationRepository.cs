@@ -4,9 +4,11 @@ namespace DDT.Backend.Common.Interfaces;
 
 public interface IConversationRepository
 {
-    Task<bool> CreateConversation(Conversation conversation);
+    Task<int> CreateConversation(Conversation conversation);
+    Task<bool> UpdateConversation(Conversation conversation);
+    Task<bool> DeleteConversation(int conversationId);
     Task<Conversation> GetOngoingConversation(int userId);
     Task<Conversation> GetMostRecentNonOngoingConversation(int userId);
-    Task<bool> UpdateConversation(Conversation conversation);
     Task<List<Conversation>> GetConversations(int userId);
+    Task<Conversation> GetConversationById(int conversationId);
 }

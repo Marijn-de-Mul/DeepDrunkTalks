@@ -29,8 +29,8 @@ export default function Conversations() {
       }
 
       try {
-        const response = await fetch('https://localhost:7108/api/Conversation/get-conversations', {
-          method: 'POST',
+        const response = await fetch('https://localhost:7108/api/conversations', {
+          method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json',
@@ -77,6 +77,34 @@ export default function Conversations() {
     }
   }
 
+  const deleteConversation = async (conversationId: any) => {
+    const token = localStorage.getItem("authToken");
+    if (!token) {
+      console.error("Token not found. Unable to fetch audio file.");
+      return;
+    }
+
+    try {
+      const response = await fetch(`https://localhost:7108/api/conversations/${conversationId}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`, 
+          "Content-Type": "application/json",
+        },
+      });
+  
+      if (response.ok) {
+        setConversations((prevConversations) =>
+          prevConversations.filter((conversation) => conversation.id !== conversationId)
+        );
+      } else {
+        console.error("Failed to delete the conversation");
+      }
+    } catch (error) {
+      console.error("Error deleting conversation:", error);
+    }
+  };  
+
   useEffect(() => {
     async function loadAudioUrls() {
       const newAudioUrls: { [key: number]: string | undefined } = {};
@@ -117,7 +145,7 @@ export default function Conversations() {
           }}
         />
       </Box>
-
+  
       <Box
         style={{
           display: "flex",
@@ -139,7 +167,7 @@ export default function Conversations() {
         >
           Conversations
         </Text>
-
+  
         <Box
           style={{
             display: "flex",
@@ -199,7 +227,7 @@ export default function Conversations() {
               >
                 {conversation.question || "No question available."}
               </Text>
-
+  
               {audioUrls[conversation.id] ? (
                 <audio
                   style={{
@@ -221,30 +249,41 @@ export default function Conversations() {
                   No audio available
                 </Text>
               )}
+  
+              <Button
+                color="red"
+                style={{
+                  marginTop: "10px",
+                  width: "100%",
+                }}
+                onClick={() => deleteConversation(conversation.id)}
+              >
+                DELETE
+              </Button>
             </Box>
           ))}
         </Box>
-
+  
         <Link to={"/"}>
           <Button
             color="red"
             style={{
               marginTop: "1.5vh",
-              height: "5vh"
+              height: "5vh",
             }}
           >
             BACK TO MAIN MENU
           </Button>
         </Link>
       </Box>
-
+  
       <Divider
         color="black"
         style={{
           marginTop: "4vh",
         }}
       />
-
+  
       <Box
         style={{
           display: "flex",
@@ -262,5 +301,5 @@ export default function Conversations() {
         </Text>
       </Box>
     </ProtectedRoute>
-  );
+  );  
 }

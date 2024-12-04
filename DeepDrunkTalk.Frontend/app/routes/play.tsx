@@ -5,7 +5,7 @@ import ProtectedRoute from "~/components/layouts/ProtectedRoute";
 import logo from "~/assets/img/logo.png";
 
 let mediaRecorder: MediaRecorder | null = null;
-let recordedChunks: Blob[] = [];  
+let recordedChunks: Blob[] = [];
 
 export default function Play() {
     const [isRecording, setIsRecording] = useState(false);
@@ -23,7 +23,7 @@ export default function Play() {
             if (!hasStartedRef.current) {
                 hasStartedRef.current = true;
                 console.info("Starting conversation...");
-                await startConversation(); 
+                await startConversation();
             }
         };
 
@@ -49,30 +49,30 @@ export default function Play() {
             console.info("startConversation: Conversation already in progress. Skipping.");
             return;
         }
-
+    
         const token = localStorage.getItem("authToken");
-        if (!token) {
-            console.error("startConversation: No auth token found.");
-            return;
-        }
-
+    
         try {
             console.info("startConversation: Making API request to start conversation.");
-            const response = await fetch("https://localhost:7108/api/Conversation/start", {
+            const response = await fetch(`https://localhost:7108/api/conversations`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${token}`,
                 },
             });
-
+    
             if (response.ok) {
                 conversationInProgressRef.current = true;
                 console.info("startConversation: Conversation started successfully.");
-
-                const questionData = await response.json(); 
+    
+                const questionData = await response.json();
                 setQuestion(questionData.question);
-                await startRecording();
+                
+                const conversationId = questionData.conversationId; 
+                localStorage.setItem("conversationId", conversationId); 
+                
+                await startRecording(); 
             } else {
                 console.error("startConversation: Failed to start conversation.", response.status);
             }
@@ -87,25 +87,27 @@ export default function Play() {
             console.info("stopConversation: No conversation in progress. Skipping.");
             return;
         }
-
+    
         const token = localStorage.getItem("authToken");
-        if (!token) {
-            console.error("stopConversation: No auth token found.");
+        const conversationId = localStorage.getItem("conversationId"); 
+    
+        if (!token || !conversationId) {
+            console.error("stopConversation: Missing token, userId, or conversationId.");
             return;
         }
-
-        stopRecording();
-
+    
+        stopRecording(); 
+    
         try {
             console.info("stopConversation: Making API request to stop conversation.");
-            const response = await fetch("https://localhost:7108/api/Conversation/stop", {
-                method: "POST",
+            const response = await fetch(`https://localhost:7108/api/conversations/${conversationId}/stop`, {
+                method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${token}`,
                 },
             });
-
+    
             if (response.ok) {
                 conversationInProgressRef.current = false;
                 console.info("stopConversation: Conversation stopped successfully.");
@@ -116,6 +118,8 @@ export default function Play() {
             console.error("stopConversation: Error while stopping conversation:", error);
         }
     }
+    
+
 
     async function nextQuestion() {
         console.info("nextQuestion: Invoked.");
@@ -130,71 +134,69 @@ export default function Play() {
         await stopConversation();
 
         console.info("nextQuestion: Starting new conversation.");
-        await startConversation(); 
+        await startConversation();
 
         setIsNextQuestionDisabled(false);
     }
-    
+
     async function startRecording() {
         console.info("startRecording: Invoked.");
         try {
             const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
             mediaRecorder = new MediaRecorder(stream, { mimeType: 'audio/webm;codecs=opus' });
-    
+
             mediaRecorder.ondataavailable = (event: BlobEvent) => {
                 if (event.data.size > 0) {
                     console.info("startRecording: Capturing audio chunk.");
                     recordedChunks.push(event.data);
                 }
             };
-    
+
             mediaRecorder.onstop = () => {
                 console.info("startRecording: Recording stopped.");
                 const blob = new Blob(recordedChunks, { type: 'audio/webm' });
-                sendAudioChunk(blob);  
-                recordedChunks = [];  
+                sendAudioChunk(blob);
+                recordedChunks = [];
             };
-    
+
             mediaRecorder.start(1000);
             setIsRecording(true);
+
             console.info("startRecording: Recording started.");
         } catch (error) {
             console.error("startRecording: Error accessing microphone:", error);
         }
     }
-    
-    // Stop the recording and trigger the onstop event
+
     function stopRecording() {
         console.info("stopRecording: Invoked.");
         if (mediaRecorder) {
-            mediaRecorder.stop();  
+            mediaRecorder.stop();
             setIsRecording(false);
             console.info("stopRecording: Recording stopped.");
         } else {
             console.error("stopRecording: MediaRecorder is not defined.");
         }
     }
-    
+
     async function sendAudioChunk(audioBlob: Blob) {
         console.info("sendAudioChunk: Sending audio chunk.");
+
+        const conversationId = localStorage.getItem("conversationId");
         const token = localStorage.getItem("authToken");
-        if (!token) {
-            console.error("sendAudioChunk: No auth token found.");
-            return;
-        }
-    
+
         try {
             const formData = new FormData();
             formData.append('audio', audioBlob, 'audio.webm');
-    
-            const response = await fetch("https://localhost:7108/api/Conversation/audio", {
+
+            const response = await fetch(`https://localhost:7108/api/conversations/${conversationId}/audio`, {
                 method: "POST",
                 headers: {
                     "Authorization": `Bearer ${token}`,
                 },
                 body: formData,
             });
-    
+
             if (response.ok) {
                 console.info("sendAudioChunk: Audio chunk sent successfully.");
             } else {
@@ -204,19 +206,18 @@ export default function Play() {
             console.error("sendAudioChunk: Error sending audio chunk:", error);
         }
     }
-    
 
     function handleBackToMainMenu() {
         console.info("handleBackToMainMenu: Navigating back to main menu.");
         stopConversation();
-        navigate("/"); 
+        navigate("/");
     }
 
     const calculateFontSize = (questionLength: number) => {
-        let fontSize = 2; 
-        if (questionLength > 50) fontSize = 1.8; 
+        let fontSize = 2;
+        if (questionLength > 50) fontSize = 1.8;
         if (questionLength > 100) fontSize = 1.6;
-        if (questionLength > 150) fontSize = 1.4; 
+        if (questionLength > 150) fontSize = 1.4;
         return fontSize + "em";
     };
 
@@ -260,9 +261,9 @@ export default function Play() {
                 >
                     <Text
                         style={{
-                            fontSize: calculateFontSize(question.length), 
+                            fontSize: calculateFontSize(question.length),
                             fontWeight: "800",
-                            wordWrap: "break-word", 
+                            wordWrap: "break-word",
                         }}
                     >
                         {question}

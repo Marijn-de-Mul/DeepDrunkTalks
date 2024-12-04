@@ -1,7 +1,11 @@
-﻿using DDT.Backend.Common.Interfaces;
+﻿using DDT.Backend.BLL.Exceptions.HelperExceptions;
+using DDT.Backend.Common.Interfaces;
 using DDT.Backend.BLL.Helpers;
-using DDT.Backend.Common.Models;
+using DDT.Backend.Common.Exceptions;
+using DDT.Backend.Common.Logger;
 using DDT.Backend.Common.Models.Authentication;
+using DDT.Backend.Common.Models;
+using MissingFieldException = System.MissingFieldException;
 
 namespace DDT.Backend.BLL.Services
 {
@@ -9,120 +13,120 @@ namespace DDT.Backend.BLL.Services
     {
         private readonly IUserRepository _userRepository;
         private readonly string _jwtSecret;
+        private readonly Logger _logger;
 
-        public AuthService(IUserRepository userRepository)
+        public AuthService(IUserRepository userRepository, Logger logger)
         {
             _userRepository = userRepository;
             _jwtSecret = Environment.GetEnvironmentVariable("JWT_SECRET");
+            _logger = logger;
         }
 
-        public async Task<string> RegisterUserAsync(RegisterRequest request)
+
+        public async Task<string> RegisterUser(RegisterRequest request)
         {
-            if (string.IsNullOrWhiteSpace(request.Name) ||
-                string.IsNullOrWhiteSpace(request.Email) ||
-                string.IsNullOrWhiteSpace(request.Password) ||
-                string.IsNullOrWhiteSpace(request.ConfirmPassword))
+            _logger.LogInformation($"Starting user registration for email: {request.Email}");
+
+            try
             {
-                throw new ArgumentException("All fields are required.");
+                if (string.IsNullOrWhiteSpace(request.Name) ||
+                    string.IsNullOrWhiteSpace(request.Email) ||
+                    string.IsNullOrWhiteSpace(request.Password) ||
+                    string.IsNullOrWhiteSpace(request.ConfirmPassword))
+                {
+                    _logger.LogWarning($"Registration failed: Missing required fields for email: {request.Email}");
+                    throw new MissingFieldException();
+                }
+
+                User? userExistsCheck = await _userRepository.GetUserByEmail(request.Email);
+
+                if (userExistsCheck != null && await _userRepository.UserExists(userExistsCheck.UserId))
+                {
+                    _logger.LogWarning($"Registration failed: User already exists for email: {request.Email}");
+                    throw new UserAlreadyExistsException();
+                }
+
+                if (request.Password != request.ConfirmPassword)
+                {
+                    _logger.LogWarning($"Registration failed: Password mismatch for email: {request.Email}");
+                    throw new PasswordMismatchException();
+                }
+
+                var user = new User
+                {
+                    Name = request.Name,
+                    Email = request.Email,
+                    Password = EncryptionHelper.Encrypt(request.Password),
+                    CreatedAt = DateTime.UtcNow,
+                    UpdatedAt = DateTime.UtcNow,
+                    Conversations = new List<Conversation>()
+                };
+
+                try
+                {
+                    await _userRepository.AddUser(user);
+                    _logger.LogInformation($"User registration successful for email: {request.Email}");
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError($"Error adding user during registration for email: {request.Email}", ex);
+                    throw new RegistrationException("An error occurred during user registration.");
+                }
+
+                try
+                {
+                    var token = JwtHelper.GenerateJwtToken(user.UserId, user.Name, _jwtSecret);
+                    _logger.LogInformation($"JWT token generated successfully for email: {request.Email}");
+                    return token;
+                }
+                catch (JwtGenerationException ex)
+                {
+                    _logger.LogError($"Error generating JWT for user registration for email: {request.Email}", ex);
+                    throw new JwtGenerationException();
+                }
             }
-
-            if (await _userRepository.UserExistsAsync(request.Email))
+            catch (Exception ex)
             {
-                throw new ArgumentException("User already exists.");
+                _logger.LogError($"An unexpected error occurred during registration for email: {request.Email}", ex);
+                throw; 
             }
-
-            if (request.Password != request.ConfirmPassword)
-            {
-                throw new ArgumentException("Passwords do not match.");
-            } 
-
-            var user = new User
-            {
-                Name = request.Name,
-                Email = request.Email,
-                Password = EncryptionHelper.Encrypt(request.Password),
-                CreatedAt = DateTime.UtcNow, 
-                UpdatedAt = DateTime.UtcNow,
-                Conversations = new List<Conversation>()
-            };
-
-            await _userRepository.AddUserAsync(user);
-
-            var token = JwtHelper.GenerateJwtToken(user.Email, user.Name, _jwtSecret);
-            return token;
         }
 
-        public async Task<string> LoginUserAsync(LoginRequest request)
+        public async Task<string> LoginUser(LoginRequest request)
         {
-            if (string.IsNullOrWhiteSpace(request.Email) || string.IsNullOrWhiteSpace(request.Password))
-            {
-                throw new ArgumentException("Email and password are required.");
-            }
+            _logger.LogInformation($"Starting user login for email: {request.Email}");
 
-            var user = await _userRepository.GetUserByEmailAsync(request.Email);
-            if (user == null)
+            try
             {
-                throw new ArgumentException("Invalid email or password.");
-            }
+                if (string.IsNullOrWhiteSpace(request.Email) || string.IsNullOrWhiteSpace(request.Password))
+                {
+                    _logger.LogWarning($"Login failed: Missing email or password for email: {request.Email}");
+                    throw new MissingFieldException(); 
+                }
 
-            if (!EncryptionHelper.Verify(request.Password, user.Password))
-            {
-                throw new ArgumentException("Invalid email or password.");
-            }
+                var user = await _userRepository.GetUserByEmail(request.Email);
 
-            if (EncryptionHelper.Verify(request.Password, user.Password))
-            {
-                var token = JwtHelper.GenerateJwtToken(user.Email, user.Name, _jwtSecret);
+                if (user == null)
+                {
+                    _logger.LogWarning($"Login failed: User not found for email: {request.Email}");
+                    throw new UserNotFoundException(); 
+                }
+
+                if (!EncryptionHelper.Verify(request.Password, user.Password))
+                {
+                    _logger.LogWarning($"Login failed: Invalid credentials for email: {request.Email}");
+                    throw new InvalidCredentialsException(); 
+                }
+
+                var token = JwtHelper.GenerateJwtToken(user.UserId, user.Name, _jwtSecret);
+                _logger.LogInformation($"User login successful for email: {request.Email}");
                 return token;
             }
-
-            return null;
-        }
-        
-        public async Task<UserSettings> GetUserSettingsAsync(string token)
-        {
-            var userEmail = JwtHelper.GetUserEmailFromToken(token, _jwtSecret);
-
-            if (string.IsNullOrEmpty(userEmail))
+            catch (Exception ex)
             {
-                throw new UnauthorizedAccessException("Invalid or missing email in the token.");
+                _logger.LogError($"An unexpected error occurred during login for email: {request.Email}", ex);
+                throw; 
             }
-
-            var user = await _userRepository.GetUserByEmailAsync(userEmail);
-
-            if (user == null)
-            {
-                throw new UnauthorizedAccessException("User not found.");
-            }
-
-            return new UserSettings
-            {
-                VolumeLevel = user.VolumeLevel,
-                RefreshFrequency = user.RefreshFrequency
-            };
-        }
-
-
-        public async Task UpdateUserSettingsAsync(string token, UserSettings settings)
-        {
-            var userEmail = JwtHelper.GetUserEmailFromToken(token, _jwtSecret);
-
-            if (string.IsNullOrEmpty(userEmail))
-            {
-                throw new UnauthorizedAccessException("Invalid or missing email in the token.");
-            }
-
-            var user = await _userRepository.GetUserByEmailAsync(userEmail);
-
-            if (user == null)
-            {
-                throw new UnauthorizedAccessException("User not found.");
-            }
-
-            user.VolumeLevel = settings.VolumeLevel;
-            user.RefreshFrequency = settings.RefreshFrequency;
-
-            await _userRepository.UpdateUserAsync(user);
         }
     }
 }

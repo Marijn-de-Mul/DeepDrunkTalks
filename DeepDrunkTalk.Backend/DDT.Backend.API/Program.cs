@@ -1,20 +1,30 @@
 using System.Text;
+using DDT.Backend.API.Middleware;
 using DDT.Backend.Common.Interfaces;
 using DDT.Backend.DAL.Repositories;
 using DDT.Backend.BLL.Helpers;
 using DDT.Backend.BLL.Services;
+using DDT.Backend.BLL.Services.Audio;
+using DDT.Backend.BLL.Services.File;
+using DDT.Backend.BLL.Services.Setting;
+using DDT.Backend.Common.Logger;
 using DDT.Backend.DAL;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using Serilog;
+using Serilog.Events;
 
 EnvironmentVariables.LoadEnvironments();
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.EnableAnnotations(); 
+});
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(ConnectionStringHelper.GetConnectionString()));
@@ -26,8 +36,16 @@ builder.Services.AddScoped<IQuestionRepository, QuestionRepository>();
 
 builder.Services.AddHttpContextAccessor();
 
-builder.Services.AddScoped<IUserRepository, AuthRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<AuthService>(); 
+
+builder.Services.AddScoped<SettingService>(); 
+
+builder.Services.AddScoped<AudioService>(); 
+
+builder.Services.AddScoped<FileService>(); 
+
+builder.Services.AddSingleton<DDT.Backend.Common.Logger.Logger>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
@@ -49,25 +67,28 @@ builder.Services.AddControllers();
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowFrontend",
-        builder =>
-        {
-            builder.WithOrigins("http://localhost:5173") 
-                .AllowAnyHeader()
-                .AllowAnyMethod()
-                .AllowCredentials(); 
-        });
+    options.AddPolicy("AllowSpecificOrigins", policy =>
+    {
+        policy.WithOrigins("http://localhost:5173")
+              .AllowAnyHeader()
+              .AllowAnyMethod()
+              .AllowCredentials(); 
+    });
 });
 
+builder.Services.AddSingleton(_ => Environment.GetEnvironmentVariable("JWT_SECRET"));
+
 var app = builder.Build();
+
+app.UseCors("AllowSpecificOrigins");
+
+app.UseMiddleware<TokenValidator>(Environment.GetEnvironmentVariable("JWT_SECRET"), app.Services.GetRequiredService<Logger>());
 
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-app.UseCors("AllowFrontend");
 
 app.UseHttpsRedirection();
 

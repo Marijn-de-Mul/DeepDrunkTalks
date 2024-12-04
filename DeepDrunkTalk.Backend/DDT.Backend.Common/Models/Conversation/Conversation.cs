@@ -7,7 +7,7 @@ public class Conversation
     public int TopicId { get; set; }
     public int QuestionId { get; set; }
     public DateTime StartTime { get; set; }
-    public DateTime EndTime { get; set; }
+    public DateTime? EndTime { get; set; }
     public string? AudioFilePath { get; set; }
     public string? OnTopicAnalysis { get; set; }
     public DateTime CreatedAt { get; set; }

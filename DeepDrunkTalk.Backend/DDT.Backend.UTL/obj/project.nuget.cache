@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "ZiWWd77am/4=",
+  "dgSpecHash": "8+fJByXIKKM=",
   "success": true,
   "projectFilePath": "C:\\Users\\MarijndeMul\\OneDrive - Office 365 Fontys\\Fontys-HBO-ICT\\Semester3\\DeepDrunkTalks\\DeepDrunkTalk.Backend\\DDT.Backend.UTL\\DDT.Backend.UTL.csproj",
   "expectedPackageFiles": [
@@ -16,6 +16,10 @@
     "C:\\Users\\MarijndeMul\\.nuget\\packages\\nunit\\3.14.0\\nunit.3.14.0.nupkg.sha512",
     "C:\\Users\\MarijndeMul\\.nuget\\packages\\nunit.analyzers\\3.9.0\\nunit.analyzers.3.9.0.nupkg.sha512",
     "C:\\Users\\MarijndeMul\\.nuget\\packages\\nunit3testadapter\\4.5.0\\nunit3testadapter.4.5.0.nupkg.sha512",
+    "C:\\Users\\MarijndeMul\\.nuget\\packages\\serilog\\4.2.0-dev-02332\\serilog.4.2.0-dev-02332.nupkg.sha512",
+    "C:\\Users\\MarijndeMul\\.nuget\\packages\\serilog.formatting.compact\\3.0.0\\serilog.formatting.compact.3.0.0.nupkg.sha512",
+    "C:\\Users\\MarijndeMul\\.nuget\\packages\\serilog.sinks.console\\6.0.0\\serilog.sinks.console.6.0.0.nupkg.sha512",
+    "C:\\Users\\MarijndeMul\\.nuget\\packages\\serilog.sinks.file\\6.0.0\\serilog.sinks.file.6.0.0.nupkg.sha512",
     "C:\\Users\\MarijndeMul\\.nuget\\packages\\system.reflection.metadata\\1.6.0\\system.reflection.metadata.1.6.0.nupkg.sha512"
   ],
   "logs": []

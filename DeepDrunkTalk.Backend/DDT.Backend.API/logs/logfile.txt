@@ -1,0 +1,154 @@
+INFO | 2024-12-04 12:13:59 | Register method called with request: {@Request}
+INFO | 2024-12-04 12:13:59 | Starting user registration for email: marijndemul@gmail.nl
+INFO | 2024-12-04 12:13:59 | Attempting to get user by email: marijndemul@gmail.nl
+ERROR | 2024-12-04 12:14:00 | Error getting user by email: marijndemul@gmail.nl | Exception: User not found. | StackTrace:    at DDT.Backend.DAL.Repositories.UserRepository.GetUserByEmail(String email) in C:\Users\MarijndeMul\OneDrive - Office 365 Fontys\Fontys-HBO-ICT\Semester3\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.DAL\Repositories\Auth\UserRepository.cs:line 88
+ERROR | 2024-12-04 12:14:00 | An unexpected error occurred during registration for email: marijndemul@gmail.nl | Exception: An error occurred while retrieving the user. | StackTrace:    at DDT.Backend.DAL.Repositories.UserRepository.GetUserByEmail(String email) in C:\Users\MarijndeMul\OneDrive - Office 365 Fontys\Fontys-HBO-ICT\Semester3\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.DAL\Repositories\Auth\UserRepository.cs:line 98
+   at DDT.Backend.BLL.Services.AuthService.RegisterUser(RegisterRequest request) in C:\Users\MarijndeMul\OneDrive - Office 365 Fontys\Fontys-HBO-ICT\Semester3\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\Services\Auth\AuthService.cs:line 41
+ERROR | 2024-12-04 12:14:00 | Unexpected error in Register method: An error occurred while retrieving the user., StackTrace:    at DDT.Backend.DAL.Repositories.UserRepository.GetUserByEmail(String email) in C:\Users\MarijndeMul\OneDrive - Office 365 Fontys\Fontys-HBO-ICT\Semester3\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.DAL\Repositories\Auth\UserRepository.cs:line 98
+   at DDT.Backend.BLL.Services.AuthService.RegisterUser(RegisterRequest request) in C:\Users\MarijndeMul\OneDrive - Office 365 Fontys\Fontys-HBO-ICT\Semester3\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\Services\Auth\AuthService.cs:line 41
+   at DDT.Backend.API.Controllers.UserController.Register(RegisterRequest request) in C:\Users\MarijndeMul\OneDrive - Office 365 Fontys\Fontys-HBO-ICT\Semester3\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.API\Controllers\UserController.cs:line 44 | Exception: An error occurred while retrieving the user. | StackTrace:    at DDT.Backend.DAL.Repositories.UserRepository.GetUserByEmail(String email) in C:\Users\MarijndeMul\OneDrive - Office 365 Fontys\Fontys-HBO-ICT\Semester3\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.DAL\Repositories\Auth\UserRepository.cs:line 98
+   at DDT.Backend.BLL.Services.AuthService.RegisterUser(RegisterRequest request) in C:\Users\MarijndeMul\OneDrive - Office 365 Fontys\Fontys-HBO-ICT\Semester3\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\Services\Auth\AuthService.cs:line 41
+   at DDT.Backend.API.Controllers.UserController.Register(RegisterRequest request) in C:\Users\MarijndeMul\OneDrive - Office 365 Fontys\Fontys-HBO-ICT\Semester3\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.API\Controllers\UserController.cs:line 44
+INFO | 2024-12-04 12:52:05 | Register method called with request: {@Request}
+INFO | 2024-12-04 12:52:05 | Starting user registration for email: marijndemul@gmail.com
+INFO | 2024-12-04 12:52:05 | Attempting to get user by email: marijndemul@gmail.com
+INFO | 2024-12-04 12:52:05 | Successfully retrieved user with email: marijndemul@gmail.com
+INFO | 2024-12-04 12:52:05 | Checking if user exists with UserId: 1
+INFO | 2024-12-04 12:52:05 | User exists check result for UserId 1: {exists}
+WARN | 2024-12-04 12:52:05 | Registration failed: User already exists for email: marijndemul@gmail.com
+ERROR | 2024-12-04 12:52:05 | An unexpected error occurred during registration for email: marijndemul@gmail.com | Exception: User already exists. | StackTrace:    at DDT.Backend.BLL.Services.AuthService.RegisterUser(RegisterRequest request) in C:\Users\MarijndeMul\OneDrive - Office 365 Fontys\Fontys-HBO-ICT\Semester3\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\Services\Auth\AuthService.cs:line 46
+ERROR | 2024-12-04 12:52:05 | Error in Register method: User already exists., StackTrace:    at DDT.Backend.BLL.Services.AuthService.RegisterUser(RegisterRequest request) in C:\Users\MarijndeMul\OneDrive - Office 365 Fontys\Fontys-HBO-ICT\Semester3\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\Services\Auth\AuthService.cs:line 46
+   at DDT.Backend.API.Controllers.UserController.Register(RegisterRequest request) in C:\Users\MarijndeMul\OneDrive - Office 365 Fontys\Fontys-HBO-ICT\Semester3\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.API\Controllers\UserController.cs:line 44 | Exception: User already exists. | StackTrace:    at DDT.Backend.BLL.Services.AuthService.RegisterUser(RegisterRequest request) in C:\Users\MarijndeMul\OneDrive - Office 365 Fontys\Fontys-HBO-ICT\Semester3\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\Services\Auth\AuthService.cs:line 46
+   at DDT.Backend.API.Controllers.UserController.Register(RegisterRequest request) in C:\Users\MarijndeMul\OneDrive - Office 365 Fontys\Fontys-HBO-ICT\Semester3\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.API\Controllers\UserController.cs:line 44
+INFO | 2024-12-04 12:52:15 | Register method called with request: {@Request}
+INFO | 2024-12-04 12:52:15 | Starting user registration for email: marijndemul@gmail.nl
+INFO | 2024-12-04 12:52:15 | Attempting to get user by email: marijndemul@gmail.nl
+ERROR | 2024-12-04 12:52:15 | Error getting user by email: marijndemul@gmail.nl | Exception: User not found. | StackTrace:    at DDT.Backend.DAL.Repositories.UserRepository.GetUserByEmail(String email) in C:\Users\MarijndeMul\OneDrive - Office 365 Fontys\Fontys-HBO-ICT\Semester3\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.DAL\Repositories\Auth\UserRepository.cs:line 88
+ERROR | 2024-12-04 12:52:15 | An unexpected error occurred during registration for email: marijndemul@gmail.nl | Exception: An error occurred while retrieving the user. | StackTrace:    at DDT.Backend.DAL.Repositories.UserRepository.GetUserByEmail(String email) in C:\Users\MarijndeMul\OneDrive - Office 365 Fontys\Fontys-HBO-ICT\Semester3\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.DAL\Repositories\Auth\UserRepository.cs:line 98
+   at DDT.Backend.BLL.Services.AuthService.RegisterUser(RegisterRequest request) in C:\Users\MarijndeMul\OneDrive - Office 365 Fontys\Fontys-HBO-ICT\Semester3\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\Services\Auth\AuthService.cs:line 41
+ERROR | 2024-12-04 12:52:15 | Unexpected error in Register method: An error occurred while retrieving the user., StackTrace:    at DDT.Backend.DAL.Repositories.UserRepository.GetUserByEmail(String email) in C:\Users\MarijndeMul\OneDrive - Office 365 Fontys\Fontys-HBO-ICT\Semester3\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.DAL\Repositories\Auth\UserRepository.cs:line 98
+   at DDT.Backend.BLL.Services.AuthService.RegisterUser(RegisterRequest request) in C:\Users\MarijndeMul\OneDrive - Office 365 Fontys\Fontys-HBO-ICT\Semester3\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\Services\Auth\AuthService.cs:line 41
+   at DDT.Backend.API.Controllers.UserController.Register(RegisterRequest request) in C:\Users\MarijndeMul\OneDrive - Office 365 Fontys\Fontys-HBO-ICT\Semester3\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.API\Controllers\UserController.cs:line 44 | Exception: An error occurred while retrieving the user. | StackTrace:    at DDT.Backend.DAL.Repositories.UserRepository.GetUserByEmail(String email) in C:\Users\MarijndeMul\OneDrive - Office 365 Fontys\Fontys-HBO-ICT\Semester3\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.DAL\Repositories\Auth\UserRepository.cs:line 98
+   at DDT.Backend.BLL.Services.AuthService.RegisterUser(RegisterRequest request) in C:\Users\MarijndeMul\OneDrive - Office 365 Fontys\Fontys-HBO-ICT\Semester3\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\Services\Auth\AuthService.cs:line 41
+   at DDT.Backend.API.Controllers.UserController.Register(RegisterRequest request) in C:\Users\MarijndeMul\OneDrive - Office 365 Fontys\Fontys-HBO-ICT\Semester3\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.API\Controllers\UserController.cs:line 44
+INFO | 2024-12-04 12:54:24 | Register method called with request: DDT.Backend.Common.Models.Authentication.RegisterRequest
+INFO | 2024-12-04 12:54:24 | Starting user registration for email: marijndemul@gmail.nl
+INFO | 2024-12-04 12:54:24 | Attempting to get user by email: marijndemul@gmail.nl
+INFO | 2024-12-04 12:54:24 | Successfully retrieved user with email: marijndemul@gmail.nl
+INFO | 2024-12-04 12:54:25 | Attempting to add user with email: marijndemul@gmail.nl
+INFO | 2024-12-04 12:54:25 | Checking if user exists with UserId: 0
+INFO | 2024-12-04 12:54:25 | User exists check result for UserId 0: {exists}
+INFO | 2024-12-04 12:54:25 | Successfully added user with email: marijndemul@gmail.nl
+INFO | 2024-12-04 12:54:25 | User registration successful for email: marijndemul@gmail.nl
+INFO | 2024-12-04 12:54:25 | JWT token generated successfully for email: marijndemul@gmail.nl
+INFO | 2024-12-04 12:59:55 | Starting user login for email: marijndemul@gmail.com
+INFO | 2024-12-04 12:59:55 | Attempting to get user by email: marijndemul@gmail.com
+INFO | 2024-12-04 12:59:55 | Successfully retrieved user with email: marijndemul@gmail.com
+INFO | 2024-12-04 12:59:56 | User login successful for email: marijndemul@gmail.com
+INFO | 2024-12-04 13:00:32 | Login attempt for email: marijndemul@gmail.com
+INFO | 2024-12-04 13:00:32 | Starting user login for email: marijndemul@gmail.com
+INFO | 2024-12-04 13:00:32 | Attempting to get user by email: marijndemul@gmail.com
+INFO | 2024-12-04 13:00:32 | Successfully retrieved user with email: marijndemul@gmail.com
+INFO | 2024-12-04 13:00:33 | User login successful for email: marijndemul@gmail.com
+INFO | 2024-12-04 13:00:33 | User marijndemul@gmail.com logged in successfully
+INFO | 2024-12-04 13:14:09 | Token validated for user ID: 1
+INFO | 2024-12-04 13:14:09 | Attempting to get user by UserId: 1
+INFO | 2024-12-04 13:14:11 | Successfully retrieved user with UserId: 1
+INFO | 2024-12-04 13:14:40 | Token validated for user ID: 1
+INFO | 2024-12-04 13:14:40 | Token validated for user ID: 1
+INFO | 2024-12-04 13:14:40 | Attempting to get user by UserId: 1
+INFO | 2024-12-04 13:14:40 | Attempting to get user by UserId: 1
+INFO | 2024-12-04 13:14:40 | Successfully retrieved user with UserId: 1
+INFO | 2024-12-04 13:14:40 | Token validated for user ID: 1
+INFO | 2024-12-04 13:14:40 | Attempting to get user by UserId: 1
+INFO | 2024-12-04 13:14:40 | Successfully retrieved user with UserId: 1
+INFO | 2024-12-04 13:14:40 | Successfully retrieved user with UserId: 1
+INFO | 2024-12-04 13:14:41 | Token validated for user ID: 1
+INFO | 2024-12-04 13:14:41 | Attempting to get user by UserId: 1
+INFO | 2024-12-04 13:14:41 | Successfully retrieved user with UserId: 1
+INFO | 2024-12-04 13:14:41 | Token validated for user ID: 1
+INFO | 2024-12-04 13:14:41 | Token validated for user ID: 1
+INFO | 2024-12-04 13:14:41 | Attempting to get user by UserId: 1
+INFO | 2024-12-04 13:14:41 | Successfully retrieved user with UserId: 1
+INFO | 2024-12-04 13:14:41 | Successfully retrieved user with UserId: 1
+INFO | 2024-12-04 13:14:42 | Token validated for user ID: 1
+INFO | 2024-12-04 13:14:42 | Attempting to get user by UserId: 1
+INFO | 2024-12-04 13:14:42 | Successfully retrieved user with UserId: 1
+INFO | 2024-12-04 13:14:42 | Token validated for user ID: 1
+INFO | 2024-12-04 13:14:42 | Attempting to get user by UserId: 1
+INFO | 2024-12-04 13:14:42 | Successfully retrieved user with UserId: 1
+INFO | 2024-12-04 13:14:42 | Token validated for user ID: 1
+INFO | 2024-12-04 13:14:42 | Attempting to get user by UserId: 1
+INFO | 2024-12-04 13:14:42 | Successfully retrieved user with UserId: 1
+INFO | 2024-12-04 13:14:42 | Token validated for user ID: 1
+INFO | 2024-12-04 13:14:42 | Attempting to get user by UserId: 1
+INFO | 2024-12-04 13:14:42 | Successfully retrieved user with UserId: 1
+INFO | 2024-12-04 13:14:42 | Token validated for user ID: 1
+INFO | 2024-12-04 13:14:42 | Attempting to get user by UserId: 1
+INFO | 2024-12-04 13:14:42 | Successfully retrieved user with UserId: 1
+INFO | 2024-12-04 13:14:42 | Token validated for user ID: 1
+INFO | 2024-12-04 13:14:42 | Attempting to get user by UserId: 1
+INFO | 2024-12-04 13:14:42 | Successfully retrieved user with UserId: 1
+INFO | 2024-12-04 13:14:42 | Attempting to get user by UserId: 1
+INFO | 2024-12-04 13:14:42 | Successfully retrieved user with UserId: 1
+INFO | 2024-12-04 13:14:42 | Token validated for user ID: 1
+INFO | 2024-12-04 13:14:42 | Attempting to get user by UserId: 1
+INFO | 2024-12-04 13:14:42 | Token validated for user ID: 1
+INFO | 2024-12-04 13:14:42 | Successfully retrieved user with UserId: 1
+INFO | 2024-12-04 13:14:42 | Attempting to get user by UserId: 1
+INFO | 2024-12-04 13:14:42 | Successfully retrieved user with UserId: 1
+INFO | 2024-12-04 13:14:42 | Token validated for user ID: 1
+INFO | 2024-12-04 13:14:42 | Attempting to get user by UserId: 1
+INFO | 2024-12-04 13:14:42 | Token validated for user ID: 1
+INFO | 2024-12-04 13:14:42 | Successfully retrieved user with UserId: 1
+INFO | 2024-12-04 13:14:42 | Attempting to get user by UserId: 1
+INFO | 2024-12-04 13:14:42 | Successfully retrieved user with UserId: 1
+INFO | 2024-12-04 13:14:42 | Token validated for user ID: 1
+INFO | 2024-12-04 13:14:42 | Attempting to get user by UserId: 1
+INFO | 2024-12-04 13:14:42 | Successfully retrieved user with UserId: 1
+INFO | 2024-12-04 13:14:47 | Token validated for user ID: 1
+INFO | 2024-12-04 13:14:47 | Attempting to get user by UserId: 1
+INFO | 2024-12-04 13:14:47 | Successfully retrieved user with UserId: 1
+INFO | 2024-12-04 13:14:47 | Token validated for user ID: 1
+INFO | 2024-12-04 13:14:47 | Attempting to get user by UserId: 1
+INFO | 2024-12-04 13:14:47 | Successfully retrieved user with UserId: 1
+INFO | 2024-12-04 13:14:49 | Token validated for user ID: 1
+INFO | 2024-12-04 13:14:49 | Attempting to get user by UserId: 1
+INFO | 2024-12-04 13:14:49 | Successfully retrieved user with UserId: 1
+INFO | 2024-12-04 13:14:49 | Attempting to update user with UserId: 1
+INFO | 2024-12-04 13:14:49 | Successfully updated user with UserId: 1
+INFO | 2024-12-04 13:14:50 | Token validated for user ID: 1
+INFO | 2024-12-04 13:14:50 | Attempting to get user by UserId: 1
+INFO | 2024-12-04 13:14:50 | Successfully retrieved user with UserId: 1
+INFO | 2024-12-04 13:14:50 | Attempting to update user with UserId: 1
+INFO | 2024-12-04 13:14:50 | Successfully updated user with UserId: 1
+INFO | 2024-12-04 13:14:51 | Token validated for user ID: 1
+INFO | 2024-12-04 13:14:51 | Attempting to get user by UserId: 1
+INFO | 2024-12-04 13:14:51 | Successfully retrieved user with UserId: 1
+INFO | 2024-12-04 13:14:52 | Token validated for user ID: 1
+INFO | 2024-12-04 13:14:52 | Attempting to get user by UserId: 1
+INFO | 2024-12-04 13:14:52 | Token validated for user ID: 1
+INFO | 2024-12-04 13:14:52 | Attempting to get user by UserId: 1
+INFO | 2024-12-04 13:14:52 | Successfully retrieved user with UserId: 1
+INFO | 2024-12-04 13:14:52 | Successfully retrieved user with UserId: 1
+INFO | 2024-12-04 13:14:52 | Token validated for user ID: 1
+INFO | 2024-12-04 13:14:52 | Attempting to get user by UserId: 1
+INFO | 2024-12-04 13:14:52 | Successfully retrieved user with UserId: 1
+INFO | 2024-12-04 13:14:52 | Token validated for user ID: 1
+INFO | 2024-12-04 13:14:52 | Attempting to get user by UserId: 1
+INFO | 2024-12-04 13:14:52 | Token validated for user ID: 1
+INFO | 2024-12-04 13:14:52 | Attempting to get user by UserId: 1
+INFO | 2024-12-04 13:14:52 | Successfully retrieved user with UserId: 1
+INFO | 2024-12-04 13:14:52 | Successfully retrieved user with UserId: 1
+INFO | 2024-12-04 13:14:52 | Token validated for user ID: 1
+INFO | 2024-12-04 13:14:52 | Attempting to get user by UserId: 1
+INFO | 2024-12-04 13:14:52 | Successfully retrieved user with UserId: 1
+INFO | 2024-12-04 13:14:53 | Token validated for user ID: 1
+INFO | 2024-12-04 13:14:53 | Attempting to get user by UserId: 1
+INFO | 2024-12-04 13:14:53 | Token validated for user ID: 1
+INFO | 2024-12-04 13:14:53 | Token validated for user ID: 1
+INFO | 2024-12-04 13:14:53 | Attempting to get user by UserId: 1
+INFO | 2024-12-04 13:14:53 | Attempting to get user by UserId: 1
+INFO | 2024-12-04 13:14:53 | Successfully retrieved user with UserId: 1
+INFO | 2024-12-04 13:14:53 | Successfully retrieved user with UserId: 1
+INFO | 2024-12-04 13:14:53 | Successfully retrieved user with UserId: 1

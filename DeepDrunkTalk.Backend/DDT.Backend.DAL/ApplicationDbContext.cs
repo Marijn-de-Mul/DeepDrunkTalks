@@ -32,11 +32,11 @@ public class ApplicationDbContext : DbContext
                 v => DateTime.SpecifyKind(v, DateTimeKind.Utc)
             );
 
-        modelBuilder.Entity<Conversation>()
-            .Property(c => c.EndTime)
-            .HasConversion(
-                v => v.ToUniversalTime(),
-                v => DateTime.SpecifyKind(v, DateTimeKind.Utc)
-            );
+        //modelBuilder.Entity<Conversation>()
+        //    .Property(c => c.EndTime)
+        //    .HasConversion(
+        //        v => v.ToUniversalTime(),
+        //        v => DateTime.SpecifyKind(v, DateTimeKind.Utc)
+        //    );
     }
 }

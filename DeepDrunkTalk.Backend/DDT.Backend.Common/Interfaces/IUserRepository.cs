@@ -5,9 +5,10 @@ namespace DDT.Backend.Common.Interfaces
 {
     public interface IUserRepository
     {
-        Task<bool> UserExistsAsync(string email);
-        Task AddUserAsync(User user);
-        Task<User> GetUserByEmailAsync(string email);
-        Task UpdateUserAsync(User user);
+        Task<bool> UserExists(int userId);
+        Task AddUser(User user);
+        Task<User> GetUserById(int userId);
+        Task<User> GetUserByEmail(string email);
+        Task UpdateUser(User user);
     }
 }

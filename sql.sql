@@ -38,7 +38,7 @@ CREATE TABLE "Conversations" (
     "TopicId" INT REFERENCES "Topics"("TopicId") ON DELETE SET NULL,
     "QuestionId" INT REFERENCES "Questions"("QuestionId") ON DELETE SET NULL,
     "StartTime" TIMESTAMPTZ NOT NULL,
-    "EndTime" TIMESTAMPTZ NOT NULL,
+    "EndTime" TIMESTAMPTZ,
     "AudioFilePath" VARCHAR,
     "OnTopicAnalysis" TEXT,
     "CreatedAt" TIMESTAMPTZ NOT NULL, 

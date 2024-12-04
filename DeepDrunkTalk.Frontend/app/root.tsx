@@ -1,6 +1,5 @@
 import '@mantine/core/styles.css';
-
-import "./assets/css/general.css"
+import "./assets/css/general.css";
 
 import {
   Links,

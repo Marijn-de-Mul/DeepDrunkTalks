@@ -66,6 +66,22 @@
               "target": "Package",
               "version": "[4.5.0, )"
             },
+            "Serilog": {
+              "target": "Package",
+              "version": "[4.2.0-dev-02332, )"
+            },
+            "Serilog.Formatting.Compact": {
+              "target": "Package",
+              "version": "[3.0.0, )"
+            },
+            "Serilog.Sinks.Console": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "Serilog.Sinks.File": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
             "coverlet.collector": {
               "target": "Package",
               "version": "[6.0.0, )"

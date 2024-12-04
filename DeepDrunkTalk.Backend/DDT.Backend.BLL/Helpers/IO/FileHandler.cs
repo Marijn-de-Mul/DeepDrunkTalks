@@ -16,9 +16,9 @@ public class FileHandler
         }
     }
 
-    public static async Task<string> SaveAudioFileAsync(IFormFile file)
+    public static async Task<string> SaveAudioFile(int conversationId, IFormFile file)
     {
-        var filePath = Path.Combine(_uploadsPath, Guid.NewGuid() + Path.GetExtension(file.FileName));
+        var filePath = Path.Combine(_uploadsPath, conversationId + Path.GetExtension(file.FileName));
 
         await using var stream = new FileStream(filePath, FileMode.Create);
         await file.CopyToAsync(stream);

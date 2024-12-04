@@ -18,39 +18,41 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null); 
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+
+const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     try {
-      const response = await fetch("https://localhost:7108/api/User/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: email,
-          password: password,
-        }),
-      });
+        const response = await fetch("https://localhost:7108/api/users/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                email: email,
+                password: password,
+            }),
+        });
 
-      if (response.ok) {
-        const data = await response.json();
-        console.log("Login successful!", data);
+        if (response.ok) {
+            const data = await response.json();
+            console.log("Login successful!", data);
 
-        const token = data.token;
+            const token = data.token;
 
-        localStorage.setItem("authToken", token);
+            localStorage.setItem("authToken", token);
 
-        window.location.href = '/';
-      } else {
-        const errorData = await response.json();
-        setError(errorData.message || "Login failed");
-      }
+            window.location.href = '/';
+        } else {
+            const errorData = await response.json();
+            setError(errorData.message || "Login failed");
+        }
     } catch (error) {
-      console.error("Error during login:", error);
-      setError("Network error during login");
+        console.error("Error during login:", error);
+        setError("Network error during login");
     }
-  };
+};
+
 
   return (
 

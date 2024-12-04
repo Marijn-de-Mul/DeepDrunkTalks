@@ -13,7 +13,6 @@ public class ConversationService
     private readonly IConversationRepository _conversationRepository;
     private readonly IUserRepository _userRepository; 
     private readonly IQuestionRepository _questionRepository;
-    private readonly string _jwtSecret;
     
     private static string audioChunksDirectory = @"C:\temp\audio_chunks";  
     private static string combinedAudioFilePath = @"C:\temp\combined_audio.webm"; 
@@ -23,21 +22,11 @@ public class ConversationService
         _conversationRepository = conversationRepository;
         _userRepository = userRepository;
         _questionRepository = questionRepository;
-        _jwtSecret = Environment.GetEnvironmentVariable("JWT_SECRET");
     }
     
-    public async Task<(bool IsSuccess, string QuestionText)> StartConversation(string token)
+    public async Task<(int ConversationId, bool IsSuccess, string QuestionText)> StartConversation(int userId)
     {
-        var userEmail = JwtHelper.GetUserEmailFromToken(token, _jwtSecret);
-    
-        if (string.IsNullOrEmpty(userEmail))
-        {
-            throw new UnauthorizedAccessException("Invalid or missing email in the token.");
-        }
-    
-        Console.WriteLine(userEmail);
-    
-        var user = await _userRepository.GetUserByEmailAsync(userEmail);
+        var user = await _userRepository.GetUserById(userId);
     
         if (user == null)
         {
@@ -64,35 +53,24 @@ public class ConversationService
             TopicId = question.TopicId, 
             QuestionId = question.QuestionId, 
             StartTime = DateTime.UtcNow,
-            EndTime = DateTime.UtcNow,
+            EndTime = null,
             CreatedAt = DateTime.UtcNow,
             UpdatedAt = DateTime.UtcNow
         };
+
+        int conversationId = await _conversationRepository.CreateConversation(conversation);
     
-        Console.WriteLine($"ConversationService - StartConversation: \n{conversation.ToString()}");
-    
-        var result = await _conversationRepository.CreateConversation(conversation);
-    
-        if (result)
+        if (conversationId > 0)
         {
-            return (true, question.QuestionText);
+            return (conversationId, true, question.QuestionText);
         }
     
-        return (false, string.Empty);
+        return (0, false, string.Empty);
     }
     
-    public async Task<bool> StopConversation(string token)
+    public async Task<bool> StopConversation(int userId, int conversationId)
     {
-        var userEmail = JwtHelper.GetUserEmailFromToken(token, _jwtSecret);
-
-        if (string.IsNullOrEmpty(userEmail))
-        {
-            throw new UnauthorizedAccessException("Invalid or missing email in the token.");
-        }
-
-        Console.WriteLine(userEmail);
-
-        var user = await _userRepository.GetUserByEmailAsync(userEmail);
+        var user = await _userRepository.GetUserById(userId);
 
         if (user == null)
         {
@@ -103,32 +81,25 @@ public class ConversationService
 
         if (conversation == null)
         {
-            Console.WriteLine($"No ongoing conversation found for the user. User ID: {user.UserId}");
             return false;
         }
 
-        Console.WriteLine($"ConversationService - StopConversation: \n{conversation.ToString()}"); 
+        if (conversation.ConversationId != conversationId)
+        {
+            return false; 
+        }
         
         conversation.EndTime = DateTime.UtcNow;
         conversation.UpdatedAt = DateTime.UtcNow;
-
-        Console.WriteLine($"ConversationService - StopConversation: \n{conversation.ToString()}");
-
+        
         await _conversationRepository.UpdateConversation(conversation);
 
         return true;
     }
 
-    public async Task<List<ConversationRequest>> GetConversations(string token)
+    public async Task<List<ConversationRequest>> GetConversations(int userId)
     {
-        var userEmail = JwtHelper.GetUserEmailFromToken(token, _jwtSecret);
-
-        if (string.IsNullOrEmpty(userEmail))
-        {
-            throw new UnauthorizedAccessException("Invalid or missing email in the token.");
-        }
-
-        var user = await _userRepository.GetUserByEmailAsync(userEmail);
+        var user = await _userRepository.GetUserById(userId);
 
         if (user == null)
         {
@@ -144,77 +115,45 @@ public class ConversationService
             var topic = await _questionRepository.GetTopicByIdAsync(conversation.TopicId);
             var question = await _questionRepository.GetQuestionByIdAsync(conversation.QuestionId);
 
-            var conversationDto = new ConversationRequest
+            var conversationRequest = new ConversationRequest
             {
                 Id = conversation.ConversationId,
-                Topic = topic.TopicName ?? "Untitled Topic",  
-                Question = question.QuestionText ?? "No question available.",  
-                StartTime = conversation.StartTime.ToString("yyyy-MM-dd HH:mm"),  
-                EndTime = conversation.EndTime.ToString("yyyy-MM-dd HH:mm"),     
-                Audio = string.IsNullOrEmpty(conversation.AudioFilePath) ? "No audio available" : conversation.AudioFilePath  
+                Topic = topic.TopicName ?? "Untitled Topic",
+                Question = question.QuestionText ?? "No question available.",
+                StartTime = conversation.StartTime.ToString("yyyy-MM-dd HH:mm"),
+                EndTime = conversation.EndTime?.ToString("yyyy-MM-dd HH:mm"),
+                Audio = string.IsNullOrEmpty(conversation.AudioFilePath) 
+                    ? "No audio available" 
+                    : conversation.AudioFilePath
             };
 
-            result.Add(conversationDto);
+            result.Add(conversationRequest);
         }
 
         return result;
     }
     
-    public async Task<string> ProcessAndStoreAudioAsync(IFormFile audioFile, string baseUrl, string token)
+    public async Task<bool> DeleteConversation(int userId, int conversationId)
     {
-        var userEmail = JwtHelper.GetUserEmailFromToken(token, _jwtSecret);
-
-        if (string.IsNullOrEmpty(userEmail))
-        {
-            throw new UnauthorizedAccessException("Invalid or missing email in the token.");
-        }
-
-        var user = await _userRepository.GetUserByEmailAsync(userEmail);
+        var user = await _userRepository.GetUserById(userId);
 
         if (user == null)
         {
             throw new UnauthorizedAccessException("User not found.");
         }
         
-        var filePath = await FileHandler.SaveAudioFileAsync(audioFile);
-        
-        var fileName = Path.GetFileName(filePath);
-        var webAccessibleUrl = $"{baseUrl}/api/Conversation/files/{fileName}";
+        var conversation = await _conversationRepository.GetConversationById(conversationId);
 
-        Conversation conversation = await _conversationRepository.GetMostRecentNonOngoingConversation(user.UserId); 
-        
-        
         if (conversation == null)
         {
-            throw new InvalidOperationException("No ongoing conversation found for the user.");
+            return false;
         }
         
-        conversation.AudioFilePath = webAccessibleUrl; 
-        
-        await _conversationRepository.UpdateConversation(conversation);
-
-        return webAccessibleUrl;
-    }
-
-    public async Task<AudioFile> GetAudioFileAsync(string fileName, string token)
-    {
-        
-        var filePath = Path.Combine(Directory.GetCurrentDirectory(), "Uploads", fileName);
-
-        if (!System.IO.File.Exists(filePath))
+        if (conversation.UserId != user.UserId)
         {
-            return null;
+            return false;
         }
-
-        var fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
-        var fileExtension = Path.GetExtension(filePath).ToLowerInvariant();
-
-        AudioFile audioFile = new AudioFile
-        {
-            fileStream = fileStream,
-            fileExtension = fileExtension
-        };
-
-        return (audioFile); 
+        
+        return await _conversationRepository.DeleteConversation(conversationId);
     }
 }

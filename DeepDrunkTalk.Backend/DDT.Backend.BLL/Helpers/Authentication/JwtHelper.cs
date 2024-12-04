@@ -7,7 +7,7 @@ namespace DDT.Backend.BLL.Helpers;
 
 public static class JwtHelper
 {
-    public static string GenerateJwtToken(string email, string username, string secret)
+    public static string GenerateJwtToken(int userId, string username, string secret)
     {
         if (string.IsNullOrEmpty(secret))
             throw new ArgumentNullException(nameof(secret), "Secret cannot be null or empty.");
@@ -18,7 +18,7 @@ public static class JwtHelper
         {
             Subject = new ClaimsIdentity(new Claim[]
             {
-                new(ClaimTypes.Email, email),
+                new(ClaimTypes.NameIdentifier, userId.ToString()),
                 new(ClaimTypes.Name, username)
             }),
             Expires = DateTime.UtcNow.AddDays(7),
@@ -29,7 +29,7 @@ public static class JwtHelper
         return tokenHandler.WriteToken(token);
     }
 
-    public static string GetUserEmailFromToken(string token, string secret)
+    public static string GetUserIdFromToken(string token, string secret)
     {
         if (string.IsNullOrEmpty(token) || string.IsNullOrEmpty(secret)) return null;
 
@@ -46,9 +46,9 @@ public static class JwtHelper
             };
 
             var principal = tokenHandler.ValidateToken(token, validationParameters, out _);
-            var userEmail = principal?.FindFirst(ClaimTypes.Email)?.Value;
+            var userId = principal?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
-            return userEmail;
+            return userId;
         }
         catch
         {

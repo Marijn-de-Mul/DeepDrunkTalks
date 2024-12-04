@@ -13,41 +13,12 @@ namespace DDT.Backend.DAL.Repositories
             _context = context;
         }
         
-        public async Task<bool> CreateConversation(Conversation conversation)
+        public async Task<int> CreateConversation(Conversation conversation)
         {
             _context.Conversations.Add(conversation);
             await _context.SaveChangesAsync();
-            return true;
-        }
-        public async Task<Conversation> GetOngoingConversation(int userId)
-        {
-            var tolerance = TimeSpan.FromMilliseconds(50); 
-
-            var ongoingConversation = await _context.Conversations
-                .Where(c => c.UserId == userId)
-                .OrderByDescending(c => c.CreatedAt)
-                .ToListAsync();
-
-            ongoingConversation = ongoingConversation
-                .Where(c => c.EndTime > c.StartTime.Add(tolerance) || c.EndTime == c.StartTime)
-                .ToList();
-
-            return ongoingConversation.FirstOrDefault();
-        }
-        
-        public async Task<Conversation> GetMostRecentNonOngoingConversation(int userId)
-        {
-            var tolerance = TimeSpan.FromMilliseconds(50);
-
-            var conversations = await _context.Conversations
-                .Where(c => c.UserId == userId)
-                .OrderByDescending(c => c.CreatedAt)
-                .ToListAsync();
-
-            var mostRecentNonOngoingConversation = conversations
-                .FirstOrDefault(c => c.EndTime <= c.StartTime.Add(tolerance) && c.EndTime != c.StartTime);
-
-            return mostRecentNonOngoingConversation;
+       
+            return conversation.ConversationId;
         }
         
         public async Task<bool> UpdateConversation(Conversation conversation)
@@ -57,11 +28,45 @@ namespace DDT.Backend.DAL.Repositories
             return true;
         }
         
+        public async Task<bool> DeleteConversation(int conversationId)
+        {
+            var conversation = await _context.Conversations.FirstOrDefaultAsync(c => c.ConversationId == conversationId);
+            if (conversation != null)
+            {
+                _context.Conversations.Remove(conversation);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            return false;
+        }
+        
+        public async Task<Conversation> GetOngoingConversation(int userId)
+        {
+            return await _context.Conversations
+                .Where(c => c.UserId == userId && c.EndTime == null)
+                .OrderByDescending(c => c.CreatedAt) 
+                .FirstOrDefaultAsync(); 
+        }
+        
+        public async Task<Conversation> GetMostRecentNonOngoingConversation(int userId)
+        {
+            return await _context.Conversations
+                .Where(c => c.UserId == userId && c.EndTime != null && c.EndTime != c.StartTime)
+                .OrderByDescending(c => c.CreatedAt) 
+                .FirstOrDefaultAsync();
+        }
+        
         public async Task<List<Conversation>> GetConversations(int userId)
         {
             return await _context.Conversations
                 .Where(c => c.UserId == userId)
                 .ToListAsync();
+        }
+        
+        public async Task<Conversation> GetConversationById(int conversationId)
+        {
+            return await _context.Conversations
+                .FirstOrDefaultAsync(c => c.ConversationId == conversationId); 
         }
     } 
 }

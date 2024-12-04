@@ -83,3 +83,14 @@ C:\Users\MarijndeMul\OneDrive - Office 365 Fontys\Fontys-HBO-ICT\Semester3\DeepD
 C:\Users\MarijndeMul\OneDrive - Office 365 Fontys\Fontys-HBO-ICT\Semester3\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.API\bin\Debug\net8.0\libmp3lame.64.dll
 C:\Users\MarijndeMul\OneDrive - Office 365 Fontys\Fontys-HBO-ICT\Semester3\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.API\bin\Debug\net8.0\NAudio.Core.dll
 C:\Users\MarijndeMul\OneDrive - Office 365 Fontys\Fontys-HBO-ICT\Semester3\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.API\bin\Debug\net8.0\NAudio.Lame.dll
+C:\Users\MarijndeMul\OneDrive - Office 365 Fontys\Fontys-HBO-ICT\Semester3\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.API\bin\Debug\net8.0\System.Net.Http.Formatting.dll
+C:\Users\MarijndeMul\OneDrive - Office 365 Fontys\Fontys-HBO-ICT\Semester3\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.API\bin\Debug\net8.0\System.Web.Http.dll
+C:\Users\MarijndeMul\OneDrive - Office 365 Fontys\Fontys-HBO-ICT\Semester3\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.API\bin\Debug\net8.0\System.Web.Http.WebHost.dll
+C:\Users\MarijndeMul\OneDrive - Office 365 Fontys\Fontys-HBO-ICT\Semester3\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.API\bin\Debug\net8.0\Microsoft.Web.Infrastructure.dll
+C:\Users\MarijndeMul\OneDrive - Office 365 Fontys\Fontys-HBO-ICT\Semester3\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.API\bin\Debug\net8.0\Swashbuckle.AspNetCore.Annotations.dll
+C:\Users\MarijndeMul\OneDrive - Office 365 Fontys\Fontys-HBO-ICT\Semester3\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.API\bin\Debug\net8.0\Swashbuckle.Core.dll
+C:\Users\MarijndeMul\OneDrive - Office 365 Fontys\Fontys-HBO-ICT\Semester3\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.API\bin\Debug\net8.0\WebActivatorEx.dll
+C:\Users\MarijndeMul\OneDrive - Office 365 Fontys\Fontys-HBO-ICT\Semester3\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.API\bin\Debug\net8.0\Serilog.dll
+C:\Users\MarijndeMul\OneDrive - Office 365 Fontys\Fontys-HBO-ICT\Semester3\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.API\bin\Debug\net8.0\Serilog.Formatting.Compact.dll
+C:\Users\MarijndeMul\OneDrive - Office 365 Fontys\Fontys-HBO-ICT\Semester3\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.API\bin\Debug\net8.0\Serilog.Sinks.Console.dll
+C:\Users\MarijndeMul\OneDrive - Office 365 Fontys\Fontys-HBO-ICT\Semester3\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.API\bin\Debug\net8.0\Serilog.Sinks.File.dll

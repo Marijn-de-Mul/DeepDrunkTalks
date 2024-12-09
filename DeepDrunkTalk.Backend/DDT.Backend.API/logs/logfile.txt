@@ -152,3 +152,84 @@ INFO | 2024-12-04 13:14:53 | Attempting to get user by UserId: 1
 INFO | 2024-12-04 13:14:53 | Successfully retrieved user with UserId: 1
 INFO | 2024-12-04 13:14:53 | Successfully retrieved user with UserId: 1
 INFO | 2024-12-04 13:14:53 | Successfully retrieved user with UserId: 1
+INFO | 2024-12-09 13:12:02 | Login attempt for email: marijndemul@gmail.com
+INFO | 2024-12-09 13:12:02 | Starting user login for email: marijndemul@gmail.com
+INFO | 2024-12-09 13:12:02 | Attempting to get user by email: marijndemul@gmail.com
+INFO | 2024-12-09 13:12:04 | Successfully retrieved user with email: marijndemul@gmail.com
+INFO | 2024-12-09 13:12:07 | User login successful for email: marijndemul@gmail.com
+INFO | 2024-12-09 13:12:07 | User marijndemul@gmail.com logged in successfully
+INFO | 2024-12-09 13:12:14 | Token validated for user ID: 1
+INFO | 2024-12-09 13:12:14 | Attempting to get user by UserId: 1
+INFO | 2024-12-09 13:12:14 | Successfully retrieved user with UserId: 1
+INFO | 2024-12-09 13:12:14 | Token validated for user ID: 1
+INFO | 2024-12-09 13:12:14 | Attempting to get user by UserId: 1
+INFO | 2024-12-09 13:12:14 | Token validated for user ID: 1
+INFO | 2024-12-09 13:12:14 | Attempting to get user by UserId: 1
+INFO | 2024-12-09 13:12:15 | Successfully retrieved user with UserId: 1
+INFO | 2024-12-09 13:12:15 | Successfully retrieved user with UserId: 1
+INFO | 2024-12-09 13:12:15 | Token validated for user ID: 1
+INFO | 2024-12-09 13:12:15 | Attempting to get user by UserId: 1
+INFO | 2024-12-09 13:12:15 | Successfully retrieved user with UserId: 1
+INFO | 2024-12-09 13:12:15 | Token validated for user ID: 1
+INFO | 2024-12-09 13:12:15 | Attempting to get user by UserId: 1
+INFO | 2024-12-09 13:12:15 | Successfully retrieved user with UserId: 1
+INFO | 2024-12-09 13:12:15 | Token validated for user ID: 1
+INFO | 2024-12-09 13:12:15 | Attempting to get user by UserId: 1
+INFO | 2024-12-09 13:12:15 | Token validated for user ID: 1
+INFO | 2024-12-09 13:12:15 | Successfully retrieved user with UserId: 1
+INFO | 2024-12-09 13:12:15 | Attempting to get user by UserId: 1
+INFO | 2024-12-09 13:12:15 | Successfully retrieved user with UserId: 1
+INFO | 2024-12-09 13:12:15 | Token validated for user ID: 1
+INFO | 2024-12-09 13:12:15 | Token validated for user ID: 1
+INFO | 2024-12-09 13:12:15 | Attempting to get user by UserId: 1
+INFO | 2024-12-09 13:12:15 | Attempting to get user by UserId: 1
+INFO | 2024-12-09 13:12:15 | Successfully retrieved user with UserId: 1
+INFO | 2024-12-09 13:12:15 | Successfully retrieved user with UserId: 1
+INFO | 2024-12-09 13:12:15 | Token validated for user ID: 1
+INFO | 2024-12-09 13:12:15 | Attempting to get user by UserId: 1
+INFO | 2024-12-09 13:12:15 | Token validated for user ID: 1
+INFO | 2024-12-09 13:12:15 | Attempting to get user by UserId: 1
+INFO | 2024-12-09 13:12:15 | Successfully retrieved user with UserId: 1
+INFO | 2024-12-09 13:12:15 | Successfully retrieved user with UserId: 1
+INFO | 2024-12-09 13:12:15 | Token validated for user ID: 1
+INFO | 2024-12-09 13:12:15 | Attempting to get user by UserId: 1
+INFO | 2024-12-09 13:12:15 | Token validated for user ID: 1
+INFO | 2024-12-09 13:12:15 | Attempting to get user by UserId: 1
+INFO | 2024-12-09 13:12:15 | Successfully retrieved user with UserId: 1
+INFO | 2024-12-09 13:12:15 | Successfully retrieved user with UserId: 1
+INFO | 2024-12-09 13:12:16 | Token validated for user ID: 1
+INFO | 2024-12-09 13:12:16 | Attempting to get user by UserId: 1
+INFO | 2024-12-09 13:12:16 | Token validated for user ID: 1
+INFO | 2024-12-09 13:12:16 | Attempting to get user by UserId: 1
+INFO | 2024-12-09 13:12:16 | Successfully retrieved user with UserId: 1
+INFO | 2024-12-09 13:12:16 | Successfully retrieved user with UserId: 1
+INFO | 2024-12-09 13:12:16 | Token validated for user ID: 1
+INFO | 2024-12-09 13:12:16 | Token validated for user ID: 1
+INFO | 2024-12-09 13:12:16 | Attempting to get user by UserId: 1
+INFO | 2024-12-09 13:12:17 | Attempting to get user by UserId: 1
+INFO | 2024-12-09 13:12:17 | Successfully retrieved user with UserId: 1
+INFO | 2024-12-09 13:12:17 | Successfully retrieved user with UserId: 1
+INFO | 2024-12-09 13:12:17 | Token validated for user ID: 1
+INFO | 2024-12-09 13:12:17 | Attempting to get user by UserId: 1
+INFO | 2024-12-09 13:12:17 | Successfully retrieved user with UserId: 1
+INFO | 2024-12-09 13:13:01 | Token validated for user ID: 1
+INFO | 2024-12-09 13:13:01 | Attempting to get user by UserId: 1
+INFO | 2024-12-09 13:13:01 | Successfully retrieved user with UserId: 1
+INFO | 2024-12-09 13:13:40 | Token validated for user ID: 1
+INFO | 2024-12-09 13:13:40 | Attempting to get user by UserId: 1
+INFO | 2024-12-09 13:13:40 | Token validated for user ID: 1
+INFO | 2024-12-09 13:13:40 | Successfully retrieved user with UserId: 1
+INFO | 2024-12-09 13:13:40 | Attempting to get user by UserId: 1
+INFO | 2024-12-09 13:13:40 | Successfully retrieved user with UserId: 1
+INFO | 2024-12-09 13:13:40 | Token validated for user ID: 1
+INFO | 2024-12-09 13:13:40 | Attempting to get user by UserId: 1
+INFO | 2024-12-09 13:13:40 | Successfully retrieved user with UserId: 1
+INFO | 2024-12-09 13:13:51 | Token validated for user ID: 1
+INFO | 2024-12-09 13:13:51 | Token validated for user ID: 1
+INFO | 2024-12-09 13:13:51 | Attempting to get user by UserId: 1
+INFO | 2024-12-09 13:13:51 | Token validated for user ID: 1
+INFO | 2024-12-09 13:13:51 | Attempting to get user by UserId: 1
+INFO | 2024-12-09 13:13:51 | Successfully retrieved user with UserId: 1
+INFO | 2024-12-09 13:13:51 | Successfully retrieved user with UserId: 1
+INFO | 2024-12-09 13:13:51 | Attempting to get user by UserId: 1
+INFO | 2024-12-09 13:13:51 | Successfully retrieved user with UserId: 1

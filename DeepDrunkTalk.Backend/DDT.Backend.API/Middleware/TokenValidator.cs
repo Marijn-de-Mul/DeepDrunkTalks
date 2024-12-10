@@ -22,6 +22,19 @@ namespace DDT.Backend.API.Middleware
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
+        private static HashSet<string> ExcludedPaths = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+        {
+            "/api/users/login",
+            "/api/users/register",
+            "/swagger"
+        };
+
+        private bool IsExcludedPath(string path)
+        {
+            var pathString = new Microsoft.AspNetCore.Http.PathString(path);
+            return ExcludedPaths.Any(excluded => pathString.StartsWithSegments(new Microsoft.AspNetCore.Http.PathString(excluded), StringComparison.OrdinalIgnoreCase));
+        }
+
         public async Task Invoke(HttpContext context)
         {
             if (context.Request.Method.Equals("OPTIONS", StringComparison.OrdinalIgnoreCase))
@@ -30,13 +43,11 @@ namespace DDT.Backend.API.Middleware
                 return;
             }
 
-            var excludedPaths = new[] { "/api/users/login", "/api/users/register", "/swagger" };
-            if (excludedPaths.Any(path => context.Request.Path.StartsWithSegments(path, StringComparison.OrdinalIgnoreCase)))
+            if (IsExcludedPath(context.Request.Path))
             {
                 await _next(context);
                 return;
             }
-
             var token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
 
             if (token != null)
@@ -105,11 +116,11 @@ namespace DDT.Backend.API.Middleware
 
             if (validatedToken is JwtSecurityToken jwtToken)
             {
-                var userIdString = jwtToken.Claims.First(x => x.Type == "nameid").Value;
+                var userIdString = jwtToken.Claims.FirstOrDefault(x => x.Type == "nameid")?.Value;
 
-                if (!int.TryParse(userIdString, out int userId))
+                if (string.IsNullOrEmpty(userIdString) || !int.TryParse(userIdString, out int userId))
                 {
-                    var ex = new TokenValidationException("Invalid UserId format in token");
+                    var ex = new TokenValidationException("Invalid or missing UserId format in token");
                     _logger.LogError($"Token validation failed: {ex.Message}", ex);
                     throw ex;
                 }

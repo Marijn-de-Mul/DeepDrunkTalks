@@ -1,4 +1,5 @@
-﻿using DDT.Backend.Common.Exceptions;
+﻿using DDT.Backend.Common;
+using DDT.Backend.Common.Exceptions;
 using DDT.Backend.Common.Interfaces;
 using DDT.Backend.Common.Logger;
 using DDT.Backend.Common.Models;
@@ -8,10 +9,10 @@ namespace DDT.Backend.DAL.Repositories
 {
     public class UserRepository : IUserRepository
     {
-        private readonly Logger _logger;
+        private readonly ILogger _logger;
         private readonly ApplicationDbContext _context;
 
-        public UserRepository(Logger logger, ApplicationDbContext context)
+        public UserRepository(ILogger logger, ApplicationDbContext context)
         {
             _logger = logger;
             _context = context;

@@ -45,6 +45,11 @@ builder.Services.AddScoped<AudioService>();
 
 builder.Services.AddScoped<FileService>(); 
 
+builder.Services.AddScoped<IFileHandler, FileHandler>();
+builder.Services.AddScoped<IFileOperations, FileOperations>();
+    
+builder.Services.AddScoped<DDT.Backend.Common.ILogger, DDT.Backend.Common.Logger.Logger>();
+
 builder.Services.AddSingleton<DDT.Backend.Common.Logger.Logger>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -82,7 +87,7 @@ var app = builder.Build();
 
 app.UseCors("AllowSpecificOrigins");
 
-app.UseMiddleware<TokenValidator>(Environment.GetEnvironmentVariable("JWT_SECRET"), app.Services.GetRequiredService<Logger>());
+app.UseMiddleware<TokenValidator>();
 
 if (app.Environment.IsDevelopment())
 {

@@ -233,3 +233,51 @@ INFO | 2024-12-09 13:13:51 | Successfully retrieved user with UserId: 1
 INFO | 2024-12-09 13:13:51 | Successfully retrieved user with UserId: 1
 INFO | 2024-12-09 13:13:51 | Attempting to get user by UserId: 1
 INFO | 2024-12-09 13:13:51 | Successfully retrieved user with UserId: 1
+INFO | 2024-12-10 22:01:13 | Login attempt for email: marijndemul@gmail.com
+INFO | 2024-12-10 22:01:13 | Starting user login for email: marijndemul@gmail.com
+INFO | 2024-12-10 22:01:13 | Attempting to get user by email: marijndemul@gmail.com
+INFO | 2024-12-10 22:01:14 | Successfully retrieved user with email: marijndemul@gmail.com
+INFO | 2024-12-10 22:01:15 | User login successful for email: marijndemul@gmail.com
+INFO | 2024-12-10 22:01:15 | User marijndemul@gmail.com logged in successfully
+INFO | 2024-12-10 22:01:28 | Login attempt for email: marijndemul@gmail.com
+INFO | 2024-12-10 22:01:28 | Starting user login for email: marijndemul@gmail.com
+INFO | 2024-12-10 22:01:28 | Attempting to get user by email: marijndemul@gmail.com
+INFO | 2024-12-10 22:01:28 | Successfully retrieved user with email: marijndemul@gmail.com
+INFO | 2024-12-10 22:01:28 | User login successful for email: marijndemul@gmail.com
+INFO | 2024-12-10 22:01:28 | User marijndemul@gmail.com logged in successfully
+INFO | 2024-12-10 22:01:42 | Login attempt for email: marijndemul@gmail.com
+INFO | 2024-12-10 22:01:42 | Starting user login for email: marijndemul@gmail.com
+INFO | 2024-12-10 22:01:42 | Attempting to get user by email: marijndemul@gmail.com
+INFO | 2024-12-10 22:01:42 | Successfully retrieved user with email: marijndemul@gmail.com
+INFO | 2024-12-10 22:01:42 | User login successful for email: marijndemul@gmail.com
+INFO | 2024-12-10 22:01:42 | User marijndemul@gmail.com logged in successfully
+INFO | 2024-12-10 22:04:02 | Login attempt for email: marijndemul@gmail.comm
+INFO | 2024-12-10 22:04:02 | Starting user login for email: marijndemul@gmail.comm
+INFO | 2024-12-10 22:04:02 | Attempting to get user by email: marijndemul@gmail.comm
+INFO | 2024-12-10 22:04:02 | Successfully retrieved user with email: marijndemul@gmail.comm
+WARN | 2024-12-10 22:04:02 | Login failed: User not found for email: marijndemul@gmail.comm
+ERROR | 2024-12-10 22:04:02 | An unexpected error occurred during login for email: marijndemul@gmail.comm | Exception: User not found. | StackTrace:    at DDT.Backend.BLL.Services.AuthService.LoginUser(LoginRequest request) in E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\Services\Auth\AuthService.cs:line 113
+ERROR | 2024-12-10 22:04:02 | User not found for email: marijndemul@gmail.comm. Exception: User not found. | Exception: User not found. | StackTrace:    at DDT.Backend.BLL.Services.AuthService.LoginUser(LoginRequest request) in E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\Services\Auth\AuthService.cs:line 113
+   at DDT.Backend.API.Controllers.UserController.Login(LoginRequest request) in E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.API\Controllers\UserController.cs:line 84
+INFO | 2024-12-10 22:04:23 | Register method called with request: DDT.Backend.Common.Models.Authentication.RegisterRequest
+INFO | 2024-12-10 22:04:23 | Starting user registration for email: test@test.nl
+INFO | 2024-12-10 22:04:23 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-10 22:04:23 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-10 22:04:24 | Attempting to add user with email: test@test.nl
+INFO | 2024-12-10 22:04:24 | Checking if user exists with UserId: 0
+INFO | 2024-12-10 22:04:24 | User exists check result for UserId 0: False
+INFO | 2024-12-10 22:04:24 | Successfully added user with email: test@test.nl
+INFO | 2024-12-10 22:04:24 | User registration successful for email: test@test.nl
+INFO | 2024-12-10 22:04:24 | JWT token generated successfully for email: test@test.nl
+INFO | 2024-12-10 22:04:34 | Login attempt for email: test@test.nl
+INFO | 2024-12-10 22:04:34 | Starting user login for email: test@test.nl
+INFO | 2024-12-10 22:04:34 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-10 22:04:34 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-10 22:04:34 | User login successful for email: test@test.nl
+INFO | 2024-12-10 22:04:34 | User test@test.nl logged in successfully
+INFO | 2024-12-10 22:32:25 | Login attempt for email: marijndemul@gmail.com
+INFO | 2024-12-10 22:32:25 | Starting user login for email: marijndemul@gmail.com
+INFO | 2024-12-10 22:32:25 | Attempting to get user by email: marijndemul@gmail.com
+INFO | 2024-12-10 22:32:25 | Successfully retrieved user with email: marijndemul@gmail.com
+INFO | 2024-12-10 22:32:25 | User login successful for email: marijndemul@gmail.com
+INFO | 2024-12-10 22:32:25 | User marijndemul@gmail.com logged in successfully

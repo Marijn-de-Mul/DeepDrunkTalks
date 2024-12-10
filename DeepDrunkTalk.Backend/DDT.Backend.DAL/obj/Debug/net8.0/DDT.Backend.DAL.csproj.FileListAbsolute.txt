@@ -14,3 +14,19 @@ C:\Users\MarijndeMul\OneDrive - Office 365 Fontys\Fontys-HBO-ICT\Semester3\DeepD
 C:\Users\MarijndeMul\OneDrive - Office 365 Fontys\Fontys-HBO-ICT\Semester3\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.DAL\obj\Debug\net8.0\refint\DDT.Backend.DAL.dll
 C:\Users\MarijndeMul\OneDrive - Office 365 Fontys\Fontys-HBO-ICT\Semester3\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.DAL\obj\Debug\net8.0\DDT.Backend.DAL.pdb
 C:\Users\MarijndeMul\OneDrive - Office 365 Fontys\Fontys-HBO-ICT\Semester3\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.DAL\obj\Debug\net8.0\ref\DDT.Backend.DAL.dll
+E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.DAL\bin\Debug\net8.0\DDT.Backend.DAL.deps.json
+E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.DAL\bin\Debug\net8.0\DDT.Backend.DAL.dll
+E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.DAL\bin\Debug\net8.0\DDT.Backend.DAL.pdb
+E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.DAL\bin\Debug\net8.0\DDT.Backend.Common.dll
+E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.DAL\bin\Debug\net8.0\DDT.Backend.Common.pdb
+E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.DAL\obj\Debug\net8.0\DDT.Backend.DAL.csproj.AssemblyReference.cache
+E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.DAL\obj\Debug\net8.0\DDT.Backend.DAL.GeneratedMSBuildEditorConfig.editorconfig
+E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.DAL\obj\Debug\net8.0\DDT.Backend.DAL.AssemblyInfoInputs.cache
+E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.DAL\obj\Debug\net8.0\DDT.Backend.DAL.AssemblyInfo.cs
+E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.DAL\obj\Debug\net8.0\DDT.Backend.DAL.csproj.CoreCompileInputs.cache
+E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.DAL\obj\Debug\net8.0\DDT.Backend.DAL.sourcelink.json
+E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.DAL\obj\Debug\net8.0\DDT.Back.F05A8CB0.Up2Date
+E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.DAL\obj\Debug\net8.0\DDT.Backend.DAL.dll
+E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.DAL\obj\Debug\net8.0\refint\DDT.Backend.DAL.dll
+E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.DAL\obj\Debug\net8.0\DDT.Backend.DAL.pdb
+E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.DAL\obj\Debug\net8.0\ref\DDT.Backend.DAL.dll

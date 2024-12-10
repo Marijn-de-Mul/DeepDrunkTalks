@@ -3,7 +3,7 @@ using System.IO;
 
 namespace DDT.Backend.Common.Logger
 {
-    public class Logger
+    public class Logger : ILogger
     {
         private readonly bool _logToConsole;
         private readonly bool _logToFile;

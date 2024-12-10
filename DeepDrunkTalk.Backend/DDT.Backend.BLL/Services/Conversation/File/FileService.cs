@@ -7,11 +7,13 @@ public class FileService
 {
     private readonly IConversationRepository _conversationRepository;
     private readonly IUserRepository _userRepository;
+    private readonly IFileOperations _fileOperations;
     
-    public FileService(IConversationRepository conversationRepository, IUserRepository userRepository)
+    public FileService(IConversationRepository conversationRepository, IUserRepository userRepository, IFileOperations fileOperations)
     {
         _conversationRepository = conversationRepository;
         _userRepository = userRepository;
+        _fileOperations = fileOperations;
     }
     
     public async Task<AudioFile> GetAudioFile(int userId, int conversationId)
@@ -39,12 +41,12 @@ public class FileService
         
         var filePath = Path.Combine(Directory.GetCurrentDirectory(), "Uploads", fileName);
     
-        if (!System.IO.File.Exists(filePath))
+        if (!_fileOperations.FileExists(filePath))
         {
             return null;
         }
     
-        var fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
+        var fileStream = _fileOperations.OpenRead(filePath);
         var fileExtension = Path.GetExtension(filePath).ToLowerInvariant();
     
         AudioFile audioFile = new AudioFile

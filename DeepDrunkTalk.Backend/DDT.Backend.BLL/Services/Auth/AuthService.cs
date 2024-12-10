@@ -1,6 +1,7 @@
 ﻿using DDT.Backend.BLL.Exceptions.HelperExceptions;
 using DDT.Backend.Common.Interfaces;
 using DDT.Backend.BLL.Helpers;
+using DDT.Backend.Common;
 using DDT.Backend.Common.Exceptions;
 using DDT.Backend.Common.Logger;
 using DDT.Backend.Common.Models.Authentication;
@@ -13,9 +14,9 @@ namespace DDT.Backend.BLL.Services
     {
         private readonly IUserRepository _userRepository;
         private readonly string _jwtSecret;
-        private readonly Logger _logger;
+        private readonly ILogger _logger;
 
-        public AuthService(IUserRepository userRepository, Logger logger)
+        public AuthService(IUserRepository userRepository, ILogger logger)
         {
             _userRepository = userRepository;
             _jwtSecret = Environment.GetEnvironmentVariable("JWT_SECRET");

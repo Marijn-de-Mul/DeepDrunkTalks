@@ -11,3 +11,16 @@ C:\Users\MarijndeMul\OneDrive - Office 365 Fontys\Fontys-HBO-ICT\Semester3\DeepD
 C:\Users\MarijndeMul\OneDrive - Office 365 Fontys\Fontys-HBO-ICT\Semester3\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.Common\obj\Debug\net8.0\refint\DDT.Backend.Common.dll
 C:\Users\MarijndeMul\OneDrive - Office 365 Fontys\Fontys-HBO-ICT\Semester3\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.Common\obj\Debug\net8.0\DDT.Backend.Common.pdb
 C:\Users\MarijndeMul\OneDrive - Office 365 Fontys\Fontys-HBO-ICT\Semester3\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.Common\obj\Debug\net8.0\ref\DDT.Backend.Common.dll
+E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.Common\bin\Debug\net8.0\DDT.Backend.Common.deps.json
+E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.Common\bin\Debug\net8.0\DDT.Backend.Common.dll
+E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.Common\bin\Debug\net8.0\DDT.Backend.Common.pdb
+E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.Common\obj\Debug\net8.0\DDT.Backend.Common.csproj.AssemblyReference.cache
+E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.Common\obj\Debug\net8.0\DDT.Backend.Common.GeneratedMSBuildEditorConfig.editorconfig
+E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.Common\obj\Debug\net8.0\DDT.Backend.Common.AssemblyInfoInputs.cache
+E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.Common\obj\Debug\net8.0\DDT.Backend.Common.AssemblyInfo.cs
+E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.Common\obj\Debug\net8.0\DDT.Backend.Common.csproj.CoreCompileInputs.cache
+E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.Common\obj\Debug\net8.0\DDT.Backend.Common.sourcelink.json
+E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.Common\obj\Debug\net8.0\DDT.Backend.Common.dll
+E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.Common\obj\Debug\net8.0\refint\DDT.Backend.Common.dll
+E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.Common\obj\Debug\net8.0\DDT.Backend.Common.pdb
+E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.Common\obj\Debug\net8.0\ref\DDT.Backend.Common.dll

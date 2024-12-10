@@ -10,11 +10,13 @@ public class AudioService
     
     private readonly IUserRepository _authRepository;
     private readonly IConversationRepository _conversationRepository;
+    private readonly IFileHandler _fileHandler;
     
-    public AudioService(IUserRepository authRepository, IConversationRepository conversationRepository)
+    public AudioService(IUserRepository authRepository, IConversationRepository conversationRepository, IFileHandler fileHandler)
     {
         _authRepository = authRepository;
         _conversationRepository = conversationRepository;
+        _fileHandler = fileHandler;
     }
     
     public async Task<string> ProcessAndStoreAudio(int userId, int conversationId, IFormFile audioFile, string baseUrl)
@@ -26,7 +28,7 @@ public class AudioService
            throw new UnauthorizedAccessException("User not found.");
        }
        
-       var filePath = await FileHandler.SaveAudioFile(conversationId, audioFile);
+       var filePath = await _fileHandler.SaveAudioFile(conversationId, audioFile);
        
        var fileName = Path.GetFileName(filePath);
        var webAccessibleUrl = $"{baseUrl}/api/conversations/{conversationId}/audio";

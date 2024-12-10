@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using DDT.Backend.Common.Interfaces;
+using Microsoft.AspNetCore.Http;
 
 namespace DDT.Backend.BLL.Helpers;
 
-public class FileHandler
+public class FileHandler : IFileHandler
 {
     private static readonly string _uploadsPath;
 
@@ -16,7 +17,7 @@ public class FileHandler
         }
     }
 
-    public static async Task<string> SaveAudioFile(int conversationId, IFormFile file)
+    public async Task<string> SaveAudioFile(int conversationId, IFormFile file)
     {
         var filePath = Path.Combine(_uploadsPath, conversationId + Path.GetExtension(file.FileName));
 

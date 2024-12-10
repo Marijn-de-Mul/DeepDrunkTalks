@@ -18,3 +18,23 @@ C:\Users\MarijndeMul\OneDrive - Office 365 Fontys\Fontys-HBO-ICT\Semester3\DeepD
 C:\Users\MarijndeMul\OneDrive - Office 365 Fontys\Fontys-HBO-ICT\Semester3\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\obj\Debug\net8.0\ref\DDT.Backend.BLL.dll
 C:\Users\MarijndeMul\OneDrive - Office 365 Fontys\Fontys-HBO-ICT\Semester3\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\bin\Debug\net8.0\libmp3lame.32.dll
 C:\Users\MarijndeMul\OneDrive - Office 365 Fontys\Fontys-HBO-ICT\Semester3\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\bin\Debug\net8.0\libmp3lame.64.dll
+E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\bin\Debug\net8.0\libmp3lame.32.dll
+E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\bin\Debug\net8.0\libmp3lame.64.dll
+E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\bin\Debug\net8.0\DDT.Backend.BLL.deps.json
+E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\bin\Debug\net8.0\DDT.Backend.BLL.dll
+E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\bin\Debug\net8.0\DDT.Backend.BLL.pdb
+E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\bin\Debug\net8.0\DDT.Backend.Common.dll
+E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\bin\Debug\net8.0\DDT.Backend.DAL.dll
+E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\bin\Debug\net8.0\DDT.Backend.DAL.pdb
+E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\bin\Debug\net8.0\DDT.Backend.Common.pdb
+E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\obj\Debug\net8.0\DDT.Backend.BLL.csproj.AssemblyReference.cache
+E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\obj\Debug\net8.0\DDT.Backend.BLL.GeneratedMSBuildEditorConfig.editorconfig
+E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\obj\Debug\net8.0\DDT.Backend.BLL.AssemblyInfoInputs.cache
+E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\obj\Debug\net8.0\DDT.Backend.BLL.AssemblyInfo.cs
+E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\obj\Debug\net8.0\DDT.Backend.BLL.csproj.CoreCompileInputs.cache
+E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\obj\Debug\net8.0\DDT.Backend.BLL.sourcelink.json
+E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\obj\Debug\net8.0\DDT.Back.B98D69DA.Up2Date
+E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\obj\Debug\net8.0\DDT.Backend.BLL.dll
+E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\obj\Debug\net8.0\refint\DDT.Backend.BLL.dll
+E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\obj\Debug\net8.0\DDT.Backend.BLL.pdb
+E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\obj\Debug\net8.0\ref\DDT.Backend.BLL.dll

@@ -2,8 +2,8 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 
 WORKDIR /src
 
-COPY ["DeepDrunkTalk.Backend/DDT.Backend.API/", "/app/DDT.Backend.API/"]
-COPY ["DeepDrunkTalk.Backend/DeepDrunkTalks.Backend.sln", "./"]
+COPY ["DDT.Backend.API/", "/app/DDT.Backend.API/"]
+COPY ["DeepDrunkTalks.Backend.sln", "./"]
 
 RUN dotnet restore "DeepDrunkTalks.Backend.sln"
 

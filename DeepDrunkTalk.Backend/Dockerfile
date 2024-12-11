@@ -1,13 +1,23 @@
-# Build
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 WORKDIR /app
-COPY . .
-RUN dotnet restore
-RUN dotnet publish -c Release -o out
+EXPOSE 80
 
-# Run
-FROM mcr.microsoft.com/dotnet/aspnet:8.0
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+WORKDIR /src
+
+COPY ["DeepDrunkTalk.Backend/DeepDrunkTalks.Backend.sln", "DeepDrunkTalk.Backend/"]
+COPY ["DeepDrunkTalk.Backend/DDT.Backend.API/"] # Copy the API folder
+RUN dotnet restore "DeepDrunkTalk.Backend/DeepDrunkTalks.Backend.sln"
+
+COPY . .
+
+WORKDIR "/src/DeepDrunkTalk.Backend/DDT.Backend.API"
+RUN dotnet publish "DDT.Backend.API.csproj" -c Release -o /app/publish
+
+FROM base AS final
 WORKDIR /app
-COPY --from=build /app/out .
-ENV ASPNETCORE_URLS=http://*:80
-CMD dotnet DDT.Backend.API.dll
+COPY --from=build /app/publish .
+
+COPY DeepDrunkTalk.Backend/DDT.Backend.API/.env /app/.env
+
+ENTRYPOINT ["dotnet", "DDT.Backend.API.dll"]

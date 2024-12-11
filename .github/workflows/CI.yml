@@ -21,9 +21,20 @@ jobs:
         working-directory: DeepDrunkTalk.Frontend/
         run: npm install
 
-      - name: (Frontend) Lint Code (ESLint)
+      - name: (Frontend) Get Changed Files
+        id: changed-files
+        run: |
+          echo "::set-output name=files::$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '\.js\|\.jsx\|\.ts\|\.tsx')"
+
+      - name: (Frontend) Lint Changed Files
         working-directory: DeepDrunkTalk.Frontend/
-        run: npm run lint
+        run: |
+          files="${{ steps.changed-files.outputs.files }}"
+          if [ -n "$files" ]; then
+            npx eslint $files --max-warnings 0
+          else
+            echo "No files to lint"
+          fi
 
       - name: (BuildX) Setup Docker BuildX
         uses: docker/setup-buildx-action@v2
@@ -55,8 +66,19 @@ jobs:
       - name: (.NET) Restore Backend Dependencies
         run: dotnet restore DeepDrunkTalk.Backend/DeepDrunkTalks.Backend.sln
 
-      - name: (.NET) Lint Code (dotnet-format)
-        run: dotnet tool install -g dotnet-format && dotnet format
+      - name: (Backend) Get Changed Files
+        id: changed-files-backend
+        run: |
+          echo "::set-output name=files::$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '\.cs')"
+
+      - name: (Backend) Lint Changed Files
+        run: |
+          files="${{ steps.changed-files-backend.outputs.files }}"
+          if [ -n "$files" ]; then
+            dotnet format $files --check --verify-no-diagrams
+          else
+            echo "No files to lint"
+          fi
 
       - name: (.NET) Run Unit Tests
         run: dotnet test --no-build --verbosity normal DeepDrunkTalk.Backend/DeepDrunkTalks.Backend.sln

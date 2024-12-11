@@ -1,13 +1,11 @@
-﻿using Moq;
-using System;
-using System.IO;
-using System.Threading.Tasks;
-using DDT.Backend.BLL.Services.File;
+﻿using DDT.Backend.BLL.Services.File;
 using DDT.Backend.Common.Interfaces;
 using DDT.Backend.Common.Models;
-using DDT.Backend.Common.Models.DTO;
+using Moq;
 using Xunit;
 using Assert = Xunit.Assert;
+
+namespace DDT.Backend.UTL;
 
 public class FileServiceTests
 {

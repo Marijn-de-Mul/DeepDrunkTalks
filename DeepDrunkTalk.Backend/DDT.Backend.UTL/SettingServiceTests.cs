@@ -1,12 +1,12 @@
 ﻿using DDT.Backend.BLL.Services.Setting;
 using DDT.Backend.Common.Interfaces;
+using DDT.Backend.Common.Models;
 using DDT.Backend.Common.Models.Authentication;
 using Moq;
-using System;
-using System.Threading.Tasks;
-using DDT.Backend.Common.Models;
 using Xunit;
 using Assert = Xunit.Assert;
+
+namespace DDT.Backend.UTL;
 
 public class SettingServiceTests
 {

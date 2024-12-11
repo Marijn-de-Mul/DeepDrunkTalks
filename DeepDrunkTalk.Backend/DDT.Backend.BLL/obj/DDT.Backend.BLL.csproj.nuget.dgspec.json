@@ -13,7 +13,6 @@
         "packagesPath": "C:\\Users\\Marij\\.nuget\\packages\\",
         "outputPath": "E:\\School\\S3\\Personal\\DeepDrunkTalks\\DeepDrunkTalk.Backend\\DDT.Backend.BLL\\obj\\",
         "projectStyle": "PackageReference",
-        "UsingMicrosoftNETSdk": false,
         "configFilePaths": [
           "C:\\Users\\Marij\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
@@ -130,7 +129,6 @@
         "packagesPath": "C:\\Users\\Marij\\.nuget\\packages\\",
         "outputPath": "E:\\School\\S3\\Personal\\DeepDrunkTalks\\DeepDrunkTalk.Backend\\DDT.Backend.Common\\obj\\",
         "projectStyle": "PackageReference",
-        "UsingMicrosoftNETSdk": false,
         "configFilePaths": [
           "C:\\Users\\Marij\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
@@ -215,7 +213,6 @@
         "packagesPath": "C:\\Users\\Marij\\.nuget\\packages\\",
         "outputPath": "E:\\School\\S3\\Personal\\DeepDrunkTalks\\DeepDrunkTalk.Backend\\DDT.Backend.DAL\\obj\\",
         "projectStyle": "PackageReference",
-        "UsingMicrosoftNETSdk": false,
         "configFilePaths": [
           "C:\\Users\\Marij\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],

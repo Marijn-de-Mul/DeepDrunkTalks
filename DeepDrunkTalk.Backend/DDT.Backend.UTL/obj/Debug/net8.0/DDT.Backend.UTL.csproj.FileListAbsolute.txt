@@ -103,16 +103,10 @@ C:\Users\MarijndeMul\OneDrive - Office 365 Fontys\Fontys-HBO-ICT\Semester3\DeepD
 C:\Users\MarijndeMul\OneDrive - Office 365 Fontys\Fontys-HBO-ICT\Semester3\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.UTL\bin\Debug\net8.0\Serilog.Sinks.Console.dll
 C:\Users\MarijndeMul\OneDrive - Office 365 Fontys\Fontys-HBO-ICT\Semester3\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.UTL\bin\Debug\net8.0\Serilog.Sinks.File.dll
 E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.UTL\bin\Debug\net8.0\CoverletSourceRootsMapping_DDT.Backend.UTL
-E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.UTL\bin\Debug\net8.0\testhost.exe
 E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.UTL\bin\Debug\net8.0\testhost.dll
-E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.UTL\bin\Debug\net8.0\NUnit3.TestAdapter.dll
-E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.UTL\bin\Debug\net8.0\NUnit3.TestAdapter.pdb
-E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.UTL\bin\Debug\net8.0\nunit.engine.dll
-E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.UTL\bin\Debug\net8.0\nunit.engine.api.dll
-E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.UTL\bin\Debug\net8.0\nunit.engine.core.dll
-E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.UTL\bin\Debug\net8.0\testcentric.engine.metadata.dll
 E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.UTL\bin\Debug\net8.0\libmp3lame.32.dll
 E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.UTL\bin\Debug\net8.0\libmp3lame.64.dll
+E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.UTL\bin\Debug\net8.0\testhost.exe
 E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.UTL\bin\Debug\net8.0\DDT.Backend.UTL.deps.json
 E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.UTL\bin\Debug\net8.0\DDT.Backend.UTL.runtimeconfig.json
 E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.UTL\bin\Debug\net8.0\DDT.Backend.UTL.dll
@@ -155,7 +149,6 @@ E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.UTL\bin\D
 E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.UTL\bin\Debug\net8.0\Npgsql.dll
 E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.UTL\bin\Debug\net8.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
 E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.UTL\bin\Debug\net8.0\NuGet.Frameworks.dll
-E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.UTL\bin\Debug\net8.0\nunit.framework.dll
 E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.UTL\bin\Debug\net8.0\Serilog.dll
 E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.UTL\bin\Debug\net8.0\Serilog.Formatting.Compact.dll
 E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.UTL\bin\Debug\net8.0\Serilog.Sinks.Console.dll
@@ -253,3 +246,6 @@ E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.UTL\obj\D
 E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.UTL\obj\Debug\net8.0\DDT.Backend.UTL.pdb
 E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.UTL\obj\Debug\net8.0\DDT.Backend.UTL.genruntimeconfig.cache
 E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.UTL\obj\Debug\net8.0\ref\DDT.Backend.UTL.dll
+E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.UTL\bin\Debug\net8.0\xunit.runner.visualstudio.dotnetcore.testadapter.dll
+E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.UTL\bin\Debug\net8.0\xunit.runner.reporters.netcoreapp10.dll
+E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.UTL\bin\Debug\net8.0\xunit.runner.utility.netcoreapp10.dll

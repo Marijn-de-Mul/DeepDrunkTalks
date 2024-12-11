@@ -1,9 +1,11 @@
-﻿using Moq;
-using Xunit;
-using DDT.Backend.BLL.Services;
+﻿using DDT.Backend.BLL.Services;
 using DDT.Backend.Common.Interfaces;
 using DDT.Backend.Common.Models;
+using Moq;
+using Xunit;
 using Assert = Xunit.Assert;
+
+namespace DDT.Backend.UTL;
 
 public class ConversationServiceTests
 {

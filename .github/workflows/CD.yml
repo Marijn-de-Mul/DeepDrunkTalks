@@ -9,7 +9,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    needs: ci 
+    needs: ci  
 
     steps:
       - name: (Github) Checkout Code
@@ -20,15 +20,21 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-      # - name: (Docker) SSH into VPS and Deploy Production Environment
-      #   run: |
-      #     ssh -o StrictHostKeyChecking=no user@your-vps-ip '
-      #       # Pull the latest production images
-      #       docker pull marijndemul16/ddt.frontend:latest
-      #       docker pull marijndemul16/ddt.backend:latest
-      #       # Deploy the production environment using Docker Compose
-      #       docker-compose -f /path/to/production/docker-compose.yml down && \
-      #       docker-compose -f /path/to/production/docker-compose.yml up -d'
-      #   env:
-      #     DOCKER_BUILDKIT: 1
-      #     DOCKER_CLI_EXPERIMENTAL: enabled
+      - name: (Docker) SSH into VPS and Deploy Production Environment
+        run: |
+          ssh -o StrictHostKeyChecking=no root@45.140.142.168 '
+            export DOCKER_BUILDKIT=1
+            export DOCKER_CLI_EXPERIMENTAL=enabled
+            
+            docker pull marijndemul16/ddt.frontend:latest
+            docker pull marijndemul16/ddt.backend:latest
+
+            cd /root/docker/deepdrunktalks
+
+            docker-compose down
+
+            docker-compose up -d
+          '
+        env:
+          DOCKER_BUILDKIT: 1
+          DOCKER_CLI_EXPERIMENTAL: enabled

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DDT.Backend.Common")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1dbb144c28ef7add066c707013979ba7919783fe")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9faa0004192bb25cfa79598c1671232c56d7e05f")]
 [assembly: System.Reflection.AssemblyProductAttribute("DDT.Backend.Common")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DDT.Backend.Common")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

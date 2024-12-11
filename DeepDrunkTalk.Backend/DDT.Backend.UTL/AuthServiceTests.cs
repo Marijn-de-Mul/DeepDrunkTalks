@@ -1,14 +1,15 @@
 using DDT.Backend.BLL.Helpers;
-using Moq;
-using Xunit;
 using DDT.Backend.BLL.Services;
 using DDT.Backend.Common;
-using DDT.Backend.Common.Interfaces;
-using DDT.Backend.Common.Logger;
-using DDT.Backend.Common.Models.Authentication;
-using DDT.Backend.Common.Models;
 using DDT.Backend.Common.Exceptions;
+using DDT.Backend.Common.Interfaces;
+using DDT.Backend.Common.Models;
+using DDT.Backend.Common.Models.Authentication;
+using Moq;
+using Xunit;
 using Assert = Xunit.Assert;
+
+namespace DDT.Backend.UTL;
 
 public class AuthServiceTests
 {

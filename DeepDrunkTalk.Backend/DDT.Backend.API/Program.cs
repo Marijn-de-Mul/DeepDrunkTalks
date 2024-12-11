@@ -16,8 +16,6 @@ using Microsoft.IdentityModel.Tokens;
 using Serilog;
 using Serilog.Events;
 
-EnvironmentVariables.LoadEnvironments();
-
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();

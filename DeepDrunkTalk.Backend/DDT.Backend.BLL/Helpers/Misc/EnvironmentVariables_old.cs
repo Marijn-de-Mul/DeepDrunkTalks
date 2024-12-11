@@ -1,6 +1,6 @@
 ﻿namespace DDT.Backend.BLL.Helpers;
 
-public class EnvironmentVariables
+public class EnvironmentVariables_old
 {
     public static void LoadEnvironments()
     {

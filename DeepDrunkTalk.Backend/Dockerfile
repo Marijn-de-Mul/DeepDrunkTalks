@@ -1,25 +1,18 @@
-# Use the .NET SDK image to build the app
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 
-# Set the working directory inside the container
 WORKDIR /src
 
-# Copy the solution file into the container
 COPY ["DeepDrunkTalks.Backend.sln", "./"]
-
-# Copy the API project directory into the container
 COPY ["DDT.Backend.API/", "/app/DDT.Backend.API/"]
 
-# Run dotnet restore to restore NuGet packages
+RUN ls -l
+
 RUN dotnet restore "DeepDrunkTalks.Backend.sln"
 
-# Set the working directory to the API project directory
 WORKDIR /app/DDT.Backend.API
 
-# Publish the application to the /app/publish directory
 RUN dotnet publish -c Release -o /app/publish
 
-# Set environment variables for the app
 ENV ASPNETCORE_ENVIRONMENT=Production
 ENV DB_HOST=ddt_postgres
 ENV DB_PORT=5432
@@ -30,8 +23,6 @@ ENV JWT_SECRET=d349e3a2f3b7cafa3737752ef9a1da8271ff6ff54666ceabe18033a0721daca88
 ENV LOG_TO_CONSOLE=false
 ENV LOG_TO_FILE=true
 
-# Expose the app's port (if needed)
 EXPOSE 8080
 
-# Set the entry point for the container to run the app
 ENTRYPOINT ["dotnet", "DDT.Backend.API.dll"]

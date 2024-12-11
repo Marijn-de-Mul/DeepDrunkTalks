@@ -7,7 +7,7 @@ on:
       - completed
 
 jobs:
-  deploy:
+  cd:
     runs-on: ubuntu-latest
 
     steps:
@@ -30,9 +30,9 @@ jobs:
 
             cd /root/docker/deepdrunktalks
 
-            docker-compose down
+            docker compose down
 
-            docker-compose up -d
+            docker compose up -d
           '
         env:
           DOCKER_BUILDKIT: 1

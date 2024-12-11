@@ -21,6 +21,10 @@ jobs:
         working-directory: DeepDrunkTalk.Frontend/
         run: npm install
 
+      - name: Fetch full commit history
+        run: |
+          git fetch --prune --unshallow
+
       - name: (Frontend) Get Changed Files
         id: changed-files
         run: |

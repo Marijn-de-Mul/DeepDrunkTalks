@@ -71,6 +71,10 @@ jobs:
       - name: (.NET) Restore Backend Dependencies
         run: dotnet restore DeepDrunkTalk.Backend/DeepDrunkTalks.Backend.sln
 
+      - name: Fetch full commit history (Backend)
+        run: |
+          git fetch --prune --unshallow
+
       - name: (Backend) Get Changed Files
         id: changed-files-backend
         run: |

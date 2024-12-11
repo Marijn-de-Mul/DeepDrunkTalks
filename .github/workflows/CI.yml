@@ -1,0 +1,81 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: (Github) Checkout Code
+        uses: actions/checkout@v4
+
+      - name: (Node.js) Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: (Frontend) Install Dependencies
+        working-directory: DeepDrunkTalk.Frontend/
+        run: npm install
+
+      - name: (Frontend) Lint Code (ESLint)
+        working-directory: DeepDrunkTalk.Frontend/
+        run: npm run lint
+
+      - name: (BuildX) Setup Docker BuildX
+        uses: docker/setup-buildx-action@v2
+
+      - name: (Docker) Build DeepDrunkTalks Frontend Docker Image
+        working-directory: DeepDrunkTalk.Frontend/
+        run: docker build . -t marijndemul16/ddt.frontend:latest
+
+      - name: (Docker) Log Into Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: (Docker) Push The DeepDrunkTalks Frontend Image To Docker Hub
+        run: docker push marijndemul16/ddt.frontend
+
+  backend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: (Github) Checkout Code
+        uses: actions/checkout@v4
+
+      - name: (.NET) Setup
+        uses: actions/setup-dotnet@main
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: (.NET) Restore Backend Dependencies
+        run: dotnet restore DeepDrunkTalk.Backend/DeepDrunkTalks.Backend.sln
+
+      - name: (.NET) Lint Code (dotnet-format)
+        run: dotnet tool install -g dotnet-format && dotnet format
+
+      - name: (.NET) Run Unit Tests
+        run: dotnet test --no-build --verbosity normal DeepDrunkTalk.Backend/DeepDrunkTalks.Backend.sln
+
+      - name: (.NET) Build DeepDrunkTalks Backend
+        run: dotnet build --no-restore DeepDrunkTalk.Backend/DeepDrunkTalks.Backend.sln
+
+      - name: (BuildX) Setup Docker BuildX
+        uses: docker/setup-buildx-action@v2
+
+      - name: (Docker) Build DeepDrunkTalks Backend Docker Image
+        working-directory: DeepDrunkTalk.Backend/
+        run: docker build . -t marijndemul16/ddt.backend:latest
+
+      - name: (Docker) Log Into Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: (Docker) Push The DeepDrunkTalks Backend Image To Docker Hub
+        run: docker push marijndemul16/ddt.backend

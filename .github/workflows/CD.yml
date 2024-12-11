@@ -1,0 +1,34 @@
+name: Deploy
+
+on:
+  workflow_run:
+    workflows: ["CI"]
+    types:
+      - completed
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    needs: ci 
+
+    steps:
+      - name: (Github) Checkout Code
+        uses: actions/checkout@v4
+
+      # - name: (SSH) Set up SSH keys
+      #   uses: webfactory/ssh-agent@v0.5.3
+      #   with:
+      #     ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      # - name: (Docker) SSH into VPS and Deploy Production Environment
+      #   run: |
+      #     ssh -o StrictHostKeyChecking=no user@your-vps-ip '
+      #       # Pull the latest production images
+      #       docker pull marijndemul16/ddt.frontend:latest
+      #       docker pull marijndemul16/ddt.backend:latest
+      #       # Deploy the production environment using Docker Compose
+      #       docker-compose -f /path/to/production/docker-compose.yml down && \
+      #       docker-compose -f /path/to/production/docker-compose.yml up -d'
+      #   env:
+      #     DOCKER_BUILDKIT: 1
+      #     DOCKER_CLI_EXPERIMENTAL: enabled

@@ -7,12 +7,19 @@ WORKDIR /src
 # Copy the solution file into the container
 COPY DeepDrunkTalks.Backend.sln .
 
-# Copy all project directories into the container
-COPY DDT.Backend.DAL/ /app/DDT.Backend.DAL/
-COPY DDT.Backend.BLL/ /app/DDT.Backend.BLL/
-COPY DDT.Backend.API/ /app/DDT.Backend.API/
-COPY DDT.Backend.Common/ /app/DDT.Backend.Common/
-COPY DDT.Backend.UTL/ /app/DDT.Backend.UTL/
+# Copy the project directories into the container
+COPY DDT.Backend.DAL/DDT.Backend.DAL.csproj DDT.Backend.DAL/
+COPY DDT.Backend.BLL/DDT.Backend.BLL.csproj DDT.Backend.BLL/
+COPY DDT.Backend.API/DDT.Backend.API.csproj DDT.Backend.API/
+COPY DDT.Backend.Common/DDT.Backend.Common.csproj DDT.Backend.Common/
+COPY DDT.Backend.UTL/DDT.Backend.UTL.csproj DDT.Backend.UTL/
+
+# Copy the rest of the source files into the container
+COPY DDT.Backend.DAL/ DDT.Backend.DAL/
+COPY DDT.Backend.BLL/ DDT.Backend.BLL/
+COPY DDT.Backend.API/ DDT.Backend.API/
+COPY DDT.Backend.Common/ DDT.Backend.Common/
+COPY DDT.Backend.UTL/ DDT.Backend.UTL/
 
 # Restore the dependencies
 RUN dotnet restore "DeepDrunkTalks.Backend.sln"

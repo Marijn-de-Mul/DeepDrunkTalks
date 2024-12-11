@@ -26,12 +26,11 @@ jobs:
         run: |
           files=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep -E '\.(js|jsx|ts|tsx)$' || echo "")
           echo "Changed files: $files"
-          echo "::set-output name=files::$files"
+          echo "files=$files" >> $GITHUB_ENV
 
       - name: (Frontend) Lint Changed Files
         working-directory: DeepDrunkTalk.Frontend/
         run: |
-          files="${{ steps.changed-files.outputs.files }}"
           if [ -n "$files" ]; then
             npx eslint $files --max-warnings 0
           else
@@ -73,11 +72,10 @@ jobs:
         run: |
           files=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep -E '\.cs$' || echo "")
           echo "Changed files: $files"
-          echo "::set-output name=files::$files"
+          echo "files=$files" >> $GITHUB_ENV
 
       - name: (Backend) Lint Changed Files
         run: |
-          files="${{ steps.changed-files-backend.outputs.files }}"
           if [ -n "$files" ]; then
             dotnet format $files --check --verify-no-diagrams
           else

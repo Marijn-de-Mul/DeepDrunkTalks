@@ -16,11 +16,11 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
-  const [isClient, setIsClient] = useState(false); // Track if it's running client-side
+  const [isClient, setIsClient] = useState(false); 
   const navigate = useNavigate();
 
   useEffect(() => {
-    setIsClient(true); // Ensure that this only runs on the client
+    setIsClient(true); 
   }, []);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -77,6 +77,8 @@ export default function Login() {
             width: "auto",
             marginTop: "10vh"
           }}
+
+          data-testid={"login-logo"}
         />
       </Box>
 
@@ -93,6 +95,8 @@ export default function Login() {
             fontWeight: "bolder",
             fontSize: "2em"
           }}
+
+          data-testid={"login-header"}
         >
           Login
         </Text>
@@ -107,6 +111,8 @@ export default function Login() {
             justifyContent: 'center',
             alignItems: 'center'
           }}
+
+          data-testid={"login-form"}
         >
           <Input
             variant="filled"
@@ -118,6 +124,8 @@ export default function Login() {
               margin: "2vw",
               width: "70vw"
             }}
+
+            data-testid={"login-emailinput"}
           />
 
           <Input
@@ -130,9 +138,11 @@ export default function Login() {
               margin: "2vw",
               width: "70vw"
             }}
+
+            data-testid={"login-passwordinput"}
           />
 
-          {error && <Text color="red" size="1em">{error}</Text>}
+          {error && <Text data-testid={"login-error-message"} color="red" size="1em">{error}</Text>}
 
           <Button
             fullWidth
@@ -143,6 +153,8 @@ export default function Login() {
               marginTop: "2vw",
               width: "70vw"
             }}
+
+            data-testid={"login-button"}
           >
             LOGIN
           </Button>
@@ -157,6 +169,8 @@ export default function Login() {
                 marginTop: "2vw",
                 height: "5vh"
               }}
+
+              data-testid={"register-button-onloginscreen"}
             >
               REGISTER INSTEAD
             </Button>

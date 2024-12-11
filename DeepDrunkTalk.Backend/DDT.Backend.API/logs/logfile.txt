@@ -281,3 +281,125 @@ INFO | 2024-12-10 22:32:25 | Attempting to get user by email: marijndemul@gmail.
 INFO | 2024-12-10 22:32:25 | Successfully retrieved user with email: marijndemul@gmail.com
 INFO | 2024-12-10 22:32:25 | User login successful for email: marijndemul@gmail.com
 INFO | 2024-12-10 22:32:25 | User marijndemul@gmail.com logged in successfully
+INFO | 2024-12-11 09:27:12 | Login attempt for email: test@eleelle.nm
+INFO | 2024-12-11 09:27:12 | Starting user login for email: test@eleelle.nm
+INFO | 2024-12-11 09:27:12 | Attempting to get user by email: test@eleelle.nm
+INFO | 2024-12-11 09:27:13 | Successfully retrieved user with email: test@eleelle.nm
+WARN | 2024-12-11 09:27:13 | Login failed: User not found for email: test@eleelle.nm
+ERROR | 2024-12-11 09:27:13 | An unexpected error occurred during login for email: test@eleelle.nm | Exception: User not found. | StackTrace:    at DDT.Backend.BLL.Services.AuthService.LoginUser(LoginRequest request) in E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\Services\Auth\AuthService.cs:line 113
+ERROR | 2024-12-11 09:27:13 | User not found for email: test@eleelle.nm. Exception: User not found. | Exception: User not found. | StackTrace:    at DDT.Backend.BLL.Services.AuthService.LoginUser(LoginRequest request) in E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\Services\Auth\AuthService.cs:line 113
+   at DDT.Backend.API.Controllers.UserController.Login(LoginRequest request) in E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.API\Controllers\UserController.cs:line 84
+INFO | 2024-12-11 09:33:28 | Login attempt for email: test@eleelle.nm
+INFO | 2024-12-11 09:33:28 | Starting user login for email: test@eleelle.nm
+INFO | 2024-12-11 09:33:28 | Attempting to get user by email: test@eleelle.nm
+INFO | 2024-12-11 09:33:28 | Successfully retrieved user with email: test@eleelle.nm
+WARN | 2024-12-11 09:33:28 | Login failed: User not found for email: test@eleelle.nm
+ERROR | 2024-12-11 09:33:28 | An unexpected error occurred during login for email: test@eleelle.nm | Exception: Invalid Credentials. | StackTrace:    at DDT.Backend.BLL.Services.AuthService.LoginUser(LoginRequest request) in E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\Services\Auth\AuthService.cs:line 113
+ERROR | 2024-12-11 09:33:28 | User not found for email: test@eleelle.nm. Exception: Invalid Credentials. | Exception: Invalid Credentials. | StackTrace:    at DDT.Backend.BLL.Services.AuthService.LoginUser(LoginRequest request) in E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\Services\Auth\AuthService.cs:line 113
+   at DDT.Backend.API.Controllers.UserController.Login(LoginRequest request) in E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.API\Controllers\UserController.cs:line 84
+INFO | 2024-12-11 09:36:14 | Login attempt for email: test@eleelle.nm
+INFO | 2024-12-11 09:36:14 | Starting user login for email: test@eleelle.nm
+INFO | 2024-12-11 09:36:14 | Attempting to get user by email: test@eleelle.nm
+INFO | 2024-12-11 09:36:14 | Successfully retrieved user with email: test@eleelle.nm
+WARN | 2024-12-11 09:36:14 | Login failed: User not found for email: test@eleelle.nm
+ERROR | 2024-12-11 09:36:14 | An unexpected error occurred during login for email: test@eleelle.nm | Exception: Invalid Credentials. | StackTrace:    at DDT.Backend.BLL.Services.AuthService.LoginUser(LoginRequest request) in E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\Services\Auth\AuthService.cs:line 113
+ERROR | 2024-12-11 09:36:14 | User not found for email: test@eleelle.nm. Exception: Invalid Credentials. | Exception: Invalid Credentials. | StackTrace:    at DDT.Backend.BLL.Services.AuthService.LoginUser(LoginRequest request) in E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\Services\Auth\AuthService.cs:line 113
+   at DDT.Backend.API.Controllers.UserController.Login(LoginRequest request) in E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.API\Controllers\UserController.cs:line 84
+INFO | 2024-12-11 09:36:26 | Login attempt for email: test@test.nl
+INFO | 2024-12-11 09:36:26 | Starting user login for email: test@test.nl
+INFO | 2024-12-11 09:36:26 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-11 09:36:26 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-11 09:36:27 | User login successful for email: test@test.nl
+INFO | 2024-12-11 09:36:27 | User test@test.nl logged in successfully
+INFO | 2024-12-11 09:45:31 | Login attempt for email: invalid@example.com
+INFO | 2024-12-11 09:45:31 | Starting user login for email: invalid@example.com
+INFO | 2024-12-11 09:45:31 | Attempting to get user by email: invalid@example.com
+INFO | 2024-12-11 09:45:31 | Successfully retrieved user with email: invalid@example.com
+WARN | 2024-12-11 09:45:31 | Login failed: User not found for email: invalid@example.com
+ERROR | 2024-12-11 09:45:31 | An unexpected error occurred during login for email: invalid@example.com | Exception: Invalid Credentials. | StackTrace:    at DDT.Backend.BLL.Services.AuthService.LoginUser(LoginRequest request) in E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\Services\Auth\AuthService.cs:line 113
+ERROR | 2024-12-11 09:45:31 | User not found for email: invalid@example.com. Exception: Invalid Credentials. | Exception: Invalid Credentials. | StackTrace:    at DDT.Backend.BLL.Services.AuthService.LoginUser(LoginRequest request) in E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\Services\Auth\AuthService.cs:line 113
+   at DDT.Backend.API.Controllers.UserController.Login(LoginRequest request) in E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.API\Controllers\UserController.cs:line 84
+INFO | 2024-12-11 09:45:38 | Login attempt for email: test@test.nl
+INFO | 2024-12-11 09:45:38 | Starting user login for email: test@test.nl
+INFO | 2024-12-11 09:45:38 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-11 09:45:38 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-11 09:45:39 | User login successful for email: test@test.nl
+INFO | 2024-12-11 09:45:39 | User test@test.nl logged in successfully
+INFO | 2024-12-11 09:51:19 | Login attempt for email: invalid@example.com
+INFO | 2024-12-11 09:51:19 | Starting user login for email: invalid@example.com
+INFO | 2024-12-11 09:51:19 | Attempting to get user by email: invalid@example.com
+INFO | 2024-12-11 09:51:19 | Successfully retrieved user with email: invalid@example.com
+WARN | 2024-12-11 09:51:19 | Login failed: User not found for email: invalid@example.com
+ERROR | 2024-12-11 09:51:19 | An unexpected error occurred during login for email: invalid@example.com | Exception: Invalid Credentials. | StackTrace:    at DDT.Backend.BLL.Services.AuthService.LoginUser(LoginRequest request) in E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\Services\Auth\AuthService.cs:line 113
+ERROR | 2024-12-11 09:51:19 | User not found for email: invalid@example.com. Exception: Invalid Credentials. | Exception: Invalid Credentials. | StackTrace:    at DDT.Backend.BLL.Services.AuthService.LoginUser(LoginRequest request) in E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\Services\Auth\AuthService.cs:line 113
+   at DDT.Backend.API.Controllers.UserController.Login(LoginRequest request) in E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.API\Controllers\UserController.cs:line 84
+INFO | 2024-12-11 09:51:40 | Login attempt for email: invalid@example.com
+INFO | 2024-12-11 09:51:40 | Starting user login for email: invalid@example.com
+INFO | 2024-12-11 09:51:40 | Attempting to get user by email: invalid@example.com
+INFO | 2024-12-11 09:51:40 | Successfully retrieved user with email: invalid@example.com
+WARN | 2024-12-11 09:51:40 | Login failed: User not found for email: invalid@example.com
+ERROR | 2024-12-11 09:51:40 | An unexpected error occurred during login for email: invalid@example.com | Exception: Invalid Credentials. | StackTrace:    at DDT.Backend.BLL.Services.AuthService.LoginUser(LoginRequest request) in E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\Services\Auth\AuthService.cs:line 113
+ERROR | 2024-12-11 09:51:40 | User not found for email: invalid@example.com. Exception: Invalid Credentials. | Exception: Invalid Credentials. | StackTrace:    at DDT.Backend.BLL.Services.AuthService.LoginUser(LoginRequest request) in E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\Services\Auth\AuthService.cs:line 113
+   at DDT.Backend.API.Controllers.UserController.Login(LoginRequest request) in E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.API\Controllers\UserController.cs:line 84
+INFO | 2024-12-11 09:52:58 | Login attempt for email: invalid@example.com
+INFO | 2024-12-11 09:52:58 | Starting user login for email: invalid@example.com
+INFO | 2024-12-11 09:52:58 | Attempting to get user by email: invalid@example.com
+INFO | 2024-12-11 09:52:58 | Successfully retrieved user with email: invalid@example.com
+WARN | 2024-12-11 09:52:58 | Login failed: User not found for email: invalid@example.com
+ERROR | 2024-12-11 09:52:58 | An unexpected error occurred during login for email: invalid@example.com | Exception: Invalid Credentials. | StackTrace:    at DDT.Backend.BLL.Services.AuthService.LoginUser(LoginRequest request) in E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\Services\Auth\AuthService.cs:line 113
+ERROR | 2024-12-11 09:52:58 | User not found for email: invalid@example.com. Exception: Invalid Credentials. | Exception: Invalid Credentials. | StackTrace:    at DDT.Backend.BLL.Services.AuthService.LoginUser(LoginRequest request) in E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\Services\Auth\AuthService.cs:line 113
+   at DDT.Backend.API.Controllers.UserController.Login(LoginRequest request)
+INFO | 2024-12-11 09:55:53 | Login attempt for email: invalid@example.com
+INFO | 2024-12-11 09:55:53 | Starting user login for email: invalid@example.com
+INFO | 2024-12-11 09:55:53 | Attempting to get user by email: invalid@example.com
+INFO | 2024-12-11 09:55:53 | Successfully retrieved user with email: invalid@example.com
+WARN | 2024-12-11 09:55:53 | Login failed: User not found for email: invalid@example.com
+ERROR | 2024-12-11 09:55:53 | An unexpected error occurred during login for email: invalid@example.com | Exception: Invalid Credentials. | StackTrace:    at DDT.Backend.BLL.Services.AuthService.LoginUser(LoginRequest request) in E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\Services\Auth\AuthService.cs:line 113
+ERROR | 2024-12-11 09:55:53 | User not found for email: invalid@example.com. Exception: Invalid Credentials. | Exception: Invalid Credentials. | StackTrace:    at DDT.Backend.BLL.Services.AuthService.LoginUser(LoginRequest request) in E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\Services\Auth\AuthService.cs:line 113
+   at DDT.Backend.API.Controllers.UserController.Login(LoginRequest request)
+INFO | 2024-12-11 09:56:11 | Login attempt for email: invalid@example.com
+INFO | 2024-12-11 09:56:11 | Starting user login for email: invalid@example.com
+INFO | 2024-12-11 09:56:11 | Attempting to get user by email: invalid@example.com
+INFO | 2024-12-11 09:56:11 | Successfully retrieved user with email: invalid@example.com
+WARN | 2024-12-11 09:56:11 | Login failed: User not found for email: invalid@example.com
+ERROR | 2024-12-11 09:56:11 | An unexpected error occurred during login for email: invalid@example.com | Exception: Invalid Credentials. | StackTrace:    at DDT.Backend.BLL.Services.AuthService.LoginUser(LoginRequest request) in E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\Services\Auth\AuthService.cs:line 113
+ERROR | 2024-12-11 09:56:11 | User not found for email: invalid@example.com. Exception: Invalid Credentials. | Exception: Invalid Credentials. | StackTrace:    at DDT.Backend.BLL.Services.AuthService.LoginUser(LoginRequest request) in E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\Services\Auth\AuthService.cs:line 113
+   at DDT.Backend.API.Controllers.UserController.Login(LoginRequest request)
+INFO | 2024-12-11 09:58:34 | Login attempt for email: invalid@example.com
+INFO | 2024-12-11 09:58:34 | Starting user login for email: invalid@example.com
+INFO | 2024-12-11 09:58:34 | Attempting to get user by email: invalid@example.com
+INFO | 2024-12-11 09:58:34 | Successfully retrieved user with email: invalid@example.com
+WARN | 2024-12-11 09:58:34 | Login failed: User not found for email: invalid@example.com
+ERROR | 2024-12-11 09:58:34 | An unexpected error occurred during login for email: invalid@example.com | Exception: Invalid Credentials. | StackTrace:    at DDT.Backend.BLL.Services.AuthService.LoginUser(LoginRequest request) in E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\Services\Auth\AuthService.cs:line 113
+ERROR | 2024-12-11 09:58:34 | User not found for email: invalid@example.com. Exception: Invalid Credentials. | Exception: Invalid Credentials. | StackTrace:    at DDT.Backend.BLL.Services.AuthService.LoginUser(LoginRequest request) in E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\Services\Auth\AuthService.cs:line 113
+   at DDT.Backend.API.Controllers.UserController.Login(LoginRequest request)
+INFO | 2024-12-11 09:59:19 | Login attempt for email: invalid@example.com
+INFO | 2024-12-11 09:59:19 | Starting user login for email: invalid@example.com
+INFO | 2024-12-11 09:59:19 | Attempting to get user by email: invalid@example.com
+INFO | 2024-12-11 09:59:19 | Successfully retrieved user with email: invalid@example.com
+WARN | 2024-12-11 09:59:19 | Login failed: User not found for email: invalid@example.com
+ERROR | 2024-12-11 09:59:19 | An unexpected error occurred during login for email: invalid@example.com | Exception: Invalid Credentials. | StackTrace:    at DDT.Backend.BLL.Services.AuthService.LoginUser(LoginRequest request) in E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\Services\Auth\AuthService.cs:line 113
+ERROR | 2024-12-11 09:59:19 | User not found for email: invalid@example.com. Exception: Invalid Credentials. | Exception: Invalid Credentials. | StackTrace:    at DDT.Backend.BLL.Services.AuthService.LoginUser(LoginRequest request) in E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\Services\Auth\AuthService.cs:line 113
+   at DDT.Backend.API.Controllers.UserController.Login(LoginRequest request)
+INFO | 2024-12-11 10:00:08 | Login attempt for email: invalid@example.com
+INFO | 2024-12-11 10:00:08 | Starting user login for email: invalid@example.com
+INFO | 2024-12-11 10:00:08 | Attempting to get user by email: invalid@example.com
+INFO | 2024-12-11 10:00:08 | Successfully retrieved user with email: invalid@example.com
+WARN | 2024-12-11 10:00:08 | Login failed: User not found for email: invalid@example.com
+ERROR | 2024-12-11 10:00:08 | An unexpected error occurred during login for email: invalid@example.com | Exception: Invalid Credentials. | StackTrace:    at DDT.Backend.BLL.Services.AuthService.LoginUser(LoginRequest request) in E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\Services\Auth\AuthService.cs:line 113
+ERROR | 2024-12-11 10:00:08 | User not found for email: invalid@example.com. Exception: Invalid Credentials. | Exception: Invalid Credentials. | StackTrace:    at DDT.Backend.BLL.Services.AuthService.LoginUser(LoginRequest request) in E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\Services\Auth\AuthService.cs:line 113
+   at DDT.Backend.API.Controllers.UserController.Login(LoginRequest request)
+INFO | 2024-12-11 10:00:22 | Login attempt for email: invalid@example.com
+INFO | 2024-12-11 10:00:22 | Starting user login for email: invalid@example.com
+INFO | 2024-12-11 10:00:22 | Attempting to get user by email: invalid@example.com
+INFO | 2024-12-11 10:00:22 | Successfully retrieved user with email: invalid@example.com
+WARN | 2024-12-11 10:00:22 | Login failed: User not found for email: invalid@example.com
+ERROR | 2024-12-11 10:00:22 | An unexpected error occurred during login for email: invalid@example.com | Exception: Invalid Credentials. | StackTrace:    at DDT.Backend.BLL.Services.AuthService.LoginUser(LoginRequest request) in E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\Services\Auth\AuthService.cs:line 113
+ERROR | 2024-12-11 10:00:22 | User not found for email: invalid@example.com. Exception: Invalid Credentials. | Exception: Invalid Credentials. | StackTrace:    at DDT.Backend.BLL.Services.AuthService.LoginUser(LoginRequest request) in E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\Services\Auth\AuthService.cs:line 113
+   at DDT.Backend.API.Controllers.UserController.Login(LoginRequest request)
+INFO | 2024-12-11 10:00:24 | Login attempt for email: test@test.nl
+INFO | 2024-12-11 10:00:24 | Starting user login for email: test@test.nl
+INFO | 2024-12-11 10:00:24 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-11 10:00:24 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-11 10:00:24 | User login successful for email: test@test.nl
+INFO | 2024-12-11 10:00:24 | User test@test.nl logged in successfully

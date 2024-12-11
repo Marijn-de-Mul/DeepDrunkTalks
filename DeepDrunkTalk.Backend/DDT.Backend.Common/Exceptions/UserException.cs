@@ -31,12 +31,12 @@
 
     public class UserNotFoundException : UserException
     {
-        public UserNotFoundException() : base("User not found.") { }
+        public UserNotFoundException() : base("Invalid Credentials.") { }
     }
 
     public class InvalidCredentialsException : UserException
     {
-        public InvalidCredentialsException() : base("Invalid email or password.") { }
+        public InvalidCredentialsException() : base("Invalid Credentials.") { }
     }
     
     public class InvalidPasswordException : UserException

@@ -24,7 +24,9 @@ jobs:
       - name: (Frontend) Get Changed Files
         id: changed-files
         run: |
-          echo "::set-output name=files::$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '\.js\|\.jsx\|\.ts\|\.tsx')"
+          files=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep -E '\.(js|jsx|ts|tsx)$' || echo "")
+          echo "Changed files: $files"
+          echo "::set-output name=files::$files"
 
       - name: (Frontend) Lint Changed Files
         working-directory: DeepDrunkTalk.Frontend/
@@ -69,7 +71,9 @@ jobs:
       - name: (Backend) Get Changed Files
         id: changed-files-backend
         run: |
-          echo "::set-output name=files::$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '\.cs')"
+          files=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep -E '\.cs$' || echo "")
+          echo "Changed files: $files"
+          echo "::set-output name=files::$files"
 
       - name: (Backend) Lint Changed Files
         run: |

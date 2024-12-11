@@ -78,12 +78,26 @@ jobs:
       - name: Get changed files
         id: files
         run: |
+          # Capture the changed .cs files, excluding obj and bin directories
           files=$(git diff --name-only 9faa0004192bb25cfa79598c1671232c56d7e05f de867efc4e1b52e3a1a5f4edf8b6efd74bad1758 | grep -E '\.cs$' | grep -vE 'obj|bin' || echo "")
-          echo "files=$files" >> $GITHUB_ENV
-
-      - name: Check changed files
-        run: |
+          
+          # Print the files for debugging purposes
           echo "Changed files: $files"
+          
+          # Split files and save them as separate variables
+          IFS=' ' read -r -a files_array <<< "$files"
+          
+          # Set each file path as a separate environment variable
+          for i in "${!files_array[@]}"; do
+            echo "FILE_$i=${files_array[$i]}" >> $GITHUB_ENV
+          done
+
+      - name: Debug changed files
+        run: |
+          echo "Listing all changed files:"
+          for i in $(seq 0 $((${#files_array[@]} - 1))); do
+            echo "File $i: ${!FILE_$i}"
+          done
 
       - name: (Backend) Lint Changed Files
         run: |

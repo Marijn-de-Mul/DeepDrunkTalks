@@ -89,7 +89,7 @@ namespace DDT.Backend.API.Controllers
             }
             catch (InvalidCredentialsException ex)
             {
-                _logger.LogError($"Authentication failed for email: {request.Email}. Exception: {ex.Message}", ex);
+                _logger.LogError($"Auth failed for email: {request.Email}. Exception: {ex.Message}", ex);
                 return Unauthorized(new { Message = ex.Message });
             }
             catch (UserNotFoundException ex)

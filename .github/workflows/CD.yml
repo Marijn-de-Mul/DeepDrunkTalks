@@ -15,10 +15,10 @@ jobs:
       - name: (Github) Checkout Code
         uses: actions/checkout@v4
 
-      # - name: (SSH) Set up SSH keys
-      #   uses: webfactory/ssh-agent@v0.5.3
-      #   with:
-      #     ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+      - name: (SSH) Set up SSH keys
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
       # - name: (Docker) SSH into VPS and Deploy Production Environment
       #   run: |

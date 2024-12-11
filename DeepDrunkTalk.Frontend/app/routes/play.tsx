@@ -18,11 +18,11 @@ export default function Play() {
     const navigate = useNavigate();
 
     useEffect(() => {
+        if (typeof window === "undefined") return; 
+
         const startConversationOnLoad = async () => {
-            console.info("App loaded. Checking if conversation should start.");
             if (!hasStartedRef.current) {
                 hasStartedRef.current = true;
-                console.info("Starting conversation...");
                 await startConversation();
             }
         };
@@ -30,30 +30,23 @@ export default function Play() {
         startConversationOnLoad();
 
         const handleBeforeUnload = () => {
-            console.info("App unloading. Stopping conversation.");
             stopConversation();
         };
 
         window.addEventListener("beforeunload", handleBeforeUnload);
 
         return () => {
-            console.info("Cleaning up event listeners and stopping conversation.");
             window.removeEventListener("beforeunload", handleBeforeUnload);
             stopConversation();
         };
     }, []);
 
     async function startConversation() {
-        console.info("startConversation: Invoked.");
-        if (conversationInProgressRef.current) {
-            console.info("startConversation: Conversation already in progress. Skipping.");
-            return;
-        }
-    
+        if (conversationInProgressRef.current || typeof window === "undefined") return;
+
         const token = localStorage.getItem("authToken");
-    
+
         try {
-            console.info("startConversation: Making API request to start conversation.");
             const response = await fetch(`https://localhost:7108/api/conversations`, {
                 method: "POST",
                 headers: {
@@ -61,45 +54,37 @@ export default function Play() {
                     Authorization: `Bearer ${token}`,
                 },
             });
-    
+
             if (response.ok) {
                 conversationInProgressRef.current = true;
-                console.info("startConversation: Conversation started successfully.");
-    
+
                 const questionData = await response.json();
                 setQuestion(questionData.question);
-                
-                const conversationId = questionData.conversationId; 
-                localStorage.setItem("conversationId", conversationId); 
-                
-                await startRecording(); 
+                localStorage.setItem("conversationId", questionData.conversationId);
+
+                await startRecording();
             } else {
-                console.error("startConversation: Failed to start conversation.", response.status);
+                console.error("Failed to start conversation", response.status);
             }
         } catch (error) {
-            console.error("startConversation: Error while starting conversation:", error);
+            console.error("Error starting conversation", error);
         }
     }
 
     async function stopConversation() {
-        console.info("stopConversation: Invoked.");
-        if (!conversationInProgressRef.current) {
-            console.info("stopConversation: No conversation in progress. Skipping.");
-            return;
-        }
-    
+        if (!conversationInProgressRef.current || typeof window === "undefined") return;
+
         const token = localStorage.getItem("authToken");
-        const conversationId = localStorage.getItem("conversationId"); 
-    
+        const conversationId = localStorage.getItem("conversationId");
+
         if (!token || !conversationId) {
-            console.error("stopConversation: Missing token, userId, or conversationId.");
+            console.error("Missing token or conversationId");
             return;
         }
-    
-        stopRecording(); 
-    
+
+        stopRecording();
+
         try {
-            console.info("stopConversation: Making API request to stop conversation.");
             const response = await fetch(`https://localhost:7108/api/conversations/${conversationId}/stop`, {
                 method: "PUT",
                 headers: {
@@ -107,108 +92,86 @@ export default function Play() {
                     Authorization: `Bearer ${token}`,
                 },
             });
-    
+
             if (response.ok) {
                 conversationInProgressRef.current = false;
-                console.info("stopConversation: Conversation stopped successfully.");
             } else {
-                console.error("stopConversation: Failed to stop conversation.", response.status);
+                console.error("Failed to stop conversation", response.status);
             }
         } catch (error) {
-            console.error("stopConversation: Error while stopping conversation:", error);
+            console.error("Error stopping conversation", error);
         }
     }
-    
-
 
     async function nextQuestion() {
-        console.info("nextQuestion: Invoked.");
-        if (!conversationInProgressRef.current) {
-            console.info("nextQuestion: No active conversation. Skipping.");
-            return;
-        }
+        if (!conversationInProgressRef.current) return;
 
         setIsNextQuestionDisabled(true);
-
-        console.info("nextQuestion: Stopping current conversation.");
         await stopConversation();
-
-        console.info("nextQuestion: Starting new conversation.");
         await startConversation();
-
         setIsNextQuestionDisabled(false);
     }
 
     async function startRecording() {
-        console.info("startRecording: Invoked.");
+        if (typeof navigator === "undefined" || typeof navigator.mediaDevices === "undefined") return;
+
         try {
             const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-            mediaRecorder = new MediaRecorder(stream, { mimeType: 'audio/webm;codecs=opus' });
+            mediaRecorder = new MediaRecorder(stream, { mimeType: "audio/webm;codecs=opus" });
 
             mediaRecorder.ondataavailable = (event: BlobEvent) => {
                 if (event.data.size > 0) {
-                    console.info("startRecording: Capturing audio chunk.");
                     recordedChunks.push(event.data);
                 }
             };
 
             mediaRecorder.onstop = () => {
-                console.info("startRecording: Recording stopped.");
-                const blob = new Blob(recordedChunks, { type: 'audio/webm' });
+                const blob = new Blob(recordedChunks, { type: "audio/webm" });
                 sendAudioChunk(blob);
                 recordedChunks = [];
             };
 
             mediaRecorder.start(1000);
             setIsRecording(true);
-
-            console.info("startRecording: Recording started.");
         } catch (error) {
-            console.error("startRecording: Error accessing microphone:", error);
+            console.error("Error accessing microphone", error);
         }
     }
 
     function stopRecording() {
-        console.info("stopRecording: Invoked.");
         if (mediaRecorder) {
             mediaRecorder.stop();
             setIsRecording(false);
-            console.info("stopRecording: Recording stopped.");
-        } else {
-            console.error("stopRecording: MediaRecorder is not defined.");
         }
     }
 
     async function sendAudioChunk(audioBlob: Blob) {
-        console.info("sendAudioChunk: Sending audio chunk.");
+        if (typeof window === "undefined") return;
 
         const conversationId = localStorage.getItem("conversationId");
         const token = localStorage.getItem("authToken");
 
         try {
             const formData = new FormData();
-            formData.append('audio', audioBlob, 'audio.webm');
+            formData.append("audio", audioBlob, "audio.webm");
 
             const response = await fetch(`https://localhost:7108/api/conversations/${conversationId}/audio`, {
                 method: "POST",
                 headers: {
-                    "Authorization": `Bearer ${token}`,
+                    Authorization: `Bearer ${token}`,
                 },
                 body: formData,
             });
 
-            if (response.ok) {
-                console.info("sendAudioChunk: Audio chunk sent successfully.");
-            } else {
-                console.error("sendAudioChunk: Failed to send audio chunk.", response.status);
+            if (!response.ok) {
+                console.error("Failed to send audio chunk", response.status);
             }
         } catch (error) {
-            console.error("sendAudioChunk: Error sending audio chunk:", error);
+            console.error("Error sending audio chunk", error);
         }
     }
 
     function handleBackToMainMenu() {
-        console.info("handleBackToMainMenu: Navigating back to main menu.");
         stopConversation();
         navigate("/");
     }
@@ -224,6 +187,7 @@ export default function Play() {
     return (
         <ProtectedRoute>
             <Box
+                data-testid="play-logo-container"
                 style={{
                     display: "flex",
                     justifyContent: "center",
@@ -232,6 +196,7 @@ export default function Play() {
                 }}
             >
                 <Image
+                    data-testid="play-logo"
                     src={logo}
                     style={{
                         maxWidth: "70vw",
@@ -242,6 +207,7 @@ export default function Play() {
             </Box>
 
             <Box
+                data-testid="play-question-container"
                 style={{
                     display: "flex",
                     justifyContent: "center",
@@ -250,6 +216,7 @@ export default function Play() {
                 }}
             >
                 <Box
+                    data-testid="play-question-box"
                     style={{
                         height: "10em",
                         display: "flex",
@@ -260,6 +227,7 @@ export default function Play() {
                     }}
                 >
                     <Text
+                        data-testid="play-question-text"
                         style={{
                             fontSize: calculateFontSize(question.length),
                             fontWeight: "800",
@@ -271,12 +239,11 @@ export default function Play() {
                 </Box>
 
                 <Button
+                    data-testid="play-next-question-button"
                     variant="filled"
                     color="black"
                     size="xl"
-                    style={{
-                        marginTop: "3vh",
-                    }}
+                    style={{ marginTop: "3vh" }}
                     onClick={nextQuestion}
                     disabled={isNextQuestionDisabled || !conversationInProgressRef.current}
                 >
@@ -284,11 +251,9 @@ export default function Play() {
                 </Button>
 
                 <Button
+                    data-testid="play-back-to-main-menu-button"
                     color="red"
-                    style={{
-                        marginTop: "3vh",
-                        height: "5vh",
-                    }}
+                    style={{ marginTop: "3vh", height: "5vh" }}
                     onClick={handleBackToMainMenu}
                 >
                     BACK TO MAIN MENU
@@ -296,13 +261,13 @@ export default function Play() {
             </Box>
 
             <Divider
+                data-testid="play-divider"
                 color="black"
-                style={{
-                    marginTop: "9.2vh",
-                }}
+                style={{ marginTop: "9.2vh" }}
             />
 
             <Box
+                data-testid="play-footer"
                 style={{
                     display: "flex",
                     justifyContent: "center",
@@ -310,10 +275,8 @@ export default function Play() {
                 }}
             >
                 <Text
-                    style={{
-                        marginTop: "2vh",
-                        fontStyle: "italic",
-                    }}
+                    data-testid="play-footer-text"
+                    style={{ marginTop: "2vh", fontStyle: "italic" }}
                 >
                     DeepDrunkTalks - 2024 ©
                 </Text>

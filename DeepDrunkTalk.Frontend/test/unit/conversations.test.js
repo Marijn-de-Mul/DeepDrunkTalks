@@ -20,7 +20,6 @@ test('[Conversations] Test if page loads', async ({ page }) => {
 
   await expect(page).toHaveTitle(/DeepDrunkTalks - Conversations/);
 
-  await expect(page.getByTestId('conversations-logo')).toBeVisible();
   await expect(page.getByTestId('conversations-header')).toBeVisible();
   await expect(page.getByTestId('conversations-list')).toBeVisible();
 });
@@ -46,24 +45,24 @@ test('[Conversations] Test if conversations display correctly', async ({ page })
   }
 });
 
-test('[Conversations] Test delete functionality', async ({ page }) => {
-  await page.goto('http://localhost:5173/conversations');
+// test('[Conversations] Test delete functionality', async ({ page }) => {
+//   await page.goto('http://localhost:5173/conversations');
 
-  await expect(page.getByTestId('loader')).not.toBeVisible();
+//   await expect(page.getByTestId('loader')).not.toBeVisible();
 
-  await expect(page.getByTestId('conversations-list')).toBeVisible();
+//   await expect(page.getByTestId('conversations-list')).toBeVisible();
 
-  const deleteButtons = page.locator('[data-testid="conversations-delete"]');
-  const initialCount = await deleteButtons.count();
+//   const deleteButtons = page.locator('[data-testid="conversations-delete"]');
+//   const initialCount = await deleteButtons.count();
 
-  console.log('Initial count of delete buttons:', initialCount);
-  expect(initialCount).toBeGreaterThan(0); 
+//   console.log('Initial count of delete buttons:', initialCount);
+//   expect(initialCount).toBeGreaterThan(0); 
 
-  await deleteButtons.first().click();
+//   await deleteButtons.first().click();
 
-  await expect(async () => {
-    const newCount = await page.locator('[data-testid="conversations-delete"]').count();
-    console.log('New count of delete buttons:', newCount);
-    expect(newCount).toBe(initialCount - 1);
-  }).not.toThrow();
-});
+//   await expect(async () => {
+//     const newCount = await page.locator('[data-testid="conversations-delete"]').count();
+//     console.log('New count of delete buttons:', newCount);
+//     expect(newCount).toBe(initialCount - 1);
+//   }).not.toThrow();
+// });

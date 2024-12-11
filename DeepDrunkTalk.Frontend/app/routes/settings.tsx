@@ -1,22 +1,30 @@
 import React, { useState, useEffect } from "react";
 import { Button, Divider, Image, Box, Text, Slider, Tooltip } from "@mantine/core";
 import { FaInfoCircle } from "react-icons/fa";
-import { Link } from "@remix-run/react";
+import { Link, MetaFunction } from "@remix-run/react";
 
 import ProtectedRoute from "~/components/layouts/ProtectedRoute";
 import logo from "~/assets/img/logo.png";
+import Loading from "~/components/Loading";
+
+export const meta: MetaFunction = () => {
+  return [
+    { title: "DeepDrunkTalks - Settings" },
+    { name: "description", content: "Welcome to DeepDrunkTalks" },
+  ];
+};
 
 export default function Settings() {
   const [volume, setVolume] = useState<number>(50);
   const [refreshFrequency, setRefreshFrequency] = useState<number>(5);
-  const [loading, setLoading] = useState<boolean>(true); 
+  const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   const fetchSettings = async () => {
     try {
       const authToken = localStorage.getItem("authToken");
       if (!authToken) throw new Error("No auth token found");
-
+      
       setLoading(true);
       setError(null);
 
@@ -30,13 +38,17 @@ export default function Settings() {
       if (!response.ok) throw new Error("Failed to fetch settings");
 
       const data = await response.json();
-      setVolume(data.volumeLevel || 50); 
-      setRefreshFrequency(data.refreshFrequency || 5); 
-    } catch (error: any) {
-      console.error("Error fetching settings:", error);
-      setError(error.message || "Failed to fetch settings");
+      setVolume(data.volumeLevel ?? 50);
+      setRefreshFrequency(data.refreshFrequency ?? 5);
+    } catch (err) {
+      const message = err instanceof Error ? err.message : "Failed to fetch settings";
+      console.error("Error fetching settings:", err);
+      setError(message);
     } finally {
-      setLoading(false);
+
+      setTimeout(() => {
+        setLoading(false);
+      }, 800);
     }
   };
 
@@ -55,16 +67,17 @@ export default function Settings() {
         },
         body: JSON.stringify({
           volumeLevel: volume,
-          refreshFrequency: refreshFrequency,
+          refreshFrequency,
         }),
       });
 
       if (!response.ok) throw new Error("Failed to save settings");
 
       console.log("Settings saved successfully");
-    } catch (error: any) {
-      console.error("Error saving settings:", error);
-      setError(error.message || "Failed to save settings");
+    } catch (err) {
+      const message = err instanceof Error ? err.message : "Failed to save settings";
+      console.error("Error saving settings:", err);
+      setError(message);
     }
   };
 
@@ -75,6 +88,7 @@ export default function Settings() {
   if (loading) {
     return (
       <Box
+        data-testid="setting-loading-state"
         style={{
           display: "flex",
           justifyContent: "center",
@@ -82,24 +96,7 @@ export default function Settings() {
           height: "100vh",
         }}
       >
-        <Text>Loading settings...</Text>
-      </Box>
-    );
-  }
-
-  if (error) {
-    return (
-      <Box
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          flexDirection: "column",
-          height: "100vh",
-        }}
-      >
-        <Text style={{ color: "red" }}>Error: {error}</Text>
-        <Button onClick={fetchSettings}>Retry</Button>
+        <Loading/>
       </Box>
     );
   }
@@ -117,6 +114,7 @@ export default function Settings() {
         >
           <Image
             src={logo}
+            data-testid="setting-app-logo"
             style={{
               maxWidth: "70vw",
               width: "auto",
@@ -136,6 +134,7 @@ export default function Settings() {
           }}
         >
           <Text
+            data-testid="setting-title"
             style={{
               margin: "3vh",
               marginBottom: "1vh",
@@ -157,6 +156,7 @@ export default function Settings() {
             }}
           >
             <Text
+              data-testid="setting-volume-label"
               style={{
                 marginBottom: "1vh",
                 fontSize: "1.2em",
@@ -171,8 +171,13 @@ export default function Settings() {
               min={0}
               max={100}
               step={1}
+              label={`${volume}%`}
+              data-testid="setting-volume-slider"
             />
-            <Text style={{ marginTop: "1vh", fontSize: "1em" }}>
+            <Text
+              style={{ marginTop: "1vh", fontSize: "1em" }}
+              data-testid="setting-volume-value"
+            >
               {`Current Volume: ${volume}%`}
             </Text>
           </Box>
@@ -186,6 +191,7 @@ export default function Settings() {
             }}
           >
             <Text
+              data-testid="setting-refresh-label"
               style={{
                 marginBottom: "1vh",
                 fontSize: "1.2em",
@@ -199,6 +205,7 @@ export default function Settings() {
                 label="This controls how frequently the system checks for updates."
                 position="top"
                 withArrow
+                data-testid="setting-refresh-tooltip"
               >
                 <span style={{ marginLeft: "5px", cursor: "pointer" }}>
                   <FaInfoCircle size={18} />
@@ -212,10 +219,14 @@ export default function Settings() {
               min={1}
               max={10}
               step={1}
-              style={{ width: "100%" }}
+              label={`${refreshFrequency} min`}
+              data-testid="setting-refresh-slider"
             />
 
-            <Text style={{ marginTop: "1vh", fontSize: "1em" }}>
+            <Text
+              style={{ marginTop: "1vh", fontSize: "1em" }}
+              data-testid="setting-refresh-value"
+            >
               {`Current Refresh Frequency: ${refreshFrequency} minutes`}
             </Text>
           </Box>
@@ -227,6 +238,7 @@ export default function Settings() {
               height: "5vh",
             }}
             onClick={saveSettings}
+            data-testid="setting-save-settings-button"
           >
             SAVE SETTINGS
           </Button>
@@ -238,6 +250,7 @@ export default function Settings() {
                 marginTop: "0.5vh",
                 height: "5vh",
               }}
+              data-testid="setting-back-to-menu-button"
             >
               BACK TO MAIN MENU
             </Button>
@@ -247,7 +260,7 @@ export default function Settings() {
         <Divider
           color="black"
           style={{
-            marginTop: "0.8vh",
+            marginTop: "3vh",
           }}
         />
 
@@ -263,6 +276,7 @@ export default function Settings() {
               marginTop: "2vh",
               fontStyle: "italic",
             }}
+            data-testid="setting-footer-text"
           >
             DeepDrunkTalks - 2024 ©
           </Text>

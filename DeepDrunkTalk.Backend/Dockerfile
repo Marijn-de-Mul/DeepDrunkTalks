@@ -25,7 +25,7 @@ COPY DDT.Backend.UTL/ DDT.Backend.UTL/
 RUN dotnet restore "DeepDrunkTalks.Backend.sln"
 
 # Set the working directory to the API project directory
-WORKDIR /app/DDT.Backend.API
+WORKDIR /app
 
 # Build the project
 RUN dotnet build "DeepDrunkTalks.Backend.sln" -c Release -o /app/build

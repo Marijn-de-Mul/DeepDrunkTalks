@@ -67,7 +67,7 @@ export default function ProtectedRoute({ children }: any) {
           height: '100vh', 
         }}
       >
-        <Loader color="rgba(0, 0, 0, 1)" size="xl" />
+        <Loader color="rgba(0, 0, 0, 1)" size="xl" type="dots" /> 
       </Box>
     );
   }

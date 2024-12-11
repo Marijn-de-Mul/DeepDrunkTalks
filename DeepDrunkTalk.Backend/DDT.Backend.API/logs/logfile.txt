@@ -403,3 +403,1538 @@ INFO | 2024-12-11 10:00:24 | Attempting to get user by email: test@test.nl
 INFO | 2024-12-11 10:00:24 | Successfully retrieved user with email: test@test.nl
 INFO | 2024-12-11 10:00:24 | User login successful for email: test@test.nl
 INFO | 2024-12-11 10:00:24 | User test@test.nl logged in successfully
+INFO | 2024-12-11 12:27:24 | Login attempt for email: invalid@example.com
+INFO | 2024-12-11 12:27:24 | Starting user login for email: invalid@example.com
+INFO | 2024-12-11 12:27:24 | Attempting to get user by email: invalid@example.com
+INFO | 2024-12-11 12:27:26 | Successfully retrieved user with email: invalid@example.com
+WARN | 2024-12-11 12:27:26 | Login failed: User not found for email: invalid@example.com
+ERROR | 2024-12-11 12:27:26 | An unexpected error occurred during login for email: invalid@example.com | Exception: Invalid Credentials. | StackTrace:    at DDT.Backend.BLL.Services.AuthService.LoginUser(LoginRequest request) in E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\Services\Auth\AuthService.cs:line 113
+ERROR | 2024-12-11 12:27:26 | User not found for email: invalid@example.com. Exception: Invalid Credentials. | Exception: Invalid Credentials. | StackTrace:    at DDT.Backend.BLL.Services.AuthService.LoginUser(LoginRequest request) in E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\Services\Auth\AuthService.cs:line 113
+   at DDT.Backend.API.Controllers.UserController.Login(LoginRequest request) in E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.API\Controllers\UserController.cs:line 84
+INFO | 2024-12-11 12:27:28 | Login attempt for email: test@test.nl
+INFO | 2024-12-11 12:27:28 | Starting user login for email: test@test.nl
+INFO | 2024-12-11 12:27:28 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-11 12:27:28 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-11 12:27:30 | User login successful for email: test@test.nl
+INFO | 2024-12-11 12:27:30 | User test@test.nl logged in successfully
+INFO | 2024-12-11 12:27:33 | Register method called with request: DDT.Backend.Common.Models.Authentication.RegisterRequest
+INFO | 2024-12-11 12:27:34 | Starting user registration for email: newuser@example.com
+INFO | 2024-12-11 12:27:34 | Attempting to get user by email: newuser@example.com
+INFO | 2024-12-11 12:27:34 | Successfully retrieved user with email: newuser@example.com
+INFO | 2024-12-11 12:27:35 | Attempting to add user with email: newuser@example.com
+INFO | 2024-12-11 12:27:35 | Checking if user exists with UserId: 0
+INFO | 2024-12-11 12:27:35 | User exists check result for UserId 0: False
+INFO | 2024-12-11 12:27:35 | Successfully added user with email: newuser@example.com
+INFO | 2024-12-11 12:27:35 | User registration successful for email: newuser@example.com
+INFO | 2024-12-11 12:27:35 | JWT token generated successfully for email: newuser@example.com
+INFO | 2024-12-11 12:38:22 | Login attempt for email: test@test.nl
+INFO | 2024-12-11 12:38:22 | Starting user login for email: test@test.nl
+INFO | 2024-12-11 12:38:22 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-11 12:38:22 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-11 12:38:23 | User login successful for email: test@test.nl
+INFO | 2024-12-11 12:38:23 | User test@test.nl logged in successfully
+INFO | 2024-12-11 12:38:25 | Token validated for user ID: 2
+INFO | 2024-12-11 12:38:25 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:38:25 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:38:32 | Token validated for user ID: 2
+INFO | 2024-12-11 12:38:32 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:38:32 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:38:39 | Token validated for user ID: 2
+INFO | 2024-12-11 12:38:39 | Token validated for user ID: 2
+INFO | 2024-12-11 12:38:39 | Token validated for user ID: 2
+INFO | 2024-12-11 12:38:39 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:38:39 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:38:39 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:38:39 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:38:39 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:38:41 | Token validated for user ID: 2
+INFO | 2024-12-11 12:38:41 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:38:41 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:38:41 | Token validated for user ID: 2
+INFO | 2024-12-11 12:38:41 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:38:41 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:38:46 | Token validated for user ID: 2
+INFO | 2024-12-11 12:38:46 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:38:46 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:38:46 | Token validated for user ID: 2
+INFO | 2024-12-11 12:38:46 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:38:46 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:39:30 | Token validated for user ID: 2
+INFO | 2024-12-11 12:39:30 | Token validated for user ID: 2
+INFO | 2024-12-11 12:39:30 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:39:30 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:39:30 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:39:30 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:39:30 | Token validated for user ID: 2
+INFO | 2024-12-11 12:39:30 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:39:30 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:40:25 | Token validated for user ID: 2
+INFO | 2024-12-11 12:40:25 | Token validated for user ID: 2
+INFO | 2024-12-11 12:40:25 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:40:25 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:40:25 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:40:25 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:40:25 | Token validated for user ID: 2
+INFO | 2024-12-11 12:40:25 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:40:25 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:40:29 | Token validated for user ID: 2
+INFO | 2024-12-11 12:40:29 | Token validated for user ID: 2
+INFO | 2024-12-11 12:40:29 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:40:29 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:40:29 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:40:29 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:40:29 | Token validated for user ID: 2
+INFO | 2024-12-11 12:40:29 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:40:29 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:40:30 | Token validated for user ID: 2
+INFO | 2024-12-11 12:40:30 | Token validated for user ID: 2
+INFO | 2024-12-11 12:40:30 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:40:30 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:40:30 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:40:30 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:40:30 | Token validated for user ID: 2
+INFO | 2024-12-11 12:40:30 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:40:30 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:40:32 | Token validated for user ID: 2
+INFO | 2024-12-11 12:40:32 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:40:32 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:40:32 | Token validated for user ID: 2
+INFO | 2024-12-11 12:40:32 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:40:32 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:40:35 | Token validated for user ID: 2
+INFO | 2024-12-11 12:40:35 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:40:35 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:40:35 | Token validated for user ID: 2
+INFO | 2024-12-11 12:40:35 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:40:35 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:40:37 | Token validated for user ID: 2
+INFO | 2024-12-11 12:40:37 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:40:37 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:40:37 | Token validated for user ID: 2
+INFO | 2024-12-11 12:40:37 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:40:37 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:40:38 | Token validated for user ID: 2
+INFO | 2024-12-11 12:40:38 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:40:38 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:40:38 | Token validated for user ID: 2
+INFO | 2024-12-11 12:40:38 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:40:38 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:40:40 | Token validated for user ID: 2
+INFO | 2024-12-11 12:40:40 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:40:40 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:40:40 | Token validated for user ID: 2
+INFO | 2024-12-11 12:40:40 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:40:40 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:43:37 | Token validated for user ID: 2
+INFO | 2024-12-11 12:43:37 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:43:37 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:43:37 | Token validated for user ID: 2
+INFO | 2024-12-11 12:43:37 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:43:37 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:43:43 | Token validated for user ID: 2
+INFO | 2024-12-11 12:43:43 | Token validated for user ID: 2
+INFO | 2024-12-11 12:43:43 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:43:43 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:43:43 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:43:43 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:43:43 | Token validated for user ID: 2
+INFO | 2024-12-11 12:43:43 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:43:43 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:43:50 | Token validated for user ID: 2
+INFO | 2024-12-11 12:43:50 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:43:50 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:43:50 | Token validated for user ID: 2
+INFO | 2024-12-11 12:43:50 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:43:50 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:43:52 | Token validated for user ID: 2
+INFO | 2024-12-11 12:43:52 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:43:52 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:43:52 | Token validated for user ID: 2
+INFO | 2024-12-11 12:43:52 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:43:52 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:43:54 | Token validated for user ID: 2
+INFO | 2024-12-11 12:43:54 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:43:54 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:43:54 | Token validated for user ID: 2
+INFO | 2024-12-11 12:43:54 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:43:54 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:44:18 | Token validated for user ID: 2
+INFO | 2024-12-11 12:44:18 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:44:18 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:44:18 | Token validated for user ID: 2
+INFO | 2024-12-11 12:44:18 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:44:18 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:44:25 | Token validated for user ID: 2
+INFO | 2024-12-11 12:44:25 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:44:25 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:44:25 | Token validated for user ID: 2
+INFO | 2024-12-11 12:44:25 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:44:25 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:44:27 | Token validated for user ID: 2
+INFO | 2024-12-11 12:44:27 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:44:27 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:44:27 | Token validated for user ID: 2
+INFO | 2024-12-11 12:44:27 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:44:27 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:44:48 | Login attempt for email: test@test.nl
+INFO | 2024-12-11 12:44:48 | Starting user login for email: test@test.nl
+INFO | 2024-12-11 12:44:48 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-11 12:44:48 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-11 12:44:49 | User login successful for email: test@test.nl
+INFO | 2024-12-11 12:44:49 | User test@test.nl logged in successfully
+INFO | 2024-12-11 12:44:54 | Token validated for user ID: 2
+INFO | 2024-12-11 12:44:54 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:44:54 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:44:54 | Token validated for user ID: 2
+INFO | 2024-12-11 12:44:54 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:44:54 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:48:49 | Login attempt for email: test@test.nl
+INFO | 2024-12-11 12:48:49 | Starting user login for email: test@test.nl
+INFO | 2024-12-11 12:48:49 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-11 12:48:49 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-11 12:48:50 | User login successful for email: test@test.nl
+INFO | 2024-12-11 12:48:50 | User test@test.nl logged in successfully
+INFO | 2024-12-11 12:48:58 | Login attempt for email: test@test.nl
+INFO | 2024-12-11 12:48:58 | Starting user login for email: test@test.nl
+INFO | 2024-12-11 12:48:58 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-11 12:48:58 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-11 12:49:00 | User login successful for email: test@test.nl
+INFO | 2024-12-11 12:49:00 | User test@test.nl logged in successfully
+INFO | 2024-12-11 12:49:08 | Login attempt for email: test@test.nl
+INFO | 2024-12-11 12:49:08 | Starting user login for email: test@test.nl
+INFO | 2024-12-11 12:49:08 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-11 12:49:08 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-11 12:49:09 | User login successful for email: test@test.nl
+INFO | 2024-12-11 12:49:09 | User test@test.nl logged in successfully
+INFO | 2024-12-11 12:49:16 | Login attempt for email: test@test.nl
+INFO | 2024-12-11 12:49:16 | Starting user login for email: test@test.nl
+INFO | 2024-12-11 12:49:16 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-11 12:49:16 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-11 12:49:17 | User login successful for email: test@test.nl
+INFO | 2024-12-11 12:49:17 | User test@test.nl logged in successfully
+INFO | 2024-12-11 12:49:20 | Login attempt for email: test@test.nl
+INFO | 2024-12-11 12:49:20 | Starting user login for email: test@test.nl
+INFO | 2024-12-11 12:49:20 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-11 12:49:20 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-11 12:49:21 | User login successful for email: test@test.nl
+INFO | 2024-12-11 12:49:21 | User test@test.nl logged in successfully
+INFO | 2024-12-11 12:51:06 | Login attempt for email: test@test.nl
+INFO | 2024-12-11 12:51:06 | Starting user login for email: test@test.nl
+INFO | 2024-12-11 12:51:06 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-11 12:51:06 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-11 12:51:07 | User login successful for email: test@test.nl
+INFO | 2024-12-11 12:51:07 | User test@test.nl logged in successfully
+INFO | 2024-12-11 12:51:08 | Token validated for user ID: 2
+INFO | 2024-12-11 12:51:08 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:51:08 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:51:08 | Token validated for user ID: 2
+INFO | 2024-12-11 12:51:08 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:51:08 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:51:16 | Login attempt for email: test@test.nl
+INFO | 2024-12-11 12:51:16 | Starting user login for email: test@test.nl
+INFO | 2024-12-11 12:51:16 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-11 12:51:16 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-11 12:51:17 | User login successful for email: test@test.nl
+INFO | 2024-12-11 12:51:17 | User test@test.nl logged in successfully
+INFO | 2024-12-11 12:51:18 | Token validated for user ID: 2
+INFO | 2024-12-11 12:51:18 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:51:18 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:51:18 | Token validated for user ID: 2
+INFO | 2024-12-11 12:51:18 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:51:18 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:51:27 | Login attempt for email: test@test.nl
+INFO | 2024-12-11 12:51:27 | Starting user login for email: test@test.nl
+INFO | 2024-12-11 12:51:27 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-11 12:51:27 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-11 12:51:28 | User login successful for email: test@test.nl
+INFO | 2024-12-11 12:51:28 | User test@test.nl logged in successfully
+INFO | 2024-12-11 12:51:28 | Token validated for user ID: 2
+INFO | 2024-12-11 12:51:28 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:51:28 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:51:28 | Token validated for user ID: 2
+INFO | 2024-12-11 12:51:28 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:51:28 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:51:36 | Login attempt for email: test@test.nl
+INFO | 2024-12-11 12:51:36 | Starting user login for email: test@test.nl
+INFO | 2024-12-11 12:51:36 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-11 12:51:36 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-11 12:51:37 | User login successful for email: test@test.nl
+INFO | 2024-12-11 12:51:37 | User test@test.nl logged in successfully
+INFO | 2024-12-11 12:51:38 | Token validated for user ID: 2
+INFO | 2024-12-11 12:51:38 | Token validated for user ID: 2
+INFO | 2024-12-11 12:51:38 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:51:38 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:51:38 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:51:38 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:51:38 | Token validated for user ID: 2
+INFO | 2024-12-11 12:51:38 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:51:38 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:51:38 | Token validated for user ID: 2
+INFO | 2024-12-11 12:51:38 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:51:38 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:51:38 | Token validated for user ID: 2
+INFO | 2024-12-11 12:51:38 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:51:38 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:51:41 | Login attempt for email: test@test.nl
+INFO | 2024-12-11 12:51:41 | Starting user login for email: test@test.nl
+INFO | 2024-12-11 12:51:41 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-11 12:51:41 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-11 12:51:42 | User login successful for email: test@test.nl
+INFO | 2024-12-11 12:51:42 | User test@test.nl logged in successfully
+INFO | 2024-12-11 12:51:43 | Token validated for user ID: 2
+INFO | 2024-12-11 12:51:43 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:51:43 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:51:43 | Token validated for user ID: 2
+INFO | 2024-12-11 12:51:43 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:51:43 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:51:45 | Token validated for user ID: 2
+INFO | 2024-12-11 12:51:45 | Token validated for user ID: 2
+INFO | 2024-12-11 12:51:45 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:51:45 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:51:45 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:51:45 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:51:45 | Token validated for user ID: 2
+INFO | 2024-12-11 12:51:45 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:51:45 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:51:45 | Token validated for user ID: 2
+INFO | 2024-12-11 12:51:45 | Token validated for user ID: 2
+INFO | 2024-12-11 12:51:45 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:51:45 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:51:45 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:51:45 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:51:46 | Token validated for user ID: 2
+INFO | 2024-12-11 12:51:46 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:51:46 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:51:46 | Token validated for user ID: 2
+INFO | 2024-12-11 12:51:46 | Token validated for user ID: 2
+INFO | 2024-12-11 12:51:46 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:51:46 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:51:46 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:51:46 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:51:46 | Token validated for user ID: 2
+INFO | 2024-12-11 12:51:46 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:51:46 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:51:46 | Token validated for user ID: 2
+INFO | 2024-12-11 12:51:46 | Token validated for user ID: 2
+INFO | 2024-12-11 12:51:46 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:51:46 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:51:46 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:51:46 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:51:46 | Token validated for user ID: 2
+INFO | 2024-12-11 12:51:46 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:51:46 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:51:51 | Token validated for user ID: 2
+INFO | 2024-12-11 12:51:51 | Token validated for user ID: 2
+INFO | 2024-12-11 12:51:51 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:51:51 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:51:51 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:51:51 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:51:51 | Token validated for user ID: 2
+INFO | 2024-12-11 12:51:51 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:51:51 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:51:58 | Login attempt for email: test@test.nl
+INFO | 2024-12-11 12:51:58 | Starting user login for email: test@test.nl
+INFO | 2024-12-11 12:51:58 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-11 12:51:58 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-11 12:52:00 | User login successful for email: test@test.nl
+INFO | 2024-12-11 12:52:00 | User test@test.nl logged in successfully
+INFO | 2024-12-11 12:52:01 | Login attempt for email: invalid@example.com
+INFO | 2024-12-11 12:52:01 | Starting user login for email: invalid@example.com
+INFO | 2024-12-11 12:52:01 | Attempting to get user by email: invalid@example.com
+INFO | 2024-12-11 12:52:01 | Successfully retrieved user with email: invalid@example.com
+WARN | 2024-12-11 12:52:01 | Login failed: User not found for email: invalid@example.com
+ERROR | 2024-12-11 12:52:01 | An unexpected error occurred during login for email: invalid@example.com | Exception: Invalid Credentials. | StackTrace:    at DDT.Backend.BLL.Services.AuthService.LoginUser(LoginRequest request) in E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\Services\Auth\AuthService.cs:line 113
+ERROR | 2024-12-11 12:52:01 | User not found for email: invalid@example.com. Exception: Invalid Credentials. | Exception: Invalid Credentials. | StackTrace:    at DDT.Backend.BLL.Services.AuthService.LoginUser(LoginRequest request) in E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\Services\Auth\AuthService.cs:line 113
+   at DDT.Backend.API.Controllers.UserController.Login(LoginRequest request) in E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.API\Controllers\UserController.cs:line 84
+INFO | 2024-12-11 12:52:01 | Token validated for user ID: 2
+INFO | 2024-12-11 12:52:01 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:52:01 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:52:01 | Token validated for user ID: 2
+INFO | 2024-12-11 12:52:01 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:52:01 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:52:04 | Login attempt for email: test@test.nl
+INFO | 2024-12-11 12:52:04 | Starting user login for email: test@test.nl
+INFO | 2024-12-11 12:52:04 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-11 12:52:04 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-11 12:52:05 | Register method called with request: DDT.Backend.Common.Models.Authentication.RegisterRequest
+INFO | 2024-12-11 12:52:05 | Starting user registration for email: newuser@example.com
+INFO | 2024-12-11 12:52:05 | Attempting to get user by email: newuser@example.com
+INFO | 2024-12-11 12:52:05 | Successfully retrieved user with email: newuser@example.com
+INFO | 2024-12-11 12:52:05 | Checking if user exists with UserId: 3
+INFO | 2024-12-11 12:52:05 | User exists check result for UserId 3: True
+WARN | 2024-12-11 12:52:05 | Registration failed: User already exists for email: newuser@example.com
+ERROR | 2024-12-11 12:52:05 | An unexpected error occurred during registration for email: newuser@example.com | Exception: User already exists. | StackTrace:    at DDT.Backend.BLL.Services.AuthService.RegisterUser(RegisterRequest request) in E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\Services\Auth\AuthService.cs:line 47
+ERROR | 2024-12-11 12:52:05 | Error in Register method: User already exists., StackTrace:    at DDT.Backend.BLL.Services.AuthService.RegisterUser(RegisterRequest request) in E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\Services\Auth\AuthService.cs:line 47
+   at DDT.Backend.API.Controllers.UserController.Register(RegisterRequest request) in E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.API\Controllers\UserController.cs:line 44 | Exception: User already exists. | StackTrace:    at DDT.Backend.BLL.Services.AuthService.RegisterUser(RegisterRequest request) in E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\Services\Auth\AuthService.cs:line 47
+   at DDT.Backend.API.Controllers.UserController.Register(RegisterRequest request) in E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.API\Controllers\UserController.cs:line 44
+INFO | 2024-12-11 12:52:05 | User login successful for email: test@test.nl
+INFO | 2024-12-11 12:52:05 | User test@test.nl logged in successfully
+INFO | 2024-12-11 12:52:10 | Login attempt for email: test@test.nl
+INFO | 2024-12-11 12:52:10 | Starting user login for email: test@test.nl
+INFO | 2024-12-11 12:52:10 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-11 12:52:10 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-11 12:52:11 | User login successful for email: test@test.nl
+INFO | 2024-12-11 12:52:11 | User test@test.nl logged in successfully
+INFO | 2024-12-11 12:52:12 | Token validated for user ID: 2
+INFO | 2024-12-11 12:52:12 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:52:12 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:52:12 | Token validated for user ID: 2
+INFO | 2024-12-11 12:52:12 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:52:12 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:52:20 | Login attempt for email: test@test.nl
+INFO | 2024-12-11 12:52:20 | Starting user login for email: test@test.nl
+INFO | 2024-12-11 12:52:20 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-11 12:52:20 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-11 12:52:21 | User login successful for email: test@test.nl
+INFO | 2024-12-11 12:52:21 | User test@test.nl logged in successfully
+INFO | 2024-12-11 12:52:21 | Token validated for user ID: 2
+INFO | 2024-12-11 12:52:21 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:52:21 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:52:21 | Token validated for user ID: 2
+INFO | 2024-12-11 12:52:21 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:52:21 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:52:29 | Login attempt for email: test@test.nl
+INFO | 2024-12-11 12:52:29 | Starting user login for email: test@test.nl
+INFO | 2024-12-11 12:52:29 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-11 12:52:29 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-11 12:52:30 | User login successful for email: test@test.nl
+INFO | 2024-12-11 12:52:30 | User test@test.nl logged in successfully
+INFO | 2024-12-11 12:52:30 | Token validated for user ID: 2
+INFO | 2024-12-11 12:52:30 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:52:30 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:52:30 | Token validated for user ID: 2
+INFO | 2024-12-11 12:52:30 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:52:30 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:52:34 | Login attempt for email: test@test.nl
+INFO | 2024-12-11 12:52:34 | Starting user login for email: test@test.nl
+INFO | 2024-12-11 12:52:34 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-11 12:52:34 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-11 12:52:35 | User login successful for email: test@test.nl
+INFO | 2024-12-11 12:52:35 | User test@test.nl logged in successfully
+INFO | 2024-12-11 12:52:35 | Token validated for user ID: 2
+INFO | 2024-12-11 12:52:35 | Token validated for user ID: 2
+INFO | 2024-12-11 12:52:35 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:52:35 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:52:35 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:52:35 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:52:35 | Token validated for user ID: 2
+INFO | 2024-12-11 12:52:35 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:52:35 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:52:35 | Token validated for user ID: 2
+INFO | 2024-12-11 12:52:35 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:52:35 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:52:36 | Token validated for user ID: 2
+INFO | 2024-12-11 12:52:36 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:52:36 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:52:45 | Login attempt for email: test@test.nl
+INFO | 2024-12-11 12:52:45 | Starting user login for email: test@test.nl
+INFO | 2024-12-11 12:52:45 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-11 12:52:45 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-11 12:52:46 | User login successful for email: test@test.nl
+INFO | 2024-12-11 12:52:46 | User test@test.nl logged in successfully
+INFO | 2024-12-11 12:52:47 | Token validated for user ID: 2
+INFO | 2024-12-11 12:52:47 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:52:47 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:52:47 | Token validated for user ID: 2
+INFO | 2024-12-11 12:52:47 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:52:47 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:53:00 | Login attempt for email: test@test.nl
+INFO | 2024-12-11 12:53:00 | Starting user login for email: test@test.nl
+INFO | 2024-12-11 12:53:00 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-11 12:53:00 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-11 12:53:01 | User login successful for email: test@test.nl
+INFO | 2024-12-11 12:53:01 | User test@test.nl logged in successfully
+INFO | 2024-12-11 12:53:02 | Token validated for user ID: 2
+INFO | 2024-12-11 12:53:02 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:53:02 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:53:02 | Token validated for user ID: 2
+INFO | 2024-12-11 12:53:02 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:53:02 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:54:05 | Login attempt for email: test@test.nl
+INFO | 2024-12-11 12:54:05 | Starting user login for email: test@test.nl
+INFO | 2024-12-11 12:54:05 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-11 12:54:05 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-11 12:54:06 | User login successful for email: test@test.nl
+INFO | 2024-12-11 12:54:06 | User test@test.nl logged in successfully
+INFO | 2024-12-11 12:54:07 | Login attempt for email: invalid@example.com
+INFO | 2024-12-11 12:54:07 | Starting user login for email: invalid@example.com
+INFO | 2024-12-11 12:54:07 | Attempting to get user by email: invalid@example.com
+INFO | 2024-12-11 12:54:07 | Successfully retrieved user with email: invalid@example.com
+WARN | 2024-12-11 12:54:07 | Login failed: User not found for email: invalid@example.com
+ERROR | 2024-12-11 12:54:07 | An unexpected error occurred during login for email: invalid@example.com | Exception: Invalid Credentials. | StackTrace:    at DDT.Backend.BLL.Services.AuthService.LoginUser(LoginRequest request) in E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\Services\Auth\AuthService.cs:line 113
+ERROR | 2024-12-11 12:54:07 | User not found for email: invalid@example.com. Exception: Invalid Credentials. | Exception: Invalid Credentials. | StackTrace:    at DDT.Backend.BLL.Services.AuthService.LoginUser(LoginRequest request) in E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\Services\Auth\AuthService.cs:line 113
+   at DDT.Backend.API.Controllers.UserController.Login(LoginRequest request) in E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.API\Controllers\UserController.cs:line 84
+INFO | 2024-12-11 12:54:07 | Token validated for user ID: 2
+INFO | 2024-12-11 12:54:07 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:54:07 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:54:07 | Token validated for user ID: 2
+INFO | 2024-12-11 12:54:07 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:54:07 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:54:09 | Login attempt for email: test@test.nl
+INFO | 2024-12-11 12:54:09 | Starting user login for email: test@test.nl
+INFO | 2024-12-11 12:54:09 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-11 12:54:09 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-11 12:54:10 | Login attempt for email: test@test.nl
+INFO | 2024-12-11 12:54:10 | Starting user login for email: test@test.nl
+INFO | 2024-12-11 12:54:10 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-11 12:54:10 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-11 12:54:10 | User login successful for email: test@test.nl
+INFO | 2024-12-11 12:54:10 | User test@test.nl logged in successfully
+INFO | 2024-12-11 12:54:11 | Register method called with request: DDT.Backend.Common.Models.Authentication.RegisterRequest
+INFO | 2024-12-11 12:54:11 | Starting user registration for email: newuser@example.com
+INFO | 2024-12-11 12:54:11 | Attempting to get user by email: newuser@example.com
+INFO | 2024-12-11 12:54:11 | Successfully retrieved user with email: newuser@example.com
+INFO | 2024-12-11 12:54:11 | Checking if user exists with UserId: 3
+INFO | 2024-12-11 12:54:11 | User exists check result for UserId 3: True
+WARN | 2024-12-11 12:54:11 | Registration failed: User already exists for email: newuser@example.com
+ERROR | 2024-12-11 12:54:11 | An unexpected error occurred during registration for email: newuser@example.com | Exception: User already exists. | StackTrace:    at DDT.Backend.BLL.Services.AuthService.RegisterUser(RegisterRequest request) in E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\Services\Auth\AuthService.cs:line 47
+ERROR | 2024-12-11 12:54:11 | Error in Register method: User already exists., StackTrace:    at DDT.Backend.BLL.Services.AuthService.RegisterUser(RegisterRequest request) in E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\Services\Auth\AuthService.cs:line 47
+   at DDT.Backend.API.Controllers.UserController.Register(RegisterRequest request) in E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.API\Controllers\UserController.cs:line 44 | Exception: User already exists. | StackTrace:    at DDT.Backend.BLL.Services.AuthService.RegisterUser(RegisterRequest request) in E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\Services\Auth\AuthService.cs:line 47
+   at DDT.Backend.API.Controllers.UserController.Register(RegisterRequest request) in E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.API\Controllers\UserController.cs:line 44
+INFO | 2024-12-11 12:54:11 | User login successful for email: test@test.nl
+INFO | 2024-12-11 12:54:11 | User test@test.nl logged in successfully
+INFO | 2024-12-11 12:54:12 | Token validated for user ID: 2
+INFO | 2024-12-11 12:54:12 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:54:12 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:54:12 | Token validated for user ID: 2
+INFO | 2024-12-11 12:54:12 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:54:12 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:54:21 | Login attempt for email: test@test.nl
+INFO | 2024-12-11 12:54:21 | Starting user login for email: test@test.nl
+INFO | 2024-12-11 12:54:21 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-11 12:54:21 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-11 12:54:22 | User login successful for email: test@test.nl
+INFO | 2024-12-11 12:54:22 | User test@test.nl logged in successfully
+INFO | 2024-12-11 12:54:23 | Token validated for user ID: 2
+INFO | 2024-12-11 12:54:23 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:54:23 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:54:23 | Token validated for user ID: 2
+INFO | 2024-12-11 12:54:23 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:54:23 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:54:31 | Login attempt for email: test@test.nl
+INFO | 2024-12-11 12:54:31 | Starting user login for email: test@test.nl
+INFO | 2024-12-11 12:54:31 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-11 12:54:31 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-11 12:54:32 | User login successful for email: test@test.nl
+INFO | 2024-12-11 12:54:32 | User test@test.nl logged in successfully
+INFO | 2024-12-11 12:54:33 | Token validated for user ID: 2
+INFO | 2024-12-11 12:54:33 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:54:33 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:54:33 | Token validated for user ID: 2
+INFO | 2024-12-11 12:54:33 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:54:33 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:54:36 | Login attempt for email: test@test.nl
+INFO | 2024-12-11 12:54:36 | Starting user login for email: test@test.nl
+INFO | 2024-12-11 12:54:36 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-11 12:54:36 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-11 12:54:37 | User login successful for email: test@test.nl
+INFO | 2024-12-11 12:54:37 | User test@test.nl logged in successfully
+INFO | 2024-12-11 12:54:37 | Token validated for user ID: 2
+INFO | 2024-12-11 12:54:37 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:54:37 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:54:37 | Token validated for user ID: 2
+INFO | 2024-12-11 12:54:37 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:54:37 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:54:51 | Login attempt for email: test@test.nl
+INFO | 2024-12-11 12:54:51 | Starting user login for email: test@test.nl
+INFO | 2024-12-11 12:54:51 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-11 12:54:51 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-11 12:54:52 | User login successful for email: test@test.nl
+INFO | 2024-12-11 12:54:52 | User test@test.nl logged in successfully
+INFO | 2024-12-11 12:54:52 | Token validated for user ID: 2
+INFO | 2024-12-11 12:54:52 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:54:52 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:54:52 | Token validated for user ID: 2
+INFO | 2024-12-11 12:54:52 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:54:52 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:56:27 | Login attempt for email: test@test.nl
+INFO | 2024-12-11 12:56:27 | Starting user login for email: test@test.nl
+INFO | 2024-12-11 12:56:27 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-11 12:56:28 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-11 12:56:28 | User login successful for email: test@test.nl
+INFO | 2024-12-11 12:56:28 | User test@test.nl logged in successfully
+INFO | 2024-12-11 12:56:29 | Token validated for user ID: 2
+INFO | 2024-12-11 12:56:29 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:56:29 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:56:29 | Token validated for user ID: 2
+INFO | 2024-12-11 12:56:29 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:56:29 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:57:00 | Login attempt for email: test@test.nl
+INFO | 2024-12-11 12:57:00 | Starting user login for email: test@test.nl
+INFO | 2024-12-11 12:57:00 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-11 12:57:00 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-11 12:57:01 | User login successful for email: test@test.nl
+INFO | 2024-12-11 12:57:01 | User test@test.nl logged in successfully
+INFO | 2024-12-11 12:57:02 | Token validated for user ID: 2
+INFO | 2024-12-11 12:57:02 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:57:02 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:57:02 | Token validated for user ID: 2
+INFO | 2024-12-11 12:57:02 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:57:02 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:57:45 | Token validated for user ID: 2
+INFO | 2024-12-11 12:57:45 | Token validated for user ID: 2
+INFO | 2024-12-11 12:57:45 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:57:45 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:57:45 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:57:45 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:57:45 | Token validated for user ID: 2
+INFO | 2024-12-11 12:57:45 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:57:45 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:57:51 | Login attempt for email: test@test.nl
+INFO | 2024-12-11 12:57:51 | Starting user login for email: test@test.nl
+INFO | 2024-12-11 12:57:51 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-11 12:57:51 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-11 12:57:52 | User login successful for email: test@test.nl
+INFO | 2024-12-11 12:57:52 | User test@test.nl logged in successfully
+INFO | 2024-12-11 12:57:52 | Token validated for user ID: 2
+INFO | 2024-12-11 12:57:52 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:57:52 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:57:52 | Token validated for user ID: 2
+INFO | 2024-12-11 12:57:52 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:57:52 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:58:01 | Token validated for user ID: 2
+INFO | 2024-12-11 12:58:01 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:58:01 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:58:01 | Token validated for user ID: 2
+INFO | 2024-12-11 12:58:01 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:58:01 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:58:25 | Token validated for user ID: 2
+INFO | 2024-12-11 12:58:25 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:58:25 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 12:58:25 | Token validated for user ID: 2
+INFO | 2024-12-11 12:58:25 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 12:58:25 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:02:38 | Login attempt for email: test@test.nl
+INFO | 2024-12-11 13:02:38 | Starting user login for email: test@test.nl
+INFO | 2024-12-11 13:02:38 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-11 13:02:38 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-11 13:02:39 | User login successful for email: test@test.nl
+INFO | 2024-12-11 13:02:39 | User test@test.nl logged in successfully
+INFO | 2024-12-11 13:02:39 | Token validated for user ID: 2
+INFO | 2024-12-11 13:02:39 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:02:39 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:02:39 | Token validated for user ID: 2
+INFO | 2024-12-11 13:02:39 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:02:39 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:02:42 | Login attempt for email: test@test.nl
+INFO | 2024-12-11 13:02:42 | Starting user login for email: test@test.nl
+INFO | 2024-12-11 13:02:42 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-11 13:02:42 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-11 13:02:43 | User login successful for email: test@test.nl
+INFO | 2024-12-11 13:02:43 | User test@test.nl logged in successfully
+INFO | 2024-12-11 13:02:43 | Token validated for user ID: 2
+INFO | 2024-12-11 13:02:43 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:02:43 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:02:43 | Token validated for user ID: 2
+INFO | 2024-12-11 13:02:43 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:02:43 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:02:51 | Login attempt for email: test@test.nl
+INFO | 2024-12-11 13:02:51 | Starting user login for email: test@test.nl
+INFO | 2024-12-11 13:02:51 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-11 13:02:51 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-11 13:02:52 | User login successful for email: test@test.nl
+INFO | 2024-12-11 13:02:52 | User test@test.nl logged in successfully
+INFO | 2024-12-11 13:02:53 | Token validated for user ID: 2
+INFO | 2024-12-11 13:02:53 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:02:53 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:02:53 | Token validated for user ID: 2
+INFO | 2024-12-11 13:02:53 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:02:53 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:02:53 | Token validated for user ID: 2
+INFO | 2024-12-11 13:02:53 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:02:53 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:02:56 | Login attempt for email: test@test.nl
+INFO | 2024-12-11 13:02:56 | Starting user login for email: test@test.nl
+INFO | 2024-12-11 13:02:56 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-11 13:02:56 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-11 13:02:57 | User login successful for email: test@test.nl
+INFO | 2024-12-11 13:02:57 | User test@test.nl logged in successfully
+INFO | 2024-12-11 13:02:57 | Token validated for user ID: 2
+INFO | 2024-12-11 13:02:57 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:02:57 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:04:23 | Token validated for user ID: 2
+INFO | 2024-12-11 13:04:23 | Token validated for user ID: 2
+INFO | 2024-12-11 13:04:23 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:04:23 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:04:23 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:04:23 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:04:27 | Token validated for user ID: 2
+INFO | 2024-12-11 13:04:27 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:04:27 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:05:04 | Token validated for user ID: 2
+INFO | 2024-12-11 13:05:04 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:05:04 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:05:05 | Token validated for user ID: 2
+INFO | 2024-12-11 13:05:05 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:05:05 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:05:06 | Token validated for user ID: 2
+INFO | 2024-12-11 13:05:06 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:05:06 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:05:07 | Token validated for user ID: 2
+INFO | 2024-12-11 13:05:07 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:05:07 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:05:08 | Token validated for user ID: 2
+INFO | 2024-12-11 13:05:08 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:05:08 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:05:09 | Token validated for user ID: 2
+INFO | 2024-12-11 13:05:09 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:05:09 | Successfully retrieved user with UserId: 2
+ERROR | 2024-12-11 13:05:21 | Missing token: Authorization token is required. | Exception: Authorization token is required. | StackTrace: 
+ERROR | 2024-12-11 13:05:21 | Missing token: Authorization token is required. | Exception: Authorization token is required. | StackTrace: 
+INFO | 2024-12-11 13:05:30 | Token validated for user ID: 2
+INFO | 2024-12-11 13:05:30 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:05:30 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:05:39 | Token validated for user ID: 2
+INFO | 2024-12-11 13:05:39 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:05:39 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:05:42 | Token validated for user ID: 2
+INFO | 2024-12-11 13:05:42 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:05:42 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:05:42 | Token validated for user ID: 2
+INFO | 2024-12-11 13:05:42 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:05:42 | Token validated for user ID: 2
+INFO | 2024-12-11 13:05:42 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:05:42 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:05:42 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:05:45 | Token validated for user ID: 2
+INFO | 2024-12-11 13:05:45 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:05:45 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:05:45 | Token validated for user ID: 2
+INFO | 2024-12-11 13:05:45 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:05:45 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:05:45 | Token validated for user ID: 2
+INFO | 2024-12-11 13:05:45 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:05:45 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:05:49 | Token validated for user ID: 2
+INFO | 2024-12-11 13:05:49 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:05:49 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:05:49 | Token validated for user ID: 2
+INFO | 2024-12-11 13:05:49 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:05:49 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:05:49 | Token validated for user ID: 2
+INFO | 2024-12-11 13:05:49 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:05:49 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:05:51 | Token validated for user ID: 2
+INFO | 2024-12-11 13:05:51 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:05:51 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:05:51 | Token validated for user ID: 2
+INFO | 2024-12-11 13:05:51 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:05:51 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:05:51 | Token validated for user ID: 2
+INFO | 2024-12-11 13:05:51 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:05:51 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:05:52 | Token validated for user ID: 2
+INFO | 2024-12-11 13:05:52 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:05:52 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:05:52 | Token validated for user ID: 2
+INFO | 2024-12-11 13:05:52 | Token validated for user ID: 2
+INFO | 2024-12-11 13:05:52 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:05:52 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:05:52 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:05:53 | Token validated for user ID: 2
+INFO | 2024-12-11 13:05:53 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:05:53 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:05:55 | Token validated for user ID: 2
+INFO | 2024-12-11 13:05:55 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:05:55 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:05:55 | Token validated for user ID: 2
+INFO | 2024-12-11 13:05:55 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:05:55 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:05:55 | Token validated for user ID: 2
+INFO | 2024-12-11 13:05:55 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:05:55 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:05:55 | Token validated for user ID: 2
+INFO | 2024-12-11 13:05:55 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:05:55 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:05:55 | Token validated for user ID: 2
+INFO | 2024-12-11 13:05:55 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:05:55 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:06:04 | Login attempt for email: test@test.nl
+INFO | 2024-12-11 13:06:04 | Starting user login for email: test@test.nl
+INFO | 2024-12-11 13:06:04 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-11 13:06:04 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-11 13:06:05 | User login successful for email: test@test.nl
+INFO | 2024-12-11 13:06:05 | User test@test.nl logged in successfully
+INFO | 2024-12-11 13:06:05 | Token validated for user ID: 2
+INFO | 2024-12-11 13:06:05 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:06:05 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:06:06 | Login attempt for email: invalid@example.com
+INFO | 2024-12-11 13:06:06 | Starting user login for email: invalid@example.com
+INFO | 2024-12-11 13:06:06 | Attempting to get user by email: invalid@example.com
+INFO | 2024-12-11 13:06:06 | Successfully retrieved user with email: invalid@example.com
+WARN | 2024-12-11 13:06:06 | Login failed: User not found for email: invalid@example.com
+ERROR | 2024-12-11 13:06:06 | An unexpected error occurred during login for email: invalid@example.com | Exception: Invalid Credentials. | StackTrace:    at DDT.Backend.BLL.Services.AuthService.LoginUser(LoginRequest request) in E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\Services\Auth\AuthService.cs:line 113
+ERROR | 2024-12-11 13:06:06 | User not found for email: invalid@example.com. Exception: Invalid Credentials. | Exception: Invalid Credentials. | StackTrace:    at DDT.Backend.BLL.Services.AuthService.LoginUser(LoginRequest request) in E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\Services\Auth\AuthService.cs:line 113
+   at DDT.Backend.API.Controllers.UserController.Login(LoginRequest request) in E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.API\Controllers\UserController.cs:line 84
+INFO | 2024-12-11 13:06:07 | Token validated for user ID: 2
+INFO | 2024-12-11 13:06:07 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:06:07 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:06:08 | Token validated for user ID: 2
+INFO | 2024-12-11 13:06:08 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:06:08 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:06:08 | Token validated for user ID: 2
+INFO | 2024-12-11 13:06:08 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:06:08 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:06:08 | Token validated for user ID: 2
+INFO | 2024-12-11 13:06:08 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:06:08 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:06:08 | Token validated for user ID: 2
+INFO | 2024-12-11 13:06:08 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:06:08 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:06:09 | Login attempt for email: test@test.nl
+INFO | 2024-12-11 13:06:09 | Starting user login for email: test@test.nl
+INFO | 2024-12-11 13:06:09 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-11 13:06:09 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-11 13:06:10 | User login successful for email: test@test.nl
+INFO | 2024-12-11 13:06:10 | User test@test.nl logged in successfully
+INFO | 2024-12-11 13:06:10 | Register method called with request: DDT.Backend.Common.Models.Authentication.RegisterRequest
+INFO | 2024-12-11 13:06:10 | Starting user registration for email: newuser@example.com
+INFO | 2024-12-11 13:06:10 | Attempting to get user by email: newuser@example.com
+INFO | 2024-12-11 13:06:10 | Successfully retrieved user with email: newuser@example.com
+INFO | 2024-12-11 13:06:10 | Checking if user exists with UserId: 3
+INFO | 2024-12-11 13:06:10 | User exists check result for UserId 3: True
+WARN | 2024-12-11 13:06:10 | Registration failed: User already exists for email: newuser@example.com
+ERROR | 2024-12-11 13:06:10 | An unexpected error occurred during registration for email: newuser@example.com | Exception: User already exists. | StackTrace:    at DDT.Backend.BLL.Services.AuthService.RegisterUser(RegisterRequest request) in E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\Services\Auth\AuthService.cs:line 47
+ERROR | 2024-12-11 13:06:10 | Error in Register method: User already exists., StackTrace:    at DDT.Backend.BLL.Services.AuthService.RegisterUser(RegisterRequest request) in E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\Services\Auth\AuthService.cs:line 47
+   at DDT.Backend.API.Controllers.UserController.Register(RegisterRequest request) in E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.API\Controllers\UserController.cs:line 44 | Exception: User already exists. | StackTrace:    at DDT.Backend.BLL.Services.AuthService.RegisterUser(RegisterRequest request) in E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\Services\Auth\AuthService.cs:line 47
+   at DDT.Backend.API.Controllers.UserController.Register(RegisterRequest request) in E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.API\Controllers\UserController.cs:line 44
+INFO | 2024-12-11 13:06:12 | Login attempt for email: test@test.nl
+INFO | 2024-12-11 13:06:12 | Starting user login for email: test@test.nl
+INFO | 2024-12-11 13:06:12 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-11 13:06:12 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-11 13:06:12 | User login successful for email: test@test.nl
+INFO | 2024-12-11 13:06:12 | User test@test.nl logged in successfully
+INFO | 2024-12-11 13:06:13 | Token validated for user ID: 2
+INFO | 2024-12-11 13:06:13 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:06:13 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:06:15 | Token validated for user ID: 2
+INFO | 2024-12-11 13:06:15 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:06:15 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:06:15 | Token validated for user ID: 2
+INFO | 2024-12-11 13:06:15 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:06:15 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:06:15 | Token validated for user ID: 2
+INFO | 2024-12-11 13:06:15 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:06:15 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:06:15 | Token validated for user ID: 2
+INFO | 2024-12-11 13:06:15 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:06:15 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:06:15 | Token validated for user ID: 2
+INFO | 2024-12-11 13:06:15 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:06:15 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:06:18 | Login attempt for email: test@test.nl
+INFO | 2024-12-11 13:06:18 | Starting user login for email: test@test.nl
+INFO | 2024-12-11 13:06:18 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-11 13:06:18 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-11 13:06:18 | User login successful for email: test@test.nl
+INFO | 2024-12-11 13:06:18 | User test@test.nl logged in successfully
+INFO | 2024-12-11 13:06:19 | Token validated for user ID: 2
+INFO | 2024-12-11 13:06:19 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:06:19 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:06:21 | Token validated for user ID: 2
+INFO | 2024-12-11 13:06:21 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:06:21 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:06:21 | Token validated for user ID: 2
+INFO | 2024-12-11 13:06:21 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:06:21 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:06:21 | Token validated for user ID: 2
+INFO | 2024-12-11 13:06:21 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:06:21 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:06:21 | Token validated for user ID: 2
+INFO | 2024-12-11 13:06:21 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:06:21 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:06:21 | Token validated for user ID: 2
+INFO | 2024-12-11 13:06:21 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:06:21 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:06:22 | Token validated for user ID: 2
+INFO | 2024-12-11 13:06:22 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:06:22 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:06:22 | Token validated for user ID: 2
+INFO | 2024-12-11 13:06:22 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:06:22 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:06:22 | Token validated for user ID: 2
+INFO | 2024-12-11 13:06:22 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:06:22 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:06:22 | Token validated for user ID: 2
+INFO | 2024-12-11 13:06:22 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:06:22 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:06:22 | Token validated for user ID: 2
+INFO | 2024-12-11 13:06:22 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:06:22 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:06:24 | Login attempt for email: test@test.nl
+INFO | 2024-12-11 13:06:24 | Starting user login for email: test@test.nl
+INFO | 2024-12-11 13:06:24 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-11 13:06:24 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-11 13:06:25 | User login successful for email: test@test.nl
+INFO | 2024-12-11 13:06:25 | User test@test.nl logged in successfully
+INFO | 2024-12-11 13:06:26 | Token validated for user ID: 2
+INFO | 2024-12-11 13:06:26 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:06:26 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:06:28 | Token validated for user ID: 2
+INFO | 2024-12-11 13:06:28 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:06:28 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:06:28 | Token validated for user ID: 2
+INFO | 2024-12-11 13:06:28 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:06:28 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:06:28 | Token validated for user ID: 2
+INFO | 2024-12-11 13:06:28 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:06:28 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:06:28 | Token validated for user ID: 2
+INFO | 2024-12-11 13:06:28 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:06:28 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:07:17 | Login attempt for email: test@test.nl
+INFO | 2024-12-11 13:07:17 | Starting user login for email: test@test.nl
+INFO | 2024-12-11 13:07:17 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-11 13:07:17 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-11 13:07:18 | User login successful for email: test@test.nl
+INFO | 2024-12-11 13:07:18 | User test@test.nl logged in successfully
+INFO | 2024-12-11 13:07:18 | Token validated for user ID: 2
+INFO | 2024-12-11 13:07:18 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:07:18 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:07:20 | Token validated for user ID: 2
+INFO | 2024-12-11 13:07:20 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:07:20 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:07:21 | Token validated for user ID: 2
+INFO | 2024-12-11 13:07:21 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:07:21 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:07:21 | Token validated for user ID: 2
+INFO | 2024-12-11 13:07:21 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:07:21 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:07:21 | Token validated for user ID: 2
+INFO | 2024-12-11 13:07:21 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:07:21 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:07:49 | Token validated for user ID: 2
+INFO | 2024-12-11 13:07:49 | Token validated for user ID: 2
+INFO | 2024-12-11 13:07:49 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:07:49 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:07:49 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:07:49 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:07:49 | Token validated for user ID: 2
+INFO | 2024-12-11 13:07:49 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:07:49 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:07:49 | Token validated for user ID: 2
+INFO | 2024-12-11 13:07:49 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:07:49 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:07:49 | Token validated for user ID: 2
+INFO | 2024-12-11 13:07:49 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:07:49 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:07:49 | Token validated for user ID: 2
+INFO | 2024-12-11 13:07:49 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:07:49 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:07:50 | Token validated for user ID: 2
+INFO | 2024-12-11 13:07:50 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:07:50 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:07:50 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:07:50 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:07:50 | Token validated for user ID: 2
+INFO | 2024-12-11 13:07:50 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:07:50 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:07:50 | Token validated for user ID: 2
+INFO | 2024-12-11 13:07:50 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:07:50 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:07:50 | Token validated for user ID: 2
+INFO | 2024-12-11 13:07:50 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:07:50 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:07:50 | Token validated for user ID: 2
+INFO | 2024-12-11 13:07:50 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:07:50 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:07:52 | Token validated for user ID: 2
+INFO | 2024-12-11 13:07:52 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:07:52 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:07:52 | Token validated for user ID: 2
+INFO | 2024-12-11 13:07:52 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:07:52 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:07:52 | Token validated for user ID: 2
+INFO | 2024-12-11 13:07:52 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:07:52 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:07:52 | Token validated for user ID: 2
+INFO | 2024-12-11 13:07:52 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:07:52 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:07:53 | Token validated for user ID: 2
+INFO | 2024-12-11 13:07:53 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:07:53 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:07:53 | Token validated for user ID: 2
+INFO | 2024-12-11 13:07:53 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:07:53 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:07:53 | Token validated for user ID: 2
+INFO | 2024-12-11 13:07:53 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:07:53 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:07:53 | Token validated for user ID: 2
+INFO | 2024-12-11 13:07:53 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:07:53 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:09:25 | Login attempt for email: test@test.nl
+INFO | 2024-12-11 13:09:25 | Starting user login for email: test@test.nl
+INFO | 2024-12-11 13:09:25 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-11 13:09:26 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-11 13:09:26 | User login successful for email: test@test.nl
+INFO | 2024-12-11 13:09:26 | User test@test.nl logged in successfully
+INFO | 2024-12-11 13:09:27 | Token validated for user ID: 2
+INFO | 2024-12-11 13:09:27 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:09:27 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:09:27 | Login attempt for email: invalid@example.com
+INFO | 2024-12-11 13:09:27 | Starting user login for email: invalid@example.com
+INFO | 2024-12-11 13:09:27 | Attempting to get user by email: invalid@example.com
+INFO | 2024-12-11 13:09:27 | Successfully retrieved user with email: invalid@example.com
+WARN | 2024-12-11 13:09:27 | Login failed: User not found for email: invalid@example.com
+ERROR | 2024-12-11 13:09:27 | An unexpected error occurred during login for email: invalid@example.com | Exception: Invalid Credentials. | StackTrace:    at DDT.Backend.BLL.Services.AuthService.LoginUser(LoginRequest request) in E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\Services\Auth\AuthService.cs:line 113
+ERROR | 2024-12-11 13:09:27 | User not found for email: invalid@example.com. Exception: Invalid Credentials. | Exception: Invalid Credentials. | StackTrace:    at DDT.Backend.BLL.Services.AuthService.LoginUser(LoginRequest request) in E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\Services\Auth\AuthService.cs:line 113
+   at DDT.Backend.API.Controllers.UserController.Login(LoginRequest request) in E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.API\Controllers\UserController.cs:line 84
+INFO | 2024-12-11 13:09:29 | Token validated for user ID: 2
+INFO | 2024-12-11 13:09:29 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:09:29 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:09:29 | Token validated for user ID: 2
+INFO | 2024-12-11 13:09:29 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:09:29 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:09:29 | Token validated for user ID: 2
+INFO | 2024-12-11 13:09:29 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:09:29 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:09:29 | Token validated for user ID: 2
+INFO | 2024-12-11 13:09:29 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:09:29 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:09:29 | Login attempt for email: test@test.nl
+INFO | 2024-12-11 13:09:29 | Starting user login for email: test@test.nl
+INFO | 2024-12-11 13:09:29 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-11 13:09:29 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-11 13:09:30 | User login successful for email: test@test.nl
+INFO | 2024-12-11 13:09:30 | User test@test.nl logged in successfully
+INFO | 2024-12-11 13:09:31 | Register method called with request: DDT.Backend.Common.Models.Authentication.RegisterRequest
+INFO | 2024-12-11 13:09:31 | Starting user registration for email: user1733922569782@example.com
+INFO | 2024-12-11 13:09:31 | Attempting to get user by email: user1733922569782@example.com
+INFO | 2024-12-11 13:09:31 | Successfully retrieved user with email: user1733922569782@example.com
+INFO | 2024-12-11 13:09:32 | Attempting to add user with email: user1733922569782@example.com
+INFO | 2024-12-11 13:09:32 | Checking if user exists with UserId: 0
+INFO | 2024-12-11 13:09:32 | User exists check result for UserId 0: False
+INFO | 2024-12-11 13:09:32 | Successfully added user with email: user1733922569782@example.com
+INFO | 2024-12-11 13:09:32 | User registration successful for email: user1733922569782@example.com
+INFO | 2024-12-11 13:09:32 | JWT token generated successfully for email: user1733922569782@example.com
+INFO | 2024-12-11 13:09:32 | Login attempt for email: test@test.nl
+INFO | 2024-12-11 13:09:32 | Starting user login for email: test@test.nl
+INFO | 2024-12-11 13:09:32 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-11 13:09:32 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-11 13:09:33 | User login successful for email: test@test.nl
+INFO | 2024-12-11 13:09:33 | User test@test.nl logged in successfully
+INFO | 2024-12-11 13:09:34 | Token validated for user ID: 2
+INFO | 2024-12-11 13:09:34 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:09:34 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:09:36 | Token validated for user ID: 2
+INFO | 2024-12-11 13:09:36 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:09:36 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:09:36 | Token validated for user ID: 2
+INFO | 2024-12-11 13:09:36 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:09:36 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:09:36 | Token validated for user ID: 2
+INFO | 2024-12-11 13:09:36 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:09:36 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:09:36 | Token validated for user ID: 2
+INFO | 2024-12-11 13:09:36 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:09:36 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:09:40 | Login attempt for email: test@test.nl
+INFO | 2024-12-11 13:09:40 | Starting user login for email: test@test.nl
+INFO | 2024-12-11 13:09:40 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-11 13:09:40 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-11 13:09:41 | User login successful for email: test@test.nl
+INFO | 2024-12-11 13:09:41 | User test@test.nl logged in successfully
+INFO | 2024-12-11 13:09:42 | Token validated for user ID: 2
+INFO | 2024-12-11 13:09:42 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:09:42 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:09:44 | Token validated for user ID: 2
+INFO | 2024-12-11 13:09:44 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:09:44 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:09:44 | Token validated for user ID: 2
+INFO | 2024-12-11 13:09:44 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:09:44 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:09:44 | Token validated for user ID: 2
+INFO | 2024-12-11 13:09:44 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:09:44 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:09:44 | Token validated for user ID: 2
+INFO | 2024-12-11 13:09:44 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:09:44 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:09:44 | Token validated for user ID: 2
+INFO | 2024-12-11 13:09:44 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:09:44 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:09:45 | Token validated for user ID: 2
+INFO | 2024-12-11 13:09:45 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:09:45 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:09:45 | Token validated for user ID: 2
+INFO | 2024-12-11 13:09:45 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:09:45 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:09:45 | Token validated for user ID: 2
+INFO | 2024-12-11 13:09:45 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:09:45 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:11:49 | Token validated for user ID: 2
+INFO | 2024-12-11 13:11:49 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:11:49 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:11:51 | Token validated for user ID: 2
+INFO | 2024-12-11 13:11:51 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:11:51 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:11:51 | Token validated for user ID: 2
+INFO | 2024-12-11 13:11:51 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:11:51 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:11:51 | Token validated for user ID: 2
+INFO | 2024-12-11 13:11:51 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:11:51 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:12:03 | Token validated for user ID: 2
+INFO | 2024-12-11 13:12:03 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:12:03 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:12:05 | Token validated for user ID: 2
+INFO | 2024-12-11 13:12:05 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:12:05 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:12:05 | Token validated for user ID: 2
+INFO | 2024-12-11 13:12:05 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:12:05 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:12:05 | Token validated for user ID: 2
+INFO | 2024-12-11 13:12:05 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:12:05 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:12:09 | Token validated for user ID: 2
+INFO | 2024-12-11 13:12:09 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:12:09 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:12:11 | Token validated for user ID: 2
+INFO | 2024-12-11 13:12:11 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:12:11 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:12:11 | Token validated for user ID: 2
+INFO | 2024-12-11 13:12:11 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:12:11 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:12:11 | Token validated for user ID: 2
+INFO | 2024-12-11 13:12:11 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:12:11 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:12:26 | Token validated for user ID: 2
+INFO | 2024-12-11 13:12:26 | Token validated for user ID: 2
+INFO | 2024-12-11 13:12:26 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:12:26 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:12:26 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:12:26 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:12:26 | Token validated for user ID: 2
+INFO | 2024-12-11 13:12:26 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:12:26 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:12:26 | Token validated for user ID: 2
+INFO | 2024-12-11 13:12:26 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:12:26 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:12:27 | Token validated for user ID: 2
+INFO | 2024-12-11 13:12:27 | Token validated for user ID: 2
+INFO | 2024-12-11 13:12:27 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:12:27 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:12:27 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:12:27 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:12:27 | Token validated for user ID: 2
+INFO | 2024-12-11 13:12:27 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:12:27 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:12:27 | Token validated for user ID: 2
+INFO | 2024-12-11 13:12:27 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:12:27 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:12:28 | Token validated for user ID: 2
+INFO | 2024-12-11 13:12:28 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:12:28 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:12:28 | Token validated for user ID: 2
+INFO | 2024-12-11 13:12:28 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:12:28 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:12:28 | Token validated for user ID: 2
+INFO | 2024-12-11 13:12:28 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:12:28 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:12:29 | Token validated for user ID: 2
+INFO | 2024-12-11 13:12:29 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:12:29 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:12:29 | Token validated for user ID: 2
+INFO | 2024-12-11 13:12:29 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:12:29 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:12:29 | Token validated for user ID: 2
+INFO | 2024-12-11 13:12:29 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:12:29 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:12:35 | Token validated for user ID: 2
+INFO | 2024-12-11 13:12:35 | Token validated for user ID: 2
+INFO | 2024-12-11 13:12:35 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:12:35 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:12:35 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:12:35 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:12:35 | Token validated for user ID: 2
+INFO | 2024-12-11 13:12:35 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:12:35 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:12:35 | Token validated for user ID: 2
+INFO | 2024-12-11 13:12:35 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:12:35 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:12:36 | Token validated for user ID: 2
+INFO | 2024-12-11 13:12:36 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:12:36 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:12:36 | Token validated for user ID: 2
+INFO | 2024-12-11 13:12:36 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:12:36 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:12:36 | Token validated for user ID: 2
+INFO | 2024-12-11 13:12:36 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:12:36 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:12:43 | Token validated for user ID: 2
+INFO | 2024-12-11 13:12:43 | Token validated for user ID: 2
+INFO | 2024-12-11 13:12:43 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:12:43 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:12:43 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:12:43 | Token validated for user ID: 2
+INFO | 2024-12-11 13:12:43 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:12:43 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:12:43 | Token validated for user ID: 2
+INFO | 2024-12-11 13:12:43 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:12:43 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:12:43 | Token validated for user ID: 2
+INFO | 2024-12-11 13:12:43 | Token validated for user ID: 2
+INFO | 2024-12-11 13:12:43 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:12:43 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:12:43 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:12:43 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:12:43 | Token validated for user ID: 2
+INFO | 2024-12-11 13:12:43 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:12:43 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:12:43 | Token validated for user ID: 2
+INFO | 2024-12-11 13:12:43 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:12:43 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:12:44 | Token validated for user ID: 2
+INFO | 2024-12-11 13:12:44 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:12:44 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:12:44 | Token validated for user ID: 2
+INFO | 2024-12-11 13:12:44 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:12:44 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:12:44 | Token validated for user ID: 2
+INFO | 2024-12-11 13:12:44 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:12:44 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:12:45 | Token validated for user ID: 2
+INFO | 2024-12-11 13:12:45 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:12:45 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:12:45 | Token validated for user ID: 2
+INFO | 2024-12-11 13:12:45 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:12:45 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:12:45 | Token validated for user ID: 2
+INFO | 2024-12-11 13:12:45 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:12:45 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:12:50 | Token validated for user ID: 2
+INFO | 2024-12-11 13:12:50 | Token validated for user ID: 2
+INFO | 2024-12-11 13:12:50 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:12:50 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:12:50 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:12:50 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:12:50 | Token validated for user ID: 2
+INFO | 2024-12-11 13:12:50 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:12:50 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:12:50 | Token validated for user ID: 2
+INFO | 2024-12-11 13:12:50 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:12:50 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:12:51 | Token validated for user ID: 2
+INFO | 2024-12-11 13:12:51 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:12:51 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:12:51 | Token validated for user ID: 2
+INFO | 2024-12-11 13:12:51 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:12:51 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:12:51 | Token validated for user ID: 2
+INFO | 2024-12-11 13:12:51 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:12:51 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:13:12 | Token validated for user ID: 2
+INFO | 2024-12-11 13:13:12 | Token validated for user ID: 2
+INFO | 2024-12-11 13:13:12 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:13:12 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:13:12 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:13:12 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:13:12 | Token validated for user ID: 2
+INFO | 2024-12-11 13:13:12 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:13:12 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:13:12 | Token validated for user ID: 2
+INFO | 2024-12-11 13:13:12 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:13:12 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:13:13 | Token validated for user ID: 2
+INFO | 2024-12-11 13:13:13 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:13:13 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:13:13 | Token validated for user ID: 2
+INFO | 2024-12-11 13:13:13 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:13:13 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:13:13 | Token validated for user ID: 2
+INFO | 2024-12-11 13:13:13 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:13:13 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:13:42 | Token validated for user ID: 2
+INFO | 2024-12-11 13:13:42 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:13:42 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:13:42 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:13:42 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:13:42 | Token validated for user ID: 2
+INFO | 2024-12-11 13:13:42 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:13:42 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:13:42 | Token validated for user ID: 2
+INFO | 2024-12-11 13:13:42 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:13:42 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:13:43 | Token validated for user ID: 2
+INFO | 2024-12-11 13:13:43 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:13:43 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:13:43 | Token validated for user ID: 2
+INFO | 2024-12-11 13:13:43 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:13:43 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:13:43 | Token validated for user ID: 2
+INFO | 2024-12-11 13:13:43 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:13:43 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:13:48 | Token validated for user ID: 2
+INFO | 2024-12-11 13:13:48 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:13:48 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:13:48 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:13:48 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:13:48 | Token validated for user ID: 2
+INFO | 2024-12-11 13:13:48 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:13:48 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:13:48 | Token validated for user ID: 2
+INFO | 2024-12-11 13:13:48 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:13:48 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:13:49 | Token validated for user ID: 2
+INFO | 2024-12-11 13:13:49 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:13:49 | Token validated for user ID: 2
+INFO | 2024-12-11 13:13:49 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:13:49 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:13:49 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:13:49 | Token validated for user ID: 2
+INFO | 2024-12-11 13:13:49 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:13:49 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:13:49 | Token validated for user ID: 2
+INFO | 2024-12-11 13:13:49 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:13:49 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:13:49 | Token validated for user ID: 2
+INFO | 2024-12-11 13:13:49 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:13:49 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:13:49 | Token validated for user ID: 2
+INFO | 2024-12-11 13:13:49 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:13:49 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:13:49 | Token validated for user ID: 2
+INFO | 2024-12-11 13:13:49 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:13:49 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:13:50 | Token validated for user ID: 2
+INFO | 2024-12-11 13:13:50 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:13:50 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:13:50 | Token validated for user ID: 2
+INFO | 2024-12-11 13:13:50 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:13:50 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:13:50 | Token validated for user ID: 2
+INFO | 2024-12-11 13:13:50 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:13:50 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:13:55 | Token validated for user ID: 2
+INFO | 2024-12-11 13:13:55 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:13:55 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:13:57 | Token validated for user ID: 2
+INFO | 2024-12-11 13:13:57 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:13:57 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:13:57 | Token validated for user ID: 2
+INFO | 2024-12-11 13:13:57 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:13:57 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:13:57 | Token validated for user ID: 2
+INFO | 2024-12-11 13:13:57 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:13:57 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:14:23 | Token validated for user ID: 2
+INFO | 2024-12-11 13:14:23 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:14:23 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:14:25 | Token validated for user ID: 2
+INFO | 2024-12-11 13:14:25 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:14:25 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:14:25 | Token validated for user ID: 2
+INFO | 2024-12-11 13:14:25 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:14:25 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:14:25 | Token validated for user ID: 2
+INFO | 2024-12-11 13:14:25 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:14:25 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:14:42 | Token validated for user ID: 2
+INFO | 2024-12-11 13:14:42 | Token validated for user ID: 2
+INFO | 2024-12-11 13:14:42 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:14:42 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:14:42 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:14:42 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:14:42 | Token validated for user ID: 2
+INFO | 2024-12-11 13:14:42 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:14:42 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:14:42 | Token validated for user ID: 2
+INFO | 2024-12-11 13:14:42 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:14:42 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:14:43 | Token validated for user ID: 2
+INFO | 2024-12-11 13:14:43 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:14:43 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:14:43 | Token validated for user ID: 2
+INFO | 2024-12-11 13:14:43 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:14:43 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:14:43 | Token validated for user ID: 2
+INFO | 2024-12-11 13:14:43 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:14:43 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:14:49 | Token validated for user ID: 2
+INFO | 2024-12-11 13:14:49 | Token validated for user ID: 2
+INFO | 2024-12-11 13:14:49 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:14:49 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:14:49 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:14:49 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:14:49 | Token validated for user ID: 2
+INFO | 2024-12-11 13:14:49 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:14:49 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:14:49 | Token validated for user ID: 2
+INFO | 2024-12-11 13:14:49 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:14:49 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:14:50 | Token validated for user ID: 2
+INFO | 2024-12-11 13:14:50 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:14:50 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:14:50 | Token validated for user ID: 2
+INFO | 2024-12-11 13:14:50 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:14:50 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:14:50 | Token validated for user ID: 2
+INFO | 2024-12-11 13:14:50 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:14:50 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:15:06 | Token validated for user ID: 2
+INFO | 2024-12-11 13:15:06 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:15:06 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:15:07 | Token validated for user ID: 2
+INFO | 2024-12-11 13:15:07 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:15:07 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:15:07 | Token validated for user ID: 2
+INFO | 2024-12-11 13:15:07 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:15:07 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:15:07 | Token validated for user ID: 2
+INFO | 2024-12-11 13:15:07 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:15:07 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:16:30 | Token validated for user ID: 2
+INFO | 2024-12-11 13:16:30 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:16:30 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:16:31 | Token validated for user ID: 2
+INFO | 2024-12-11 13:16:31 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:16:31 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:16:31 | Token validated for user ID: 2
+INFO | 2024-12-11 13:16:31 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:16:31 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:16:31 | Token validated for user ID: 2
+INFO | 2024-12-11 13:16:31 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:16:31 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:16:45 | Token validated for user ID: 2
+INFO | 2024-12-11 13:16:45 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:16:45 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:16:45 | Token validated for user ID: 2
+INFO | 2024-12-11 13:16:45 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:16:45 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:16:50 | Token validated for user ID: 2
+INFO | 2024-12-11 13:16:50 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:16:50 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:16:51 | Token validated for user ID: 2
+INFO | 2024-12-11 13:16:51 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:16:51 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:16:51 | Token validated for user ID: 2
+INFO | 2024-12-11 13:16:51 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:16:51 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:16:51 | Token validated for user ID: 2
+INFO | 2024-12-11 13:16:51 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:16:51 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:16:57 | Token validated for user ID: 2
+INFO | 2024-12-11 13:16:57 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:16:57 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:16:58 | Token validated for user ID: 2
+INFO | 2024-12-11 13:16:58 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:16:58 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:16:58 | Token validated for user ID: 2
+INFO | 2024-12-11 13:16:58 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:16:58 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:16:58 | Token validated for user ID: 2
+INFO | 2024-12-11 13:16:58 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:16:58 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:17:03 | Token validated for user ID: 2
+INFO | 2024-12-11 13:17:03 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:17:03 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:17:03 | Token validated for user ID: 2
+INFO | 2024-12-11 13:17:03 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:17:03 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:18:48 | Token validated for user ID: 2
+INFO | 2024-12-11 13:18:48 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:18:48 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:18:48 | Token validated for user ID: 2
+INFO | 2024-12-11 13:18:48 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:18:48 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:18:50 | Token validated for user ID: 2
+INFO | 2024-12-11 13:18:50 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:18:50 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:18:50 | Token validated for user ID: 2
+INFO | 2024-12-11 13:18:50 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:18:50 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:18:53 | Token validated for user ID: 2
+INFO | 2024-12-11 13:18:53 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:18:53 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:18:54 | Token validated for user ID: 2
+INFO | 2024-12-11 13:18:54 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:18:54 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:18:54 | Token validated for user ID: 2
+INFO | 2024-12-11 13:18:54 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:18:54 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:18:54 | Token validated for user ID: 2
+INFO | 2024-12-11 13:18:54 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:18:54 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:19:55 | Login attempt for email: test@test.nl
+INFO | 2024-12-11 13:19:55 | Starting user login for email: test@test.nl
+INFO | 2024-12-11 13:19:55 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-11 13:19:55 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-11 13:19:56 | User login successful for email: test@test.nl
+INFO | 2024-12-11 13:19:56 | User test@test.nl logged in successfully
+INFO | 2024-12-11 13:20:05 | Login attempt for email: test@test.nl
+INFO | 2024-12-11 13:20:05 | Starting user login for email: test@test.nl
+INFO | 2024-12-11 13:20:05 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-11 13:20:05 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-11 13:20:06 | User login successful for email: test@test.nl
+INFO | 2024-12-11 13:20:06 | User test@test.nl logged in successfully
+INFO | 2024-12-11 13:20:15 | Login attempt for email: test@test.nl
+INFO | 2024-12-11 13:20:15 | Starting user login for email: test@test.nl
+INFO | 2024-12-11 13:20:15 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-11 13:20:15 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-11 13:20:16 | User login successful for email: test@test.nl
+INFO | 2024-12-11 13:20:16 | User test@test.nl logged in successfully
+INFO | 2024-12-11 13:20:47 | Login attempt for email: test@test.nl
+INFO | 2024-12-11 13:20:47 | Starting user login for email: test@test.nl
+INFO | 2024-12-11 13:20:47 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-11 13:20:47 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-11 13:20:48 | User login successful for email: test@test.nl
+INFO | 2024-12-11 13:20:48 | User test@test.nl logged in successfully
+INFO | 2024-12-11 13:21:13 | Login attempt for email: test@test.nl
+INFO | 2024-12-11 13:21:13 | Starting user login for email: test@test.nl
+INFO | 2024-12-11 13:21:13 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-11 13:21:14 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-11 13:21:14 | User login successful for email: test@test.nl
+INFO | 2024-12-11 13:21:14 | User test@test.nl logged in successfully
+INFO | 2024-12-11 13:22:26 | Login attempt for email: test@test.nl
+INFO | 2024-12-11 13:22:26 | Starting user login for email: test@test.nl
+INFO | 2024-12-11 13:22:26 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-11 13:22:26 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-11 13:22:27 | User login successful for email: test@test.nl
+INFO | 2024-12-11 13:22:27 | User test@test.nl logged in successfully
+INFO | 2024-12-11 13:22:30 | Login attempt for email: test@test.nl
+INFO | 2024-12-11 13:22:30 | Starting user login for email: test@test.nl
+INFO | 2024-12-11 13:22:30 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-11 13:22:30 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-11 13:22:30 | User login successful for email: test@test.nl
+INFO | 2024-12-11 13:22:30 | User test@test.nl logged in successfully
+INFO | 2024-12-11 13:22:33 | Login attempt for email: test@test.nl
+INFO | 2024-12-11 13:22:33 | Starting user login for email: test@test.nl
+INFO | 2024-12-11 13:22:33 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-11 13:22:33 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-11 13:22:34 | User login successful for email: test@test.nl
+INFO | 2024-12-11 13:22:34 | User test@test.nl logged in successfully
+INFO | 2024-12-11 13:22:34 | Token validated for user ID: 2
+INFO | 2024-12-11 13:22:34 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:22:34 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:22:36 | Login attempt for email: test@test.nl
+INFO | 2024-12-11 13:22:36 | Starting user login for email: test@test.nl
+INFO | 2024-12-11 13:22:36 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-11 13:22:36 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-11 13:22:37 | User login successful for email: test@test.nl
+INFO | 2024-12-11 13:22:37 | User test@test.nl logged in successfully
+INFO | 2024-12-11 13:22:38 | Token validated for user ID: 2
+INFO | 2024-12-11 13:22:38 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:22:38 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:22:39 | Login attempt for email: test@test.nl
+INFO | 2024-12-11 13:22:39 | Starting user login for email: test@test.nl
+INFO | 2024-12-11 13:22:39 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-11 13:22:39 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-11 13:22:40 | User login successful for email: test@test.nl
+INFO | 2024-12-11 13:22:40 | User test@test.nl logged in successfully
+INFO | 2024-12-11 13:22:41 | Token validated for user ID: 2
+INFO | 2024-12-11 13:22:41 | Token validated for user ID: 2
+INFO | 2024-12-11 13:22:41 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:22:41 | Attempting to get user by UserId: 2
+INFO | 2024-12-11 13:22:41 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:22:41 | Successfully retrieved user with UserId: 2
+INFO | 2024-12-11 13:22:43 | Login attempt for email: test@test.nl
+INFO | 2024-12-11 13:22:43 | Starting user login for email: test@test.nl
+INFO | 2024-12-11 13:22:43 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-11 13:22:43 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-11 13:22:43 | User login successful for email: test@test.nl
+INFO | 2024-12-11 13:22:43 | User test@test.nl logged in successfully
+INFO | 2024-12-11 13:22:47 | Login attempt for email: test@test.nl
+INFO | 2024-12-11 13:22:47 | Starting user login for email: test@test.nl
+INFO | 2024-12-11 13:22:47 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-11 13:22:47 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-11 13:22:48 | User login successful for email: test@test.nl
+INFO | 2024-12-11 13:22:48 | User test@test.nl logged in successfully

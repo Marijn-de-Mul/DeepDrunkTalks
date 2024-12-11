@@ -1,10 +1,10 @@
-import type { MetaFunction } from "@remix-run/node";
-import { Button, Divider, Image, Box, Text } from '@mantine/core';
+import { Button, Divider, Image, Box, Text, Loader } from '@mantine/core';
 import { useState, useEffect } from 'react';
-import { Link } from '@remix-run/react';
+import { Link, MetaFunction } from '@remix-run/react';
 
 import ProtectedRoute from "~/components/layouts/ProtectedRoute";
 import logo from "~/assets/img/logo.png";
+import Loading from "~/components/Loading";
 
 interface Conversation {
   id: number;
@@ -12,44 +12,67 @@ interface Conversation {
   question: string;
   startTime: string;
   endTime: string;
-  audio: string | null; 
+  audio: string | null;
 }
+
+export const meta: MetaFunction = () => {
+  return [
+    { title: "DeepDrunkTalks - Conversations" },
+    { name: "description", content: "Welcome to DeepDrunkTalks" },
+  ];
+};
 
 export default function Conversations() {
   const [conversations, setConversations] = useState<Conversation[]>([]);
   const [audioUrls, setAudioUrls] = useState<{ [key: number]: string | undefined }>({});
+  const [isClient, setIsClient] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    async function fetchConversations() {
-      const token = localStorage.getItem('authToken');
+    setIsClient(true);
+  }, []);
 
-      if (!token) {
-        console.error('No auth token found');
-        return;
-      }
+  useEffect(() => {
+    if (isClient) {
+      async function fetchConversations() {
 
-      try {
-        const response = await fetch('https://localhost:7108/api/conversations', {
-          method: 'GET',
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
-        });
+        setIsLoading(true); 
 
-        if (!response.ok) {
-          throw new Error('Failed to fetch conversations');
+        const token = localStorage.getItem('authToken');
+        if (!token) {
+          console.error('No auth token found');
+          return;
         }
 
-        const data = await response.json();
-        setConversations(data);
-      } catch (error) {
-        console.error('Error fetching conversations:', error);
-      }
-    }
+        try {
+          const response = await fetch('https://localhost:7108/api/conversations', {
+            method: 'GET',
+            headers: {
+              'Authorization': `Bearer ${token}`,
+              'Content-Type': 'application/json',
+            },
+          });
 
-    fetchConversations();
-  }, []);
+          if (!response.ok) {
+            throw new Error('Failed to fetch conversations');
+          }
+
+          const data = await response.json();
+          
+          setTimeout(() => {
+            setConversations(data);
+            setIsLoading(false);
+          }, 800);
+
+        } catch (error) {
+          console.error('Error fetching conversations:', error);
+          setIsLoading(false);
+        }
+      }
+
+      fetchConversations();
+    }
+  }, [isClient]);
 
   async function fetchAudioFile(fileName: string) {
     const token = localStorage.getItem("authToken");
@@ -88,11 +111,11 @@ export default function Conversations() {
       const response = await fetch(`https://localhost:7108/api/conversations/${conversationId}`, {
         method: "DELETE",
         headers: {
-          Authorization: `Bearer ${token}`, 
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
       });
-  
+
       if (response.ok) {
         setConversations((prevConversations) =>
           prevConversations.filter((conversation) => conversation.id !== conversationId)
@@ -103,7 +126,7 @@ export default function Conversations() {
     } catch (error) {
       console.error("Error deleting conversation:", error);
     }
-  };  
+  };
 
   useEffect(() => {
     async function loadAudioUrls() {
@@ -114,7 +137,7 @@ export default function Conversations() {
           const audioUrl = await fetchAudioFile(conversation.audio);
           newAudioUrls[conversation.id] = audioUrl;
         } else {
-          newAudioUrls[conversation.id] = undefined; 
+          newAudioUrls[conversation.id] = undefined;
         }
       }
 
@@ -126,6 +149,10 @@ export default function Conversations() {
     }
   }, [conversations]);
 
+  if (!isClient || isLoading) {
+    return <Loading></Loading>; 
+  }
+
   return (
     <ProtectedRoute>
       <Box
@@ -133,27 +160,11 @@ export default function Conversations() {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          marginBottom: "4vh",
-        }}
-      >
-        <Image
-          src={logo}
-          style={{
-            maxWidth: "70vw",
-            width: "auto",
-            marginTop: "10vh",
-          }}
-        />
-      </Box>
-  
-      <Box
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
           flexDirection: "column",
           width: "100%",
+          marginTop: "5vh", 
         }}
+        data-testid="conversations-main-container"
       >
         <Text
           style={{
@@ -164,10 +175,11 @@ export default function Conversations() {
             color: "black",
             textAlign: "center",
           }}
+          data-testid="conversations-header"
         >
           Conversations
         </Text>
-  
+
         <Box
           style={{
             display: "flex",
@@ -176,16 +188,17 @@ export default function Conversations() {
             padding: "10px",
             gap: "15px",
             overflowY: "auto",
-            maxHeight: "calc(100vh - 625px)",
+            maxHeight: "calc(100vh - 250px)",
             width: "90%",
             borderRadius: "10px",
             boxShadow: "inset 0 0 10px rgba(0, 0, 0, 0.1)",
             backgroundColor: "rgba(255, 255, 255, 0.05)",
           }}
+          data-testid="conversations-list"
         >
           {conversations.map((conversation) => (
             <Box
-              key={conversation.id}
+              key={conversation.id}  
               style={{
                 width: "100%",
                 padding: "15px",
@@ -194,8 +207,10 @@ export default function Conversations() {
                 backgroundColor: "rgba(255, 255, 255, 0.1)",
                 boxShadow: "0 4px 6px rgba(0, 0, 0, 0.15)",
               }}
+              data-testid="conversations-item"
             >
               <Text
+                data-testid="conversations-item-topic"
                 style={{
                   fontSize: "1.2em",
                   fontWeight: "600",
@@ -206,6 +221,7 @@ export default function Conversations() {
                 {conversation.topic || "Untitled Topic"}
               </Text>
               <Text
+                data-testid="conversations-item-question"
                 style={{
                   fontSize: "0.9em",
                   fontWeight: "400",
@@ -213,11 +229,10 @@ export default function Conversations() {
                   marginBottom: "5px",
                 }}
               >
-                {conversation.startTime && conversation.endTime
-                  ? `${conversation.startTime.split(" ")[0]} (${conversation.startTime.split(" ")[1].slice(0, 5)} - ${conversation.endTime.split(" ")[1].slice(0, 5)})`
-                  : "No time available"}
+                {conversation.question || "No question available."}
               </Text>
               <Text
+                data-testid="conversations-item-time"
                 style={{
                   fontSize: "0.9em",
                   fontWeight: "400",
@@ -225,9 +240,11 @@ export default function Conversations() {
                   marginBottom: "10px",
                 }}
               >
-                {conversation.question || "No question available."}
+                {conversation.startTime && conversation.endTime
+                  ? `${conversation.startTime.split(" ")[0]} (${conversation.startTime.split(" ")[1].slice(0, 5)} - ${conversation.endTime.split(" ")[1].slice(0, 5)})`
+                  : "No time available"}
               </Text>
-  
+
               {audioUrls[conversation.id] ? (
                 <audio
                   style={{
@@ -235,10 +252,12 @@ export default function Conversations() {
                     borderRadius: "5px",
                   }}
                   controls
-                  src={audioUrls[conversation.id]} 
+                  src={audioUrls[conversation.id]}
+                  data-testid="conversations-item-audio"
                 />
               ) : (
                 <Text
+                  data-testid="conversations-item-no-audio"
                   style={{
                     fontSize: "0.9em",
                     fontWeight: "400",
@@ -249,7 +268,7 @@ export default function Conversations() {
                   No audio available
                 </Text>
               )}
-  
+
               <Button
                 color="red"
                 style={{
@@ -257,49 +276,54 @@ export default function Conversations() {
                   width: "100%",
                 }}
                 onClick={() => deleteConversation(conversation.id)}
+                data-testid="conversations-delete"
               >
                 DELETE
               </Button>
             </Box>
           ))}
         </Box>
-  
-        <Link to={"/"}>
+
+        <Link to={"/"} data-testid="conversations-back-link">
           <Button
             color="red"
             style={{
               marginTop: "1.5vh",
               height: "5vh",
             }}
+            data-testid="conversations-back-button"
           >
             BACK TO MAIN MENU
           </Button>
         </Link>
       </Box>
-  
+
       <Divider
         color="black"
         style={{
-          marginTop: "4vh",
+          marginTop: "0.5vh",
         }}
+        data-testid="conversations-divider"
       />
-  
+
       <Box
         style={{
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
         }}
+        data-testid="conversations-footer"
       >
         <Text
           style={{
             marginTop: "2vh",
             fontStyle: "italic",
           }}
+          data-testid="conversations-footer-text"
         >
           DeepDrunkTalks - 2024 ©
         </Text>
       </Box>
     </ProtectedRoute>
-  );  
+  );
 }

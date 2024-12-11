@@ -1,7 +1,9 @@
 import type { MetaFunction } from "@remix-run/node";
-import { Button , Divider, Image, Box, Text } from '@mantine/core';
+import { Button, Divider, Image, Box, Text } from '@mantine/core';
 import { Link } from '@remix-run/react';
+import { useEffect, useState } from "react";
 
+import Loading from "~/components/Loading"; 
 import logo from "~/assets/img/logo.png"; 
 import ProtectedRoute from "~/components/layouts/ProtectedRoute";
 
@@ -13,125 +15,136 @@ export const meta: MetaFunction = () => {
 };
 
 export default function Index() {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("authToken");
-    
     window.location.href = "/login";
-  };  
+  };
+
+  if (!isClient) {
+    return <Loading></Loading>;
+  }
 
   return (
     <ProtectedRoute>
-      <> 
-
-      <Box
-
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center", 
-          marginBottom: "4vh"
-        }}
-        
-      > 
-        <Image 
-
-          src={logo}
-
+      <>
+        <Box
           style={{
-              maxWidth: "70vw", 
-              width: "auto", 
-              marginTop: "10vh"
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            marginBottom: "4vh",
           }}
-
-        />
-
-      </Box>
-
-      <Box  
-
-        style={{
-          display: "flex", 
-          justifyContent: "center", 
-          alignItems: "center", 
-          flexDirection: "column"
-        }}
-
-      > 
-
-        <Link to="/play">
-          <Button variant="filled" color="rgba(0, 0, 0, 1)" size="xl"
-          
+          data-testid="mainmenu-logo-container"
+        >
+          <Image
+            src={logo}
+            alt="DeepDrunkTalks Logo"
             style={{
-              marginTop: "3vh"
+              maxWidth: "70vw",
+              width: "auto",
+              marginTop: "10vh",
             }}
+            data-testid="mainmenu-logo"
+          />
+        </Box>
 
-          >START GAME</Button>
-        </Link>
-
-        <Link to={"/conversations"}>
-            <Button variant="filled" color="rgba(0, 0, 0, 1)" size="xl"
-            
-            style={{
-              marginTop: "3vh"
-            }}
-          
-            >CONVERSATIONS</Button>
-        </Link>
-
-        <Link to={"/settings"}>
-            <Button variant="filled" color="rgba(0, 0, 0, 1)" size="xl"
-            
+        <Box
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flexDirection: "column",
+          }}
+          data-testid="mainmenu-button-container"
+        >
+          <Link to="/play" data-testid="mainmenu-link-play">
+            <Button
+              variant="filled"
+              color="rgba(0, 0, 0, 1)"
+              size="xl"
               style={{
-                marginTop: "3vh"
+                marginTop: "3vh",
               }}
+              data-testid="mainmenu-button-play"
+            >
+              START GAME
+            </Button>
+          </Link>
 
-            >SETTINGS</Button>
-        </Link>
+          <Link to="/conversations" data-testid="mainmenu-link-conversations">
+            <Button
+              variant="filled"
+              color="rgba(0, 0, 0, 1)"
+              size="xl"
+              style={{
+                marginTop: "3vh",
+              }}
+              data-testid="mainmenu-button-conversations"
+            >
+              CONVERSATIONS
+            </Button>
+          </Link>
 
-        <Button
+          <Link to="/settings" data-testid="mainmenu-link-settings">
+            <Button
+              variant="filled"
+              color="rgba(0, 0, 0, 1)"
+              size="xl"
+              style={{
+                marginTop: "3vh",
+              }}
+              data-testid="mainmenu-button-settings"
+            >
+              SETTINGS
+            </Button>
+          </Link>
 
+          <Button
             color="red"
             onClick={handleLogout}
-            style={{ 
+            style={{
               marginTop: "3vh",
-              height: "5vh"
+              height: "5vh",
             }}
-          
-          >LOGOUT</Button>
+            data-testid="mainmenu-button-logout"
+          >
+            LOGOUT
+          </Button>
+        </Box>
 
-      </Box>
-
-      <Divider color="black"
-
-        style={{
-          marginTop: "8vh"
-        }}
-
-      ></Divider>
-
-      <Box 
-
-        style={{
-          display: "flex", 
-          justifyContent: "center", 
-          alignItems: "center"
-        }}
-
-      > 
-
-        <Text 
-        
+        <Divider
+          color="black"
           style={{
-            marginTop: "2vh", 
-            fontStyle: "italic"
+            marginTop: "10vh",
           }}
-        
-        > DeepDrunkTalks - 2024 © </Text>
+          data-testid="mainmenu-divider"
+        ></Divider>
 
-      </Box>
-
+        <Box
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+          data-testid="mainmenu-footer"
+        >
+          <Text
+            style={{
+              marginTop: "2vh",
+              fontStyle: "italic",
+            }}
+            data-testid="mainmenu-footer-text"
+          >
+            DeepDrunkTalks - 2024 ©
+          </Text>
+        </Box>
       </>
     </ProtectedRoute>
-  )
+  );
 }

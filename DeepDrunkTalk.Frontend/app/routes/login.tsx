@@ -1,9 +1,10 @@
 import type { MetaFunction } from "@remix-run/node";
-import { Button, Box, Input, Image, Text, Divider } from '@mantine/core';
+import { Button, Box, Input, Image, Text, Divider, Loader } from '@mantine/core';
 import { useEffect, useState } from "react";
 import { useNavigate } from "@remix-run/react";
 
 import logo from "~/assets/img/logo.png";
+import Loading from "~/components/Loading";
 
 export const meta: MetaFunction = () => {
   return [
@@ -57,7 +58,7 @@ export default function Login() {
   };
 
   if (!isClient) {
-    return null; 
+    return <Loading></Loading>; 
   }
 
   return (

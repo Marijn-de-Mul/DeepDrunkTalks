@@ -75,12 +75,15 @@ jobs:
         run: |
           git fetch --prune --unshallow
 
-      - name: (Backend) Get Changed Files
-        id: changed-files-backend
+      - name: Get changed files
+        id: files
         run: |
           files=$(git diff --name-only 9faa0004192bb25cfa79598c1671232c56d7e05f de867efc4e1b52e3a1a5f4edf8b6efd74bad1758 | grep -E '\.cs$' | grep -vE 'obj|bin' || echo "")
-          echo "Changed files: $files"
           echo "files=$files" >> $GITHUB_ENV
+
+      - name: Check changed files
+        run: |
+          echo "Changed files: $files"
 
       - name: (Backend) Lint Changed Files
         run: |

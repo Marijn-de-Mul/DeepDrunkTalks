@@ -1,23 +1,24 @@
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
-WORKDIR /app
-EXPOSE 80
-
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+
 WORKDIR /src
 
 COPY ["DeepDrunkTalk.Backend/DeepDrunkTalks.Backend.sln", "DeepDrunkTalk.Backend/"]
-COPY ["DeepDrunkTalk.Backend/DDT.Backend.API/", "/app/DDT.Backend.API/"]
 RUN dotnet restore "DeepDrunkTalk.Backend/DeepDrunkTalks.Backend.sln"
 
-COPY . .
+COPY ["DeepDrunkTalk.Backend/DDT.Backend.API/", "/app/DDT.Backend.API/"]
+WORKDIR /app/DDT.Backend.API
+RUN dotnet publish -c Release -o /app/publish
 
-WORKDIR "/src/DeepDrunkTalk.Backend/DDT.Backend.API"
-RUN dotnet publish "DDT.Backend.API.csproj" -c Release -o /app/publish
+ENV ASPNETCORE_ENVIRONMENT=Production
+ENV DB_HOST=ddt_postgres
+ENV DB_PORT=5432
+ENV DB_USER=postgres
+ENV DB_PASS=deepdrunktalks
+ENV DB_NAME=deepdrunktalks
+ENV JWT_SECRET=d349e3a2f3b7cafa3737752ef9a1da8271ff6ff54666ceabe18033a0721daca882c490ac264cd867d6c6ff5ac64e06889be2aa342f912186b749ff7d18ef5824c8f770c5eefee1e4b7f386c598d9939d3cfce32c6ae51a022367862ce98ebd9caa7659092e8200061a27c680a21f74920dd0d64c345cbfc5fe86e7db2ba1d7b22a497354cd9bc06247f9bcfa6b2966ab5587453967f9018d69327c1ef5664ef4c18f4caa6173c030f3492fa9bfb45a91dc636cde1a7eaab2b7dcd782bfc28d818dc86c49dcc0ee2e8a86f87106c7e32327ca94dee546356135882ed2dcbd0158b1022dc0f40d927f311ad49f399754c4a5d5eeed07181349b87bc1b408886da1583f8883fe51d07f792bb2026b40d03f94328e83196e0d8680e4fcfb2febb37cbe45588110a65c7bfd3b1f4ca9e30a88b03d193bb9467bc1d40f8c974cf14bae43eaa9281ff47c7fc8c978daf22e1e973f65daa0993013cb6c053fce88fab67f9e447562f408885d4a8e16c189c8d9b4b1df4de2e00ace3ca2c5d885972e597714076b777320a0e21bc357ff7f4b9204fa307b654a306a1a5da26789cdaf7cf33c7fc64e45e4f22521914e7b3141c6454aebb85b39a4388e6308950990fb3dba37488c96e1d180ff170c8852e560fa6a0752369e861e99a29db23ea6e3e255528b990d1b2e8a1588edce881903759f20e18546323d9cbbac0699ebf131b019f3
+ENV LOG_TO_CONSOLE=false
+ENV LOG_TO_FILE=true
 
-FROM base AS final
-WORKDIR /app
-COPY --from=build /app/publish .
-
-COPY DeepDrunkTalk.Backend/DDT.Backend.API/.env /app/.env
+EXPOSE 8080
 
 ENTRYPOINT ["dotnet", "DDT.Backend.API.dll"]

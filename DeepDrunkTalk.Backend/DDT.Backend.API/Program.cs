@@ -18,6 +18,13 @@ using Serilog.Events;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var environment = builder.Environment;
+
+if (!environment.IsProduction())
+{
+    EnvironmentVariables_old.LoadEnvironments();
+}
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
@@ -70,13 +77,27 @@ builder.Services.AddControllers();
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowSpecificOrigins", policy =>
+    if (!environment.IsProduction())
     {
-        policy.WithOrigins("http://localhost:5173")
-              .AllowAnyHeader()
-              .AllowAnyMethod()
-              .AllowCredentials(); 
-    });
+        options.AddPolicy("AllowSpecificOrigins", policy =>
+        {
+            policy.WithOrigins("http://localhost:5173")
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowCredentials(); 
+        });
+    }
+    
+    if (environment.IsProduction())
+    {
+        options.AddPolicy("AllowSpecificOrigins", policy =>
+        {
+            policy.WithOrigins("http://frontend:3000", "http://frontend:81")
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowCredentials(); 
+        });
+    }
 });
 
 builder.Services.AddSingleton(_ => Environment.GetEnvironmentVariable("JWT_SECRET"));

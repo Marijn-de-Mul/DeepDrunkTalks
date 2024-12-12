@@ -190,3 +190,6 @@ E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.API\obj\D
 E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.API\obj\Debug\net8.0\DDT.Backend.API.pdb
 E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.API\obj\Debug\net8.0\DDT.Backend.API.genruntimeconfig.cache
 E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.API\obj\Debug\net8.0\ref\DDT.Backend.API.dll
+E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.API\bin\Debug\net8.0\DDT.Backend.API.staticwebassets.endpoints.json
+E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.API\obj\Debug\net8.0\staticwebassets.build.endpoints.json
+E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.API\obj\Debug\net8.0\staticwebassets\msbuild.DDT.Backend.API.Microsoft.AspNetCore.StaticWebAssetEndpoints.props

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "HD/xK/ft9xc=",
+  "dgSpecHash": "EXhnZaLET6o=",
   "success": true,
   "projectFilePath": "E:\\School\\S3\\Personal\\DeepDrunkTalks\\DeepDrunkTalk.Backend\\DDT.Backend.API\\DDT.Backend.API.csproj",
   "expectedPackageFiles": [
@@ -78,7 +78,11 @@
     "C:\\Users\\Marij\\.nuget\\packages\\system.identitymodel.tokens.jwt\\8.1.1\\system.identitymodel.tokens.jwt.8.1.1.nupkg.sha512",
     "C:\\Users\\Marij\\.nuget\\packages\\system.io.pipelines\\6.0.0-preview.4.21253.7\\system.io.pipelines.6.0.0-preview.4.21253.7.nupkg.sha512",
     "C:\\Users\\Marij\\.nuget\\packages\\system.memory\\4.5.4\\system.memory.4.5.4.nupkg.sha512",
-    "C:\\Users\\Marij\\.nuget\\packages\\webactivatorex\\2.0.0\\webactivatorex.2.0.0.nupkg.sha512"
+    "C:\\Users\\Marij\\.nuget\\packages\\webactivatorex\\2.0.0\\webactivatorex.2.0.0.nupkg.sha512",
+    "C:\\Users\\Marij\\.nuget\\packages\\microsoft.netcore.app.ref\\8.0.11\\microsoft.netcore.app.ref.8.0.11.nupkg.sha512",
+    "C:\\Users\\Marij\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\8.0.11\\microsoft.windowsdesktop.app.ref.8.0.11.nupkg.sha512",
+    "C:\\Users\\Marij\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\8.0.11\\microsoft.aspnetcore.app.ref.8.0.11.nupkg.sha512",
+    "C:\\Users\\Marij\\.nuget\\packages\\microsoft.netcore.app.host.win-x86\\8.0.11\\microsoft.netcore.app.host.win-x86.8.0.11.nupkg.sha512"
   ],
   "logs": [
     {

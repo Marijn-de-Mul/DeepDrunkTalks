@@ -1,11 +1,12 @@
 {
   "Version": 1,
-  "Hash": "hfazCbY3n1TboR+dBf46GkIIhu77KpLc47R1HjgaAMw=",
+  "Hash": "mobJJvSZ3s0qHvHYbI13vrz3jgroTpCrmeP5JuY178A=",
   "Source": "DDT.Backend.API",
   "BasePath": "_content/DDT.Backend.API",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
   "DiscoveryPatterns": [],
-  "Assets": []
+  "Assets": [],
+  "Endpoints": []
 }

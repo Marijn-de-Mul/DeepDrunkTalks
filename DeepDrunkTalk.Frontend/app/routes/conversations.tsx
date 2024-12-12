@@ -45,7 +45,11 @@ export default function Conversations() {
         }
 
         try {
-          const response = await fetch('https://localhost:7108/api/conversations', {
+          const backendUrl = process.env.NODE_ENV === "production"
+            ? "https://backend:7108"
+            : "https://localhost:7108";
+
+          const response = await fetch(`${backendUrl}/api/conversations`, {
             method: 'GET',
             headers: {
               'Authorization': `Bearer ${token}`,

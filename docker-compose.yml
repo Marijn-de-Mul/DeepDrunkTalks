@@ -1,67 +1,18 @@
 version: '3'
 
 services:
-  nginx:
-    image: nginx:latest
-    container_name: ddt_nginx
+  nginx-proxy-frontend:
+    image: jwilder/nginx-proxy
+    restart: always
     ports:
-      - "81:80"  
-      - "82:443"   
-    depends_on:
-      - frontend
-    networks:
-      - production
-    volumes:
-      - ./nginx-configs:/etc/nginx
-      - ./data/certbot/conf:/etc/letsencrypt
-      - ./data/certbot/www:/var/www/certbot
+      - "81:80"
+      - "82:443"
     environment:
-      - NGINX_HOST=ddt.marijndemul.nl  
-      - NGINX_EMAIL=test@test.nl  
-    command: >
-      sh -c "echo '
-      server {
-        listen 80;
-        server_name ${NGINX_HOST};
-
-        location / {
-          proxy_pass http://ddt_frontend:3000;
-          proxy_set_header Host $host;
-          proxy_set_header X-Real-IP $remote_addr;
-          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        }
-
-        location /.well-known/acme-challenge/ {
-          root /var/www/certbot;
-        }
-      }
-
-      server {
-        listen 443 ssl;
-        server_name ${NGINX_HOST};
-
-        ssl_certificate /etc/letsencrypt/live/${NGINX_HOST}/fullchain.pem;
-        ssl_certificate_key /etc/letsencrypt/live/${NGINX_HOST}/privkey.pem;
-        ssl_protocols TLSv1.2 TLSv1.3;
-        ssl_prefer_server_ciphers on;
-
-        location / {
-          proxy_pass http://ddt_frontend:3000;
-          proxy_set_header Host $host;
-          proxy_set_header X-Real-IP $remote_addr;
-          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        }
-      }' > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
-  
-  certbot:
-    image: certbot/certbot
-    container_name: certbot
-    depends_on:
-      - nginx
+      - DEFAULT_HOST=ddt.marijndemul.nl
+      - ENABLE_LETSENCRYPT=true
+      - LETSENCRYPT_EMAIL=test@test.nl
     volumes:
-      - ./data/certbot/conf:/etc/letsencrypt
-      - ./data/certbot/www:/var/www/certbot
-    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+      - "/var/run/docker.sock:/tmp/docker.sock:ro"
 
   frontend:
     image: marijndemul16/ddt.frontend:latest
@@ -79,14 +30,14 @@ services:
     container_name: ddt_backend
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
-      - DB_HOST=${DB_HOST}           
-      - DB_PORT=${DB_PORT}           
-      - DB_USER=${DB_USER}           
-      - DB_PASS=${DB_PASS}           
-      - DB_NAME=${DB_NAME}           
-      - JWT_SECRET=${JWT_SECRET}     
-      - LOG_TO_CONSOLE=${LOG_TO_CONSOLE} 
-      - LOG_TO_FILE=${LOG_TO_FILE}      
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_USER=${DB_USER}
+      - DB_PASS=${DB_PASS}
+      - DB_NAME=${DB_NAME}
+      - JWT_SECRET=${JWT_SECRET}
+      - LOG_TO_CONSOLE=${LOG_TO_CONSOLE}
+      - LOG_TO_FILE=${LOG_TO_FILE}
     ports:
       - "8079:8079"
       - "8080:8080"
@@ -100,8 +51,8 @@ services:
     image: postgres:13
     container_name: ddt_postgres
     environment:
-      - POSTGRES_DB=${DB_NAME}  
-      - POSTGRES_USER=${DB_USER} 
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
       - POSTGRES_PASSWORD=${DB_PASS}
     volumes:
       - postgres_data:/var/lib/postgresql/data

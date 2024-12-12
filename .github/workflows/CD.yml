@@ -31,8 +31,8 @@ jobs:
 
             docker compose pull
             
-            docker image prune
-
+            docker image prune -f
+            
             docker compose up -d
           '
         env:

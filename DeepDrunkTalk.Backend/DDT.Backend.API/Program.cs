@@ -104,10 +104,10 @@ builder.Services.AddSingleton(_ => Environment.GetEnvironmentVariable("JWT_SECRE
 
 builder.WebHost.ConfigureKestrel(options =>
 {
-    options.ListenAnyIP(8079);  
-    options.ListenAnyIP(8080, listenOptions =>
+    options.ListenAnyIP(80); 
+    options.ListenAnyIP(443, listenOptions =>
     {
-        listenOptions.UseHttps();  
+        listenOptions.UseHttps("/etc/ssl/certs/mycertificate.crt", "/etc/ssl/private/mycertificate.key");
     });
 });
 

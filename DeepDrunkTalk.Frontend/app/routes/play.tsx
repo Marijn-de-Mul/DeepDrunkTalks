@@ -7,7 +7,7 @@ import logo from "~/assets/img/logo.png";
 let mediaRecorder: MediaRecorder | null = null;
 let recordedChunks: Blob[] = [];
 
-export default function Play {
+export default function Play() {
   const [isRecording, setIsRecording] = useState(false);
   const [question, setQuestion] = useState("Question Placeholder");
   const [isNextQuestionDisabled, setIsNextQuestionDisabled] = useState(false);

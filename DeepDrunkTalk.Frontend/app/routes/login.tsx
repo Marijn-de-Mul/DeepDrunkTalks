@@ -29,7 +29,7 @@ export default function Login() {
 
     try {
       const backendUrl = process.env.NODE_ENV === "production"
-            ? "https://backend:7108"
+            ? "https://backend:8080"
             : "https://localhost:7108";
 
       const response = await fetch(`${backendUrl}/api/users/login`, {

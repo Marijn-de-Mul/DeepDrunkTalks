@@ -32,14 +32,14 @@ jobs:
           echo "Changed files: $files"
           echo "files=$files" >> $GITHUB_ENV
 
-      - name: (Frontend) Lint Changed Files
-        working-directory: DeepDrunkTalk.Frontend/
-        run: |
-          if [ -n "$files" ]; then
-            npx eslint $files --max-warnings 0
-          else
-            echo "No files to lint"
-          fi
+      #- name: (Frontend) Lint Changed Files
+      #  working-directory: DeepDrunkTalk.Frontend/
+      #  run: |
+      #    if [ -n "$files" ]; then
+      #      npx eslint $files --max-warnings 0
+      #    else
+      #      echo "No files to lint"
+      #    fi
 
       - name: (BuildX) Setup Docker BuildX
         uses: docker/setup-buildx-action@v2

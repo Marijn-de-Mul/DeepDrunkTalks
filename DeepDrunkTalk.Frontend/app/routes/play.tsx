@@ -1,4 +1,4 @@
-import { Button, Divider, Image, Box, Text } from "@mantine/core";
+import { Button, Image, Box, Text } from "@mantine/core";
 import { useNavigate } from "@remix-run/react";
 import { useEffect, useRef, useState } from "react";
 import ProtectedRoute from "~/components/layouts/ProtectedRoute";
@@ -8,9 +8,9 @@ let mediaRecorder: MediaRecorder | null = null;
 let recordedChunks: Blob[] = [];
 
 export default function Play() {
-  const [isRecording, setIsRecording] = useState(false);
   const [question, setQuestion] = useState("Question Placeholder");
   const [isNextQuestionDisabled, setIsNextQuestionDisabled] = useState(false);
+  const [isRecording, setIsRecording] = useState(false);
 
   const conversationInProgressRef = useRef(false);
   const hasStartedRef = useRef(false);
@@ -126,22 +126,23 @@ export default function Play() {
   }
 
   async function startRecording() {
-    if (typeof navigator === "undefined" || typeof navigator.mediaDevices === "undefined") return;
-
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      mediaRecorder = new MediaRecorder(stream, { mimeType: "audio/webm;codecs=opus" });
+      recordedChunks = [];
 
-      mediaRecorder.ondataavailable = (event: BlobEvent) => {
+      mediaRecorder = new MediaRecorder(stream, {
+        mimeType: 'audio/webm;codecs=opus'
+      });
+
+      mediaRecorder.ondataavailable = (event) => {
         if (event.data.size > 0) {
           recordedChunks.push(event.data);
         }
       };
 
-      mediaRecorder.onstop = () => {
-        const blob = new Blob(recordedChunks, { type: "audio/webm" });
-        sendAudioChunk(blob);
-        recordedChunks = [];
+      mediaRecorder.onstop = async () => {
+        const audioBlob = new Blob(recordedChunks, { type: 'audio/webm' });
+        await sendAudioChunk(audioBlob);
       };
 
       mediaRecorder.start(1000);
@@ -152,7 +153,7 @@ export default function Play() {
   }
 
   function stopRecording() {
-    if (mediaRecorder) {
+    if (mediaRecorder && mediaRecorder.state !== 'inactive') {
       mediaRecorder.stop();
       setIsRecording(false);
     }
@@ -174,16 +175,16 @@ export default function Play() {
     formData.append("audio", audioBlob);
 
     try {
-      const response = await fetch("/audiopostproxy", {
-        method: "POST",
-        body: formData,
+      const response = await fetch('/audiopostproxy', {
+        method: 'POST',
+        body: formData
       });
 
       if (!response.ok) {
-        console.error("Failed to send audio chunk:", response.status);
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
     } catch (error) {
-      console.error("Error while sending audio chunk:", error);
+      console.error("Error sending audio:", error);
     }
   }
 

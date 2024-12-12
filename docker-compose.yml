@@ -1,26 +1,36 @@
-version: '3'
-
 services:
   nginx:
     image: nginx:latest
-    container_name: nginx-proxy-frontend
+    container_name: nginx
     ports:
       - "81:80"
       - "82:443"
     volumes:
-      - "./nginx.conf:/etc/nginx/nginx.conf:ro"
-      - "/etc/letsencrypt/live/ddt.marijndemul.nl/fullchain.pem:/etc/ssl/certs/fullchain.pem:ro"
-      - "/etc/letsencrypt/live/ddt.marijndemul.nl/privkey.pem:/etc/ssl/private/privkey.pem:ro"
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/ssl:/etc/nginx/ssl
+      - ./nginx/logs:/var/log/nginx
+      - certbot-etc:/etc/letsencrypt
+      - certbot-var:/var/lib/letsencrypt
+      - webroot:/var/www/html
     depends_on:
       - frontend
     networks:
       - production
 
+  certbot:
+    image: certbot/certbot
+    container_name: certbot
+    volumes:
+      - certbot-etc:/etc/letsencrypt
+      - certbot-var:/var/lib/letsencrypt
+      - webroot:/var/www/html
+    command: certonly --webroot --webroot-path=/var/www/html --email test@test.nl --agree-tos --no-eff-email --force-renewal -d ddt.marijndemul.nl
+
   frontend:
     image: marijndemul16/ddt.frontend:latest
     container_name: frontend
-    ports:
-      - "3000:3000"
+    expose:
+      - "3000"
     environment:
       - NODE_ENV=production
     restart: always
@@ -64,9 +74,12 @@ services:
     networks:
       - production
 
+volumes:
+  postgres_data:
+  certbot-etc:
+  certbot-var:
+  webroot:
+
 networks:
   production:
     driver: bridge
-
-volumes:
-  postgres_data:

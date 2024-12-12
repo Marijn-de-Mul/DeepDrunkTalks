@@ -52,46 +52,51 @@ namespace DDT.Backend.API.Middleware
             var authorizationHeader = context.Request.Headers["Authorization"].FirstOrDefault();
             _logger.LogInformation($"Authorization header: {authorizationHeader}");
 
-            var token = authorizationHeader?.Split(" ").Last();
+            if (string.IsNullOrEmpty(authorizationHeader) || !authorizationHeader.StartsWith("Bearer "))
+            {
+                _logger.LogInformation("Authorization header is missing or does not start with 'Bearer '");
+                context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+                await context.Response.WriteAsync("Invalid authorization header.");
+                return;
+            }
+
+            var token = authorizationHeader.Substring("Bearer ".Length).Trim();
             _logger.LogInformation($"Extracted token: {token}");
 
-            if (token != null)
+            if (string.IsNullOrEmpty(token))
             {
-                try
-                {
-                    var segments = token.Split('.');
-                    if (segments.Length != 3 && segments.Length != 5)
-                    {
-                        _logger.LogInformation($"Invalid JWT token format. Token: {token}");
-                        context.Response.StatusCode = StatusCodes.Status401Unauthorized;
-                        await context.Response.WriteAsync("Invalid token format.");
-                        return;
-                    }
-
-                    var userId = ValidateTokenAndAttachUser(context, token);
-                    _logger.LogInformation($"Token validated for user ID: {userId}");
-                }
-                catch (TokenValidationException ex)
-                {
-                    _logger.LogError($"Token validation failed: {ex.Message}", ex);
-                    context.Response.StatusCode = StatusCodes.Status401Unauthorized;
-                    await context.Response.WriteAsync(ex.Message);
-                    return;
-                }
-                catch (Exception ex)
-                {
-                    _logger.LogError($"Unexpected error occurred while validating token: {ex.Message}", ex);
-                    context.Response.StatusCode = StatusCodes.Status500InternalServerError;
-                    await context.Response.WriteAsync("An error occurred while processing the token.");
-                    return;
-                }
+                _logger.LogInformation("Token is missing after 'Bearer '");
+                context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+                await context.Response.WriteAsync("Token is missing.");
+                return;
             }
-            else
+
+            try
             {
-                var ex = new MissingTokenException();
-                _logger.LogError($"Missing token: {ex.Message}", ex);
+                var segments = token.Split('.');
+                if (segments.Length != 3 && segments.Length != 5)
+                {
+                    _logger.LogInformation($"Invalid JWT token format. Token: {token}");
+                    context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+                    await context.Response.WriteAsync("Invalid token format.");
+                    return;
+                }
+
+                var userId = ValidateTokenAndAttachUser(context, token);
+                _logger.LogInformation($"Token validated for user ID: {userId}");
+            }
+            catch (TokenValidationException ex)
+            {
+                _logger.LogError($"Token validation failed: {ex.Message}", ex);
                 context.Response.StatusCode = StatusCodes.Status401Unauthorized;
                 await context.Response.WriteAsync(ex.Message);
+                return;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Unexpected error occurred while validating token: {ex.Message}", ex);
+                context.Response.StatusCode = StatusCodes.Status500InternalServerError;
+                await context.Response.WriteAsync("An error occurred while processing the token.");
                 return;
             }
 

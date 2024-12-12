@@ -14,7 +14,7 @@ export const meta: MetaFunction = () => {
 };
 
 export default function Register() {
-  const [username, setUsername] = useState("");
+  const [name, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -42,10 +42,9 @@ export default function Register() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          endpoint: "/api/register",
+          endpoint: "/api/users/register",
           method: "POST",
-          authorization: "", 
-          body: { email, password },
+          body: { name, email, password, confirmPassword }
         }),
       });
 
@@ -128,7 +127,7 @@ export default function Register() {
             data-testid="register-usernameinput"
             variant="filled"
             placeholder="Username"
-            value={username}
+            value={name}
             onChange={(e) => setUsername(e.target.value)}
             style={{
               margin: "2vw",

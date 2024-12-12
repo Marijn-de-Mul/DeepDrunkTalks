@@ -6561,3 +6561,39 @@ INFO | 2024-12-12 17:07:52 | Extracted token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVC
 INFO | 2024-12-12 17:07:52 | Token validated for user ID: 7
 INFO | 2024-12-12 17:07:52 | Attempting to get user by UserId: 7
 INFO | 2024-12-12 17:07:52 | Successfully retrieved user with UserId: 7
+INFO | 2024-12-12 18:22:41 | Authorization header: Bearer
+INFO | 2024-12-12 18:22:41 | Authorization header is missing or does not start with 'Bearer '
+INFO | 2024-12-12 18:23:14 | Authorization header: Bearer undefined
+INFO | 2024-12-12 18:23:14 | Extracted token: undefined
+INFO | 2024-12-12 18:23:14 | Invalid JWT token format. Token: undefined
+INFO | 2024-12-12 18:24:21 | Register method called with request: DDT.Backend.Common.Models.Authentication.RegisterRequest
+INFO | 2024-12-12 18:24:21 | Starting user registration for email: string
+INFO | 2024-12-12 18:24:21 | Attempting to get user by email: string
+INFO | 2024-12-12 18:24:22 | Successfully retrieved user with email: string
+INFO | 2024-12-12 18:24:22 | Attempting to add user with email: string
+INFO | 2024-12-12 18:24:22 | Checking if user exists with UserId: 0
+INFO | 2024-12-12 18:24:22 | User exists check result for UserId 0: False
+INFO | 2024-12-12 18:24:22 | Successfully added user with email: string
+INFO | 2024-12-12 18:24:22 | User registration successful for email: string
+INFO | 2024-12-12 18:24:22 | JWT token generated successfully for email: string
+INFO | 2024-12-12 18:25:51 | Login attempt for email: test@test.nl
+INFO | 2024-12-12 18:25:51 | Starting user login for email: test@test.nl
+INFO | 2024-12-12 18:25:51 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-12 18:25:51 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-12 18:25:52 | User login successful for email: test@test.nl
+INFO | 2024-12-12 18:25:52 | User test@test.nl logged in successfully
+INFO | 2024-12-12 18:29:41 | Register method called with request: DDT.Backend.Common.Models.Authentication.RegisterRequest
+INFO | 2024-12-12 18:29:41 | Starting user registration for email: dasdasads@tsdaasdasd.nl
+INFO | 2024-12-12 18:29:41 | Attempting to get user by email: dasdasads@tsdaasdasd.nl
+INFO | 2024-12-12 18:29:41 | Successfully retrieved user with email: dasdasads@tsdaasdasd.nl
+INFO | 2024-12-12 18:29:41 | Attempting to add user with email: dasdasads@tsdaasdasd.nl
+INFO | 2024-12-12 18:29:41 | Checking if user exists with UserId: 0
+INFO | 2024-12-12 18:29:41 | User exists check result for UserId 0: False
+INFO | 2024-12-12 18:29:41 | Successfully added user with email: dasdasads@tsdaasdasd.nl
+INFO | 2024-12-12 18:29:41 | User registration successful for email: dasdasads@tsdaasdasd.nl
+INFO | 2024-12-12 18:29:41 | JWT token generated successfully for email: dasdasads@tsdaasdasd.nl
+INFO | 2024-12-12 18:29:53 | Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI5IiwidW5pcXVlX25hbWUiOiJ0ZXN0dHR0dHQiLCJuYmYiOjE3MzQwMjgxODEsImV4cCI6MTczNDYzMjk4MSwiaWF0IjoxNzM0MDI4MTgxfQ.z1TXiFqNHfNL6AA4jgBAQdNHW1eSqsswEzN66K-dzRA
+INFO | 2024-12-12 18:29:53 | Extracted token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI5IiwidW5pcXVlX25hbWUiOiJ0ZXN0dHR0dHQiLCJuYmYiOjE3MzQwMjgxODEsImV4cCI6MTczNDYzMjk4MSwiaWF0IjoxNzM0MDI4MTgxfQ.z1TXiFqNHfNL6AA4jgBAQdNHW1eSqsswEzN66K-dzRA
+INFO | 2024-12-12 18:29:53 | Token validated for user ID: 9
+INFO | 2024-12-12 18:29:53 | Attempting to get user by UserId: 9
+INFO | 2024-12-12 18:29:53 | Successfully retrieved user with UserId: 9

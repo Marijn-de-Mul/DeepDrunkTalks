@@ -117,7 +117,7 @@ export default function Conversations() {
       for (const conversation of conversations) {
         if (conversation.audio) {
           const audioUrl = await fetchAudioFile(conversation.id);
-          newAudioUrls[conversation.id] = audioUrl;
+          newAudioUrls[conversation.id] = audioUrl || undefined;
         } else {
           newAudioUrls[conversation.id] = undefined;
         }
@@ -130,6 +130,42 @@ export default function Conversations() {
       loadAudioUrls();
     }
   }, [conversations]);
+
+  const deleteConversation = async (conversationId: number) => {
+    const token = localStorage.getItem("authToken");
+    
+    if (!token) {
+      console.error("No auth token found");
+      return;
+    }
+
+    try {
+      const response = await fetch(`/jsonproxy`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          endpoint: `/api/conversations/${conversationId}`,
+          method: 'DELETE',
+          authorization: token
+        })
+      });
+
+      if (response.ok) {
+        setConversations(conversations.filter(conv => conv.id !== conversationId));
+        setAudioUrls(prev => {
+          const newUrls = { ...prev };
+          delete newUrls[conversationId];
+          return newUrls;
+        });
+      } else {
+        console.error("Failed to delete conversation:", response.status);
+      }
+    } catch (error) {
+      console.error("Error deleting conversation:", error);
+    }
+  };
 
   if (!isClient || isLoading) {
     return <Loading></Loading>;

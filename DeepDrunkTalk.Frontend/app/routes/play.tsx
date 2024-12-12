@@ -125,13 +125,31 @@ export default function Play() {
     setIsNextQuestionDisabled(false);
   }
 
+  const AUDIO_FORMATS = [
+    'audio/webm;codecs=opus',
+    'audio/webm',
+    'audio/mp4',
+    'audio/aac',
+    'audio/mpeg'
+  ];
+
   async function startRecording() {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
       recordedChunks = [];
 
+      const supportedFormat = AUDIO_FORMATS.find(format =>
+        MediaRecorder.isTypeSupported(format)
+      );
+
+      if (!supportedFormat) {
+        throw new Error('No supported audio format found');
+      }
+
+      console.log('Using format:', supportedFormat);
+
       mediaRecorder = new MediaRecorder(stream, {
-        mimeType: 'audio/webm;codecs=opus'
+        mimeType: supportedFormat
       });
 
       mediaRecorder.ondataavailable = (event) => {
@@ -148,7 +166,8 @@ export default function Play() {
       mediaRecorder.start(1000);
       setIsRecording(true);
     } catch (error) {
-      console.error("Error accessing microphone", error);
+      console.error("Error:", error);
+      setIsRecording(false);
     }
   }
 

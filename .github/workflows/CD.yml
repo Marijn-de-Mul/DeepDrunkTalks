@@ -24,13 +24,14 @@ jobs:
           ssh -o StrictHostKeyChecking=no root@45.140.142.168 '
             export DOCKER_BUILDKIT=1
             export DOCKER_CLI_EXPERIMENTAL=enabled
-            
-            docker pull marijndemul16/ddt.frontend:latest
-            docker pull marijndemul16/ddt.backend:latest
 
             cd /root/docker/deepdrunktalks
 
             docker compose down
+
+            docker compose pull
+            
+            docker image prune
 
             docker compose up -d
           '

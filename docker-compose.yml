@@ -1,22 +1,24 @@
 version: '3'
 
 services:
-  nginx-proxy-frontend:
-    image: jwilder/nginx-proxy
-    restart: always
+  nginx:
+    image: nginx:latest
+    container_name: ddt_nginx
     ports:
       - "81:80"
       - "82:443"
-    environment:
-      - DEFAULT_HOST=ddt.marijndemul.nl
-      - ENABLE_LETSENCRYPT=true
-      - LETSENCRYPT_EMAIL=test@test.nl
     volumes:
-      - "/var/run/docker.sock:/tmp/docker.sock:ro"
+      - "./nginx.conf:/etc/nginx/nginx.conf:ro"
+      - "/etc/letsencrypt/live/ddt.marijndemul.nl/fullchain.pem:/etc/ssl/certs/fullchain.pem:ro"
+      - "/etc/letsencrypt/live/ddt.marijndemul.nl/privkey.pem:/etc/ssl/private/privkey.pem:ro"
+    depends_on:
+      - frontend
+    networks:
+      - production
 
   frontend:
     image: marijndemul16/ddt.frontend:latest
-    container_name: ddt_frontend
+    container_name: frontend
     ports:
       - "3000:3000"
     environment:
@@ -27,7 +29,7 @@ services:
 
   backend:
     image: marijndemul16/ddt.backend:latest
-    container_name: ddt_backend
+    container_name: backend
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
       - DB_HOST=${DB_HOST}
@@ -49,7 +51,7 @@ services:
 
   postgres:
     image: postgres:13
-    container_name: ddt_postgres
+    container_name: postgres
     environment:
       - POSTGRES_DB=${DB_NAME}
       - POSTGRES_USER=${DB_USER}

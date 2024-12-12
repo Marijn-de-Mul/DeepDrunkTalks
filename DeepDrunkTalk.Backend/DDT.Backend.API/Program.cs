@@ -92,7 +92,7 @@ builder.Services.AddCors(options =>
     {
         options.AddPolicy("AllowSpecificOrigins", policy =>
         {
-            policy.WithOrigins("http://frontend:3000", "http://frontend:81")
+            policy.WithOrigins("http://frontend:3000", "http://frontend:3000", "https://ddt.marijndemul.nl:81")
                 .AllowAnyHeader()
                 .AllowAnyMethod()
                 .AllowCredentials(); 

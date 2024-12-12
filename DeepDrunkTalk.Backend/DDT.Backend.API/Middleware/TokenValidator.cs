@@ -22,7 +22,7 @@ namespace DDT.Backend.API.Middleware
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        private static HashSet<string> ExcludedPaths = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+        private static readonly HashSet<string> ExcludedPaths = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
         {
             "/api/users/login",
             "/api/users/register",
@@ -31,8 +31,8 @@ namespace DDT.Backend.API.Middleware
 
         private bool IsExcludedPath(string path)
         {
-            var pathString = new Microsoft.AspNetCore.Http.PathString(path);
-            return ExcludedPaths.Any(excluded => pathString.StartsWithSegments(new Microsoft.AspNetCore.Http.PathString(excluded), StringComparison.OrdinalIgnoreCase));
+            var pathString = new PathString(path);
+            return ExcludedPaths.Any(excluded => pathString.StartsWithSegments(new PathString(excluded), StringComparison.OrdinalIgnoreCase));
         }
 
         public async Task Invoke(HttpContext context)
@@ -48,12 +48,26 @@ namespace DDT.Backend.API.Middleware
                 await _next(context);
                 return;
             }
-            var token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
+
+            var authorizationHeader = context.Request.Headers["Authorization"].FirstOrDefault();
+            _logger.LogInformation($"Authorization header: {authorizationHeader}");
+
+            var token = authorizationHeader?.Split(" ").Last();
+            _logger.LogInformation($"Extracted token: {token}");
 
             if (token != null)
             {
                 try
                 {
+                    var segments = token.Split('.');
+                    if (segments.Length != 3 && segments.Length != 5)
+                    {
+                        _logger.LogInformation($"Invalid JWT token format. Token: {token}");
+                        context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+                        await context.Response.WriteAsync("Invalid token format.");
+                        return;
+                    }
+
                     var userId = ValidateTokenAndAttachUser(context, token);
                     _logger.LogInformation($"Token validated for user ID: {userId}");
                 }
@@ -92,7 +106,7 @@ namespace DDT.Backend.API.Middleware
 
             try
             {
-                tokenHandler.ValidateToken(token, new TokenValidationParameters
+                var principal = tokenHandler.ValidateToken(token, new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(key),
@@ -100,6 +114,27 @@ namespace DDT.Backend.API.Middleware
                     ValidateAudience = false,
                     ClockSkew = TimeSpan.Zero
                 }, out validatedToken);
+
+                if (validatedToken is JwtSecurityToken jwtToken)
+                {
+                    var userIdString = jwtToken.Claims.FirstOrDefault(x => x.Type == "nameid")?.Value;
+
+                    if (string.IsNullOrEmpty(userIdString) || !int.TryParse(userIdString, out int userId))
+                    {
+                        var ex = new TokenValidationException("Invalid or missing UserId format in token");
+                        _logger.LogError($"Token validation failed: {ex.Message}", ex);
+                        throw ex;
+                    }
+
+                    context.Items["UserId"] = userId;
+                    return userId;
+                }
+                else
+                {
+                    var ex = new TokenValidationException("Invalid token type");
+                    _logger.LogError($"Token type is not JwtSecurityToken: {ex.Message}", ex);
+                    throw ex;
+                }
             }
             catch (SecurityTokenExpiredException)
             {
@@ -111,27 +146,6 @@ namespace DDT.Backend.API.Middleware
             {
                 var ex = new InvalidTokenFormatException();
                 _logger.LogError($"Invalid token format: {ex.Message}", ex);
-                throw ex;
-            }
-
-            if (validatedToken is JwtSecurityToken jwtToken)
-            {
-                var userIdString = jwtToken.Claims.FirstOrDefault(x => x.Type == "nameid")?.Value;
-
-                if (string.IsNullOrEmpty(userIdString) || !int.TryParse(userIdString, out int userId))
-                {
-                    var ex = new TokenValidationException("Invalid or missing UserId format in token");
-                    _logger.LogError($"Token validation failed: {ex.Message}", ex);
-                    throw ex;
-                }
-
-                context.Items["UserId"] = userId;
-                return userId;
-            }
-            else
-            {
-                var ex = new TokenValidationException("Invalid token type");
-                _logger.LogError($"Token type is not JwtSecurityToken: {ex.Message}", ex);
                 throw ex;
             }
         }

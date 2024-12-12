@@ -72,8 +72,8 @@ public class EncryptionHelper
         {
             using var argon2 = new Argon2id(Encoding.UTF8.GetBytes(password));
             argon2.Salt = salt;
-            argon2.DegreeOfParallelism = 16;
-            argon2.MemorySize = 600_000;
+            argon2.MemorySize = 32_000; 
+            argon2.DegreeOfParallelism = 4; 
             argon2.Iterations = Iterations;
 
             return argon2.GetBytes(HashSize);
@@ -88,17 +88,17 @@ public class EncryptionHelper
 
     private static bool SlowEquals(byte[] a, byte[] b)
     {
-        try
+        if (a == null || b == null)
         {
-            var diff = (uint)a.Length ^ (uint)b.Length;
-            for (var i = 0; i < a.Length && i < b.Length; i++) diff |= (uint)(a[i] ^ b[i]);
-            return diff == 0;
+            Console.WriteLine("Null arrays cannot be compared.");
+            return false; 
         }
 
-        catch (Exception e)
+        var diff = (uint)a.Length ^ (uint)b.Length;
+        for (var i = 0; i < a.Length && i < b.Length; i++)
         {
-            Console.WriteLine(e);
-            return false;
+            diff |= (uint)(a[i] ^ b[i]);
         }
+        return diff == 0;
     }
 }

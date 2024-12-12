@@ -3,7 +3,7 @@ import { Button, Box, Input, Image, Text, Divider, Loader } from '@mantine/core'
 import { useState, useEffect } from "react";
 import { Form } from "@remix-run/react";
 
-import logo from "~/assets/img/logo.png"; 
+import logo from "~/assets/img/logo.png";
 import Loading from "~/components/Loading";
 
 export const meta: MetaFunction = () => {
@@ -18,8 +18,8 @@ export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [error, setError] = useState(""); 
-  const [isClient, setIsClient] = useState(false); 
+  const [error, setError] = useState("");
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
@@ -36,16 +36,16 @@ export default function Register() {
     }
 
     try {
-      const response = await fetch("https://localhost:7108/api/users/register", {
+      const response = await fetch("/jsonproxy", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          name: username,
-          email: email,
-          password: password,
-          confirmPassword: confirmPassword,
+          endpoint: "/api/register",
+          method: "POST",
+          authorization: "", 
+          body: { email, password },
         }),
       });
 
@@ -54,21 +54,21 @@ export default function Register() {
         console.log("Registration successful!", data);
 
         if (isClient) {
-          localStorage.setItem("authToken", data.token);  
-          window.location.href = "/";  
+          localStorage.setItem("authToken", data.token);
+          window.location.href = "/";
         }
       } else {
-        const errorData = await response.json(); 
-        setError(errorData.message || "An error occurred during registration."); 
+        const errorData = await response.json();
+        setError(errorData.message || "An error occurred during registration.");
       }
     } catch (error) {
       console.error("Error during registration:", error);
-      setError("Network error. Please try again later."); 
+      setError("Network error. Please try again later.");
     }
   };
 
   if (!isClient) {
-    return <Loading></Loading>; 
+    return <Loading></Loading>;
   }
 
   return (
@@ -78,16 +78,16 @@ export default function Register() {
         style={{
           display: "flex",
           justifyContent: "center",
-          alignItems: "center", 
+          alignItems: "center",
           marginBottom: "2vh"
         }}
-      > 
-        <Image 
+      >
+        <Image
           data-testid="register-logo"
           src={logo}
           style={{
-            maxWidth: "70vw", 
-            width: "auto", 
+            maxWidth: "70vw",
+            width: "auto",
             marginTop: "10vh"
           }}
         />
@@ -98,10 +98,10 @@ export default function Register() {
         style={{
           display: "flex",
           justifyContent: "center",
-          alignItems: "center", 
+          alignItems: "center",
           marginBottom: "2vh"
         }}
-      > 
+      >
         <Text
           data-testid="register-header"
           style={{
@@ -114,74 +114,74 @@ export default function Register() {
       </Box>
 
       <Box>
-        <Form 
+        <Form
           data-testid="register-form"
           onSubmit={handleSubmit}
           style={{
             display: 'flex',
-            flexDirection: 'column', 
+            flexDirection: 'column',
             justifyContent: 'center',
             alignItems: 'center'
           }}
         >
-          <Input 
+          <Input
             data-testid="register-usernameinput"
-            variant="filled" 
-            placeholder="Username" 
+            variant="filled"
+            placeholder="Username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             style={{
               margin: "2vw",
-              width: "70vw" 
+              width: "70vw"
             }}
           />
 
-          <Input 
+          <Input
             data-testid="register-emailinput"
-            variant="filled" 
+            variant="filled"
             placeholder="E-Mail"
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             style={{
               margin: "2vw",
-              width: "70vw" 
+              width: "70vw"
             }}
           />
 
-          <Input 
+          <Input
             data-testid="register-passwordinput"
-            variant="filled" 
+            variant="filled"
             placeholder="Password"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             style={{
               margin: "2vw",
-              width: "70vw" 
+              width: "70vw"
             }}
           />
 
-          <Input 
+          <Input
             data-testid="register-confirm-passwordinput"
-            variant="filled" 
+            variant="filled"
             placeholder="Repeat Password"
             type="password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             style={{
               margin: "2vw",
-              width: "70vw" 
+              width: "70vw"
             }}
           />
 
-          {error && <Text data-testid="register-error-message" color="red" size="1em">{error}</Text>} 
+          {error && <Text data-testid="register-error-message" color="red" size="1em">{error}</Text>}
 
-          <Button 
+          <Button
             data-testid="register-button"
-            fullWidth 
-            color="rgba(0, 0, 0, 1)" 
-            size="lg" 
+            fullWidth
+            color="rgba(0, 0, 0, 1)"
+            size="lg"
             type="submit"
             style={{
               marginTop: "2vw",
@@ -191,12 +191,12 @@ export default function Register() {
             REGISTER
           </Button>
 
-          <a href="./login"> 
-            <Button 
+          <a href="./login">
+            <Button
               data-testid="login-button-onregisterscreen"
-              fullWidth 
-              color="rgba(0, 0, 0, 1)" 
-              size="lg" 
+              fullWidth
+              color="rgba(0, 0, 0, 1)"
+              size="lg"
               style={{
                 marginTop: "2vw",
                 height: "5vh"
@@ -206,29 +206,29 @@ export default function Register() {
             </Button>
           </a>
         </Form>
-      </Box>   
+      </Box>
 
-      <Divider 
+      <Divider
         color="black"
         style={{
           marginTop: error ? "1.0vh" : "2.8vh"
         }}
       ></Divider>
 
-      <Box 
+      <Box
         style={{
-          display: "flex", 
-          justifyContent: "center", 
+          display: "flex",
+          justifyContent: "center",
           alignItems: "center"
         }}
-      > 
-        <Text 
+      >
+        <Text
           style={{
-            marginTop: "2vh", 
+            marginTop: "2vh",
             fontStyle: "italic"
           }}
-        > 
-          DeepDrunkTalks - 2024 © 
+        >
+          DeepDrunkTalks - 2024 ©
         </Text>
       </Box>
     </>

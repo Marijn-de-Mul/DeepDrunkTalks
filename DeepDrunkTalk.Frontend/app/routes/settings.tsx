@@ -24,15 +24,21 @@ export default function Settings() {
     try {
       const authToken = localStorage.getItem("authToken");
       if (!authToken) throw new Error("No auth token found");
-      
+
       setLoading(true);
       setError(null);
 
-      const response = await fetch("https://localhost:7108/api/users/settings", {
-        method: "GET",
+      const response = await fetch("/jsonproxy", {
+        method: "POST",
         headers: {
-          Authorization: `Bearer ${authToken}`,
+          "Content-Type": "application/json",
         },
+        body: JSON.stringify({
+          endpoint: "/api/users/settings",
+          method: "GET",
+          authorization: authToken,
+          body: null,
+        }),
       });
 
       if (!response.ok) throw new Error("Failed to fetch settings");
@@ -45,7 +51,6 @@ export default function Settings() {
       console.error("Error fetching settings:", err);
       setError(message);
     } finally {
-
       setTimeout(() => {
         setLoading(false);
       }, 800);
@@ -59,15 +64,19 @@ export default function Settings() {
 
       setError(null);
 
-      const response = await fetch("https://localhost:7108/api/users/settings", {
+      const response = await fetch("/jsonproxy", {
         method: "PUT",
         headers: {
-          Authorization: `Bearer ${authToken}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          volumeLevel: volume,
-          refreshFrequency,
+          endpoint: "/api/users/settings",
+          method: "PUT",
+          authorization: authToken,
+          body: {
+            volumeLevel: volume,
+            refreshFrequency,
+          },
         }),
       });
 

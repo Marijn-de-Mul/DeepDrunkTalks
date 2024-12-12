@@ -35,8 +35,7 @@ export default function Conversations() {
   useEffect(() => {
     if (isClient) {
       async function fetchConversations() {
-
-        setIsLoading(true); 
+        setIsLoading(true);
 
         const token = localStorage.getItem('authToken');
         if (!token) {
@@ -45,16 +44,17 @@ export default function Conversations() {
         }
 
         try {
-          const backendUrl = process.env.NODE_ENV === "production"
-            ? "http://backend:8079"
-            : "https://localhost:8080";
-
-          const response = await fetch(`${backendUrl}/api/conversations`, {
-            method: 'GET',
+          const response = await fetch("/jsonproxy", {
+            method: 'POST',
             headers: {
-              'Authorization': `Bearer ${token}`,
               'Content-Type': 'application/json',
             },
+            body: JSON.stringify({
+              method: 'GET',
+              endpoint: '/api/conversations',
+              authorization: token,
+              body: null,
+            }),
           });
 
           if (!response.ok) {
@@ -62,7 +62,7 @@ export default function Conversations() {
           }
 
           const data = await response.json();
-          
+
           setTimeout(() => {
             setConversations(data);
             setIsLoading(false);
@@ -78,19 +78,22 @@ export default function Conversations() {
     }
   }, [isClient]);
 
-  async function fetchAudioFile(fileName: string) {
+  async function fetchAudioFile(conversationId: any) {
     const token = localStorage.getItem("authToken");
     if (!token) {
       console.error("Token not found. Unable to fetch audio file.");
       return;
     }
 
+    const formData = new FormData();
+    formData.append("endpoint", `/api/conversations/${conversationId}/audio`);
+    formData.append("method", "GET");
+    formData.append("authorization", token);
+
     try {
-      const response = await fetch(fileName, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+      const response = await fetch("/audioProxy", {
+        method: "POST",
+        body: formData,
       });
 
       if (response.ok) {
@@ -104,41 +107,13 @@ export default function Conversations() {
     }
   }
 
-  const deleteConversation = async (conversationId: any) => {
-    const token = localStorage.getItem("authToken");
-    if (!token) {
-      console.error("Token not found. Unable to fetch audio file.");
-      return;
-    }
-
-    try {
-      const response = await fetch(`https://localhost:7108/api/conversations/${conversationId}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      });
-
-      if (response.ok) {
-        setConversations((prevConversations) =>
-          prevConversations.filter((conversation) => conversation.id !== conversationId)
-        );
-      } else {
-        console.error("Failed to delete the conversation");
-      }
-    } catch (error) {
-      console.error("Error deleting conversation:", error);
-    }
-  };
-
   useEffect(() => {
     async function loadAudioUrls() {
       const newAudioUrls: { [key: number]: string | undefined } = {};
 
       for (const conversation of conversations) {
         if (conversation.audio) {
-          const audioUrl = await fetchAudioFile(conversation.audio);
+          const audioUrl = await fetchAudioFile(conversation.id);
           newAudioUrls[conversation.id] = audioUrl;
         } else {
           newAudioUrls[conversation.id] = undefined;
@@ -154,7 +129,7 @@ export default function Conversations() {
   }, [conversations]);
 
   if (!isClient || isLoading) {
-    return <Loading></Loading>; 
+    return <Loading></Loading>;
   }
 
   return (
@@ -166,7 +141,7 @@ export default function Conversations() {
           alignItems: "center",
           flexDirection: "column",
           width: "100%",
-          marginTop: "5vh", 
+          marginTop: "5vh",
         }}
         data-testid="conversations-main-container"
       >
@@ -202,7 +177,7 @@ export default function Conversations() {
         >
           {conversations.map((conversation) => (
             <Box
-              key={conversation.id}  
+              key={conversation.id}
               style={{
                 width: "100%",
                 padding: "15px",

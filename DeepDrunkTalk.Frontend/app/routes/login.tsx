@@ -28,20 +28,16 @@ export default function Login() {
     event.preventDefault();
 
     try {
-      // Create the payload for the proxy
-      const requestData = {
-        method: "POST", // Specify HTTP method
-        apiPath: "/api/users/login", // The path on your backend
-        body: JSON.stringify({ email, password }), // The body (login credentials)
-      };
-
-      // Send the request to the proxy route
-      const response = await fetch("/proxy", {
-        method: "POST", // POST to the /proxy route
+      const response = await fetch("/jsonproxy", {
+        method: "POST",
         headers: {
-          "Content-Type": "application/json", // Ensure the body is sent as JSON
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(requestData), // Send the request data as a JSON string
+        body: JSON.stringify({
+          endpoint: "/api/users/login",
+          method: "POST",
+          body: { email, password }
+        }),
       });
 
       if (response.ok) {
@@ -49,8 +45,8 @@ export default function Login() {
         console.log("Login successful!", data);
 
         if (isClient) {
-          localStorage.setItem("authToken", data.token); // Store token
-          navigate("/"); // Redirect to home page or dashboard
+          localStorage.setItem("authToken", data.token); 
+          navigate("/");
         }
       } else {
         const errorData = await response.json();

@@ -33,7 +33,6 @@ export default function Login() {
       formData.append("apiPath", "/api/users/login");
       formData.append("body", JSON.stringify({ email, password })); 
 
-      // Call the proxy route
       const response = await fetch("/proxy", {
         method: "POST", 
         body: formData, 

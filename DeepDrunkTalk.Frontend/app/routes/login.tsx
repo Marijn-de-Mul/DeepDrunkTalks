@@ -17,30 +17,26 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
-  const [isClient, setIsClient] = useState(false); 
+  const [isClient, setIsClient] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    setIsClient(true); 
+    setIsClient(true);
   }, []);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     try {
-      const backendUrl = process.env.NODE_ENV === "production"
-            ? "http://backend:8079"
-            : "https://localhost:8080";
+      const formData = new FormData();
+      formData.append("method", "POST"); 
+      formData.append("apiPath", "/api/users/login");
+      formData.append("body", JSON.stringify({ email, password })); 
 
-      const response = await fetch(`${backendUrl}/api/users/login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: email,
-          password: password,
-        }),
+      // Call the proxy route
+      const response = await fetch("/proxy", {
+        method: "POST", 
+        body: formData, 
       });
 
       if (response.ok) {
@@ -48,7 +44,7 @@ export default function Login() {
         console.log("Login successful!", data);
 
         if (isClient) {
-          localStorage.setItem("authToken", data.token);
+          localStorage.setItem("authToken", data.token); 
           navigate("/"); 
         }
       } else {
@@ -62,7 +58,7 @@ export default function Login() {
   };
 
   if (!isClient) {
-    return <Loading></Loading>; 
+    return <Loading></Loading>;
   }
 
   return (

@@ -18,11 +18,6 @@ COPY DDT.Backend.UTL/ DDT.Backend.UTL/
 
 RUN dotnet restore "DeepDrunkTalks.Backend.sln"
 
-RUN ls -l /src
-RUN ls -l /app
-
-WORKDIR /app
-
 RUN dotnet build "DeepDrunkTalks.Backend.sln" -c Release -o /app/build
 
 RUN dotnet publish "DeepDrunkTalks.Backend.sln" -c Release -o /app/publish

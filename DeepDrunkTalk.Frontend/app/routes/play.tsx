@@ -4,7 +4,9 @@ import { useEffect, useRef, useState } from "react";
 import ProtectedRoute from "~/components/layouts/ProtectedRoute";
 import logo from "~/assets/img/logo.png";
 
-let mediaRecorder: MediaRecorder | null = null;
+let audioContext: AudioContext | null = null;
+let mediaStreamSource: MediaStreamAudioSourceNode | null = null;
+let recorder: MediaRecorder | null = null;
 let recordedChunks: Blob[] = [];
 
 export default function Play() {
@@ -124,60 +126,59 @@ export default function Play() {
     await startConversation();
     setIsNextQuestionDisabled(false);
   }
-
-  const AUDIO_FORMATS = [
-    'audio/webm;codecs=opus',
-    'audio/webm',
-    'audio/mp4',
-    'audio/aac',
-    'audio/mpeg'
-  ];
-
+  
   async function startRecording() {
     try {
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      recordedChunks = [];
-
-      const supportedFormat = AUDIO_FORMATS.find(format =>
-        MediaRecorder.isTypeSupported(format)
-      );
-
-      if (!supportedFormat) {
-        throw new Error('No supported audio format found');
-      }
-
-      console.log('Using format:', supportedFormat);
-
-      mediaRecorder = new MediaRecorder(stream, {
-        mimeType: supportedFormat
+      const stream = await navigator.mediaDevices.getUserMedia({ 
+        audio: {
+          sampleRate: 44100,
+          channelCount: 1,
+          echoCancellation: true,
+          noiseSuppression: true
+        } 
       });
-
-      mediaRecorder.ondataavailable = (event) => {
+  
+      audioContext = new AudioContext();
+      mediaStreamSource = audioContext.createMediaStreamSource(stream);
+      
+      recorder = new MediaRecorder(stream, {
+        mimeType: 'audio/webm;codecs=opus'
+      });
+  
+      recordedChunks = [];
+  
+      recorder.ondataavailable = (event) => {
         if (event.data.size > 0) {
           recordedChunks.push(event.data);
         }
       };
-
-      mediaRecorder.onstop = async () => {
+  
+      recorder.onstop = async () => {
         const audioBlob = new Blob(recordedChunks, { type: 'audio/webm' });
         await sendAudioChunk(audioBlob);
+        
+        if (audioContext) {
+          await audioContext.close();
+          audioContext = null;
+        }
+        mediaStreamSource = null;
       };
-
-      mediaRecorder.start(1000);
+  
+      recorder.start(1000);
       setIsRecording(true);
     } catch (error) {
       console.error("Error:", error);
       setIsRecording(false);
     }
   }
-
+  
   function stopRecording() {
-    if (mediaRecorder && mediaRecorder.state !== 'inactive') {
-      mediaRecorder.stop();
+    if (recorder && recorder.state !== 'inactive') {
+      recorder.stop();
       setIsRecording(false);
     }
   }
-
+  
   async function sendAudioChunk(audioBlob: Blob) {
     const token = localStorage.getItem("authToken");
     const conversationId = localStorage.getItem("conversationId");

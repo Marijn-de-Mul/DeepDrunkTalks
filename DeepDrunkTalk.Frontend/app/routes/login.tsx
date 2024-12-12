@@ -29,8 +29,8 @@ export default function Login() {
 
     try {
       const backendUrl = process.env.NODE_ENV === "production"
-            ? "https://backend:8080"
-            : "https://localhost:7108";
+            ? "https://backend:8079"
+            : "https://localhost:8079";
 
       const response = await fetch(`${backendUrl}/api/users/login`, {
         method: "POST",

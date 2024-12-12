@@ -28,7 +28,11 @@ export default function Login() {
     event.preventDefault();
 
     try {
-      const response = await fetch("https://localhost:7108/api/users/login", {
+      const backendUrl = process.env.NODE_ENV === "production"
+            ? "https://backend:7108"
+            : "https://localhost:7108";
+
+      const response = await fetch(`${backendUrl}/api/users/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

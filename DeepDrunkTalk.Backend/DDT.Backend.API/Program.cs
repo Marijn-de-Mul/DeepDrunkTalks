@@ -121,4 +121,16 @@ app.UseAuthorization();
 
 app.MapControllers();  
 
+if (environment.IsProduction())
+{
+    builder.WebHost.ConfigureKestrel(options =>
+    {
+        options.ListenAnyIP(8079);  
+        options.ListenAnyIP(8080, listenOptions =>
+        {
+            listenOptions.UseHttps();  
+        });
+    });
+}
+
 app.Run();

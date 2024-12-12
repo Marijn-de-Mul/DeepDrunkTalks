@@ -174,7 +174,7 @@ const Play = () => {
     formData.append("audio", audioBlob);
 
     try {
-      const response = await fetch("/audioProxy", {
+      const response = await fetch("/audiopostproxy", {
         method: "POST",
         body: formData,
       });
@@ -275,30 +275,7 @@ const Play = () => {
           BACK TO MAIN MENU
         </Button>
       </Box>
-
-      <Divider
-        data-testid="play-divider"
-        color="black"
-        style={{ marginTop: "9.2vh" }}
-      />
-
-      <Box
-        data-testid="play-footer"
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <Text
-          data-testid="play-footer-text"
-          style={{ marginTop: "2vh", fontStyle: "italic" }}
-        >
-          DeepDrunkTalks - 2024 ©
-        </Text>
-      </Box>
     </ProtectedRoute>
   );
 };
 
-export default Play;

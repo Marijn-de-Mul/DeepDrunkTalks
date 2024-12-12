@@ -179,30 +179,6 @@ export default function Login() {
           </a>
         </form>
       </Box>
-
-      <Divider
-        color="black"
-        style={{
-          marginTop: error ? "13.2vh" : "15vh"
-        }}
-      ></Divider>
-
-      <Box
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center"
-        }}
-      >
-        <Text
-          style={{
-            marginTop: "2vh",
-            fontStyle: "italic"
-          }}
-        >
-          DeepDrunkTalks - 2024 ©
-        </Text>
-      </Box>
     </>
   );
 }

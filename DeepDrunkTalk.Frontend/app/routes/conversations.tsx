@@ -85,15 +85,16 @@ export default function Conversations() {
       return;
     }
 
-    const formData = new FormData();
-    formData.append("endpoint", `/api/conversations/${conversationId}/audio`);
-    formData.append("method", "GET");
-    formData.append("authorization", token);
-
     try {
-      const response = await fetch("/audioProxy", {
+      const formData = new FormData();
+      formData.append("endpoint", `/api/conversations/${conversationId}/audio`);
+
+      const response = await fetch(`/audiogetproxy`, {
         method: "POST",
-        body: formData,
+        headers: {
+          "Authorization": `Bearer ${token}`
+        },
+        body: formData
       });
 
       if (response.ok) {
@@ -101,9 +102,11 @@ export default function Conversations() {
         return URL.createObjectURL(audioBlob);
       } else {
         console.error("Failed to fetch audio file:", response.status);
+        return null;
       }
     } catch (error) {
-      console.error("Error while fetching audio file:", error);
+      console.error("Error fetching audio file:", error);
+      return null;
     }
   }
 
@@ -275,33 +278,6 @@ export default function Conversations() {
             BACK TO MAIN MENU
           </Button>
         </Link>
-      </Box>
-
-      <Divider
-        color="black"
-        style={{
-          marginTop: "0.5vh",
-        }}
-        data-testid="conversations-divider"
-      />
-
-      <Box
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-        data-testid="conversations-footer"
-      >
-        <Text
-          style={{
-            marginTop: "2vh",
-            fontStyle: "italic",
-          }}
-          data-testid="conversations-footer-text"
-        >
-          DeepDrunkTalks - 2024 ©
-        </Text>
       </Box>
     </ProtectedRoute>
   );

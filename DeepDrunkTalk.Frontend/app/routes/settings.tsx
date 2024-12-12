@@ -265,31 +265,6 @@ export default function Settings() {
             </Button>
           </Link>
         </Box>
-
-        <Divider
-          color="black"
-          style={{
-            marginTop: "3vh",
-          }}
-        />
-
-        <Box
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <Text
-            style={{
-              marginTop: "2vh",
-              fontStyle: "italic",
-            }}
-            data-testid="setting-footer-text"
-          >
-            DeepDrunkTalks - 2024 ©
-          </Text>
-        </Box>
       </>
     </ProtectedRoute>
   );

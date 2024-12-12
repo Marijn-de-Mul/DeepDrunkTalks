@@ -206,30 +206,6 @@ export default function Register() {
           </a>
         </Form>
       </Box>
-
-      <Divider
-        color="black"
-        style={{
-          marginTop: error ? "1.0vh" : "2.8vh"
-        }}
-      ></Divider>
-
-      <Box
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center"
-        }}
-      >
-        <Text
-          style={{
-            marginTop: "2vh",
-            fontStyle: "italic"
-          }}
-        >
-          DeepDrunkTalks - 2024 ©
-        </Text>
-      </Box>
     </>
   );
 }

@@ -117,33 +117,6 @@ export default function Index() {
             LOGOUT
           </Button>
         </Box>
-
-        <Divider
-          color="black"
-          style={{
-            marginTop: "10vh",
-          }}
-          data-testid="mainmenu-divider"
-        ></Divider>
-
-        <Box
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-          data-testid="mainmenu-footer"
-        >
-          <Text
-            style={{
-              marginTop: "2vh",
-              fontStyle: "italic",
-            }}
-            data-testid="mainmenu-footer-text"
-          >
-            DeepDrunkTalks - 2024 ©
-          </Text>
-        </Box>
       </>
     </ProtectedRoute>
   );

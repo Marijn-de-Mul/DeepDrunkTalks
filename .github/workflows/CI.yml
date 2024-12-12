@@ -25,12 +25,12 @@ jobs:
         run: |
           git fetch --prune --unshallow
 
-      - name: (Frontend) Get Changed Files
-        id: changed-files
-        run: |
-          files=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep -E '\.(js|jsx|ts|tsx)$' || echo "")
-          echo "Changed files: $files"
-          echo "files=$files" >> $GITHUB_ENV
+      # - name: (Frontend) Get Changed Files
+      #   id: changed-files
+      #   run: |
+      #     files=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep -E '\.(js|jsx|ts|tsx)$' || echo "")
+      #     echo "Changed files: $files"
+      #     echo "files=$files" >> $GITHUB_ENV
 
       #- name: (Frontend) Lint Changed Files
       #  working-directory: DeepDrunkTalk.Frontend/

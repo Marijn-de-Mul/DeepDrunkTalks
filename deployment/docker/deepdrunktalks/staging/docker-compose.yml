@@ -1,6 +1,6 @@
 services:
   frontend:
-    image: marijndemul16/ddt.frontend:staging
+    image: marijndemul16/ddt.frontend:latest
     container_name: frontend_staging
     ports:
       - "3001:3000"
@@ -11,7 +11,7 @@ services:
       - staging
 
   backend:
-    image: marijndemul16/ddt.backend:staging
+    image: marijndemul16/ddt.backend:latest
     container_name: backend_staging
     environment:
       - ASPNETCORE_ENVIRONMENT=Staging

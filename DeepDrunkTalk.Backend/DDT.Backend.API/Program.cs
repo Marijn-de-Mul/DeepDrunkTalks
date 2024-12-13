@@ -20,7 +20,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 var environment = builder.Environment;
 
-if (!environment.IsProduction())
+if (!environment.IsProduction() && !environment.IsStaging())
 {
     EnvironmentVariables_old.LoadEnvironments();
 }

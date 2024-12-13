@@ -164,7 +164,7 @@ export default function Play() {
   async function stopRecording() {
     if (recorder) {
       return new Promise<void>((resolve, reject) => {
-        recorder.stopRecording(async () => {
+        recorder!.stopRecording(async () => {
           try {
             const blob = recorder?.getBlob();
             console.log('Raw blob:', blob);

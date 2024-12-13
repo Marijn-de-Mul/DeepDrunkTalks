@@ -21,7 +21,11 @@ export const action: ActionFunction = async ({ request }) => {
 
     const proxyFormData = new FormData();
     if (audio instanceof Blob) {
-      proxyFormData.append("audio", audio, "audio.webm");
+      const arrayBuffer = await audio.arrayBuffer();
+      if (arrayBuffer.byteLength === 0) {
+        throw new Error("Invalid state: chunk ArrayBuffer is zero-length or detached");
+      }
+      proxyFormData.append("audio", new Blob([arrayBuffer], { type: 'audio/webm' }), "audio.webm");
     } else if (typeof audio === 'string') {
       proxyFormData.append("audio", new Blob([audio]), "audio.webm");
     } else {

@@ -8,52 +8,28 @@ export const action: ActionFunction = async ({ request }) => {
   const endpoint = formData.get("endpoint");
   const authorization = formData.get("authorization");
   const audio = formData.get("audio");
-
   if (!endpoint || !authorization || !audio) {
-    console.error("Missing required parameters:", { endpoint, authorization, audio });
     return json({ error: "Missing required parameters" }, { status: 400 });
   }
-
   const targetUrl = `${BASE_URL}${endpoint}`;
-
+  const headers: HeadersInit = {
+    "Authorization": `Bearer ${authorization}`,
+  };
+  const proxyFormData = new FormData();
+  proxyFormData.append("audio", audio as Blob, "audio.webm");
   try {
-    console.log('Audio type:', audio instanceof Blob);
-    console.log('Audio size:', audio instanceof Blob ? audio.size : 'N/A');
-
-    const proxyFormData = new FormData();
-    if (audio instanceof Blob) {
-      const arrayBuffer = await audio.arrayBuffer();
-      if (arrayBuffer.byteLength === 0) {
-        throw new Error("Invalid state: chunk ArrayBuffer is zero-length or detached");
-      }
-      proxyFormData.append("audio", new Blob([arrayBuffer], { type: 'audio/webm' }), "audio.webm");
-      console.log("Audio blob appended to proxyFormData.");
-    } else if (typeof audio === 'string') {
-      proxyFormData.append("audio", new Blob([audio], { type: 'audio/webm' }), "audio.webm");
-      console.log("Audio string converted to blob and appended to proxyFormData.");
-    } else {
-      throw new Error("Invalid audio format");
-    }
-
     const response = await fetch(targetUrl, {
       method: "POST",
-      headers: {
-        "Authorization": `Bearer ${authorization}`,
-      },
-      body: proxyFormData
-    });
-
-    console.log('Upload response status:', response.status);
+      headers,
+      body: proxyFormData,
+    } as import("node-fetch").RequestInit);
+    console.log("Audio upload status:", response.status);
     if (!response.ok) {
-      const errorText = await response.text();
-      console.error('Upload failed:', response.status, errorText);
       return json({ error: "Failed to upload audio" }, { status: response.status });
     }
-
-    console.log("Audio chunk uploaded successfully.");
-    return json({ success: true });
+    return json({ success: true }, { status: 200 });
   } catch (error) {
     console.error("Audio upload error:", error);
-    return json({ error: `AAA: ${String(error)}` }, { status: 500 });
+    return json({ error: "Internal Server Error" }, { status: 500 });
   }
 };

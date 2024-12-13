@@ -18274,3 +18274,63 @@ INFO | 2024-12-13 09:59:41 | Extracted token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVC
 INFO | 2024-12-13 09:59:41 | Token validated for user ID: 7
 INFO | 2024-12-13 09:59:41 | Attempting to get user by UserId: 7
 INFO | 2024-12-13 09:59:41 | Successfully retrieved user with UserId: 7
+INFO | 2024-12-13 10:17:20 | Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI3IiwidW5pcXVlX25hbWUiOiJ0ZXN0IiwibmJmIjoxNzM0MDc4NzgzLCJleHAiOjE3MzQ2ODM1ODMsImlhdCI6MTczNDA3ODc4M30.hKSbsZLR_px-XZHLmqNTctxdQ1Sj2oytE64tSaE3Wnc
+INFO | 2024-12-13 10:17:20 | Extracted token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI3IiwidW5pcXVlX25hbWUiOiJ0ZXN0IiwibmJmIjoxNzM0MDc4NzgzLCJleHAiOjE3MzQ2ODM1ODMsImlhdCI6MTczNDA3ODc4M30.hKSbsZLR_px-XZHLmqNTctxdQ1Sj2oytE64tSaE3Wnc
+INFO | 2024-12-13 10:17:20 | Token validated for user ID: 7
+INFO | 2024-12-13 10:17:20 | Attempting to get user by UserId: 7
+INFO | 2024-12-13 10:17:22 | Successfully retrieved user with UserId: 7
+INFO | 2024-12-13 10:17:23 | Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI3IiwidW5pcXVlX25hbWUiOiJ0ZXN0IiwibmJmIjoxNzM0MDc4NzgzLCJleHAiOjE3MzQ2ODM1ODMsImlhdCI6MTczNDA3ODc4M30.hKSbsZLR_px-XZHLmqNTctxdQ1Sj2oytE64tSaE3Wnc
+INFO | 2024-12-13 10:17:23 | Extracted token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI3IiwidW5pcXVlX25hbWUiOiJ0ZXN0IiwibmJmIjoxNzM0MDc4NzgzLCJleHAiOjE3MzQ2ODM1ODMsImlhdCI6MTczNDA3ODc4M30.hKSbsZLR_px-XZHLmqNTctxdQ1Sj2oytE64tSaE3Wnc
+INFO | 2024-12-13 10:17:23 | Token validated for user ID: 7
+INFO | 2024-12-13 10:17:24 | Attempting to get user by UserId: 7
+INFO | 2024-12-13 10:17:24 | Successfully retrieved user with UserId: 7
+INFO | 2024-12-13 10:17:24 | Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI3IiwidW5pcXVlX25hbWUiOiJ0ZXN0IiwibmJmIjoxNzM0MDc4NzgzLCJleHAiOjE3MzQ2ODM1ODMsImlhdCI6MTczNDA3ODc4M30.hKSbsZLR_px-XZHLmqNTctxdQ1Sj2oytE64tSaE3Wnc
+INFO | 2024-12-13 10:17:24 | Extracted token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI3IiwidW5pcXVlX25hbWUiOiJ0ZXN0IiwibmJmIjoxNzM0MDc4NzgzLCJleHAiOjE3MzQ2ODM1ODMsImlhdCI6MTczNDA3ODc4M30.hKSbsZLR_px-XZHLmqNTctxdQ1Sj2oytE64tSaE3Wnc
+INFO | 2024-12-13 10:17:24 | Token validated for user ID: 7
+INFO | 2024-12-13 10:17:24 | Attempting to get user by UserId: 7
+INFO | 2024-12-13 10:17:24 | Successfully retrieved user with UserId: 7
+INFO | 2024-12-13 10:17:24 | Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI3IiwidW5pcXVlX25hbWUiOiJ0ZXN0IiwibmJmIjoxNzM0MDc4NzgzLCJleHAiOjE3MzQ2ODM1ODMsImlhdCI6MTczNDA3ODc4M30.hKSbsZLR_px-XZHLmqNTctxdQ1Sj2oytE64tSaE3Wnc
+INFO | 2024-12-13 10:17:24 | Extracted token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI3IiwidW5pcXVlX25hbWUiOiJ0ZXN0IiwibmJmIjoxNzM0MDc4NzgzLCJleHAiOjE3MzQ2ODM1ODMsImlhdCI6MTczNDA3ODc4M30.hKSbsZLR_px-XZHLmqNTctxdQ1Sj2oytE64tSaE3Wnc
+INFO | 2024-12-13 10:17:24 | Token validated for user ID: 7
+INFO | 2024-12-13 10:17:24 | Attempting to get user by UserId: 7
+INFO | 2024-12-13 10:17:24 | Successfully retrieved user with UserId: 7
+INFO | 2024-12-13 10:17:35 | Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI3IiwidW5pcXVlX25hbWUiOiJ0ZXN0IiwibmJmIjoxNzM0MDc4NzgzLCJleHAiOjE3MzQ2ODM1ODMsImlhdCI6MTczNDA3ODc4M30.hKSbsZLR_px-XZHLmqNTctxdQ1Sj2oytE64tSaE3Wnc
+INFO | 2024-12-13 10:17:35 | Extracted token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI3IiwidW5pcXVlX25hbWUiOiJ0ZXN0IiwibmJmIjoxNzM0MDc4NzgzLCJleHAiOjE3MzQ2ODM1ODMsImlhdCI6MTczNDA3ODc4M30.hKSbsZLR_px-XZHLmqNTctxdQ1Sj2oytE64tSaE3Wnc
+INFO | 2024-12-13 10:17:35 | Token validated for user ID: 7
+INFO | 2024-12-13 10:17:35 | Attempting to get user by UserId: 7
+INFO | 2024-12-13 10:17:35 | Successfully retrieved user with UserId: 7
+INFO | 2024-12-13 10:17:36 | Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI3IiwidW5pcXVlX25hbWUiOiJ0ZXN0IiwibmJmIjoxNzM0MDc4NzgzLCJleHAiOjE3MzQ2ODM1ODMsImlhdCI6MTczNDA3ODc4M30.hKSbsZLR_px-XZHLmqNTctxdQ1Sj2oytE64tSaE3Wnc
+INFO | 2024-12-13 10:17:36 | Extracted token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI3IiwidW5pcXVlX25hbWUiOiJ0ZXN0IiwibmJmIjoxNzM0MDc4NzgzLCJleHAiOjE3MzQ2ODM1ODMsImlhdCI6MTczNDA3ODc4M30.hKSbsZLR_px-XZHLmqNTctxdQ1Sj2oytE64tSaE3Wnc
+INFO | 2024-12-13 10:17:36 | Token validated for user ID: 7
+INFO | 2024-12-13 10:17:36 | Attempting to get user by UserId: 7
+INFO | 2024-12-13 10:17:36 | Successfully retrieved user with UserId: 7
+INFO | 2024-12-13 10:17:37 | Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI3IiwidW5pcXVlX25hbWUiOiJ0ZXN0IiwibmJmIjoxNzM0MDc4NzgzLCJleHAiOjE3MzQ2ODM1ODMsImlhdCI6MTczNDA3ODc4M30.hKSbsZLR_px-XZHLmqNTctxdQ1Sj2oytE64tSaE3Wnc
+INFO | 2024-12-13 10:17:37 | Extracted token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI3IiwidW5pcXVlX25hbWUiOiJ0ZXN0IiwibmJmIjoxNzM0MDc4NzgzLCJleHAiOjE3MzQ2ODM1ODMsImlhdCI6MTczNDA3ODc4M30.hKSbsZLR_px-XZHLmqNTctxdQ1Sj2oytE64tSaE3Wnc
+INFO | 2024-12-13 10:17:37 | Token validated for user ID: 7
+INFO | 2024-12-13 10:17:37 | Attempting to get user by UserId: 7
+INFO | 2024-12-13 10:17:37 | Successfully retrieved user with UserId: 7
+INFO | 2024-12-13 10:17:37 | Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI3IiwidW5pcXVlX25hbWUiOiJ0ZXN0IiwibmJmIjoxNzM0MDc4NzgzLCJleHAiOjE3MzQ2ODM1ODMsImlhdCI6MTczNDA3ODc4M30.hKSbsZLR_px-XZHLmqNTctxdQ1Sj2oytE64tSaE3Wnc
+INFO | 2024-12-13 10:17:37 | Extracted token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI3IiwidW5pcXVlX25hbWUiOiJ0ZXN0IiwibmJmIjoxNzM0MDc4NzgzLCJleHAiOjE3MzQ2ODM1ODMsImlhdCI6MTczNDA3ODc4M30.hKSbsZLR_px-XZHLmqNTctxdQ1Sj2oytE64tSaE3Wnc
+INFO | 2024-12-13 10:17:37 | Token validated for user ID: 7
+INFO | 2024-12-13 10:17:37 | Attempting to get user by UserId: 7
+INFO | 2024-12-13 10:17:37 | Successfully retrieved user with UserId: 7
+INFO | 2024-12-13 10:20:33 | Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI3IiwidW5pcXVlX25hbWUiOiJ0ZXN0IiwibmJmIjoxNzM0MDc4NzgzLCJleHAiOjE3MzQ2ODM1ODMsImlhdCI6MTczNDA3ODc4M30.hKSbsZLR_px-XZHLmqNTctxdQ1Sj2oytE64tSaE3Wnc
+INFO | 2024-12-13 10:20:33 | Extracted token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI3IiwidW5pcXVlX25hbWUiOiJ0ZXN0IiwibmJmIjoxNzM0MDc4NzgzLCJleHAiOjE3MzQ2ODM1ODMsImlhdCI6MTczNDA3ODc4M30.hKSbsZLR_px-XZHLmqNTctxdQ1Sj2oytE64tSaE3Wnc
+INFO | 2024-12-13 10:20:33 | Token validated for user ID: 7
+INFO | 2024-12-13 10:20:33 | Attempting to get user by UserId: 7
+INFO | 2024-12-13 10:20:33 | Successfully retrieved user with UserId: 7
+INFO | 2024-12-13 10:20:34 | Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI3IiwidW5pcXVlX25hbWUiOiJ0ZXN0IiwibmJmIjoxNzM0MDc4NzgzLCJleHAiOjE3MzQ2ODM1ODMsImlhdCI6MTczNDA3ODc4M30.hKSbsZLR_px-XZHLmqNTctxdQ1Sj2oytE64tSaE3Wnc
+INFO | 2024-12-13 10:20:34 | Extracted token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI3IiwidW5pcXVlX25hbWUiOiJ0ZXN0IiwibmJmIjoxNzM0MDc4NzgzLCJleHAiOjE3MzQ2ODM1ODMsImlhdCI6MTczNDA3ODc4M30.hKSbsZLR_px-XZHLmqNTctxdQ1Sj2oytE64tSaE3Wnc
+INFO | 2024-12-13 10:20:34 | Token validated for user ID: 7
+INFO | 2024-12-13 10:20:34 | Attempting to get user by UserId: 7
+INFO | 2024-12-13 10:20:34 | Successfully retrieved user with UserId: 7
+INFO | 2024-12-13 10:20:34 | Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI3IiwidW5pcXVlX25hbWUiOiJ0ZXN0IiwibmJmIjoxNzM0MDc4NzgzLCJleHAiOjE3MzQ2ODM1ODMsImlhdCI6MTczNDA3ODc4M30.hKSbsZLR_px-XZHLmqNTctxdQ1Sj2oytE64tSaE3Wnc
+INFO | 2024-12-13 10:20:34 | Extracted token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI3IiwidW5pcXVlX25hbWUiOiJ0ZXN0IiwibmJmIjoxNzM0MDc4NzgzLCJleHAiOjE3MzQ2ODM1ODMsImlhdCI6MTczNDA3ODc4M30.hKSbsZLR_px-XZHLmqNTctxdQ1Sj2oytE64tSaE3Wnc
+INFO | 2024-12-13 10:20:34 | Token validated for user ID: 7
+INFO | 2024-12-13 10:20:34 | Attempting to get user by UserId: 7
+INFO | 2024-12-13 10:20:34 | Successfully retrieved user with UserId: 7
+INFO | 2024-12-13 10:20:35 | Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI3IiwidW5pcXVlX25hbWUiOiJ0ZXN0IiwibmJmIjoxNzM0MDc4NzgzLCJleHAiOjE3MzQ2ODM1ODMsImlhdCI6MTczNDA3ODc4M30.hKSbsZLR_px-XZHLmqNTctxdQ1Sj2oytE64tSaE3Wnc
+INFO | 2024-12-13 10:20:35 | Extracted token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI3IiwidW5pcXVlX25hbWUiOiJ0ZXN0IiwibmJmIjoxNzM0MDc4NzgzLCJleHAiOjE3MzQ2ODM1ODMsImlhdCI6MTczNDA3ODc4M30.hKSbsZLR_px-XZHLmqNTctxdQ1Sj2oytE64tSaE3Wnc
+INFO | 2024-12-13 10:20:35 | Token validated for user ID: 7
+INFO | 2024-12-13 10:20:35 | Attempting to get user by UserId: 7
+INFO | 2024-12-13 10:20:35 | Successfully retrieved user with UserId: 7

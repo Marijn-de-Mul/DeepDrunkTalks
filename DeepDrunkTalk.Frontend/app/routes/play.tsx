@@ -240,8 +240,8 @@ export default function Play() {
     }
   }
 
-  function handleBackToMainMenu() {
-    stopConversation();
+  async function handleBackToMainMenu() {
+    await stopConversation();
     navigate("/");
   }
 

@@ -10,11 +10,12 @@ export const action: ActionFunction = async ({ request }) => {
   const audio = formData.get("audio");
 
   if (!endpoint || !authorization || !audio) {
+    console.error("Missing required parameters:", { endpoint, authorization, audio });
     return json({ error: "Missing required parameters" }, { status: 400 });
   }
 
   const targetUrl = `${BASE_URL}${endpoint}`;
-  
+
   try {
     console.log('Audio type:', audio instanceof Blob);
     console.log('Audio size:', audio instanceof Blob ? audio.size : 'N/A');
@@ -26,8 +27,10 @@ export const action: ActionFunction = async ({ request }) => {
         throw new Error("Invalid state: chunk ArrayBuffer is zero-length or detached");
       }
       proxyFormData.append("audio", new Blob([arrayBuffer], { type: 'audio/webm' }), "audio.webm");
+      console.log("Audio blob appended to proxyFormData.");
     } else if (typeof audio === 'string') {
-      proxyFormData.append("audio", new Blob([audio]), "audio.webm");
+      proxyFormData.append("audio", new Blob([audio], { type: 'audio/webm' }), "audio.webm");
+      console.log("Audio string converted to blob and appended to proxyFormData.");
     } else {
       throw new Error("Invalid audio format");
     }
@@ -40,11 +43,14 @@ export const action: ActionFunction = async ({ request }) => {
       body: proxyFormData
     });
 
+    console.log('Upload response status:', response.status);
     if (!response.ok) {
-      console.error('Upload failed:', response.status);
+      const errorText = await response.text();
+      console.error('Upload failed:', response.status, errorText);
       return json({ error: "Failed to upload audio" }, { status: response.status });
     }
 
+    console.log("Audio chunk uploaded successfully.");
     return json({ success: true });
   } catch (error) {
     console.error("Audio upload error:", error);

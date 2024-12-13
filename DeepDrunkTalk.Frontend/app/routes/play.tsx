@@ -1,20 +1,19 @@
-import { Button, Image, Box, Text } from "@mantine/core";
-import { useNavigate } from "@remix-run/react";
 import { useEffect, useRef, useState } from "react";
-import RecordRTC, { StereoAudioRecorder } from 'recordrtc';
+import { useNavigate } from "@remix-run/react";
+import { Button, Image, Box, Text } from "@mantine/core";
 
 import ProtectedRoute from "~/components/layouts/ProtectedRoute";
 import logo from "~/assets/img/logo.png";
-
-let recorder: RecordRTC | null = null;
-let audioStream: MediaStream | null = null;
 
 export default function Play() {
   const [question, setQuestion] = useState("Question Placeholder");
   const [isNextQuestionDisabled, setIsNextQuestionDisabled] = useState(false);
   const [isRecording, setIsRecording] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [conversationInProgress, setConversationInProgress] = useState(false); // Changed from useRef to useState
 
-  const conversationInProgressRef = useRef(false);
+  const recorderRef = useRef<any>(null);
+  const audioStreamRef = useRef<MediaStream | null>(null);
   const hasStartedRef = useRef(false);
 
   const navigate = useNavigate();
@@ -44,7 +43,7 @@ export default function Play() {
   }, []);
 
   async function startConversation() {
-    if (conversationInProgressRef.current || typeof window === "undefined") return;
+    if (conversationInProgress || typeof window === "undefined") return;
 
     const token = localStorage.getItem("authToken");
 
@@ -58,7 +57,7 @@ export default function Play() {
           endpoint: "/api/conversations",
           method: "POST",
           authorization: token,
-          body: {}
+          body: {},
         }),
       });
 
@@ -68,7 +67,7 @@ export default function Play() {
         setQuestion(questionData.question);
         localStorage.setItem("conversationId", questionData.conversationId);
 
-        conversationInProgressRef.current = true;
+        setConversationInProgress(true); // Update state instead of ref
 
         await startRecording();
       } else {
@@ -80,7 +79,7 @@ export default function Play() {
   }
 
   async function stopConversation() {
-    if (!conversationInProgressRef.current || typeof window === "undefined") return;
+    if (!conversationInProgress || typeof window === "undefined") return;
 
     const token = localStorage.getItem("authToken");
     const conversationId = localStorage.getItem("conversationId");
@@ -102,12 +101,12 @@ export default function Play() {
           endpoint: `/api/conversations/${conversationId}/stop`,
           method: "PUT",
           authorization: token,
-          body: {}
+          body: {},
         }),
       });
 
       if (response.ok) {
-        conversationInProgressRef.current = false;
+        setConversationInProgress(false); // Update state instead of ref
         console.log("Conversation stopped successfully");
       } else {
         const errorData = await response.json();
@@ -119,89 +118,111 @@ export default function Play() {
   }
 
   async function nextQuestion() {
-    if (!conversationInProgressRef.current) return;
+    if (!conversationInProgress || isRecording || isProcessing) return;
 
+    setIsProcessing(true);
     setIsNextQuestionDisabled(true);
     console.log("Stopping current conversation...");
     await stopConversation();
     console.log("Starting new conversation...");
     await startConversation();
+    setIsProcessing(false);
     setIsNextQuestionDisabled(false);
   }
 
   async function startRecording() {
-    if (typeof window === 'undefined') return;
+    if (typeof window === "undefined") return;
 
     try {
-      const RecordRTC = (await import('recordrtc')).default;
-      const { StereoAudioRecorder } = await import('recordrtc');
+      const RecordRTCModule = await import("recordrtc");
+      const { StereoAudioRecorder } = await import("recordrtc");
 
-      audioStream = await window.navigator.mediaDevices.getUserMedia({
+      audioStreamRef.current = await navigator.mediaDevices.getUserMedia({
         audio: {
           echoCancellation: true,
           noiseSuppression: true,
           sampleRate: 44100,
-          channelCount: 1
-        }
+          channelCount: 1,
+        },
       });
 
-      recorder = new RecordRTC(audioStream, {
-        type: 'audio',
-        mimeType: 'audio/webm',
+      const RecordRTC = RecordRTCModule.default;
+
+      recorderRef.current = new RecordRTC(audioStreamRef.current, {
+        type: "audio",
+        mimeType: "audio/webm",
         recorderType: StereoAudioRecorder,
         numberOfAudioChannels: 1,
-        desiredSampRate: 44100
+        desiredSampRate: 44100,
+        timeSlice: 1000, // Capture audio in 1-second chunks
+        ondataavailable: (blob: Blob) => {
+          console.log("Received audio chunk:", blob.size, "bytes");
+          if (blob.size > 0) {
+            sendAudioChunk(blob).catch((error) =>
+              console.error("Error sending audio chunk:", error)
+            );
+          } else {
+            console.error("Received empty audio chunk");
+          }
+        },
       });
 
-      recorder.startRecording();
+      recorderRef.current.startRecording();
+      console.log("Recording started with streaming (chunks every 1s)");
       setIsRecording(true);
     } catch (error) {
-      console.error("Error:", error);
+      console.error("Error starting RecordRTC:", error);
       setIsRecording(false);
     }
   }
 
   async function stopRecording() {
-    if (recorder) {
+    if (recorderRef.current && isRecording) {
       return new Promise<void>((resolve, reject) => {
-        recorder!.stopRecording(async () => {
+        recorderRef.current?.stopRecording(async () => {
           try {
-            const blob = recorder?.getBlob();
-            console.log('Raw blob:', blob);
+            const blob = recorderRef.current?.getBlob();
+            console.log("Final recorded blob:", blob);
 
-            if (blob) {
-              const webmBlob = new Blob([blob], { type: 'audio/webm' });
-              console.log('WebM blob:', webmBlob);
-
-              const formData = new FormData();
-              formData.append("audio", webmBlob, "recording.webm");
-
-              for (let [key, value] of formData.entries()) {
-                console.log(`FormData entry - ${key}:`, value);
-              }
-
-              await sendAudioChunk(webmBlob);
+            if (blob && blob.size > 0) {
+              console.log(`Final blob size: ${blob.size} bytes`);
+              await sendAudioChunk(blob); // Send the final chunk if necessary
             } else {
-              console.error("Blob is undefined or null");
+              console.error("Final blob is undefined, null, or empty");
             }
 
-            if (audioStream) {
-              audioStream.getTracks().forEach(track => track.stop());
-              audioStream = null;
+            if (audioStreamRef.current) {
+              audioStreamRef.current.getTracks().forEach((track) => track.stop());
+              audioStreamRef.current = null;
+              console.log("Audio stream stopped.");
             }
-            if (recorder) {
-              recorder.destroy();
-              recorder = null;
+
+            if (recorderRef.current) {
+              recorderRef.current.destroy();
+              recorderRef.current = null;
+              console.log("Recorder destroyed.");
             }
+
             setIsRecording(false);
             resolve();
           } catch (error) {
-            console.error("Error processing recording:", error);
+            console.error("Error processing final recording:", error);
             setIsRecording(false);
             reject(error);
           }
         });
+
+        // Optional: Set a timeout to reject if stopRecording takes too long
+        setTimeout(() => {
+          if (isRecording) {
+            console.error("stopRecording timed out.");
+            reject(new Error("stopRecording timed out."));
+          }
+        }, 5000); // 5 seconds timeout
       });
+    } else {
+      console.error("Cannot stop recording: RecordRTC is not active");
+      return Promise.resolve();
     }
   }
 
@@ -225,24 +246,36 @@ export default function Play() {
     }
 
     try {
-      const response = await fetch('/audiopostproxy', {
-        method: 'POST',
-        body: formData
+      const response = await fetch("/audiopostproxy", {
+        method: "POST",
+        body: formData,
       });
 
-      console.log('Proxy response:', response);
+      console.log("Proxy response:", response);
 
       if (!response.ok) {
+        const errorText = await response.text();
+        console.error(`Error response from proxy: ${response.status} - ${errorText}`);
         throw new Error(`HTTP error! status: ${response.status}`);
+      } else {
+        console.log("Audio chunk uploaded successfully.");
       }
     } catch (error) {
-      console.error("Error sending audio:", error);
+      console.error("Error sending audio chunk:", error);
     }
   }
 
   async function handleBackToMainMenu() {
+    if (isProcessing) return;
+
+    setIsProcessing(true);
+    setIsNextQuestionDisabled(true);
+    console.log("Stopping conversation before navigating to main menu...");
     await stopConversation();
+    console.log("Navigating to main menu.");
     navigate("/");
+    setIsProcessing(false);
+    setIsNextQuestionDisabled(false);
   }
 
   const calculateFontSize = (questionLength: number) => {
@@ -314,7 +347,12 @@ export default function Play() {
           size="xl"
           style={{ marginTop: "3vh" }}
           onClick={nextQuestion}
-          disabled={isNextQuestionDisabled || !conversationInProgressRef.current}
+          disabled={
+            isNextQuestionDisabled ||
+            !conversationInProgress || // Updated from ref to state
+            isRecording ||
+            isProcessing
+          }
         >
           NEXT QUESTION
         </Button>
@@ -324,12 +362,11 @@ export default function Play() {
           color="red"
           style={{ marginTop: "3vh", height: "5vh" }}
           onClick={handleBackToMainMenu}
+          disabled={isProcessing}
         >
           BACK TO MAIN MENU
         </Button>
       </Box>
     </ProtectedRoute>
   );
-};
-
-
+}

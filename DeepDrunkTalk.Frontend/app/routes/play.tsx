@@ -1,13 +1,13 @@
 import { Button, Image, Box, Text } from "@mantine/core";
 import { useNavigate } from "@remix-run/react";
 import { useEffect, useRef, useState } from "react";
+import RecordRTC, { StereoAudioRecorder } from 'recordrtc';
+
 import ProtectedRoute from "~/components/layouts/ProtectedRoute";
 import logo from "~/assets/img/logo.png";
 
-let audioContext: AudioContext | null = null;
-let mediaStreamSource: MediaStreamAudioSourceNode | null = null;
-let recorder: MediaRecorder | null = null;
-let recordedChunks: Blob[] = [];
+let recorder: RecordRTC | null = null;
+let audioStream: MediaStream | null = null;
 
 export default function Play() {
   const [question, setQuestion] = useState("Question Placeholder");
@@ -126,59 +126,84 @@ export default function Play() {
     await startConversation();
     setIsNextQuestionDisabled(false);
   }
-  
+
   async function startRecording() {
+    if (typeof window === 'undefined') return;
+
     try {
-      const stream = await navigator.mediaDevices.getUserMedia({ 
+      const RecordRTC = (await import('recordrtc')).default;
+      const { StereoAudioRecorder } = await import('recordrtc');
+
+      audioStream = await window.navigator.mediaDevices.getUserMedia({
         audio: {
-          sampleRate: 44100,
-          channelCount: 1,
           echoCancellation: true,
-          noiseSuppression: true
-        } 
-      });
-  
-      audioContext = new AudioContext();
-      mediaStreamSource = audioContext.createMediaStreamSource(stream);
-      
-      recorder = new MediaRecorder(stream, {
-        mimeType: 'audio/webm;codecs=opus'
-      });
-  
-      recordedChunks = [];
-  
-      recorder.ondataavailable = (event) => {
-        if (event.data.size > 0) {
-          recordedChunks.push(event.data);
+          noiseSuppression: true,
+          sampleRate: 44100,
+          channelCount: 1
         }
-      };
-  
-      recorder.onstop = async () => {
-        const audioBlob = new Blob(recordedChunks, { type: 'audio/webm' });
-        await sendAudioChunk(audioBlob);
-        
-        if (audioContext) {
-          await audioContext.close();
-          audioContext = null;
-        }
-        mediaStreamSource = null;
-      };
-  
-      recorder.start(1000);
+      });
+
+      recorder = new RecordRTC(audioStream, {
+        type: 'audio',
+        mimeType: 'audio/webm',
+        recorderType: StereoAudioRecorder,
+        numberOfAudioChannels: 1,
+        desiredSampRate: 44100
+      });
+
+      recorder.startRecording();
       setIsRecording(true);
     } catch (error) {
       console.error("Error:", error);
       setIsRecording(false);
     }
   }
-  
+
   function stopRecording() {
-    if (recorder && recorder.state !== 'inactive') {
-      recorder.stop();
-      setIsRecording(false);
+    if (recorder) {
+      recorder.stopRecording(async () => {
+        try {
+          // Get raw blob data and verify
+          const blob = recorder?.getBlob();
+          console.log('Raw blob:', blob);
+
+          if (blob) {
+            // Create proper WebM blob
+            const webmBlob = new Blob([blob], {
+              type: 'audio/webm'
+            });
+            console.log('WebM blob:', webmBlob);
+
+            // Create FormData and verify contents
+            const formData = new FormData();
+            formData.append("audio", webmBlob, "recording.webm");
+
+            // Log FormData entries
+            for (let [key, value] of formData.entries()) {
+              console.log(`FormData entry - ${key}:`, value);
+            }
+
+            await sendAudioChunk(webmBlob);
+          }
+
+          // Cleanup
+          if (audioStream) {
+            audioStream.getTracks().forEach(track => track.stop());
+            audioStream = null;
+          }
+          if (recorder) {
+            recorder.destroy();
+            recorder = null;
+          }
+          setIsRecording(false);
+        } catch (error) {
+          console.error("Error processing recording:", error);
+          setIsRecording(false);
+        }
+      });
     }
   }
-  
+
   async function sendAudioChunk(audioBlob: Blob) {
     const token = localStorage.getItem("authToken");
     const conversationId = localStorage.getItem("conversationId");
@@ -188,17 +213,25 @@ export default function Play() {
       return;
     }
 
+    // Create and verify FormData
     const formData = new FormData();
     formData.append("endpoint", `/api/conversations/${conversationId}/audio`);
     formData.append("method", "POST");
     formData.append("authorization", token);
-    formData.append("audio", audioBlob);
+    formData.append("audio", audioBlob, "recording.webm");
+
+    // Log FormData contents before sending
+    for (let [key, value] of formData.entries()) {
+      console.log(`Sending FormData - ${key}:`, value);
+    }
 
     try {
       const response = await fetch('/audiopostproxy', {
         method: 'POST',
         body: formData
       });
+
+      console.log('Proxy response:', response);
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);

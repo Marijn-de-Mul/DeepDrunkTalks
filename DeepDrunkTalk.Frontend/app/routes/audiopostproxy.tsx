@@ -1,8 +1,12 @@
 import { json, type ActionFunction } from "@remix-run/node";
 import fetch from "node-fetch";
 
-const BASE_URL = process.env.NODE_ENV === "production" ? "http://backend:8079" : "http://localhost:8079";
-
+const BASE_URL = process.env.NODE_ENV === "production"
+  ? "http://backend:8079"
+  : process.env.NODE_ENV === "test"
+    ? "http://backend:8077"
+    : "http://localhost:8079";
+    
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
   const endpoint = formData.get("endpoint");

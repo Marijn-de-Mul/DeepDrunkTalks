@@ -1,0 +1,55 @@
+services:
+  frontend:
+    image: marijndemul16/ddt.frontend:staging
+    container_name: frontend_staging
+    ports:
+      - "3001:3000"
+    environment:
+      - NODE_ENV=test
+    restart: always
+    networks:
+      - staging
+
+  backend:
+    image: marijndemul16/ddt.backend:staging
+    container_name: backend_staging
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Staging
+      - DB_HOST=${STAGING_DB_HOST}
+      - DB_PORT=${STAGING_DB_PORT}
+      - DB_USER=${STAGING_DB_USER}
+      - DB_PASS=${STAGING_DB_PASS}
+      - DB_NAME=${STAGING_DB_NAME}
+      - JWT_SECRET=${STAGING_JWT_SECRET}
+      - LOG_TO_CONSOLE=${STAGING_LOG_TO_CONSOLE}
+      - LOG_TO_FILE=${STAGING_LOG_TO_FILE}
+    ports:
+      - "8077:8079"
+      - "8078:8080"
+    restart: always
+    depends_on:
+      - postgres
+    networks:
+      - staging
+
+  postgres:
+    image: postgres:13
+    container_name: postgres_staging
+    environment:
+      - POSTGRES_DB=${STAGING_DB_NAME}
+      - POSTGRES_USER=${STAGING_DB_USER}
+      - POSTGRES_PASSWORD=${STAGING_DB_PASS}
+    volumes:
+      - postgres_staging_data:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+    restart: always
+    networks:
+      - staging
+
+volumes:
+  postgres_staging_data:
+
+networks:
+  staging:
+    driver: bridge

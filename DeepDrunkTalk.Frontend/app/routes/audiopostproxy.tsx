@@ -44,6 +44,6 @@ export const action: ActionFunction = async ({ request }) => {
     return json({ success: true });
   } catch (error) {
     console.error("Audio upload error:", error);
-    return json({ error: String(error) }, { status: 500 });
+    return json({ error: `AAA: ${String(error)}` }, { status: 500 });
   }
 };

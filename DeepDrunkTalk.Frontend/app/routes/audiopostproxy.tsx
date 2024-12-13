@@ -14,29 +14,36 @@ export const action: ActionFunction = async ({ request }) => {
   }
 
   const targetUrl = `${BASE_URL}${endpoint}`;
-  const headers: HeadersInit = {
-    "Authorization": `Bearer ${authorization}`,
-  };
-
-  const proxyFormData = new FormData();
-  proxyFormData.append("audio", audio as Blob, "audio.webm");
-
+  
   try {
+    console.log('Audio type:', audio instanceof Blob);
+    console.log('Audio size:', audio instanceof Blob ? audio.size : 'N/A');
+
+    const proxyFormData = new FormData();
+    if (audio instanceof Blob) {
+      proxyFormData.append("audio", audio, "audio.webm");
+    } else if (typeof audio === 'string') {
+      proxyFormData.append("audio", new Blob([audio]), "audio.webm");
+    } else {
+      throw new Error("Invalid audio format");
+    }
+
     const response = await fetch(targetUrl, {
       method: "POST",
-      headers,
-      body: proxyFormData,
-    } as import("node-fetch").RequestInit);
-
-    console.log("Audio upload status:", response.status);
+      headers: {
+        "Authorization": `Bearer ${authorization}`,
+      },
+      body: proxyFormData
+    });
 
     if (!response.ok) {
+      console.error('Upload failed:', response.status);
       return json({ error: "Failed to upload audio" }, { status: response.status });
     }
 
-    return json({ success: true }, { status: 200 });
+    return json({ success: true });
   } catch (error) {
     console.error("Audio upload error:", error);
-    return json({ error: "Internal Server Error" }, { status: 500 });
+    return json({ error: String(error) }, { status: 500 });
   }
 };

@@ -90,7 +90,7 @@ export default function Play() {
       return;
     }
 
-    stopRecording();
+    await stopRecording();
 
     try {
       const response = await fetch("/jsonproxy", {
@@ -122,7 +122,9 @@ export default function Play() {
     if (!conversationInProgressRef.current) return;
 
     setIsNextQuestionDisabled(true);
+    console.log("Stopping current conversation...");
     await stopConversation();
+    console.log("Starting new conversation...");
     await startConversation();
     setIsNextQuestionDisabled(false);
   }
@@ -159,47 +161,46 @@ export default function Play() {
     }
   }
 
-  function stopRecording() {
+  async function stopRecording() {
     if (recorder) {
-      recorder.stopRecording(async () => {
-        try {
-          // Get raw blob data and verify
-          const blob = recorder?.getBlob();
-          console.log('Raw blob:', blob);
+      return new Promise<void>((resolve, reject) => {
+        recorder.stopRecording(async () => {
+          try {
+            const blob = recorder?.getBlob();
+            console.log('Raw blob:', blob);
 
-          if (blob) {
-            // Create proper WebM blob
-            const webmBlob = new Blob([blob], {
-              type: 'audio/webm'
-            });
-            console.log('WebM blob:', webmBlob);
+            if (blob) {
+              const webmBlob = new Blob([blob], { type: 'audio/webm' });
+              console.log('WebM blob:', webmBlob);
 
-            // Create FormData and verify contents
-            const formData = new FormData();
-            formData.append("audio", webmBlob, "recording.webm");
+              const formData = new FormData();
+              formData.append("audio", webmBlob, "recording.webm");
 
-            // Log FormData entries
-            for (let [key, value] of formData.entries()) {
-              console.log(`FormData entry - ${key}:`, value);
+              for (let [key, value] of formData.entries()) {
+                console.log(`FormData entry - ${key}:`, value);
+              }
+
+              await sendAudioChunk(webmBlob);
+            } else {
+              console.error("Blob is undefined or null");
             }
 
-            await sendAudioChunk(webmBlob);
+            if (audioStream) {
+              audioStream.getTracks().forEach(track => track.stop());
+              audioStream = null;
+            }
+            if (recorder) {
+              recorder.destroy();
+              recorder = null;
+            }
+            setIsRecording(false);
+            resolve();
+          } catch (error) {
+            console.error("Error processing recording:", error);
+            setIsRecording(false);
+            reject(error);
           }
-
-          // Cleanup
-          if (audioStream) {
-            audioStream.getTracks().forEach(track => track.stop());
-            audioStream = null;
-          }
-          if (recorder) {
-            recorder.destroy();
-            recorder = null;
-          }
-          setIsRecording(false);
-        } catch (error) {
-          console.error("Error processing recording:", error);
-          setIsRecording(false);
-        }
+        });
       });
     }
   }
@@ -213,14 +214,12 @@ export default function Play() {
       return;
     }
 
-    // Create and verify FormData
     const formData = new FormData();
     formData.append("endpoint", `/api/conversations/${conversationId}/audio`);
     formData.append("method", "POST");
     formData.append("authorization", token);
     formData.append("audio", audioBlob, "recording.webm");
 
-    // Log FormData contents before sending
     for (let [key, value] of formData.entries()) {
       console.log(`Sending FormData - ${key}:`, value);
     }

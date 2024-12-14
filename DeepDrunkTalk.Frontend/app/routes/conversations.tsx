@@ -1,6 +1,7 @@
 import { Button, Divider, Image, Box, Text, Loader } from '@mantine/core';
 import { useState, useEffect } from 'react';
 import { Link, MetaFunction } from '@remix-run/react';
+import { createFFmpeg, fetchFile } from '@ffmpeg/ffmpeg';
 
 import ProtectedRoute from "~/components/layouts/ProtectedRoute";
 import logo from "~/assets/img/logo.png";
@@ -27,10 +28,24 @@ export default function Conversations() {
   const [audioUrls, setAudioUrls] = useState<{ [key: number]: string | undefined }>({});
   const [isClient, setIsClient] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [ffmpeg, setFfmpeg] = useState<any>(null);
+  const [isFFmpegLoaded, setIsFFmpegLoaded] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
   }, []);
+
+  useEffect(() => {
+    if (isClient) {
+      async function loadFFmpeg() {
+        const ffmpegInstance = createFFmpeg({ log: true });
+        await ffmpegInstance.load();
+        setFfmpeg(ffmpegInstance);
+        setIsFFmpegLoaded(true);
+      }
+      loadFFmpeg();
+    }
+  }, [isClient]);
 
   useEffect(() => {
     if (isClient) {
@@ -99,7 +114,19 @@ export default function Conversations() {
 
       if (response.ok) {
         const audioBlob = await response.blob();
-        return URL.createObjectURL(audioBlob);
+        const isApple = /Apple/.test(navigator.userAgent);
+
+        if (isApple && ffmpeg && isFFmpegLoaded) {
+          // Convert audio to mp4 for Apple compatibility
+          const fileName = `audio_${conversationId}.webm`;
+          ffmpeg.FS('writeFile', fileName, await fetchFile(audioBlob));
+          await ffmpeg.run('-i', fileName, '-c:a', 'aac', '-b:a', '128k', `output_${conversationId}.mp4`);
+          const data = ffmpeg.FS('readFile', `output_${conversationId}.mp4`);
+          const convertedBlob = new Blob([data.buffer], { type: 'audio/mp4' });
+          return URL.createObjectURL(convertedBlob);
+        } else {
+          return URL.createObjectURL(audioBlob);
+        }
       } else {
         console.error("Failed to fetch audio file:", response.status);
         return null;
@@ -126,10 +153,10 @@ export default function Conversations() {
       setAudioUrls(newAudioUrls);
     }
 
-    if (conversations.length > 0) {
+    if (conversations.length > 0 && isFFmpegLoaded) {
       loadAudioUrls();
     }
-  }, [conversations]);
+  }, [conversations, isFFmpegLoaded]);
 
   const deleteConversation = async (conversationId: number) => {
     const token = localStorage.getItem("authToken");
@@ -167,8 +194,8 @@ export default function Conversations() {
     }
   };
 
-  if (!isClient || isLoading) {
-    return <Loading></Loading>;
+  if (!isClient || isLoading || !isFFmpegLoaded) {
+    return <Loading />;
   }
 
   return (

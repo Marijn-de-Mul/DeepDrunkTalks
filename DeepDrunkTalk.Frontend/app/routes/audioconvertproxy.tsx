@@ -25,7 +25,12 @@ async function convertAudio(audioFile: File): Promise<string> {
   readableStream.push(audioBuffer);
   readableStream.push(null);
 
-  const inputFormat = audioFile.type.split('/')[1]; 
+  const mimeType = audioFile.type;
+  let inputFormat = mimeType.split('/')[1];
+
+  if (mimeType === 'audio/mp4' || mimeType === 'audio/aac') {
+    inputFormat = 'aac';
+  }
 
   return new Promise((resolve, reject) => {
     ffmpeg(readableStream)

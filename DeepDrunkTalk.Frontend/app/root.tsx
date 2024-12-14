@@ -3,6 +3,8 @@ import 'app/assets/css/styles.css';
 
 import { MantineProvider } from '@mantine/core';
 import { Links, Meta, Outlet, ScrollRestoration, Scripts } from '@remix-run/react';
+import { cssBundleHref } from "@remix-run/css-bundle";
+import type { LinksFunction } from "@remix-run/node";
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (

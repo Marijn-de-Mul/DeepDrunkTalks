@@ -1,11 +1,12 @@
 import { Button, Box, Text } from '@mantine/core';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { MetaFunction } from '@remix-run/node';
 import { Link } from "@remix-run/react";
 import { createFFmpeg, fetchFile } from '@ffmpeg/ffmpeg';
 
 import ProtectedRoute from "~/components/layouts/ProtectedRoute";
 import Loading from "~/components/Loading";
+import { AudioLoader, AudioProcessingStatus } from '~/components/AudioLoader';
 
 interface Conversation {
   id: number;
@@ -28,49 +29,62 @@ export default function Conversations() {
   const [audioUrls, setAudioUrls] = useState<{ [key: number]: string | undefined }>({});
   const [isClient, setIsClient] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [audioStatus, setAudioStatus] = useState<{ [key: number]: AudioProcessingStatus }>({});
   const [ffmpeg, setFfmpeg] = useState<any>(null);
   const [isFFmpegLoaded, setIsFFmpegLoaded] = useState(false);
+  const observer = useRef<IntersectionObserver | null>(null);
+  const [conversionQueue, setConversionQueue] = useState<number[]>([]);
+  const [isConverting, setIsConverting] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
   }, []);
 
   useEffect(() => {
+    async function loadFFmpeg() {
+      const ffmpegInstance = createFFmpeg({ log: true });
+      await ffmpegInstance.load();
+      setFfmpeg(ffmpegInstance);
+      setIsFFmpegLoaded(true);
+    }
+
+    if (isClient) {
+      loadFFmpeg();
+    }
+  }, [isClient]);
+
+  useEffect(() => {
     if (isClient) {
       async function fetchConversations() {
         setIsLoading(true);
-
-        const token = localStorage.getItem('authToken');
+        const token = localStorage.getItem("authToken");
         if (!token) {
-          console.error('No auth token found');
+          console.error("No auth token found");
           return;
         }
-
         try {
           const response = await fetch("/jsonproxy", {
-            method: 'POST',
+            method: "POST",
             headers: {
-              'Content-Type': 'application/json',
+              "Content-Type": "application/json"
             },
             body: JSON.stringify({
-              method: 'GET',
-              endpoint: '/api/conversations',
+              method: "GET",
+              endpoint: "/api/conversations",
               authorization: token,
-              body: null,
-            }),
+              body: null
+            })
           });
-
           if (!response.ok) {
-            throw new Error('Failed to fetch conversations');
+            throw new Error("Failed to fetch conversations");
           }
-
           const data = await response.json();
-
-          setConversations(data);
-          setIsLoading(false);
-
+          setTimeout(() => {
+            setConversations(data);
+            setIsLoading(false);
+          }, 800);
         } catch (error) {
-          console.error('Error fetching conversations:', error);
+          console.error("Error fetching conversations:", error);
           setIsLoading(false);
         }
       }
@@ -79,16 +93,25 @@ export default function Conversations() {
     }
   }, [isClient]);
 
-  async function loadFFmpeg() {
-    if (!ffmpeg) {
-      const ffmpegInstance = createFFmpeg({ log: true });
-      await ffmpegInstance.load();
-      setFfmpeg(ffmpegInstance);
-      setIsFFmpegLoaded(true);
-    }
-  }
+  const convertAudio = async (conversationId: number, blob: Blob) => {
+    const fileName = `audio_${conversationId}.webm`;
+    ffmpeg.FS('writeFile', fileName, await fetchFile(blob));
+    await ffmpeg.run('-i', fileName, '-c:a', 'aac', '-b:a', '128k', `output_${conversationId}.mp4`);
+    const data = ffmpeg.FS('readFile', `output_${conversationId}.mp4`);
+    return new Blob([data.buffer], { type: 'audio/mp4' });
+  };
 
-  async function fetchAudioFile(conversationId: any) {
+  const setAudioStatusWithDelay = async (conversationId: number, status: AudioProcessingStatus) => {
+    return new Promise<void>(resolve => {
+      setTimeout(() => {
+        setAudioStatus(prev => ({ ...prev, [conversationId]: status }));
+        resolve();
+      }, 800);
+    });
+  };
+
+  async function fetchAudioFile(conversationId: number) {
+    await setAudioStatusWithDelay(conversationId, AudioProcessingStatus.INITIALIZING);
     const token = localStorage.getItem("authToken");
     if (!token) {
       console.error("Token not found. Unable to fetch audio file.");
@@ -96,38 +119,70 @@ export default function Conversations() {
     }
 
     try {
+      await setAudioStatusWithDelay(conversationId, AudioProcessingStatus.FETCHING);
       const formData = new FormData();
       formData.append("endpoint", `/api/conversations/${conversationId}/audio`);
 
       const response = await fetch(`/audiogetproxy`, {
         method: "POST",
-        headers: {
-          "Authorization": `Bearer ${token}`
-        },
+        headers: { "Authorization": `Bearer ${token}` },
         body: formData
       });
 
       if (response.ok) {
         const audioBlob = await response.blob();
         const isApple = /Apple/.test(navigator.userAgent);
+        const supportsWebM = MediaRecorder.isTypeSupported('audio/webm');
 
-        if (isApple) {
+        if (isApple || !supportsWebM) {
           if (!isFFmpegLoaded) {
-            await loadFFmpeg();
-          }
-          if (ffmpeg) {
-            const fileName = `audio_${conversationId}.webm`;
-            ffmpeg.FS('writeFile', fileName, await fetchFile(audioBlob));
-            await ffmpeg.run('-i', fileName, '-c:a', 'aac', '-b:a', '128k', `output_${conversationId}.mp4`);
-            const data = ffmpeg.FS('readFile', `output_${conversationId}.mp4`);
-            const convertedBlob = new Blob([data.buffer], { type: 'audio/mp4' });
-            return URL.createObjectURL(convertedBlob);
-          } else {
             console.error("FFmpeg is not loaded.");
             return null;
           }
+
+          await setAudioStatusWithDelay(conversationId, AudioProcessingStatus.CONVERTING);
+
+          // Add to queue instead of immediate conversion
+          setConversionQueue(prev => [...prev, conversationId]);
+
+          // Wait for conversion
+          while (conversionQueue.includes(conversationId) || isConverting) {
+            await new Promise(resolve => setTimeout(resolve, 100));
+          }
+
+          const convertedBlob = await convertAudio(conversationId, audioBlob);
+          const audioUrl = URL.createObjectURL(convertedBlob);
+
+          setAudioUrls(prev => ({
+            ...prev,
+            [conversationId]: audioUrl
+          }));
+
+          setTimeout(() => {
+            setAudioStatus(prev => {
+              const newStatus = { ...prev };
+              delete newStatus[conversationId];
+              return newStatus;
+            });
+          }, 800);
+
+          return audioUrl;
         } else {
-          return URL.createObjectURL(audioBlob);
+          const audioUrl = URL.createObjectURL(audioBlob);
+          setAudioUrls(prev => ({
+            ...prev,
+            [conversationId]: audioUrl
+          }));
+
+          setTimeout(() => {
+            setAudioStatus(prev => {
+              const newStatus = { ...prev };
+              delete newStatus[conversationId];
+              return newStatus;
+            });
+          }, 800);
+
+          return audioUrl;
         }
       } else {
         console.error("Failed to fetch audio file:", response.status);
@@ -144,11 +199,11 @@ export default function Conversations() {
       const newAudioUrls: { [key: number]: string | undefined } = {};
 
       for (const conversation of conversations) {
-        if (conversation.audio) {
+        if (conversation.audio && !audioUrls[conversation.id]) {
           const audioUrl = await fetchAudioFile(conversation.id);
           newAudioUrls[conversation.id] = audioUrl || undefined;
         } else {
-          newAudioUrls[conversation.id] = undefined;
+          newAudioUrls[conversation.id] = audioUrls[conversation.id];
         }
       }
 
@@ -160,9 +215,37 @@ export default function Conversations() {
     }
   }, [conversations]);
 
+  useEffect(() => {
+    if (observer.current) {
+      observer.current.disconnect();
+    }
+
+    observer.current = new IntersectionObserver((entries) => {
+      entries.forEach(async (entry) => {
+        if (entry.isIntersecting) {
+          const conversationId = Number(entry.target.getAttribute('data-conversation-id'));
+          if (conversationId && !audioUrls[conversationId]) {
+            const audioUrl = await fetchAudioFile(conversationId);
+            setAudioUrls((prev) => ({
+              ...prev,
+              [conversationId]: audioUrl || undefined,
+            }));
+          }
+        }
+      });
+    });
+
+    const items = document.querySelectorAll('[data-conversation-id]');
+    items.forEach((item) => observer.current?.observe(item));
+
+    return () => {
+      observer.current?.disconnect();
+    };
+  }, [audioUrls, conversations]);
+
   const deleteConversation = async (conversationId: number) => {
     const token = localStorage.getItem("authToken");
-    
+
     if (!token) {
       console.error("No auth token found");
       return;
@@ -247,6 +330,7 @@ export default function Conversations() {
             {conversations.map((conversation) => (
               <Box
                 key={conversation.id}
+                data-conversation-id={conversation.id}
                 style={{
                   width: "100%",
                   padding: "15px",
@@ -304,17 +388,23 @@ export default function Conversations() {
                     data-testid="conversations-item-audio"
                   />
                 ) : (
-                  <Text
-                    data-testid="conversations-item-no-audio"
-                    style={{
-                      fontSize: "0.9em",
-                      fontWeight: "400",
-                      color: "#666",
-                      textAlign: "center",
-                    }}
-                  >
-                    No audio available
-                  </Text>
+                  <>
+                    {audioStatus[conversation.id] ? (
+                      <AudioLoader status={audioStatus[conversation.id]} />
+                    ) : (
+                      <Text
+                        data-testid="conversations-item-no-audio"
+                        style={{
+                          fontSize: "0.9em",
+                          fontWeight: "400",
+                          color: "#666",
+                          textAlign: "center",
+                        }}
+                      >
+                        No audio available
+                      </Text>
+                    )}
+                  </>
                 )}
 
                 <Button
@@ -383,7 +473,7 @@ export default function Conversations() {
               marginTop: "3vh",
               height: "5vh",
               position: "fixed",
-              bottom: "60px", // Adjusted to be a bit higher
+              bottom: "60px",
               left: "50%",
               transform: "translateX(-50%)",
             }}

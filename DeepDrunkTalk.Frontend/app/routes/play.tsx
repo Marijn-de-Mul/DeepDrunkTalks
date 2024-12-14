@@ -1,4 +1,4 @@
-import { Button, Image, Box, Text, Center, Stack, Card, Title } from "@mantine/core";
+import { Button, Image, Box, Text } from "@mantine/core";
 import { useNavigate } from "@remix-run/react";
 import { useEffect, useRef, useState } from "react";
 import ProtectedRoute from "~/components/layouts/ProtectedRoute";
@@ -448,17 +448,6 @@ export default function Play() {
           </Button>
         </Box>
       )}
-      <Box
-        data-testid="play-footer"
-        style={{
-          position: "fixed",
-          bottom: "10px",
-          width: "100%",
-          textAlign: "center",
-        }}
-      >
-        <Text data-testid="play-footer-text">DeepDrunkTalks - 2024 ©</Text>
-      </Box>
     </ProtectedRoute>
   );
 }

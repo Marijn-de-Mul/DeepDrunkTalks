@@ -1,7 +1,8 @@
 import type { MetaFunction } from "@remix-run/node";
-import { Button, Box, Input, Image, Text, Divider, Loader } from '@mantine/core';
+import { Button, Box, Input, Image, Text } from '@mantine/core';
 import { useEffect, useState } from "react";
 import { useNavigate } from "@remix-run/react";
+import { Link } from "react-router-dom";
 
 import logo from "~/assets/img/logo.png";
 import Loading from "~/components/Loading";
@@ -45,7 +46,7 @@ export default function Login() {
         console.log("Login successful!", data);
 
         if (isClient) {
-          localStorage.setItem("authToken", data.token); 
+          localStorage.setItem("authToken", data.token);
           navigate("/");
         }
       } else {
@@ -161,22 +162,21 @@ export default function Login() {
             LOGIN
           </Button>
 
-          <a href="./register">
+          <Link to="/register" style={{ textDecoration: "none" }}>
             <Button
+              data-testid="register-button-onloginscreen"
               fullWidth
               color="rgba(0, 0, 0, 1)"
               size="lg"
               type="button"
               style={{
                 marginTop: "2vw",
-                height: "5vh"
+                height: "5vh",
               }}
-
-              data-testid={"register-button-onloginscreen"}
             >
               REGISTER INSTEAD
             </Button>
-          </a>
+          </Link>
         </form>
       </Box>
     </>

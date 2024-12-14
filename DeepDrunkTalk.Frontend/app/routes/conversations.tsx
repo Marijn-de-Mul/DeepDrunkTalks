@@ -225,109 +225,153 @@ export default function Conversations() {
           Conversations
         </Text>
 
-        <Box
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            padding: "10px",
-            gap: "15px",
-            overflowY: "auto",
-            maxHeight: "calc(100vh - 250px)",
-            width: "90%",
-            borderRadius: "10px",
-            boxShadow: "inset 0 0 10px rgba(0, 0, 0, 0.1)",
-            backgroundColor: "rgba(255, 255, 255, 0.05)",
-          }}
-          data-testid="conversations-list"
-        >
-          {conversations.map((conversation) => (
-            <Box
-              key={conversation.id}
-              style={{
-                width: "100%",
-                padding: "15px",
-                border: "1px solid rgba(0, 0, 0, 0.2)",
-                borderRadius: "10px",
-                backgroundColor: "rgba(255, 255, 255, 0.1)",
-                boxShadow: "0 4px 6px rgba(0, 0, 0, 0.15)",
-              }}
-              data-testid="conversations-item"
-            >
-              <Text
-                data-testid="conversations-item-topic"
+        {conversations.length > 0 ? (
+          <Box
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              padding: "10px",
+              gap: "15px",
+              overflowY: "auto",
+              maxHeight: "calc(100vh - 250px)",
+              width: "90%",
+              borderRadius: "10px",
+              boxShadow: "inset 0 0 10px rgba(0, 0, 0, 0.1)",
+              backgroundColor: "rgba(255, 255, 255, 0.05)",
+            }}
+            data-testid="conversations-list"
+          >
+            {conversations.map((conversation) => (
+              <Box
+                key={conversation.id}
                 style={{
-                  fontSize: "1.2em",
-                  fontWeight: "600",
-                  color: "#000",
-                  marginBottom: "5px",
+                  width: "100%",
+                  padding: "15px",
+                  border: "1px solid rgba(0, 0, 0, 0.2)",
+                  borderRadius: "10px",
+                  backgroundColor: "rgba(255, 255, 255, 0.1)",
+                  boxShadow: "0 4px 6px rgba(0, 0, 0, 0.15)",
                 }}
+                data-testid="conversations-item"
               >
-                {conversation.topic || "Untitled Topic"}
-              </Text>
-              <Text
-                data-testid="conversations-item-question"
-                style={{
-                  fontSize: "0.9em",
-                  fontWeight: "400",
-                  color: "#333",
-                  marginBottom: "5px",
-                }}
-              >
-                {conversation.question || "No question available."}
-              </Text>
-              <Text
-                data-testid="conversations-item-time"
-                style={{
-                  fontSize: "0.9em",
-                  fontWeight: "400",
-                  color: "#333",
-                  marginBottom: "10px",
-                }}
-              >
-                {conversation.startTime && conversation.endTime
-                  ? `${conversation.startTime.split(" ")[0]} (${conversation.startTime.split(" ")[1].slice(0, 5)} - ${conversation.endTime.split(" ")[1].slice(0, 5)})`
-                  : "No time available"}
-              </Text>
-
-              {audioUrls[conversation.id] ? (
-                <audio
-                  style={{
-                    width: "100%",
-                    borderRadius: "5px",
-                  }}
-                  controls
-                  src={audioUrls[conversation.id]}
-                  data-testid="conversations-item-audio"
-                />
-              ) : (
                 <Text
-                  data-testid="conversations-item-no-audio"
+                  data-testid="conversations-item-topic"
+                  style={{
+                    fontSize: "1.2em",
+                    fontWeight: "600",
+                    color: "#000",
+                    marginBottom: "5px",
+                  }}
+                >
+                  {conversation.topic || "Untitled Topic"}
+                </Text>
+                <Text
+                  data-testid="conversations-item-question"
                   style={{
                     fontSize: "0.9em",
                     fontWeight: "400",
-                    color: "#666",
-                    textAlign: "center",
+                    color: "#333",
+                    marginBottom: "5px",
                   }}
                 >
-                  No audio available
+                  {conversation.question || "No question available."}
                 </Text>
-              )}
+                <Text
+                  data-testid="conversations-item-time"
+                  style={{
+                    fontSize: "0.9em",
+                    fontWeight: "400",
+                    color: "#333",
+                    marginBottom: "10px",
+                  }}
+                >
+                  {conversation.startTime && conversation.endTime
+                    ? `${conversation.startTime.split(" ")[0]} (${conversation.startTime.split(" ")[1].slice(0, 5)} - ${conversation.endTime.split(" ")[1].slice(0, 5)})`
+                    : "No time available"}
+                </Text>
 
+                {audioUrls[conversation.id] ? (
+                  <audio
+                    style={{
+                      width: "100%",
+                      borderRadius: "5px",
+                    }}
+                    controls
+                    src={audioUrls[conversation.id]}
+                    data-testid="conversations-item-audio"
+                  />
+                ) : (
+                  <Text
+                    data-testid="conversations-item-no-audio"
+                    style={{
+                      fontSize: "0.9em",
+                      fontWeight: "400",
+                      color: "#666",
+                      textAlign: "center",
+                    }}
+                  >
+                    No audio available
+                  </Text>
+                )}
+
+                <Button
+                  color="red"
+                  style={{
+                    marginTop: "10px",
+                    width: "100%",
+                  }}
+                  onClick={() => deleteConversation(conversation.id)}
+                  data-testid="conversations-delete"
+                >
+                  DELETE
+                </Button>
+              </Box>
+            ))}
+          </Box>
+        ) : (
+          <Box
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              padding: "20px",
+              textAlign: "center",
+              color: "#555",
+            }}
+            data-testid="no-conversations-message"
+          >
+            <Text
+              style={{
+                fontSize: "1.5em",
+                marginBottom: "10px",
+              }}
+            >
+              No Conversations Yet
+            </Text>
+            <Text
+              style={{
+                fontSize: "1em",
+                marginBottom: "20px",
+              }}
+            >
+              Start a new conversation by playing the game. Your conversations will appear here once you've played.
+            </Text>
+            <Link to="/play">
               <Button
-                color="red"
+                color="blue"
+                variant="filled"
                 style={{
                   marginTop: "10px",
-                  width: "100%",
+                  height: "5vh",
                 }}
-                onClick={() => deleteConversation(conversation.id)}
-                data-testid="conversations-delete"
+                data-testid="start-play-button"
               >
-                DELETE
+                Start Playing
               </Button>
-            </Box>
-          ))}
-        </Box>
+            </Link>
+          </Box>
+        )}
 
         <Link to={"/"} data-testid="conversations-back-link">
           <Button

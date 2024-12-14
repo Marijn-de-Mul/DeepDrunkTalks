@@ -37,18 +37,6 @@ export default function Conversations() {
 
   useEffect(() => {
     if (isClient) {
-      async function loadFFmpeg() {
-        const ffmpegInstance = createFFmpeg({ log: true });
-        await ffmpegInstance.load();
-        setFfmpeg(ffmpegInstance);
-        setIsFFmpegLoaded(true);
-      }
-      loadFFmpeg();
-    }
-  }, [isClient]);
-
-  useEffect(() => {
-    if (isClient) {
       async function fetchConversations() {
         setIsLoading(true);
 
@@ -78,10 +66,8 @@ export default function Conversations() {
 
           const data = await response.json();
 
-          setTimeout(() => {
-            setConversations(data);
-            setIsLoading(false);
-          }, 800);
+          setConversations(data);
+          setIsLoading(false);
 
         } catch (error) {
           console.error('Error fetching conversations:', error);
@@ -92,6 +78,15 @@ export default function Conversations() {
       fetchConversations();
     }
   }, [isClient]);
+
+  async function loadFFmpeg() {
+    if (!ffmpeg) {
+      const ffmpegInstance = createFFmpeg({ log: true });
+      await ffmpegInstance.load();
+      setFfmpeg(ffmpegInstance);
+      setIsFFmpegLoaded(true);
+    }
+  }
 
   async function fetchAudioFile(conversationId: any) {
     const token = localStorage.getItem("authToken");
@@ -116,7 +111,8 @@ export default function Conversations() {
         const audioBlob = await response.blob();
         const isApple = /Apple/.test(navigator.userAgent);
 
-        if (isApple && ffmpeg && isFFmpegLoaded) {
+        if (isApple) {
+          await loadFFmpeg();
           const fileName = `audio_${conversationId}.webm`;
           ffmpeg.FS('writeFile', fileName, await fetchFile(audioBlob));
           await ffmpeg.run('-i', fileName, '-c:a', 'aac', '-b:a', '128k', `output_${conversationId}.mp4`);
@@ -152,10 +148,10 @@ export default function Conversations() {
       setAudioUrls(newAudioUrls);
     }
 
-    if (conversations.length > 0 && isFFmpegLoaded) {
+    if (conversations.length > 0) {
       loadAudioUrls();
     }
-  }, [conversations, isFFmpegLoaded]);
+  }, [conversations]);
 
   const deleteConversation = async (conversationId: number) => {
     const token = localStorage.getItem("authToken");
@@ -193,7 +189,7 @@ export default function Conversations() {
     }
   };
 
-  if (!isClient || isLoading || !isFFmpegLoaded) {
+  if (!isClient || isLoading) {
     return <Loading />;
   }
 

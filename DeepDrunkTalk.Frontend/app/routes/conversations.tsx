@@ -110,38 +110,38 @@ export default function Conversations() {
     });
   };
 
-  async function fetchAudioFile(conversationId: number) {
+    async function fetchAudioFile(conversationId: number) {
     await setAudioStatusWithDelay(conversationId, AudioProcessingStatus.INITIALIZING);
     const token = localStorage.getItem("authToken");
     if (!token) {
       console.error("Token not found. Unable to fetch audio file.");
       return;
     }
-
+  
     try {
       await setAudioStatusWithDelay(conversationId, AudioProcessingStatus.FETCHING);
       const formData = new FormData();
       formData.append("endpoint", `/api/conversations/${conversationId}/audio`);
-
+  
       const response = await fetch(`/audiogetproxy`, {
         method: "POST",
         headers: { "Authorization": `Bearer ${token}` },
         body: formData
       });
-
+  
       if (response.ok) {
         const audioBlob = await response.blob();
         const isApple = /Apple/.test(navigator.userAgent);
         const supportsWebM = MediaRecorder.isTypeSupported('audio/webm');
-
+  
         if (isApple || !supportsWebM) {
           if (!isFFmpegLoaded) {
             console.error("FFmpeg is not loaded.");
-            return null;
+            return;
           }
-
+  
           setAudioStatus(prev => ({ ...prev, [conversationId]: AudioProcessingStatus.QUEUED }));
-
+  
           setConversionQueue(prev => [...prev, conversationId]);
         } else {
           const audioUrl = URL.createObjectURL(audioBlob);
@@ -159,28 +159,21 @@ export default function Conversations() {
         }
       } else {
         console.error("Failed to fetch audio file:", response.status);
-        return null;
+        return;
       }
     } catch (error) {
       console.error("Error fetching audio file:", error);
-      return null;
+      return;
     }
   }
 
   useEffect(() => {
     async function loadAudioUrls() {
-      const newAudioUrls: { [key: number]: string | undefined } = {};
-
       for (const conversation of conversations) {
         if (conversation.audio && !audioUrls[conversation.id]) {
-          const audioUrl = await fetchAudioFile(conversation.id);
-          newAudioUrls[conversation.id] = audioUrl || undefined;
-        } else {
-          newAudioUrls[conversation.id] = audioUrls[conversation.id];
+          await fetchAudioFile(conversation.id);
         }
       }
-
-      setAudioUrls(newAudioUrls);
     }
 
     if (conversations.length > 0) {
@@ -188,33 +181,29 @@ export default function Conversations() {
     }
   }, [conversations]);
 
-  useEffect(() => {
+    useEffect(() => {
     if (observer.current) {
       observer.current.disconnect();
     }
-
+  
     observer.current = new IntersectionObserver((entries) => {
       entries.forEach(async (entry) => {
         if (entry.isIntersecting) {
           const conversationId = Number(entry.target.getAttribute('data-conversation-id'));
           if (conversationId && !audioUrls[conversationId]) {
-            const audioUrl = await fetchAudioFile(conversationId);
-            setAudioUrls((prev) => ({
-              ...prev,
-              [conversationId]: audioUrl || undefined,
-            }));
+            await fetchAudioFile(conversationId);
           }
         }
       });
     });
-
+  
     const items = document.querySelectorAll('[data-conversation-id]');
     items.forEach((item) => observer.current?.observe(item));
-
+  
     return () => {
       observer.current?.disconnect();
     };
-  }, [audioUrls, conversations]);
+  }, [conversations]);
 
   const deleteConversation = async (conversationId: number) => {
     const token = localStorage.getItem("authToken");

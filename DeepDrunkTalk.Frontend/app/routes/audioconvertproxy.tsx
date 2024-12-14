@@ -7,7 +7,11 @@ import { v4 as uuidv4 } from 'uuid';
 import path from 'path';
 import os from 'os';
 
-ffmpeg.setFfmpegPath(ffmpegPath);
+if (ffmpegPath) {
+  ffmpeg.setFfmpegPath(ffmpegPath);
+} else {
+  throw new Error('FFmpeg path not found');
+}
 
 async function convertAudio(audioFile: File): Promise<string> {
   const outputFileName = `${uuidv4()}.mp3`;
@@ -25,10 +29,22 @@ async function convertAudio(audioFile: File): Promise<string> {
 
   return new Promise((resolve, reject) => {
     ffmpeg(readableStream)
-      .inputFormat(inputFormat) 
+      .inputFormat(inputFormat)
       .toFormat('mp3')
-      .on('error', (err) => reject(err))
-      .on('end', () => resolve(outputFilePath))
+      .on('start', (commandLine) => {
+        console.log('Spawned Ffmpeg with command: ' + commandLine);
+      })
+      .on('progress', (progress) => {
+        console.log('Processing: ' + progress.percent + '% done');
+      })
+      .on('error', (err) => {
+        console.error('Error: ' + err.message);
+        reject(err);
+      })
+      .on('end', () => {
+        console.log('Conversion finished');
+        resolve(outputFilePath);
+      })
       .save(outputFilePath);
   });
 }
@@ -51,6 +67,7 @@ export let action: ActionFunction = async ({ request }) => {
       },
     });
   } catch (error) {
+    console.error('Conversion error:', error);
     return json({ error: error.message }, { status: 500 });
   }
 };

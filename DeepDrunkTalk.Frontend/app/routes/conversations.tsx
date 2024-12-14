@@ -117,7 +117,6 @@ export default function Conversations() {
         const isApple = /Apple/.test(navigator.userAgent);
 
         if (isApple && ffmpeg && isFFmpegLoaded) {
-          // Convert audio to mp4 for Apple compatibility
           const fileName = `audio_${conversationId}.webm`;
           ffmpeg.FS('writeFile', fileName, await fetchFile(audioBlob));
           await ffmpeg.run('-i', fileName, '-c:a', 'aac', '-b:a', '128k', `output_${conversationId}.mp4`);

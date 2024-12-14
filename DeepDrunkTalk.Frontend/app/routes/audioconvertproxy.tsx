@@ -14,6 +14,16 @@ if (ffmpegPath) {
 }
 
 async function convertAudio(audioFile: File): Promise<string> {
+  const mimeType = audioFile.type;
+  const inputFormat = mimeType.split('/')[1];
+
+  if (inputFormat === 'mp3') {
+    console.log('File is already in mp3 format, skipping conversion.');
+    const outputFilePath = path.join(os.tmpdir(), `${uuidv4()}.mp3`);
+    await writeFile(outputFilePath, Buffer.from(await audioFile.arrayBuffer()));
+    return outputFilePath;
+  }
+
   const outputFileName = `${uuidv4()}.mp3`;
   const outputFilePath = path.join(os.tmpdir(), outputFileName);
 
@@ -24,13 +34,6 @@ async function convertAudio(audioFile: File): Promise<string> {
   readableStream._read = () => {};
   readableStream.push(audioBuffer);
   readableStream.push(null);
-
-  const mimeType = audioFile.type;
-  let inputFormat = mimeType.split('/')[1];
-
-  if (mimeType === 'audio/mp4' || mimeType === 'audio/aac') {
-    inputFormat = 'aac';
-  }
 
   console.log(`Converting audio file with MIME type: ${mimeType} and input format: ${inputFormat}`);
   console.log(`Audio file size: ${audioFile.size} bytes`);

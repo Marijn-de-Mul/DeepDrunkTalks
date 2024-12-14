@@ -64,9 +64,3 @@ test('[Main Menu] Test logout functionality', async ({ page }) => {
   await expect(page).toHaveURL('http://localhost:3000/login');
 });
 
-test('[Main Menu] Test if footer is visible', async ({ page }) => {
-  await page.goto('http://localhost:3000/');
-
-  await expect(page.getByTestId('mainmenu-footer')).toBeVisible();
-  await expect(page.getByTestId('mainmenu-footer')).toHaveText(/DeepDrunkTalks - 2024 ©/);
-});

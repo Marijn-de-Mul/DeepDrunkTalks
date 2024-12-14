@@ -20029,3 +20029,173 @@ WARN | 2024-12-14 17:11:03 | Login failed: User not found for email: invalid@exa
 ERROR | 2024-12-14 17:11:03 | An unexpected error occurred during login for email: invalid@example.com | Exception: Invalid Credentials. | StackTrace:    at DDT.Backend.BLL.Services.AuthService.LoginUser(LoginRequest request) in E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\Services\Auth\AuthService.cs:line 113
 ERROR | 2024-12-14 17:11:03 | User not found for email: invalid@example.com. Exception: Invalid Credentials. | Exception: Invalid Credentials. | StackTrace:    at DDT.Backend.BLL.Services.AuthService.LoginUser(LoginRequest request) in E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.BLL\Services\Auth\AuthService.cs:line 113
    at DDT.Backend.API.Controllers.UserController.Login(LoginRequest request) in E:\School\S3\Personal\DeepDrunkTalks\DeepDrunkTalk.Backend\DDT.Backend.API\Controllers\UserController.cs:line 84
+INFO | 2024-12-14 17:11:06 | Login attempt for email: test@test.nl
+INFO | 2024-12-14 17:11:06 | Starting user login for email: test@test.nl
+INFO | 2024-12-14 17:11:06 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-14 17:11:06 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-14 17:11:07 | User login successful for email: test@test.nl
+INFO | 2024-12-14 17:11:07 | User test@test.nl logged in successfully
+INFO | 2024-12-14 17:11:07 | Login attempt for email: test@test.nl
+INFO | 2024-12-14 17:11:07 | Starting user login for email: test@test.nl
+INFO | 2024-12-14 17:11:07 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-14 17:11:08 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-14 17:11:08 | Login attempt for email: test@test.nl
+INFO | 2024-12-14 17:11:08 | Starting user login for email: test@test.nl
+INFO | 2024-12-14 17:11:08 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-14 17:11:08 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-14 17:11:09 | User login successful for email: test@test.nl
+INFO | 2024-12-14 17:11:09 | User test@test.nl logged in successfully
+INFO | 2024-12-14 17:11:09 | User login successful for email: test@test.nl
+INFO | 2024-12-14 17:11:09 | User test@test.nl logged in successfully
+INFO | 2024-12-14 17:11:09 | Register method called with request: DDT.Backend.Common.Models.Authentication.RegisterRequest
+INFO | 2024-12-14 17:11:09 | Starting user registration for email: user1734196267458@example.com
+INFO | 2024-12-14 17:11:09 | Attempting to get user by email: user1734196267458@example.com
+INFO | 2024-12-14 17:11:09 | Successfully retrieved user with email: user1734196267458@example.com
+INFO | 2024-12-14 17:11:10 | Attempting to add user with email: user1734196267458@example.com
+INFO | 2024-12-14 17:11:10 | Checking if user exists with UserId: 0
+INFO | 2024-12-14 17:11:10 | User exists check result for UserId 0: False
+INFO | 2024-12-14 17:11:10 | Successfully added user with email: user1734196267458@example.com
+INFO | 2024-12-14 17:11:10 | User registration successful for email: user1734196267458@example.com
+INFO | 2024-12-14 17:11:10 | JWT token generated successfully for email: user1734196267458@example.com
+INFO | 2024-12-14 17:11:10 | Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI3IiwidW5pcXVlX25hbWUiOiJ0ZXN0IiwibmJmIjoxNzM0MTk2MjY5LCJleHAiOjE3MzQ4MDEwNjksImlhdCI6MTczNDE5NjI2OX0.boI_9BrjBswau5vbgd1isMMQqdF-yt0qghbD58RHgsI
+INFO | 2024-12-14 17:11:10 | Extracted token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI3IiwidW5pcXVlX25hbWUiOiJ0ZXN0IiwibmJmIjoxNzM0MTk2MjY5LCJleHAiOjE3MzQ4MDEwNjksImlhdCI6MTczNDE5NjI2OX0.boI_9BrjBswau5vbgd1isMMQqdF-yt0qghbD58RHgsI
+INFO | 2024-12-14 17:11:10 | Token validated for user ID: 7
+INFO | 2024-12-14 17:11:10 | Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI3IiwidW5pcXVlX25hbWUiOiJ0ZXN0IiwibmJmIjoxNzM0MTk2MjY5LCJleHAiOjE3MzQ4MDEwNjksImlhdCI6MTczNDE5NjI2OX0.boI_9BrjBswau5vbgd1isMMQqdF-yt0qghbD58RHgsI
+INFO | 2024-12-14 17:11:10 | Extracted token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI3IiwidW5pcXVlX25hbWUiOiJ0ZXN0IiwibmJmIjoxNzM0MTk2MjY5LCJleHAiOjE3MzQ4MDEwNjksImlhdCI6MTczNDE5NjI2OX0.boI_9BrjBswau5vbgd1isMMQqdF-yt0qghbD58RHgsI
+INFO | 2024-12-14 17:11:10 | Attempting to get user by UserId: 7
+INFO | 2024-12-14 17:11:10 | Token validated for user ID: 7
+INFO | 2024-12-14 17:11:10 | Attempting to get user by UserId: 7
+INFO | 2024-12-14 17:11:10 | Successfully retrieved user with UserId: 7
+INFO | 2024-12-14 17:11:10 | Successfully retrieved user with UserId: 7
+INFO | 2024-12-14 17:11:14 | Login attempt for email: test@test.nl
+INFO | 2024-12-14 17:11:14 | Starting user login for email: test@test.nl
+INFO | 2024-12-14 17:11:14 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-14 17:11:14 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-14 17:11:15 | User login successful for email: test@test.nl
+INFO | 2024-12-14 17:11:15 | User test@test.nl logged in successfully
+INFO | 2024-12-14 17:11:17 | Login attempt for email: test@test.nl
+INFO | 2024-12-14 17:11:17 | Starting user login for email: test@test.nl
+INFO | 2024-12-14 17:11:17 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-14 17:11:17 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-14 17:11:17 | Login attempt for email: test@test.nl
+INFO | 2024-12-14 17:11:17 | Starting user login for email: test@test.nl
+INFO | 2024-12-14 17:11:17 | User login successful for email: test@test.nl
+INFO | 2024-12-14 17:11:17 | User test@test.nl logged in successfully
+INFO | 2024-12-14 17:11:17 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-14 17:11:17 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-14 17:11:18 | Login attempt for email: test@test.nl
+INFO | 2024-12-14 17:11:18 | Starting user login for email: test@test.nl
+INFO | 2024-12-14 17:11:18 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-14 17:11:18 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-14 17:11:18 | User login successful for email: test@test.nl
+INFO | 2024-12-14 17:11:18 | User test@test.nl logged in successfully
+INFO | 2024-12-14 17:11:18 | Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI3IiwidW5pcXVlX25hbWUiOiJ0ZXN0IiwibmJmIjoxNzM0MTk2Mjc3LCJleHAiOjE3MzQ4MDEwNzcsImlhdCI6MTczNDE5NjI3N30.cG_8D2IkCbRNAzEst-07E36NP9IXvhnw4WvEPeOmf9g
+INFO | 2024-12-14 17:11:18 | Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI3IiwidW5pcXVlX25hbWUiOiJ0ZXN0IiwibmJmIjoxNzM0MTk2Mjc3LCJleHAiOjE3MzQ4MDEwNzcsImlhdCI6MTczNDE5NjI3N30.cG_8D2IkCbRNAzEst-07E36NP9IXvhnw4WvEPeOmf9g
+INFO | 2024-12-14 17:11:18 | Extracted token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI3IiwidW5pcXVlX25hbWUiOiJ0ZXN0IiwibmJmIjoxNzM0MTk2Mjc3LCJleHAiOjE3MzQ4MDEwNzcsImlhdCI6MTczNDE5NjI3N30.cG_8D2IkCbRNAzEst-07E36NP9IXvhnw4WvEPeOmf9g
+INFO | 2024-12-14 17:11:18 | Extracted token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI3IiwidW5pcXVlX25hbWUiOiJ0ZXN0IiwibmJmIjoxNzM0MTk2Mjc3LCJleHAiOjE3MzQ4MDEwNzcsImlhdCI6MTczNDE5NjI3N30.cG_8D2IkCbRNAzEst-07E36NP9IXvhnw4WvEPeOmf9g
+INFO | 2024-12-14 17:11:18 | Token validated for user ID: 7
+INFO | 2024-12-14 17:11:18 | Token validated for user ID: 7
+INFO | 2024-12-14 17:11:18 | Attempting to get user by UserId: 7
+INFO | 2024-12-14 17:11:18 | Attempting to get user by UserId: 7
+INFO | 2024-12-14 17:11:18 | Successfully retrieved user with UserId: 7
+INFO | 2024-12-14 17:11:18 | Successfully retrieved user with UserId: 7
+INFO | 2024-12-14 17:11:18 | User login successful for email: test@test.nl
+INFO | 2024-12-14 17:11:18 | User test@test.nl logged in successfully
+INFO | 2024-12-14 17:11:19 | Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI3IiwidW5pcXVlX25hbWUiOiJ0ZXN0IiwibmJmIjoxNzM0MTk2Mjc4LCJleHAiOjE3MzQ4MDEwNzgsImlhdCI6MTczNDE5NjI3OH0.RzslZeVB_rkldfX1vgJtJWpOhXTjkW4dpnV0PO2SGRI
+INFO | 2024-12-14 17:11:19 | Extracted token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI3IiwidW5pcXVlX25hbWUiOiJ0ZXN0IiwibmJmIjoxNzM0MTk2Mjc4LCJleHAiOjE3MzQ4MDEwNzgsImlhdCI6MTczNDE5NjI3OH0.RzslZeVB_rkldfX1vgJtJWpOhXTjkW4dpnV0PO2SGRI
+INFO | 2024-12-14 17:11:19 | Token validated for user ID: 7
+INFO | 2024-12-14 17:11:19 | Attempting to get user by UserId: 7
+INFO | 2024-12-14 17:11:19 | Successfully retrieved user with UserId: 7
+INFO | 2024-12-14 17:11:21 | Login attempt for email: test@test.nl
+INFO | 2024-12-14 17:11:21 | Starting user login for email: test@test.nl
+INFO | 2024-12-14 17:11:21 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-14 17:11:21 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-14 17:11:22 | User login successful for email: test@test.nl
+INFO | 2024-12-14 17:11:22 | User test@test.nl logged in successfully
+INFO | 2024-12-14 17:11:23 | Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI3IiwidW5pcXVlX25hbWUiOiJ0ZXN0IiwibmJmIjoxNzM0MTk2MjgxLCJleHAiOjE3MzQ4MDEwODEsImlhdCI6MTczNDE5NjI4MX0.BmV6vykxh-lll3AvmHYU1wyP8MlEBywDPwgtr2QKPkE
+INFO | 2024-12-14 17:11:23 | Extracted token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI3IiwidW5pcXVlX25hbWUiOiJ0ZXN0IiwibmJmIjoxNzM0MTk2MjgxLCJleHAiOjE3MzQ4MDEwODEsImlhdCI6MTczNDE5NjI4MX0.BmV6vykxh-lll3AvmHYU1wyP8MlEBywDPwgtr2QKPkE
+INFO | 2024-12-14 17:11:23 | Token validated for user ID: 7
+INFO | 2024-12-14 17:11:23 | Attempting to get user by UserId: 7
+INFO | 2024-12-14 17:11:23 | Successfully retrieved user with UserId: 7
+INFO | 2024-12-14 17:11:24 | Login attempt for email: test@test.nl
+INFO | 2024-12-14 17:11:24 | Starting user login for email: test@test.nl
+INFO | 2024-12-14 17:11:24 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-14 17:11:24 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-14 17:11:24 | User login successful for email: test@test.nl
+INFO | 2024-12-14 17:11:24 | User test@test.nl logged in successfully
+INFO | 2024-12-14 17:11:25 | Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI3IiwidW5pcXVlX25hbWUiOiJ0ZXN0IiwibmJmIjoxNzM0MTk2Mjg0LCJleHAiOjE3MzQ4MDEwODQsImlhdCI6MTczNDE5NjI4NH0.jne0NCk36jiNU4Swkm7rac9-PVMVERDCKIKUsiXaXHY
+INFO | 2024-12-14 17:11:25 | Extracted token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI3IiwidW5pcXVlX25hbWUiOiJ0ZXN0IiwibmJmIjoxNzM0MTk2Mjg0LCJleHAiOjE3MzQ4MDEwODQsImlhdCI6MTczNDE5NjI4NH0.jne0NCk36jiNU4Swkm7rac9-PVMVERDCKIKUsiXaXHY
+INFO | 2024-12-14 17:11:25 | Token validated for user ID: 7
+INFO | 2024-12-14 17:11:25 | Attempting to get user by UserId: 7
+INFO | 2024-12-14 17:11:25 | Successfully retrieved user with UserId: 7
+INFO | 2024-12-14 17:11:25 | Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI3IiwidW5pcXVlX25hbWUiOiJ0ZXN0IiwibmJmIjoxNzM0MTk2Mjg0LCJleHAiOjE3MzQ4MDEwODQsImlhdCI6MTczNDE5NjI4NH0.jne0NCk36jiNU4Swkm7rac9-PVMVERDCKIKUsiXaXHY
+INFO | 2024-12-14 17:11:25 | Extracted token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI3IiwidW5pcXVlX25hbWUiOiJ0ZXN0IiwibmJmIjoxNzM0MTk2Mjg0LCJleHAiOjE3MzQ4MDEwODQsImlhdCI6MTczNDE5NjI4NH0.jne0NCk36jiNU4Swkm7rac9-PVMVERDCKIKUsiXaXHY
+INFO | 2024-12-14 17:11:25 | Token validated for user ID: 7
+INFO | 2024-12-14 17:11:25 | Attempting to get user by UserId: 7
+INFO | 2024-12-14 17:11:25 | Successfully retrieved user with UserId: 7
+INFO | 2024-12-14 17:11:26 | Login attempt for email: test@test.nl
+INFO | 2024-12-14 17:11:26 | Starting user login for email: test@test.nl
+INFO | 2024-12-14 17:11:26 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-14 17:11:26 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-14 17:11:26 | User login successful for email: test@test.nl
+INFO | 2024-12-14 17:11:26 | User test@test.nl logged in successfully
+INFO | 2024-12-14 17:11:27 | Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI3IiwidW5pcXVlX25hbWUiOiJ0ZXN0IiwibmJmIjoxNzM0MTk2Mjg2LCJleHAiOjE3MzQ4MDEwODYsImlhdCI6MTczNDE5NjI4Nn0.ojD3U8uefzGxBuqLn3UA86Yz3AA83YmUfjE5xw6klkI
+INFO | 2024-12-14 17:11:27 | Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI3IiwidW5pcXVlX25hbWUiOiJ0ZXN0IiwibmJmIjoxNzM0MTk2Mjg2LCJleHAiOjE3MzQ4MDEwODYsImlhdCI6MTczNDE5NjI4Nn0.ojD3U8uefzGxBuqLn3UA86Yz3AA83YmUfjE5xw6klkI
+INFO | 2024-12-14 17:11:27 | Extracted token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI3IiwidW5pcXVlX25hbWUiOiJ0ZXN0IiwibmJmIjoxNzM0MTk2Mjg2LCJleHAiOjE3MzQ4MDEwODYsImlhdCI6MTczNDE5NjI4Nn0.ojD3U8uefzGxBuqLn3UA86Yz3AA83YmUfjE5xw6klkI
+INFO | 2024-12-14 17:11:27 | Extracted token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI3IiwidW5pcXVlX25hbWUiOiJ0ZXN0IiwibmJmIjoxNzM0MTk2Mjg2LCJleHAiOjE3MzQ4MDEwODYsImlhdCI6MTczNDE5NjI4Nn0.ojD3U8uefzGxBuqLn3UA86Yz3AA83YmUfjE5xw6klkI
+INFO | 2024-12-14 17:11:27 | Token validated for user ID: 7
+INFO | 2024-12-14 17:11:27 | Token validated for user ID: 7
+INFO | 2024-12-14 17:11:27 | Attempting to get user by UserId: 7
+INFO | 2024-12-14 17:11:27 | Attempting to get user by UserId: 7
+INFO | 2024-12-14 17:11:27 | Successfully retrieved user with UserId: 7
+INFO | 2024-12-14 17:11:27 | Successfully retrieved user with UserId: 7
+INFO | 2024-12-14 17:11:28 | Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI3IiwidW5pcXVlX25hbWUiOiJ0ZXN0IiwibmJmIjoxNzM0MTk2Mjg0LCJleHAiOjE3MzQ4MDEwODQsImlhdCI6MTczNDE5NjI4NH0.jne0NCk36jiNU4Swkm7rac9-PVMVERDCKIKUsiXaXHY
+INFO | 2024-12-14 17:11:28 | Extracted token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI3IiwidW5pcXVlX25hbWUiOiJ0ZXN0IiwibmJmIjoxNzM0MTk2Mjg0LCJleHAiOjE3MzQ4MDEwODQsImlhdCI6MTczNDE5NjI4NH0.jne0NCk36jiNU4Swkm7rac9-PVMVERDCKIKUsiXaXHY
+INFO | 2024-12-14 17:11:28 | Token validated for user ID: 7
+INFO | 2024-12-14 17:11:28 | Attempting to get user by UserId: 7
+INFO | 2024-12-14 17:11:28 | Successfully retrieved user with UserId: 7
+INFO | 2024-12-14 17:11:28 | Attempting to update user with UserId: 7
+INFO | 2024-12-14 17:11:28 | Successfully updated user with UserId: 7
+INFO | 2024-12-14 17:11:30 | Login attempt for email: test@test.nl
+INFO | 2024-12-14 17:11:30 | Starting user login for email: test@test.nl
+INFO | 2024-12-14 17:11:30 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-14 17:11:30 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-14 17:11:31 | User login successful for email: test@test.nl
+INFO | 2024-12-14 17:11:31 | User test@test.nl logged in successfully
+INFO | 2024-12-14 17:11:34 | Login attempt for email: test@test.nl
+INFO | 2024-12-14 17:11:34 | Starting user login for email: test@test.nl
+INFO | 2024-12-14 17:11:34 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-14 17:11:34 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-14 17:11:35 | User login successful for email: test@test.nl
+INFO | 2024-12-14 17:11:35 | User test@test.nl logged in successfully
+INFO | 2024-12-14 17:11:47 | Login attempt for email: test@test.nl
+INFO | 2024-12-14 17:11:47 | Starting user login for email: test@test.nl
+INFO | 2024-12-14 17:11:47 | Attempting to get user by email: test@test.nl
+INFO | 2024-12-14 17:11:47 | Successfully retrieved user with email: test@test.nl
+INFO | 2024-12-14 17:11:48 | User login successful for email: test@test.nl
+INFO | 2024-12-14 17:11:48 | User test@test.nl logged in successfully
+INFO | 2024-12-14 17:12:59 | Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI3IiwidW5pcXVlX25hbWUiOiJ0ZXN0IiwibmJmIjoxNzM0MDc4NzgzLCJleHAiOjE3MzQ2ODM1ODMsImlhdCI6MTczNDA3ODc4M30.hKSbsZLR_px-XZHLmqNTctxdQ1Sj2oytE64tSaE3Wnc
+INFO | 2024-12-14 17:12:59 | Extracted token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI3IiwidW5pcXVlX25hbWUiOiJ0ZXN0IiwibmJmIjoxNzM0MDc4NzgzLCJleHAiOjE3MzQ2ODM1ODMsImlhdCI6MTczNDA3ODc4M30.hKSbsZLR_px-XZHLmqNTctxdQ1Sj2oytE64tSaE3Wnc
+INFO | 2024-12-14 17:12:59 | Token validated for user ID: 7
+INFO | 2024-12-14 17:12:59 | Attempting to get user by UserId: 7
+INFO | 2024-12-14 17:12:59 | Successfully retrieved user with UserId: 7
+INFO | 2024-12-14 17:13:03 | Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI3IiwidW5pcXVlX25hbWUiOiJ0ZXN0IiwibmJmIjoxNzM0MDc4NzgzLCJleHAiOjE3MzQ2ODM1ODMsImlhdCI6MTczNDA3ODc4M30.hKSbsZLR_px-XZHLmqNTctxdQ1Sj2oytE64tSaE3Wnc
+INFO | 2024-12-14 17:13:03 | Extracted token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI3IiwidW5pcXVlX25hbWUiOiJ0ZXN0IiwibmJmIjoxNzM0MDc4NzgzLCJleHAiOjE3MzQ2ODM1ODMsImlhdCI6MTczNDA3ODc4M30.hKSbsZLR_px-XZHLmqNTctxdQ1Sj2oytE64tSaE3Wnc
+INFO | 2024-12-14 17:13:03 | Token validated for user ID: 7
+INFO | 2024-12-14 17:13:03 | Attempting to get user by UserId: 7
+INFO | 2024-12-14 17:13:03 | Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI3IiwidW5pcXVlX25hbWUiOiJ0ZXN0IiwibmJmIjoxNzM0MDc4NzgzLCJleHAiOjE3MzQ2ODM1ODMsImlhdCI6MTczNDA3ODc4M30.hKSbsZLR_px-XZHLmqNTctxdQ1Sj2oytE64tSaE3Wnc
+INFO | 2024-12-14 17:13:03 | Extracted token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI3IiwidW5pcXVlX25hbWUiOiJ0ZXN0IiwibmJmIjoxNzM0MDc4NzgzLCJleHAiOjE3MzQ2ODM1ODMsImlhdCI6MTczNDA3ODc4M30.hKSbsZLR_px-XZHLmqNTctxdQ1Sj2oytE64tSaE3Wnc
+INFO | 2024-12-14 17:13:03 | Token validated for user ID: 7
+INFO | 2024-12-14 17:13:03 | Successfully retrieved user with UserId: 7
+INFO | 2024-12-14 17:13:03 | Attempting to get user by UserId: 7
+INFO | 2024-12-14 17:13:03 | Successfully retrieved user with UserId: 7
+INFO | 2024-12-14 17:13:05 | Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI3IiwidW5pcXVlX25hbWUiOiJ0ZXN0IiwibmJmIjoxNzM0MDc4NzgzLCJleHAiOjE3MzQ2ODM1ODMsImlhdCI6MTczNDA3ODc4M30.hKSbsZLR_px-XZHLmqNTctxdQ1Sj2oytE64tSaE3Wnc
+INFO | 2024-12-14 17:13:05 | Extracted token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI3IiwidW5pcXVlX25hbWUiOiJ0ZXN0IiwibmJmIjoxNzM0MDc4NzgzLCJleHAiOjE3MzQ2ODM1ODMsImlhdCI6MTczNDA3ODc4M30.hKSbsZLR_px-XZHLmqNTctxdQ1Sj2oytE64tSaE3Wnc
+INFO | 2024-12-14 17:13:05 | Token validated for user ID: 7
+INFO | 2024-12-14 17:13:05 | Attempting to get user by UserId: 7
+INFO | 2024-12-14 17:13:05 | Successfully retrieved user with UserId: 7
+INFO | 2024-12-14 17:13:06 | Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI3IiwidW5pcXVlX25hbWUiOiJ0ZXN0IiwibmJmIjoxNzM0MDc4NzgzLCJleHAiOjE3MzQ2ODM1ODMsImlhdCI6MTczNDA3ODc4M30.hKSbsZLR_px-XZHLmqNTctxdQ1Sj2oytE64tSaE3Wnc
+INFO | 2024-12-14 17:13:06 | Extracted token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI3IiwidW5pcXVlX25hbWUiOiJ0ZXN0IiwibmJmIjoxNzM0MDc4NzgzLCJleHAiOjE3MzQ2ODM1ODMsImlhdCI6MTczNDA3ODc4M30.hKSbsZLR_px-XZHLmqNTctxdQ1Sj2oytE64tSaE3Wnc
+INFO | 2024-12-14 17:13:06 | Token validated for user ID: 7
+INFO | 2024-12-14 17:13:06 | Attempting to get user by UserId: 7
+INFO | 2024-12-14 17:13:06 | Successfully retrieved user with UserId: 7

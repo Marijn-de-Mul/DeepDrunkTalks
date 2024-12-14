@@ -29,6 +29,7 @@ export default function Play() {
   const [isMicrophoneEnabled, setIsMicrophoneEnabled] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isReadyToStart, setIsReadyToStart] = useState(false);
+  const [isRequestingMicrophone, setIsRequestingMicrophone] = useState(true);
 
   const conversationInProgressRef = useRef(false);
   const hasStartedRef = useRef(false);
@@ -68,8 +69,10 @@ export default function Play() {
 
   useEffect(() => {
     async function enableMicrophone() {
+      setIsRequestingMicrophone(true);
       const accessGranted = await requestMicrophoneAccess();
       setIsMicrophoneEnabled(accessGranted);
+      setIsRequestingMicrophone(false);
       setIsLoading(false);
     }
 
@@ -264,6 +267,10 @@ export default function Play() {
   };
 
   if (isLoading) {
+    return <Loading />;
+  }
+
+  if (isRequestingMicrophone) {
     return <Loading />;
   }
 

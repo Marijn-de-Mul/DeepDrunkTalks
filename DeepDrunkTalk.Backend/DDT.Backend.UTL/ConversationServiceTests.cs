@@ -53,7 +53,7 @@ public class ConversationServiceTests
     public async Task StartConversation_ShouldThrowException_WhenUserNotFound()
     {
         var userId = 1;
-        _userRepositoryMock.Setup(repo => repo.GetUserById(userId)).ReturnsAsync((User)null);
+        _userRepositoryMock.Setup(repo => repo.GetUserById(userId))!.ReturnsAsync((User)null!);
 
         await Assert.ThrowsAsync<UnauthorizedAccessException>(() => _conversationService.StartConversation(userId));
         _userRepositoryMock.Verify(repo => repo.GetUserById(userId), Times.Once);

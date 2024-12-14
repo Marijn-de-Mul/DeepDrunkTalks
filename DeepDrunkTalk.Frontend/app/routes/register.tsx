@@ -1,7 +1,8 @@
 import type { MetaFunction } from "@remix-run/node";
-import { Button, Box, Input, Image, Text, Divider, Loader } from '@mantine/core';
+import { Button, Box, Input, Image, Text } from '@mantine/core';
 import { useState, useEffect } from "react";
 import { Form } from "@remix-run/react";
+import { Link } from "react-router-dom";
 
 import logo from "~/assets/img/logo.png";
 import Loading from "~/components/Loading";
@@ -190,7 +191,7 @@ export default function Register() {
             REGISTER
           </Button>
 
-          <a href="./login">
+          <Link to="/login" style={{ textDecoration: "none" }}>
             <Button
               data-testid="login-button-onregisterscreen"
               fullWidth
@@ -198,12 +199,12 @@ export default function Register() {
               size="lg"
               style={{
                 marginTop: "2vw",
-                height: "5vh"
+                height: "5vh",
               }}
             >
               LOGIN INSTEAD
             </Button>
-          </a>
+          </Link>
         </Form>
       </Box>
     </>

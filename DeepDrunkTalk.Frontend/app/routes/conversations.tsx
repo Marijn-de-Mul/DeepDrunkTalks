@@ -2,7 +2,6 @@ import { Button, Box, Text, Modal } from '@mantine/core';
 import { useState, useEffect, useRef } from 'react';
 import { MetaFunction } from '@remix-run/node';
 import { Link } from "@remix-run/react";
-import { createFFmpeg, fetchFile } from '@ffmpeg/ffmpeg';
 import { isMobileDevice } from '~/utils/device'; 
 
 import ProtectedRoute from "~/components/layouts/ProtectedRoute";
@@ -31,30 +30,13 @@ export default function Conversations() {
   const [isClient, setIsClient] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [audioStatus, setAudioStatus] = useState<{ [key: number]: AudioProcessingStatus }>({});
-  const [ffmpeg, setFfmpeg] = useState<any>(null);
-  const [isFFmpegLoaded, setIsFFmpegLoaded] = useState(false);
   const observer = useRef<IntersectionObserver | null>(null);
-  const [conversionQueue, setConversionQueue] = useState<number[]>([]);
-  const [isConverting, setIsConverting] = useState(false);
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
   const [conversationToDelete, setConversationToDelete] = useState<number | null>(null);
 
   useEffect(() => {
     setIsClient(true);
   }, []);
-
-  useEffect(() => {
-    async function loadFFmpeg() {
-      const ffmpegInstance = createFFmpeg({ log: true });
-      await ffmpegInstance.load();
-      setFfmpeg(ffmpegInstance);
-      setIsFFmpegLoaded(true);
-    }
-
-    if (isClient) {
-      loadFFmpeg();
-    }
-  }, [isClient]);
 
   useEffect(() => {
     if (isClient) {
@@ -96,14 +78,6 @@ export default function Conversations() {
     }
   }, [isClient]);
 
-  const convertAudio = async (conversationId: number, blob: Blob) => {
-    const fileName = `audio_${conversationId}.webm`;
-    ffmpeg.FS('writeFile', fileName, await fetchFile(blob));
-    await ffmpeg.run('-i', fileName, '-c:a', 'aac', '-b:a', '128k', `output_${conversationId}.mp4`);
-    const data = ffmpeg.FS('readFile', `output_${conversationId}.mp4`);
-    return new Blob([data.buffer], { type: 'audio/mp4' });
-  };
-
   const setAudioStatusWithDelay = async (conversationId: number, status: AudioProcessingStatus) => {
     return new Promise<void>(resolve => {
       setTimeout(() => {
@@ -134,38 +108,20 @@ export default function Conversations() {
 
       if (response.ok) {
         const audioBlob = await response.blob();
-        const isApple = /Apple/.test(navigator.userAgent);
-        const supportsWebM = MediaRecorder.isTypeSupported('audio/webm');
-
-        if (isMobileDevice() || isApple || !supportsWebM) {
-          // Perform server-side conversion for mobile devices
-          const convertedBlob = await convertAudio(conversationId, audioBlob);
-          const audioUrl = URL.createObjectURL(convertedBlob);
-          setAudioUrls(prev => ({
-            ...prev,
-            [conversationId]: audioUrl
-          }));
-          setTimeout(() => {
-            setAudioStatus(prev => {
-              const newStatus = { ...prev };
-              delete newStatus[conversationId];
-              return newStatus;
-            });
-          }, 800);
-        } else {
-          const audioUrl = URL.createObjectURL(audioBlob);
-          setAudioUrls(prev => ({
-            ...prev,
-            [conversationId]: audioUrl
-          }));
-          setTimeout(() => {
-            setAudioStatus(prev => {
-              const newStatus = { ...prev };
-              delete newStatus[conversationId];
-              return newStatus;
-            });
-          }, 800);
-        }
+        console.log("Performing server-side conversion");
+        const convertedBlob = await convertAudioOnServer(conversationId, audioBlob);
+        const audioUrl = URL.createObjectURL(convertedBlob);
+        setAudioUrls(prev => ({
+          ...prev,
+          [conversationId]: audioUrl
+        }));
+        setTimeout(() => {
+          setAudioStatus(prev => {
+            const newStatus = { ...prev };
+            delete newStatus[conversationId];
+            return newStatus;
+          });
+        }, 800);
       } else {
         console.error("Failed to fetch audio file:", response.status);
         return;
@@ -173,6 +129,29 @@ export default function Conversations() {
     } catch (error) {
       console.error("Error fetching audio file:", error);
       return;
+    }
+  }
+
+  async function convertAudioOnServer(conversationId: number, audioBlob: Blob): Promise<Blob> {
+    const formData = new FormData();
+    formData.append("audioFile", audioBlob, `audio_${conversationId}.webm`);
+    const token = localStorage.getItem("authToken");
+    if (!token) {
+      console.error("Token not found. Unable to convert audio file.");
+      return audioBlob;
+    }
+
+    const response = await fetch(`/audioconvertproxy`, {
+      method: "POST",
+      headers: { "Authorization": `Bearer ${token}` },
+      body: formData
+    });
+
+    if (response.ok) {
+      return await response.blob();
+    } else {
+      console.error("Failed to convert audio file:", response.status);
+      return audioBlob;
     }
   }
 
@@ -249,75 +228,6 @@ export default function Conversations() {
       console.error("Error deleting conversation:", error);
     }
   };
-
-  async function fetchOriginalAudioBlob(conversationId: number): Promise<Blob | null> {
-    const token = localStorage.getItem("authToken");
-    if (!token) {
-      console.error("Token not found. Unable to fetch audio file.");
-      return null;
-    }
-
-    try {
-      const formData = new FormData();
-      formData.append("endpoint", `/api/conversations/${conversationId}/audio`);
-
-      const response = await fetch(`/audiogetproxy`, {
-        method: "POST",
-        headers: { "Authorization": `Bearer ${token}` },
-        body: formData
-      });
-
-      if (response.ok) {
-        const audioBlob = await response.blob();
-        return audioBlob;
-      } else {
-        console.error("Failed to fetch audio file:", response.status);
-        return null;
-      }
-    } catch (error) {
-      console.error("Error fetching audio file:", error);
-      return null;
-    }
-  }
-
-  useEffect(() => {
-    async function processQueue() {
-      if (conversionQueue.length === 0 || isConverting) return;
-
-      setIsConverting(true);
-      const conversationId = conversionQueue.shift();
-      if (!conversationId) {
-        setIsConverting(false);
-        return;
-      }
-
-      const audioBlob = await fetchOriginalAudioBlob(conversationId);
-      if (!audioBlob) {
-        setIsConverting(false);
-        return;
-      }
-
-      await setAudioStatusWithDelay(conversationId, AudioProcessingStatus.CONVERTING);
-      const convertedBlob = await convertAudio(conversationId, audioBlob);
-      await setAudioStatusWithDelay(conversationId, AudioProcessingStatus.FINALIZING);
-      const audioUrl = URL.createObjectURL(convertedBlob);
-      setAudioUrls(prev => ({
-        ...prev,
-        [conversationId]: audioUrl
-      }));
-      setTimeout(() => {
-        setAudioStatus(prev => {
-          const newStatus = { ...prev };
-          delete newStatus[conversationId];
-          return newStatus;
-        });
-      }, 800);
-
-      setIsConverting(false);
-    }
-
-    processQueue();
-  }, [conversionQueue, isConverting]);
 
   const openConfirmModal = (conversationId: number) => {
     setConversationToDelete(conversationId);

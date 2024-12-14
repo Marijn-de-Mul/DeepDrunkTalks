@@ -32,6 +32,9 @@ async function convertAudio(audioFile: File): Promise<string> {
     inputFormat = 'aac';
   }
 
+  console.log(`Converting audio file with MIME type: ${mimeType} and input format: ${inputFormat}`);
+  console.log(`Audio file size: ${audioFile.size} bytes`);
+
   return new Promise((resolve, reject) => {
     ffmpeg(readableStream)
       .inputFormat(inputFormat)
@@ -40,7 +43,7 @@ async function convertAudio(audioFile: File): Promise<string> {
         console.log('Spawned Ffmpeg with command: ' + commandLine);
       })
       .on('progress', (progress) => {
-        console.log('Processing: ' + progress.percent + '% done');
+        console.log('Processing: ' + (progress.percent ? progress.percent : 'unknown') + '% done');
       })
       .on('error', (err) => {
         console.error('Error: ' + err.message);
@@ -63,6 +66,7 @@ export let action: ActionFunction = async ({ request }) => {
   }
 
   try {
+    console.log(`Received audio file with name: ${(audioFile as File).name} and type: ${(audioFile as File).type}`);
     const outputFilePath = await convertAudio(audioFile as File);
     const audioBuffer = await readFile(outputFilePath);
     return new Response(audioBuffer, {

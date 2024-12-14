@@ -1,8 +1,9 @@
-import { Button, Box, Text } from '@mantine/core';
+import { Button, Box, Text, Modal } from '@mantine/core';
 import { useState, useEffect, useRef } from 'react';
 import { MetaFunction } from '@remix-run/node';
 import { Link } from "@remix-run/react";
 import { createFFmpeg, fetchFile } from '@ffmpeg/ffmpeg';
+import { isMobileDevice } from '~/utils/device'; 
 
 import ProtectedRoute from "~/components/layouts/ProtectedRoute";
 import Loading from "~/components/Loading";
@@ -35,6 +36,8 @@ export default function Conversations() {
   const observer = useRef<IntersectionObserver | null>(null);
   const [conversionQueue, setConversionQueue] = useState<number[]>([]);
   const [isConverting, setIsConverting] = useState(false);
+  const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
+  const [conversationToDelete, setConversationToDelete] = useState<number | null>(null);
 
   useEffect(() => {
     setIsClient(true);
@@ -110,39 +113,55 @@ export default function Conversations() {
     });
   };
 
-    async function fetchAudioFile(conversationId: number) {
+  async function fetchAudioFile(conversationId: number) {
     await setAudioStatusWithDelay(conversationId, AudioProcessingStatus.INITIALIZING);
     const token = localStorage.getItem("authToken");
     if (!token) {
       console.error("Token not found. Unable to fetch audio file.");
       return;
     }
-  
+
     try {
       await setAudioStatusWithDelay(conversationId, AudioProcessingStatus.FETCHING);
       const formData = new FormData();
       formData.append("endpoint", `/api/conversations/${conversationId}/audio`);
-  
+
       const response = await fetch(`/audiogetproxy`, {
         method: "POST",
         headers: { "Authorization": `Bearer ${token}` },
         body: formData
       });
-  
+
       if (response.ok) {
         const audioBlob = await response.blob();
         const isApple = /Apple/.test(navigator.userAgent);
         const supportsWebM = MediaRecorder.isTypeSupported('audio/webm');
-  
-        if (isApple || !supportsWebM) {
-          if (!isFFmpegLoaded) {
-            console.error("FFmpeg is not loaded.");
+
+        if (isMobileDevice() || isApple || !supportsWebM) {
+          // Fallback to server-side conversion for mobile devices
+          const serverConvertedResponse = await fetch(`/api/conversations/${conversationId}/audio-converted`, {
+            method: "GET",
+            headers: { "Authorization": `Bearer ${token}` }
+          });
+
+          if (serverConvertedResponse.ok) {
+            const serverConvertedBlob = await serverConvertedResponse.blob();
+            const audioUrl = URL.createObjectURL(serverConvertedBlob);
+            setAudioUrls(prev => ({
+              ...prev,
+              [conversationId]: audioUrl
+            }));
+            setTimeout(() => {
+              setAudioStatus(prev => {
+                const newStatus = { ...prev };
+                delete newStatus[conversationId];
+                return newStatus;
+              });
+            }, 800);
+          } else {
+            console.error("Failed to fetch server-converted audio file:", serverConvertedResponse.status);
             return;
           }
-  
-          setAudioStatus(prev => ({ ...prev, [conversationId]: AudioProcessingStatus.QUEUED }));
-  
-          setConversionQueue(prev => [...prev, conversationId]);
         } else {
           const audioUrl = URL.createObjectURL(audioBlob);
           setAudioUrls(prev => ({
@@ -181,11 +200,11 @@ export default function Conversations() {
     }
   }, [conversations]);
 
-    useEffect(() => {
+  useEffect(() => {
     if (observer.current) {
       observer.current.disconnect();
     }
-  
+
     observer.current = new IntersectionObserver((entries) => {
       entries.forEach(async (entry) => {
         if (entry.isIntersecting) {
@@ -196,10 +215,10 @@ export default function Conversations() {
         }
       });
     });
-  
+
     const items = document.querySelectorAll('[data-conversation-id]');
     items.forEach((item) => observer.current?.observe(item));
-  
+
     return () => {
       observer.current?.disconnect();
     };
@@ -309,6 +328,23 @@ export default function Conversations() {
 
     processQueue();
   }, [conversionQueue, isConverting]);
+
+  const openConfirmModal = (conversationId: number) => {
+    setConversationToDelete(conversationId);
+    setIsConfirmModalOpen(true);
+  };
+
+  const handleConfirmDelete = () => {
+    if (conversationToDelete !== null) {
+      deleteConversation(conversationToDelete);
+    }
+    setIsConfirmModalOpen(false);
+  };
+
+  const handleCancelDelete = () => {
+    setIsConfirmModalOpen(false);
+    setConversationToDelete(null);
+  };
 
   if (!isClient || isLoading) {
     return <Loading />;
@@ -444,7 +480,7 @@ export default function Conversations() {
                     marginTop: "10px",
                     width: "100%",
                   }}
-                  onClick={() => deleteConversation(conversation.id)}
+                  onClick={() => openConfirmModal(conversation.id)}
                   data-testid="conversations-delete"
                 >
                   DELETE
@@ -514,6 +550,30 @@ export default function Conversations() {
           </Button>
         </Link>
       </Box>
+
+      <Modal
+        opened={isConfirmModalOpen}
+        onClose={handleCancelDelete}
+        title="Confirm Deletion"
+      >
+        <Text size="sm">
+          Are you sure you want to delete this conversation? This action cannot be undone.
+        </Text>
+        <Box
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            marginTop: "20px",
+          }}
+        >
+          <Button color="red" onClick={handleConfirmDelete}>
+            Delete
+          </Button>
+          <Button onClick={handleCancelDelete}>
+            Cancel
+          </Button>
+        </Box>
+      </Modal>
     </ProtectedRoute>
   );
 }

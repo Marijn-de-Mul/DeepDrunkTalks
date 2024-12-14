@@ -530,7 +530,7 @@
   resolved "https://registry.npmjs.org/@jspm/core/-/core-2.0.1.tgz"
   integrity sha512-Lg3PnLp0QXpxwLIAuuJboLeRaIhrgJjeuh797QADg3xz8wGLugQOS5DpsE8A6i6Adgzf+bacllkKZG3J0tGfDw==
 
-"@mantine/core@^7.12.2":
+"@mantine/core@^7.12.2", "@mantine/core@7.15.1":
   version "7.15.1"
   resolved "https://registry.npmjs.org/@mantine/core/-/core-7.15.1.tgz"
   integrity sha512-MKHrByqgpu+vzhauX0X9EH+BOgJqyjHwk4E0sfIIX9CXC9pziLMc4aL8pua0KaXiRuQiskTl/DuGX31saHBH5g==
@@ -546,6 +546,11 @@
   version "7.15.1"
   resolved "https://registry.npmjs.org/@mantine/hooks/-/hooks-7.15.1.tgz"
   integrity sha512-jrpjA5JhVSgUi0expfZpvNplMgvwdvrCIcKiDjQ16p/KiWngvTVfmJMtBOVxQ6hWrn500nLmZIDEcTmV9Dvb7g==
+
+"@mantine/modals@^7.15.1":
+  version "7.15.1"
+  resolved "https://registry.npmjs.org/@mantine/modals/-/modals-7.15.1.tgz"
+  integrity sha512-mKlnzkwqOHO1laeVfILbcPLITF2qRwKbf/aF3GZhHiJVTX0aSEQ5IBL7dBQHhETLsfNp/GLzmOHKyw3zdNUS5g==
 
 "@mdx-js/mdx@^2.3.0":
   version "2.3.0"

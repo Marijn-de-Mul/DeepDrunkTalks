@@ -138,30 +138,20 @@ export default function Conversations() {
         const supportsWebM = MediaRecorder.isTypeSupported('audio/webm');
 
         if (isMobileDevice() || isApple || !supportsWebM) {
-          // Fallback to server-side conversion for mobile devices
-          const serverConvertedResponse = await fetch(`/api/conversations/${conversationId}/audio-converted`, {
-            method: "GET",
-            headers: { "Authorization": `Bearer ${token}` }
-          });
-
-          if (serverConvertedResponse.ok) {
-            const serverConvertedBlob = await serverConvertedResponse.blob();
-            const audioUrl = URL.createObjectURL(serverConvertedBlob);
-            setAudioUrls(prev => ({
-              ...prev,
-              [conversationId]: audioUrl
-            }));
-            setTimeout(() => {
-              setAudioStatus(prev => {
-                const newStatus = { ...prev };
-                delete newStatus[conversationId];
-                return newStatus;
-              });
-            }, 800);
-          } else {
-            console.error("Failed to fetch server-converted audio file:", serverConvertedResponse.status);
-            return;
-          }
+          // Perform server-side conversion for mobile devices
+          const convertedBlob = await convertAudio(conversationId, audioBlob);
+          const audioUrl = URL.createObjectURL(convertedBlob);
+          setAudioUrls(prev => ({
+            ...prev,
+            [conversationId]: audioUrl
+          }));
+          setTimeout(() => {
+            setAudioStatus(prev => {
+              const newStatus = { ...prev };
+              delete newStatus[conversationId];
+              return newStatus;
+            });
+          }, 800);
         } else {
           const audioUrl = URL.createObjectURL(audioBlob);
           setAudioUrls(prev => ({

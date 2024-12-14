@@ -140,40 +140,15 @@ export default function Conversations() {
             return null;
           }
 
-          await setAudioStatusWithDelay(conversationId, AudioProcessingStatus.CONVERTING);
+          setAudioStatus(prev => ({ ...prev, [conversationId]: AudioProcessingStatus.QUEUED }));
 
-          // Add to queue instead of immediate conversion
           setConversionQueue(prev => [...prev, conversationId]);
-
-          // Wait for conversion
-          while (conversionQueue.includes(conversationId) || isConverting) {
-            await new Promise(resolve => setTimeout(resolve, 100));
-          }
-
-          const convertedBlob = await convertAudio(conversationId, audioBlob);
-          const audioUrl = URL.createObjectURL(convertedBlob);
-
-          setAudioUrls(prev => ({
-            ...prev,
-            [conversationId]: audioUrl
-          }));
-
-          setTimeout(() => {
-            setAudioStatus(prev => {
-              const newStatus = { ...prev };
-              delete newStatus[conversationId];
-              return newStatus;
-            });
-          }, 800);
-
-          return audioUrl;
         } else {
           const audioUrl = URL.createObjectURL(audioBlob);
           setAudioUrls(prev => ({
             ...prev,
             [conversationId]: audioUrl
           }));
-
           setTimeout(() => {
             setAudioStatus(prev => {
               const newStatus = { ...prev };
@@ -181,8 +156,6 @@ export default function Conversations() {
               return newStatus;
             });
           }, 800);
-
-          return audioUrl;
         }
       } else {
         console.error("Failed to fetch audio file:", response.status);
@@ -278,6 +251,75 @@ export default function Conversations() {
       console.error("Error deleting conversation:", error);
     }
   };
+
+  async function fetchOriginalAudioBlob(conversationId: number): Promise<Blob | null> {
+    const token = localStorage.getItem("authToken");
+    if (!token) {
+      console.error("Token not found. Unable to fetch audio file.");
+      return null;
+    }
+
+    try {
+      const formData = new FormData();
+      formData.append("endpoint", `/api/conversations/${conversationId}/audio`);
+
+      const response = await fetch(`/audiogetproxy`, {
+        method: "POST",
+        headers: { "Authorization": `Bearer ${token}` },
+        body: formData
+      });
+
+      if (response.ok) {
+        const audioBlob = await response.blob();
+        return audioBlob;
+      } else {
+        console.error("Failed to fetch audio file:", response.status);
+        return null;
+      }
+    } catch (error) {
+      console.error("Error fetching audio file:", error);
+      return null;
+    }
+  }
+
+  useEffect(() => {
+    async function processQueue() {
+      if (conversionQueue.length === 0 || isConverting) return;
+
+      setIsConverting(true);
+      const conversationId = conversionQueue.shift();
+      if (!conversationId) {
+        setIsConverting(false);
+        return;
+      }
+
+      const audioBlob = await fetchOriginalAudioBlob(conversationId);
+      if (!audioBlob) {
+        setIsConverting(false);
+        return;
+      }
+
+      await setAudioStatusWithDelay(conversationId, AudioProcessingStatus.CONVERTING);
+      const convertedBlob = await convertAudio(conversationId, audioBlob);
+      await setAudioStatusWithDelay(conversationId, AudioProcessingStatus.FINALIZING);
+      const audioUrl = URL.createObjectURL(convertedBlob);
+      setAudioUrls(prev => ({
+        ...prev,
+        [conversationId]: audioUrl
+      }));
+      setTimeout(() => {
+        setAudioStatus(prev => {
+          const newStatus = { ...prev };
+          delete newStatus[conversationId];
+          return newStatus;
+        });
+      }, 800);
+
+      setIsConverting(false);
+    }
+
+    processQueue();
+  }, [conversionQueue, isConverting]);
 
   if (!isClient || isLoading) {
     return <Loading />;

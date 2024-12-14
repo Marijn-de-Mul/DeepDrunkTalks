@@ -2,10 +2,11 @@ import { Box, Text } from '@mantine/core';
 import { keyframes } from '@emotion/react';
 
 export enum AudioProcessingStatus {
-  INITIALIZING = 'Getting things ready...',
-  FETCHING = 'Downloading your audio...',
-  CONVERTING = 'Converting to the right format...',
-  FINALIZING = 'Almost there...'
+  INITIALIZING = 'Initializing',
+  FETCHING = 'Fetching',
+  QUEUED = 'Queued',
+  CONVERTING = 'Converting',
+  FINALIZING = 'Finalizing',
 }
 
 const pulse = keyframes`
@@ -46,7 +47,10 @@ export function AudioLoader({ status }: AudioLoaderProps) {
             animation: `${pulse} 1.5s ease-in-out infinite`
           }}
         />
-        <Text size="sm" weight={500} align="center">
+        <Text size="sm" style={{
+          fontWeight: 'extrabold',
+          alignItems: 'center',
+        }} >
           {status}
         </Text>
       </Box>

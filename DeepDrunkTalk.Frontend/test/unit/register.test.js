@@ -6,7 +6,7 @@ test.beforeEach(async ({ page }) => {
 });
 
 test('[Register] Test if page loads', async ({ page }) => {
-  await page.goto('http://localhost:5173/register');
+  await page.goto('http://localhost:3000/register');
 
   await expect(page).toHaveTitle(/DeepDrunkTalks - Register/);
 
@@ -22,7 +22,7 @@ test('[Register] Test if page loads', async ({ page }) => {
 });
 
 test('[Register] Test if registration fails with mismatched passwords', async ({ page }) => {
-  await page.goto('http://localhost:5173/register');
+  await page.goto('http://localhost:3000/register');
 
   await page.fill('[data-testid="register-usernameinput"]', 'testuser');
   await page.fill('[data-testid="register-emailinput"]', 'testuser@example.com');
@@ -36,7 +36,7 @@ test('[Register] Test if registration fails with mismatched passwords', async ({
 });
 
 test('[Register] Test if registration succeeds with valid data', async ({ page }) => {
-  await page.goto('http://localhost:5173/register');
+  await page.goto('http://localhost:3000/register');
 
   await expect(page).toHaveTitle(/DeepDrunkTalks - Register/);
 
@@ -51,15 +51,15 @@ test('[Register] Test if registration succeeds with valid data', async ({ page }
 
   await page.click('[data-testid="register-button"]');
 
-  await expect(page).toHaveURL('http://localhost:5173/');
+  await expect(page).toHaveURL('http://localhost:3000/');
 });
 
 test('[Register] Test if we are redirected to login page', async ({ page }) => {
-  await page.goto('http://localhost:5173/register');
+  await page.goto('http://localhost:3000/register');
 
   await expect(page).toHaveTitle(/DeepDrunkTalks - Register/);
 
   await page.click('[data-testid="login-button-onregisterscreen"]');
 
-  await expect(page).toHaveURL('http://localhost:5173/login');  
+  await expect(page).toHaveURL('http://localhost:3000/login');  
 });

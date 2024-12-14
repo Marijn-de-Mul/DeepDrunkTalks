@@ -380,7 +380,7 @@ export default function Conversations() {
               marginTop: "3vh",
               height: "5vh",
               position: "fixed",
-              bottom: "20px",
+              bottom: "60px", // Adjusted to be a bit higher
               left: "50%",
               transform: "translateX(-50%)",
             }}

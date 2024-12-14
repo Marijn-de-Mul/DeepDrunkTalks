@@ -1,13 +1,13 @@
 import { test, expect } from '@playwright/test';
 
 test.beforeEach(async ({ page, context }) => {
-  await page.goto('http://localhost:5173/login');
+  await page.goto('http://localhost:3000/login');
 
   await page.fill('[data-testid="login-emailinput"]', 'test@test.nl');
   await page.fill('[data-testid="login-passwordinput"]', 'test');
   await page.click('[data-testid="login-button"]');
 
-  await page.waitForURL('http://localhost:5173/');
+  await page.waitForURL('http://localhost:3000/');
   const cookies = await context.cookies();
   await context.addCookies(cookies);
 
@@ -16,7 +16,7 @@ test.beforeEach(async ({ page, context }) => {
 });
 
 test('[Settings] Test if page loads', async ({ page }) => {
-  await page.goto('http://localhost:5173/settings');
+  await page.goto('http://localhost:3000/settings');
 
   await expect(page).toHaveTitle(/DeepDrunkTalks - Settings/);
 
@@ -26,7 +26,7 @@ test('[Settings] Test if page loads', async ({ page }) => {
 });
 
 test('[Settings] Test loading settings from server', async ({ page }) => {
-  await page.goto('http://localhost:5173/settings');
+  await page.goto('http://localhost:3000/settings');
 
   await expect(page.getByTestId('setting-loading-state')).toBeVisible();
 
@@ -36,7 +36,7 @@ test('[Settings] Test loading settings from server', async ({ page }) => {
 });
 
 test('[Settings] Test if settings elements are visible and functional', async ({ page }) => {
-  await page.goto('http://localhost:5173/settings');
+  await page.goto('http://localhost:3000/settings');
 
   await expect(page.getByTestId('setting-volume-slider')).toBeVisible();
   await page.getByTestId('setting-volume-slider').click({ position: { x: 75, y: 10 } }); 
@@ -48,7 +48,7 @@ test('[Settings] Test if settings elements are visible and functional', async ({
 });
 
 test('[Settings] Test saving settings', async ({ page }) => {
-  await page.goto('http://localhost:5173/settings');
+  await page.goto('http://localhost:3000/settings');
 
   await expect(page.getByTestId('setting-loading-state')).not.toBeVisible();
 

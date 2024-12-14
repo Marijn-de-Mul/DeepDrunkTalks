@@ -1,13 +1,13 @@
 import { test, expect } from '@playwright/test';
 
 test.beforeEach(async ({ page, context }) => {
-  await page.goto('http://localhost:5173/login');
+  await page.goto('http://localhost:3000/login');
 
   await page.fill('[data-testid="login-emailinput"]', 'test@test.nl');
   await page.fill('[data-testid="login-passwordinput"]', 'test');
   await page.click('[data-testid="login-button"]');
 
-  await page.waitForURL('http://localhost:5173/');
+  await page.waitForURL('http://localhost:3000/');
   const cookies = await context.cookies();
   await context.addCookies(cookies); 
 
@@ -16,7 +16,7 @@ test.beforeEach(async ({ page, context }) => {
 });
 
 test('[Conversations] Test if page loads', async ({ page }) => {
-  await page.goto('http://localhost:5173/conversations');
+  await page.goto('http://localhost:3000/conversations');
 
   await expect(page).toHaveTitle(/DeepDrunkTalks - Conversations/);
 
@@ -25,7 +25,7 @@ test('[Conversations] Test if page loads', async ({ page }) => {
 });
 
 test('[Conversations] Test if conversations display correctly', async ({ page }) => {
-  await page.goto('http://localhost:5173/conversations');
+  await page.goto('http://localhost:3000/conversations');
 
   await expect(page.getByTestId('loader')).toBeVisible();
   await expect(page.getByTestId('loader')).not.toBeVisible();
@@ -46,7 +46,7 @@ test('[Conversations] Test if conversations display correctly', async ({ page })
 });
 
 // test('[Conversations] Test delete functionality', async ({ page }) => {
-//   await page.goto('http://localhost:5173/conversations');
+//   await page.goto('http://localhost:3000/conversations');
 
 //   await expect(page.getByTestId('loader')).not.toBeVisible();
 

@@ -1,18 +1,18 @@
 import { test, expect } from '@playwright/test';
 
 test.beforeEach(async ({ page, context }) => {
-  await page.goto('http://localhost:5173/login');
+  await page.goto('http://localhost:3000/login');
 
   await page.fill('[data-testid="login-emailinput"]', 'test@test.nl');
   await page.fill('[data-testid="login-passwordinput"]', 'test');
   await page.click('[data-testid="login-button"]');
 
-  await page.waitForURL('http://localhost:5173/');
+  await page.waitForURL('http://localhost:3000/');
   await context.addCookies(await context.cookies());
 });
 
 test('[Play] Test if page loads correctly', async ({ page }) => {
-  await page.goto('http://localhost:5173/play');
+  await page.goto('http://localhost:3000/play');
 
   await expect(page.getByTestId('play-logo')).toBeVisible();
   await expect(page.getByTestId('play-logo-container')).toBeVisible();
@@ -22,7 +22,7 @@ test('[Play] Test if page loads correctly', async ({ page }) => {
 });
 
 test('[Play] Test NEXT QUESTION button functionality', async ({ page }) => {
-  await page.goto('http://localhost:5173/play');
+  await page.goto('http://localhost:3000/play');
 
   const initialQuestion = await page.locator('[data-testid="play-question-text"]').innerText();
 
@@ -36,11 +36,11 @@ test('[Play] Test NEXT QUESTION button functionality', async ({ page }) => {
 });
 
 test('[Play] Test BACK TO MAIN MENU button functionality', async ({ page }) => {
-  await page.goto('http://localhost:5173/play');
+  await page.goto('http://localhost:3000/play');
 
   await page.click('[data-testid="play-back-to-main-menu-button"]');
 
-  await expect(page).toHaveURL('http://localhost:5173/');
+  await expect(page).toHaveURL('http://localhost:3000/');
 });
 
 // test('[Play] Test audio upload after conversation stops', async ({ page }) => {
@@ -52,7 +52,7 @@ test('[Play] Test BACK TO MAIN MENU button functionality', async ({ page }) => {
 //     }
 //   });
 
-//   await page.goto('http://localhost:5173/play');
+//   await page.goto('http://localhost:3000/play');
 //   await page.waitForTimeout(2000); 
   
 //   await page.click('[data-testid="play-back-to-main-menu-button"]');

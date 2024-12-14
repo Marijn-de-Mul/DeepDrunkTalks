@@ -7,7 +7,7 @@ test.beforeEach(async ({ page }) => {
 
 
 test('[Login] Test if page loads', async ({ page }) => {
-  await page.goto('http://localhost:5173/login');
+  await page.goto('http://localhost:3000/login');
 
   await expect(page).toHaveTitle(/DeepDrunkTalks - Login/);
 
@@ -27,7 +27,7 @@ test('[Login] Test if login fails with invalid creds', async ({ page }) => {
     }
   });
 
-  await page.goto('http://localhost:5173/login');
+  await page.goto('http://localhost:3000/login');
 
   await page.fill('[data-testid="login-emailinput"]', 'invalid@example.com');
   await page.fill('[data-testid="login-passwordinput"]', 'wrongpassword');
@@ -39,7 +39,7 @@ test('[Login] Test if login fails with invalid creds', async ({ page }) => {
 });
 
 test('[Login] Test if login succeeds with valid creds', async ({ page }) => {
-  await page.goto('http://localhost:5173/login');
+  await page.goto('http://localhost:3000/login');
 
   await expect(page).toHaveTitle(/DeepDrunkTalks - Login/);
 
@@ -48,17 +48,17 @@ test('[Login] Test if login succeeds with valid creds', async ({ page }) => {
 
   await page.click('[data-testid="login-button"]');
 
-  await expect(page).toHaveURL('http://localhost:5173/'); 
+  await expect(page).toHaveURL('http://localhost:3000/'); 
 });
 
 
 test('[Login] Test if we are redirected to register page', async ({ page }) => {
-  await page.goto('http://localhost:5173/login');
+  await page.goto('http://localhost:3000/login');
 
   await expect(page).toHaveTitle(/DeepDrunkTalks - Login/);
 
   await page.click('[data-testid="register-button-onloginscreen"]');
 
-  await expect(page).toHaveURL('http://localhost:5173/register');  
+  await expect(page).toHaveURL('http://localhost:3000/register');  
 });
 

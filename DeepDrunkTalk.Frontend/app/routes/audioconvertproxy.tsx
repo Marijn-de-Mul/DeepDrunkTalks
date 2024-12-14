@@ -21,9 +21,11 @@ async function convertAudio(audioFile: File): Promise<string> {
   readableStream.push(audioBuffer);
   readableStream.push(null);
 
+  const inputFormat = audioFile.type.split('/')[1]; 
+
   return new Promise((resolve, reject) => {
     ffmpeg(readableStream)
-      .inputFormat('webm')
+      .inputFormat(inputFormat) 
       .toFormat('mp3')
       .on('error', (err) => reject(err))
       .on('end', () => resolve(outputFilePath))

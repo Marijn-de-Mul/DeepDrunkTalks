@@ -1,4 +1,4 @@
-import { Button, Box, Text} from '@mantine/core';
+import { Button, Box, Text } from '@mantine/core';
 import { useState, useEffect } from 'react';
 import { MetaFunction } from '@remix-run/node';
 import { Link } from "@remix-run/react";
@@ -334,7 +334,8 @@ export default function Conversations() {
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-              padding: "20px",
+              justifyContent: "center",
+              height: "50vh",
               textAlign: "center",
               color: "#555",
             }}
@@ -376,8 +377,12 @@ export default function Conversations() {
           <Button
             color="red"
             style={{
-              marginTop: "1.5vh",
+              marginTop: "3vh",
               height: "5vh",
+              position: "fixed",
+              bottom: "20px",
+              left: "50%",
+              transform: "translateX(-50%)",
             }}
             data-testid="conversations-back-button"
           >
@@ -388,4 +393,3 @@ export default function Conversations() {
     </ProtectedRoute>
   );
 }
-

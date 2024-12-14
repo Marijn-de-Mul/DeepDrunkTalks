@@ -1,11 +1,23 @@
-import { Button, Image, Box, Text } from "@mantine/core";
+import { Button, Image, Box, Text, Center, Stack, Card, Title } from "@mantine/core";
 import { useNavigate } from "@remix-run/react";
 import { useEffect, useRef, useState } from "react";
 import ProtectedRoute from "~/components/layouts/ProtectedRoute";
 import logo from "~/assets/img/logo.png";
+import Loading from '~/components/Loading';
 
 let mediaRecorder: MediaRecorder | null = null;
 let recordedChunks: Blob[] = [];
+
+const requestMicrophoneAccess = async () => {
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    stream.getTracks().forEach(track => track.stop()); 
+    return true;
+  } catch (error) {
+    console.error('Error accessing microphone:', error);
+    return false;
+  }
+};
 
 export default function Play() {
   const [question, setQuestion] = useState("Question Placeholder");
@@ -14,6 +26,9 @@ export default function Play() {
   const [permissionStatus, setPermissionStatus] = useState<
     "granted" | "denied" | "prompt" | undefined
   >(undefined);
+  const [isMicrophoneEnabled, setIsMicrophoneEnabled] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isReadyToStart, setIsReadyToStart] = useState(false);
 
   const conversationInProgressRef = useRef(false);
   const hasStartedRef = useRef(false);
@@ -39,15 +54,6 @@ export default function Play() {
 
     checkMicrophonePermission();
 
-    const startConversationOnLoad = async () => {
-      if (!hasStartedRef.current) {
-        hasStartedRef.current = true;
-        await startConversation();
-      }
-    };
-
-    startConversationOnLoad();
-
     const handleBeforeUnload = () => {
       stopConversation();
     };
@@ -59,6 +65,24 @@ export default function Play() {
       stopConversation();
     };
   }, []);
+
+  useEffect(() => {
+    async function enableMicrophone() {
+      const accessGranted = await requestMicrophoneAccess();
+      setIsMicrophoneEnabled(accessGranted);
+      setIsLoading(false);
+    }
+
+    enableMicrophone();
+  }, []);
+
+  const handleStartConversation = async () => {
+    if (isMicrophoneEnabled && !hasStartedRef.current) {
+      hasStartedRef.current = true;
+      setIsReadyToStart(true);
+      await startConversation();
+    }
+  };
 
   async function startConversation() {
     if (conversationInProgressRef.current || typeof window === "undefined") return;
@@ -239,6 +263,10 @@ export default function Play() {
     return fontSize + "em";
   };
 
+  if (isLoading) {
+    return <Loading />;
+  }
+
   return (
     <ProtectedRoute>
       <Box
@@ -261,97 +289,155 @@ export default function Play() {
         />
       </Box>
 
-      {permissionStatus !== "granted" && (
+      {!isMicrophoneEnabled && (
         <Box
-          data-testid="microphone-permission-message"
+          data-testid="microphone-access-message"
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            padding: "20px",
+            textAlign: "center",
+            color: "#555",
+            height: "100vh",
+          }}
+        >
+          <Text
+            style={{
+              fontSize: "1.5em",
+              marginBottom: "10px",
+            }}
+          >
+            Microphone Access Required
+          </Text>
+          <Text
+            style={{
+              fontSize: "1em",
+              marginBottom: "20px",
+            }}
+          >
+            Please enable microphone access to start the conversation.
+          </Text>
+          <Button
+            color="red"
+            style={{
+              marginTop: "1.5vh",
+              height: "5vh",
+            }}
+            onClick={handleBackToMainMenu}
+          >
+            BACK TO MAIN MENU
+          </Button>
+        </Box>
+      )}
+
+      {isMicrophoneEnabled && !isReadyToStart && (
+        <Box
+          data-testid="ready-to-start-message"
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            padding: "20px",
+            textAlign: "center",
+            color: "#555",
+            height: "100vh",
+          }}
+        >
+          <Text
+            style={{
+              fontSize: "1.5em",
+              marginBottom: "10px",
+            }}
+          >
+            Microphone Access Granted
+          </Text>
+          <Text
+            style={{
+              fontSize: "1em",
+              marginBottom: "20px",
+            }}
+          >
+            Microphone access granted. Click "Continue" to start the conversation.
+          </Text>
+          <Button
+            variant="filled"
+            color="green"
+            style={{ marginTop: "10px", height: "5vh" }}
+            onClick={handleStartConversation}
+          >
+            Continue
+          </Button>
+          <Button
+            color="red"
+            style={{
+              marginTop: "1.5vh",
+              height: "5vh",
+            }}
+            onClick={handleBackToMainMenu}
+          >
+            BACK TO MAIN MENU
+          </Button>
+        </Box>
+      )}
+
+      {isReadyToStart && (
+        <Box
+          data-testid="play-question-container"
           style={{
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
             flexDirection: "column",
-            marginBottom: "2vh",
-            color: "red",
           }}
         >
-          <Text size="lg">
-            Microphone access is {permissionStatus}. Please enable it to continue.
-          </Text>
-          {permissionStatus === "denied" && (
-            <Button
-              variant="filled"
-              color="red"
-              style={{ marginTop: "1vh" }}
-              onClick={() => {
-                navigator.mediaDevices
-                  .getUserMedia({ audio: true })
-                  .then(() => {
-                    setPermissionStatus("granted");
-                    startRecording();
-                  })
-                  .catch((err) => {
-                    console.error("Microphone access denied:", err);
-                  });
-              }}
-            >
-              Enable Microphone
-            </Button>
-          )}
-        </Box>
-      )}
-
-      <Box
-        data-testid="play-question-container"
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          flexDirection: "column",
-        }}
-      >
-        <Box
-          data-testid="play-question-box"
-          style={{
-            height: "10em",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            textAlign: "center",
-            overflow: "hidden",
-          }}
-        >
-          <Text
-            data-testid="play-question-text"
+          <Box
+            data-testid="play-question-box"
             style={{
-              fontSize: calculateFontSize(question.length),
-              fontWeight: "800",
-              wordWrap: "break-word",
+              height: "10em",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              textAlign: "center",
+              overflow: "hidden",
             }}
           >
-            {question}
-          </Text>
+            <Text
+              data-testid="play-question-text"
+              style={{
+                fontSize: calculateFontSize(question.length),
+                fontWeight: "800",
+                wordWrap: "break-word",
+              }}
+            >
+              {question}
+            </Text>
+          </Box>
+
+          <Button
+            data-testid="play-next-question-button"
+            variant="filled"
+            color="black"
+            size="xl"
+            style={{ marginTop: "3vh" }}
+            onClick={nextQuestion}
+            disabled={isNextQuestionDisabled || !conversationInProgressRef.current}
+          >
+            NEXT QUESTION
+          </Button>
+
+          <Button
+            color="red"
+            style={{
+              marginTop: "3vh",
+              height: "5vh",
+            }}
+            onClick={handleBackToMainMenu}
+          >
+            BACK TO MAIN MENU
+          </Button>
         </Box>
-
-        <Button
-          data-testid="play-next-question-button"
-          variant="filled"
-          color="black"
-          size="xl"
-          style={{ marginTop: "3vh" }}
-          onClick={nextQuestion}
-          disabled={isNextQuestionDisabled || !conversationInProgressRef.current}
-        >
-          NEXT QUESTION
-        </Button>
-
-        <Button
-          data-testid="play-back-to-main-menu-button"
-          color="red"
-          style={{ marginTop: "3vh", height: "5vh" }}
-          onClick={handleBackToMainMenu}
-        >
-          BACK TO MAIN MENU
-        </Button>
-      </Box>
+      )}
     </ProtectedRoute>
   );
 }

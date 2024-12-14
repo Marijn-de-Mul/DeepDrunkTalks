@@ -112,13 +112,20 @@ export default function Conversations() {
         const isApple = /Apple/.test(navigator.userAgent);
 
         if (isApple) {
-          await loadFFmpeg();
-          const fileName = `audio_${conversationId}.webm`;
-          ffmpeg.FS('writeFile', fileName, await fetchFile(audioBlob));
-          await ffmpeg.run('-i', fileName, '-c:a', 'aac', '-b:a', '128k', `output_${conversationId}.mp4`);
-          const data = ffmpeg.FS('readFile', `output_${conversationId}.mp4`);
-          const convertedBlob = new Blob([data.buffer], { type: 'audio/mp4' });
-          return URL.createObjectURL(convertedBlob);
+          if (!isFFmpegLoaded) {
+            await loadFFmpeg();
+          }
+          if (ffmpeg) {
+            const fileName = `audio_${conversationId}.webm`;
+            ffmpeg.FS('writeFile', fileName, await fetchFile(audioBlob));
+            await ffmpeg.run('-i', fileName, '-c:a', 'aac', '-b:a', '128k', `output_${conversationId}.mp4`);
+            const data = ffmpeg.FS('readFile', `output_${conversationId}.mp4`);
+            const convertedBlob = new Blob([data.buffer], { type: 'audio/mp4' });
+            return URL.createObjectURL(convertedBlob);
+          } else {
+            console.error("FFmpeg is not loaded.");
+            return null;
+          }
         } else {
           return URL.createObjectURL(audioBlob);
         }

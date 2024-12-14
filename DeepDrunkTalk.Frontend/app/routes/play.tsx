@@ -332,6 +332,7 @@ export default function Play() {
               height: "5vh",
             }}
             onClick={handleBackToMainMenu}
+            data-testid="play-back-to-main-menu-button"
           >
             BACK TO MAIN MENU
           </Button>
@@ -382,6 +383,7 @@ export default function Play() {
               height: "5vh",
             }}
             onClick={handleBackToMainMenu}
+            data-testid="play-back-to-main-menu-button"
           >
             BACK TO MAIN MENU
           </Button>
@@ -440,11 +442,23 @@ export default function Play() {
               height: "5vh",
             }}
             onClick={handleBackToMainMenu}
+            data-testid="play-back-to-main-menu-button"
           >
             BACK TO MAIN MENU
           </Button>
         </Box>
       )}
+      <Box
+        data-testid="play-footer"
+        style={{
+          position: "fixed",
+          bottom: "10px",
+          width: "100%",
+          textAlign: "center",
+        }}
+      >
+        <Text data-testid="play-footer-text">DeepDrunkTalks - 2024 ©</Text>
+      </Box>
     </ProtectedRoute>
   );
 }

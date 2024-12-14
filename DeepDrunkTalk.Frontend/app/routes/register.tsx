@@ -1,8 +1,7 @@
 import type { MetaFunction } from "@remix-run/node";
 import { Button, Box, Input, Image, Text } from '@mantine/core';
 import { useState, useEffect } from "react";
-import { Form } from "@remix-run/react";
-import { Link } from "react-router-dom";
+import { Form, Link } from "@remix-run/react";
 
 import logo from "~/assets/img/logo.png";
 import Loading from "~/components/Loading";

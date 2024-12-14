@@ -1,10 +1,10 @@
-import { Button, Divider, Image, Box, Text, Loader } from '@mantine/core';
+import { Button, Box, Text} from '@mantine/core';
 import { useState, useEffect } from 'react';
-import { Link, MetaFunction } from '@remix-run/react';
+import { MetaFunction } from '@remix-run/node';
+import { Link } from "@remix-run/react";
 import { createFFmpeg, fetchFile } from '@ffmpeg/ffmpeg';
 
 import ProtectedRoute from "~/components/layouts/ProtectedRoute";
-import logo from "~/assets/img/logo.png";
 import Loading from "~/components/Loading";
 
 interface Conversation {
@@ -388,3 +388,4 @@ export default function Conversations() {
     </ProtectedRoute>
   );
 }
+

@@ -1,8 +1,7 @@
 import type { MetaFunction } from "@remix-run/node";
 import { Button, Box, Input, Image, Text } from '@mantine/core';
 import { useEffect, useState } from "react";
-import { useNavigate } from "@remix-run/react";
-import { Link } from "react-router-dom";
+import { useNavigate, Link, Form } from "@remix-run/react";
 
 import logo from "~/assets/img/logo.png";
 import Loading from "~/components/Loading";
@@ -106,7 +105,7 @@ export default function Login() {
       </Box>
 
       <Box>
-        <form
+        <Form
           onSubmit={handleSubmit}
           style={{
             display: 'flex',
@@ -177,7 +176,7 @@ export default function Login() {
               REGISTER INSTEAD
             </Button>
           </Link>
-        </form>
+        </Form>
       </Box>
     </>
   );

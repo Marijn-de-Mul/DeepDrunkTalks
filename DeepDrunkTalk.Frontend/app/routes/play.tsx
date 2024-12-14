@@ -11,6 +11,9 @@ export default function Play() {
   const [question, setQuestion] = useState("Question Placeholder");
   const [isNextQuestionDisabled, setIsNextQuestionDisabled] = useState(false);
   const [isRecording, setIsRecording] = useState(false);
+  const [permissionStatus, setPermissionStatus] = useState<
+    "granted" | "denied" | "prompt" | undefined
+  >(undefined);
 
   const conversationInProgressRef = useRef(false);
   const hasStartedRef = useRef(false);
@@ -19,6 +22,22 @@ export default function Play() {
 
   useEffect(() => {
     if (typeof window === "undefined") return;
+
+    const checkMicrophonePermission = async () => {
+      try {
+        const status = await navigator.permissions.query({ name: "microphone" as PermissionName });
+        setPermissionStatus(status.state);
+
+        status.onchange = () => {
+          setPermissionStatus(status.state);
+        };
+      } catch (error) {
+        console.error("Permission API not supported:", error);
+        setPermissionStatus("granted");
+      }
+    };
+
+    checkMicrophonePermission();
 
     const startConversationOnLoad = async () => {
       if (!hasStartedRef.current) {
@@ -56,7 +75,7 @@ export default function Play() {
           endpoint: "/api/conversations",
           method: "POST",
           authorization: token,
-          body: {}
+          body: {},
         }),
       });
 
@@ -68,7 +87,11 @@ export default function Play() {
 
         conversationInProgressRef.current = true;
 
-        await startRecording();
+        if (permissionStatus === "granted") {
+          await startRecording();
+        } else {
+          console.warn("Microphone access not granted. Recording will not start.");
+        }
       } else {
         console.error("Failed to start conversation", response.status);
       }
@@ -100,7 +123,7 @@ export default function Play() {
           endpoint: `/api/conversations/${conversationId}/stop`,
           method: "PUT",
           authorization: token,
-          body: {}
+          body: {},
         }),
       });
 
@@ -126,26 +149,26 @@ export default function Play() {
   }
 
   const AUDIO_FORMATS = [
-    'audio/webm;codecs=opus',
-    'audio/webm',
-    'audio/mp4',
-    'audio/aac',
-    'audio/mpeg'
+    "audio/webm;codecs=opus",
+    "audio/webm",
+    "audio/mp4",
+    "audio/aac",
+    "audio/mpeg",
   ];
   async function startRecording() {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
       recordedChunks = [];
 
-      const supportedFormat = AUDIO_FORMATS.find(format =>
+      const supportedFormat = AUDIO_FORMATS.find((format) =>
         MediaRecorder.isTypeSupported(format)
       );
       if (!supportedFormat) {
-        throw new Error('No supported audio format found');
+        throw new Error("No supported audio format found");
       }
-      console.log('Using format:', supportedFormat);
+      console.log("Using format:", supportedFormat);
       mediaRecorder = new MediaRecorder(stream, {
-        mimeType: supportedFormat
+        mimeType: supportedFormat,
       });
 
       mediaRecorder.ondataavailable = (event) => {
@@ -155,7 +178,7 @@ export default function Play() {
       };
 
       mediaRecorder.onstop = async () => {
-        const audioBlob = new Blob(recordedChunks, { type: 'audio/webm' });
+        const audioBlob = new Blob(recordedChunks, { type: "audio/webm" });
         await sendAudioChunk(audioBlob);
       };
 
@@ -168,7 +191,7 @@ export default function Play() {
   }
 
   function stopRecording() {
-    if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+    if (mediaRecorder && mediaRecorder.state !== "inactive") {
       mediaRecorder.stop();
       setIsRecording(false);
     }
@@ -190,9 +213,9 @@ export default function Play() {
     formData.append("audio", audioBlob);
 
     try {
-      const response = await fetch('/audiopostproxy', {
-        method: 'POST',
-        body: formData
+      const response = await fetch("/audiopostproxy", {
+        method: "POST",
+        body: formData,
       });
 
       if (!response.ok) {
@@ -237,6 +260,44 @@ export default function Play() {
           }}
         />
       </Box>
+
+      {permissionStatus !== "granted" && (
+        <Box
+          data-testid="microphone-permission-message"
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flexDirection: "column",
+            marginBottom: "2vh",
+            color: "red",
+          }}
+        >
+          <Text size="lg">
+            Microphone access is {permissionStatus}. Please enable it to continue.
+          </Text>
+          {permissionStatus === "denied" && (
+            <Button
+              variant="filled"
+              color="red"
+              style={{ marginTop: "1vh" }}
+              onClick={() => {
+                navigator.mediaDevices
+                  .getUserMedia({ audio: true })
+                  .then(() => {
+                    setPermissionStatus("granted");
+                    startRecording();
+                  })
+                  .catch((err) => {
+                    console.error("Microphone access denied:", err);
+                  });
+              }}
+            >
+              Enable Microphone
+            </Button>
+          )}
+        </Box>
+      )}
 
       <Box
         data-testid="play-question-container"
@@ -293,4 +354,4 @@ export default function Play() {
       </Box>
     </ProtectedRoute>
   );
-};
+}

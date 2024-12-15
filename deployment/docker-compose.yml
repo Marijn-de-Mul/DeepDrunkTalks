@@ -1,5 +1,5 @@
 services:
-  frontend:
+    frontend:
     image: marijndemul16/ddt.frontend:latest
     container_name: frontend
     ports:
@@ -15,17 +15,20 @@ services:
     container_name: backend
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
-      - DB_HOST=${DB_HOST}
-      - DB_PORT=${DB_PORT}
+      - DB_HOST=postgres
+      - DB_PORT=5432
       - DB_USER=${DB_USER}
       - DB_PASS=${DB_PASS}
       - DB_NAME=${DB_NAME}
       - JWT_SECRET=${JWT_SECRET}
       - LOG_TO_CONSOLE=${LOG_TO_CONSOLE}
       - LOG_TO_FILE=${LOG_TO_FILE}
+    volumes:
+      - backend_data:/app
+      - ./uploads:/app/uploads
     ports:
-      - "8079:8079"
-      - "8080:8080"
+      - "8080:8079"  
+      - "8081:8080"  
     restart: always
     depends_on:
       - postgres
@@ -42,16 +45,14 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
-      - "5432:5432"
+      - "5433:5432"  
     restart: always
     networks:
       - production
 
 volumes:
   postgres_data:
-  certbot-etc:
-  certbot-var:
-  webroot:
+  backend_data:
 
 networks:
   production:

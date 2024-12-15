@@ -5,24 +5,9 @@ import ProtectedRoute from "~/components/layouts/ProtectedRoute";
 import logo from "~/assets/img/logo.png";
 import Loading from '~/components/Loading';
 
-let mediaRecorder: MediaRecorder | null = null;
-let recordedChunks: Blob[] = [];
-
-const requestMicrophoneAccess = async () => {
-  try {
-    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-    stream.getTracks().forEach(track => track.stop());
-    return true;
-  } catch (error) {
-    console.error('Error accessing microphone:', error);
-    return false;
-  }
-};
-
 export default function Play() {
   const [question, setQuestion] = useState("Question Placeholder");
   const [isNextQuestionDisabled, setIsNextQuestionDisabled] = useState(false);
-  const [isRecording, setIsRecording] = useState(false);
   const [permissionStatus, setPermissionStatus] = useState<
     "granted" | "denied" | "prompt" | undefined
   >(undefined);
@@ -33,6 +18,10 @@ export default function Play() {
 
   const conversationInProgressRef = useRef(false);
   const hasStartedRef = useRef(false);
+  
+  const mediaRecorderRef = useRef<MediaRecorder | null>(null);
+  const mediaStreamRef = useRef<MediaStream | null>(null);
+  const recordedChunksRef = useRef<Blob[]>([]);
 
   const navigate = useNavigate();
 
@@ -198,36 +187,43 @@ export default function Play() {
 
   async function startRecording() {
     try {
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      recordedChunks = [];
+      if (!mediaStreamRef.current) {
+        mediaStreamRef.current = await navigator.mediaDevices.getUserMedia({ audio: true });
+      }
+
+      recordedChunksRef.current = [];
 
       const supportedFormat = AUDIO_FORMATS.find((format) =>
         MediaRecorder.isTypeSupported(format)
       );
+
       if (!supportedFormat) {
         throw new Error("No supported audio format found");
       }
+
       console.log("Using format:", supportedFormat);
-      mediaRecorder = new MediaRecorder(stream, {
+      mediaRecorderRef.current = new MediaRecorder(mediaStreamRef.current, {
         mimeType: supportedFormat,
       });
 
-      mediaRecorder.ondataavailable = (event) => {
+      mediaRecorderRef.current.ondataavailable = (event) => {
         if (event.data.size > 0) {
-          recordedChunks.push(event.data);
+          recordedChunksRef.current.push(event.data);
         }
       };
 
-      mediaRecorder.onstop = async () => {
-        const audioBlob = new Blob(recordedChunks, { type: supportedFormat });
+      mediaRecorderRef.current.onstop = async () => {
+        const audioBlob = new Blob(recordedChunksRef.current, { type: supportedFormat });
         await sendAudioChunk(audioBlob);
       };
 
-      mediaRecorder.start(1000);
-      setIsRecording(true);
+      mediaRecorderRef.current.onerror = (event) => {
+        console.error("MediaRecorder error:", event.error);
+      };
+
+      mediaRecorderRef.current.start(1000);
     } catch (error) {
-      console.error("Error:", error);
-      setIsRecording(false);
+      console.error("Error starting recording:", error);
     }
   }
 
@@ -277,9 +273,13 @@ export default function Play() {
   }
 
   function stopRecording() {
-    if (mediaRecorder && mediaRecorder.state !== "inactive") {
-      mediaRecorder.stop();
-      setIsRecording(false);
+    if (mediaRecorderRef.current && mediaRecorderRef.current.state !== "inactive") {
+      mediaRecorderRef.current.stop();
+    }
+
+    if (mediaStreamRef.current) {
+      mediaStreamRef.current.getTracks().forEach(track => track.stop());
+      mediaStreamRef.current = null;
     }
   }
 
@@ -296,11 +296,7 @@ export default function Play() {
     return fontSize + "em";
   };
 
-  if (isLoading) {
-    return <Loading />;
-  }
-
-  if (isRequestingMicrophone) {
+  if (isLoading || isRequestingMicrophone) {
     return <Loading />;
   }
 
@@ -481,3 +477,14 @@ export default function Play() {
     </ProtectedRoute>
   );
 }
+
+const requestMicrophoneAccess = async () => {
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    stream.getTracks().forEach(track => track.stop());
+    return true;
+  } catch (error) {
+    console.error('Error accessing microphone:', error);
+    return false;
+  }
+};

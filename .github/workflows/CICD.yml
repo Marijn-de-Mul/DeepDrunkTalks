@@ -168,6 +168,8 @@ jobs:
 
             docker exec ddt_frontend_staging npx playwright test
 
+            docker exec ddt_frontend_staging tar -czf /app/playwright-report.tar.gz -C /app/playwright-report .
+
             docker cp ddt_frontend_staging:/app/playwright-report /root/docker/ddt_staging/playwright-report
           '
         

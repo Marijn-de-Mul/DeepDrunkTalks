@@ -37,15 +37,39 @@ export default function Play() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
-
     const checkMicrophonePermission = async () => {
       try {
         const status = await navigator.permissions.query({ name: "microphone" as PermissionName });
         setPermissionStatus(status.state);
 
-        status.onchange = () => {
+        const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
+        const shouldReload = () => {
+          return (
+            status.state === "granted" &&
+            isSafari &&
+            !sessionStorage.getItem("hasReloaded")
+          );
+        };
+
+        if (shouldReload()) {
+          sessionStorage.setItem("hasReloaded", "true");
+          window.location.reload();
+        }
+
+        const handleChange = () => {
           setPermissionStatus(status.state);
+
+          if (status.state === "granted" && isSafari && !sessionStorage.getItem("hasReloaded")) {
+            sessionStorage.setItem("hasReloaded", "true");
+            window.location.reload();
+          }
+        };
+
+        status.addEventListener('change', handleChange);
+
+        return () => {
+          status.removeEventListener('change', handleChange);
         };
       } catch (error) {
         console.error("Permission API not supported:", error);
@@ -54,17 +78,6 @@ export default function Play() {
     };
 
     checkMicrophonePermission();
-
-    const handleBeforeUnload = () => {
-      stopConversation();
-    };
-
-    window.addEventListener("beforeunload", handleBeforeUnload);
-
-    return () => {
-      window.removeEventListener("beforeunload", handleBeforeUnload);
-      stopConversation();
-    };
   }, []);
 
   useEffect(() => {

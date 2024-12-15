@@ -130,65 +130,66 @@ jobs:
         run: docker push marijndemul16/ddt.backend
 
   e2e-tests:
-      runs-on: ubuntu-latest
-      timeout-minutes: 60
-      steps:
-        - name: Checkout Repository
-          uses: actions/checkout@v4
+    needs: [frontend, backend]
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
   
-        - name: Set up SSH keys
-          uses: webfactory/ssh-agent@v0.5.3
-          with:
-            ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+      - name: Set up SSH keys
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
   
-        - name: Deploy to Staging and Run Playwright Tests
-          run: |
-            ssh -o StrictHostKeyChecking=no root@45.140.142.168 '
-              set -e  
+      - name: Deploy to Staging and Run Playwright Tests
+        run: |
+          ssh -o StrictHostKeyChecking=no root@45.140.142.168 '
+            set -e  
   
-              export DOCKER_BUILDKIT=1
-              export DOCKER_CLI_EXPERIMENTAL=enabled
+            export DOCKER_BUILDKIT=1
+            export DOCKER_CLI_EXPERIMENTAL=enabled
   
-              cd /root/docker/ddt_staging
+            cd /root/docker/ddt_staging
   
-              docker compose down
+            docker compose down
   
-              docker compose pull
+            docker compose pull
   
-              docker image prune -f
+            docker image prune -f
   
-              docker compose up -d
+            docker compose up -d
   
-              sleep 15
-            '
+            sleep 15
+          '
 
-        - name: Archive Playwright Reports on VPS
-          run: |
-            ssh -o StrictHostKeyChecking=no root@45.140.142.168 '
-              cd /root/docker/ddt_staging/playwright-report
-              tar -czf /root/docker/ddt_staging/playwright-report.tar.gz .
-            '
+      - name: Archive Playwright Reports on VPS
+        run: |
+          ssh -o StrictHostKeyChecking=no root@45.140.142.168 '
+            cd /root/docker/ddt_staging/playwright-report
+            tar -czf /root/docker/ddt_staging/playwright-report.tar.gz .
+          '
   
-        - name: Download Playwright Report
-          uses: appleboy/scp-action@v0.1.4
-          with:
-            host: ${{ secrets.VPS_HOST }}
-            username: root
-            key: ${{ secrets.SSH_PRIVATE_KEY }}
-            port: 22
-            source: "/root/docker/ddt_staging/playwright-report.tar.gz"
-            target: "./playwright-report.tar.gz"
+      - name: Download Playwright Report
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: root
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          source: "/root/docker/ddt_staging/playwright-report.tar.gz"
+          target: "./playwright-report.tar.gz"
   
-        - name: Extract Playwright Report
-          run: tar -xzf playwright-report.tar.gz -C ./
+      - name: Extract Playwright Report
+        run: tar -xzf playwright-report.tar.gz -C ./
   
-        - name: Upload Playwright Report
-          if: ${{ always() }}
-          uses: actions/upload-artifact@v4
-          with:
-            name: playwright-report
-            path: ./playwright-report/
-            retention-days: 30
+      - name: Upload Playwright Report
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: ./playwright-report/
+          retention-days: 30
 
   cd:
     needs: [e2e-tests]

@@ -1,13 +1,12 @@
 ﻿using DDT.Backend.Common.Interfaces;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
 
 namespace DDT.Backend.BLL.Helpers;
 
 public class FileHandler : IFileHandler
 {
     private static readonly string _uploadsPath;
-    private readonly ILogger<FileHandler> _logger;
+    private readonly DDT.Backend.Common.ILogger _logger;
 
     static FileHandler()
     {
@@ -18,7 +17,7 @@ public class FileHandler : IFileHandler
         }
     }
 
-    public FileHandler(ILogger<FileHandler> logger)
+    public FileHandler(DDT.Backend.Common.ILogger logger)
     {
         _logger = logger;
     }

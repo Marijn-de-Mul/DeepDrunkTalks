@@ -12,10 +12,10 @@ namespace DDT.Backend.BLL.Services.File
         private readonly IUserRepository _userRepository;
         private readonly IFileOperations _fileOperations;
         private readonly IFileHandler _fileHandler;
-        private readonly ILogger<FileService> _logger;
+        private readonly DDT.Backend.Common.ILogger _logger;
 
         public FileService(IConversationRepository conversationRepository, IUserRepository userRepository,
-            IFileOperations fileOperations, IFileHandler fileHandler, ILogger<FileService> logger)
+            IFileOperations fileOperations, IFileHandler fileHandler, DDT.Backend.Common.ILogger logger)
         {
             _conversationRepository = conversationRepository;
             _userRepository = userRepository;

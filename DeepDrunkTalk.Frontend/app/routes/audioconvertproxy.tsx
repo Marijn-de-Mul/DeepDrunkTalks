@@ -6,7 +6,6 @@ import os from "os";
 import { v4 as uuidv4 } from "uuid";
 import { writeFile, unlink, readFile } from "fs/promises";
 
-// Ensure FFmpeg path is set
 if (ffmpegPath) {
   ffmpeg.setFfmpegPath(ffmpegPath);
 } else {
@@ -19,10 +18,8 @@ export const config = {
   },
 };
 
-// Define the Action Function
 export const action: ActionFunction = async ({ request }) => {
   try {
-    // Parse the multipart form data
     const formData = await unstable_parseMultipartFormData(
       request,
       unstable_createMemoryUploadHandler()
@@ -33,15 +30,12 @@ export const action: ActionFunction = async ({ request }) => {
       return json({ error: "No file uploaded" }, { status: 400 });
     }
 
-    // Read the file as a buffer
     const buffer = Buffer.from(await file.arrayBuffer());
     const uniqueId = uuidv4();
     const tempFilePath = path.join(os.tmpdir(), `${uniqueId}-${file.name}`);
 
-    // Write the file to the temp directory
     await writeFile(tempFilePath, buffer);
 
-    // Perform FFmpeg conversion
     const outputPath = path.join(os.tmpdir(), `${uniqueId}.mp3`);
 
     await new Promise<void>((resolve, reject) => {
@@ -52,14 +46,11 @@ export const action: ActionFunction = async ({ request }) => {
         .on("error", (err) => reject(err));
     });
 
-    // Read the converted file
     const convertedBuffer = await readFile(outputPath);
 
-    // Clean up temporary files
     await unlink(tempFilePath);
     await unlink(outputPath);
 
-    // Return the converted file as a response
     return new Response(convertedBuffer, {
       status: 200,
       headers: {

@@ -23,6 +23,8 @@ export default function Play() {
   const mediaStreamRef = useRef<MediaStream | null>(null);
   const recordedChunksRef = useRef<Blob[]>([]);
 
+  const intentionalStopRef = useRef(false);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -81,10 +83,16 @@ export default function Play() {
     enableMicrophone();
   }, []);
 
-  const handleStartConversation = async () => {
+  useEffect(() => {
     if (isMicrophoneEnabled && !hasStartedRef.current) {
       hasStartedRef.current = true;
       setIsReadyToStart(true);
+      startConversation(); 
+    }
+  }, [isMicrophoneEnabled]);
+
+  const handleStartConversation = async () => {
+    if (isMicrophoneEnabled && !conversationInProgressRef.current) {
       await startConversation();
     }
   };
@@ -172,6 +180,7 @@ export default function Play() {
     if (!conversationInProgressRef.current) return;
 
     setIsNextQuestionDisabled(true);
+    intentionalStopRef.current = true; 
     await stopConversation();
     await startConversation();
     setIsNextQuestionDisabled(false);
@@ -190,38 +199,40 @@ export default function Play() {
       if (!mediaStreamRef.current) {
         mediaStreamRef.current = await navigator.mediaDevices.getUserMedia({ audio: true });
       }
-
+  
       recordedChunksRef.current = [];
-
+      intentionalStopRef.current = false;
+  
       const supportedFormat = AUDIO_FORMATS.find((format) =>
         MediaRecorder.isTypeSupported(format)
       );
-
+  
       if (!supportedFormat) {
         throw new Error("No supported audio format found");
       }
-
-      console.log("Using format:", supportedFormat);
+  
       mediaRecorderRef.current = new MediaRecorder(mediaStreamRef.current, {
         mimeType: supportedFormat,
       });
-
+  
       mediaRecorderRef.current.ondataavailable = (event) => {
         if (event.data.size > 0) {
           recordedChunksRef.current.push(event.data);
         }
       };
-
+  
       mediaRecorderRef.current.onstop = async () => {
-        const audioBlob = new Blob(recordedChunksRef.current, { type: supportedFormat });
-        await sendAudioChunk(audioBlob);
+        if (!intentionalStopRef.current && mediaRecorderRef.current) {
+          console.warn("MediaRecorder stopped unexpectedly, retrying...");
+          await startRecording();
+        } else if (recordedChunksRef.current.length > 0) {
+          const audioBlob = new Blob(recordedChunksRef.current, { type: supportedFormat });
+          await sendAudioChunk(audioBlob);
+        }
       };
-
-      mediaRecorderRef.current.onerror = (event) => {
-        console.error("MediaRecorder error:", event.error);
-      };
-
+  
       mediaRecorderRef.current.start(1000);
+  
     } catch (error) {
       console.error("Error starting recording:", error);
     }
@@ -274,16 +285,27 @@ export default function Play() {
 
   function stopRecording() {
     if (mediaRecorderRef.current && mediaRecorderRef.current.state !== "inactive") {
+      intentionalStopRef.current = true;
       mediaRecorderRef.current.stop();
     }
-
+  
     if (mediaStreamRef.current) {
       mediaStreamRef.current.getTracks().forEach(track => track.stop());
       mediaStreamRef.current = null;
     }
   }
-
+  
   async function handleBackToMainMenu() {
+    if (mediaRecorderRef.current && mediaRecorderRef.current.state !== "inactive") {
+      intentionalStopRef.current = true;
+      mediaRecorderRef.current.stop();
+    }
+  
+    if (mediaStreamRef.current) {
+      mediaStreamRef.current.getTracks().forEach(track => track.stop());
+      mediaStreamRef.current = null;
+    }
+  
     await stopConversation();
     navigate("/");
   }

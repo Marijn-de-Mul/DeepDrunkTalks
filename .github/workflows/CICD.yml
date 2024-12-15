@@ -167,13 +167,23 @@ jobs:
             docker exec ddt_frontend_staging npx playwright install --with-deps
 
             docker exec ddt_frontend_staging npx playwright test
+
+            docker cp ddt_frontend_staging:/app/playwright-report /root/docker/ddt_staging/playwright-report
           '
         
-      - uses: actions/upload-artifact@v4
+      - name: Transfer Playwright Report from VPS to GitHub Runner
+        run: |
+          scp -o StrictHostKeyChecking=no root@45.140.142.168:/root/docker/ddt_staging/playwright-report.tar.gz ./playwright-report.tar.gz
+
+      - name: Extract Playwright Report
+        run: tar -xzf playwright-report.tar.gz -C ./
+
+      - name: Upload Playwright Report
         if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
         with:
           name: playwright-report
-          path: playwright-report/
+          path: ./playwright-report/
           retention-days: 30
 
   cd:

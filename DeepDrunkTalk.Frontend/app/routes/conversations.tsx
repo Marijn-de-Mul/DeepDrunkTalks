@@ -2,7 +2,7 @@ import { Button, Box, Text, Modal } from '@mantine/core';
 import { useState, useEffect, useRef } from 'react';
 import { MetaFunction } from '@remix-run/node';
 import { Link } from "@remix-run/react";
-import { isMobileDevice } from '~/utils/device'; 
+import { isMobileDevice } from '~/utils/device';
 
 import ProtectedRoute from "~/components/layouts/ProtectedRoute";
 import Loading from "~/components/Loading";
@@ -98,7 +98,12 @@ export default function Conversations() {
     try {
       await setAudioStatusWithDelay(conversationId, AudioProcessingStatus.FETCHING);
       const formData = new FormData();
-      formData.append("endpoint", `/api/conversations/${conversationId}/audio`);
+
+      let endpoint = `/api/conversations/${conversationId}/audio`;
+      if (!endpoint.startsWith('/')) {
+        endpoint = `/${endpoint}`;
+      }
+      formData.append("endpoint", endpoint);
 
       const response = await fetch(`/audiogetproxy`, {
         method: "POST",
@@ -108,9 +113,7 @@ export default function Conversations() {
 
       if (response.ok) {
         const audioBlob = await response.blob();
-        console.log("Performing server-side conversion");
-        const convertedBlob = await convertAudioOnServer(conversationId, audioBlob);
-        const audioUrl = URL.createObjectURL(convertedBlob);
+        const audioUrl = URL.createObjectURL(audioBlob);
         setAudioUrls(prev => ({
           ...prev,
           [conversationId]: audioUrl
@@ -123,35 +126,13 @@ export default function Conversations() {
           });
         }, 800);
       } else {
-        console.error("Failed to fetch audio file:", response.status);
+        const errorResponse = await response.json();
+        console.error("Failed to fetch audio file:", response.status, errorResponse.error);
         return;
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error fetching audio file:", error);
       return;
-    }
-  }
-
-  async function convertAudioOnServer(conversationId: number, audioBlob: Blob): Promise<Blob> {
-    const formData = new FormData();
-    formData.append("audioFile", audioBlob, `audio_${conversationId}.webm`);
-    const token = localStorage.getItem("authToken");
-    if (!token) {
-      console.error("Token not found. Unable to convert audio file.");
-      return audioBlob;
-    }
-
-    const response = await fetch(`/audioconvertproxy`, {
-      method: "POST",
-      headers: { "Authorization": `Bearer ${token}` },
-      body: formData
-    });
-
-    if (response.ok) {
-      return await response.blob();
-    } else {
-      console.error("Failed to convert audio file:", response.status);
-      return audioBlob;
     }
   }
 

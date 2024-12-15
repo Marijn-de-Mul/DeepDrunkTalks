@@ -1,11 +1,20 @@
 import { json, type ActionFunction } from "@remix-run/node";
 import fetch from "node-fetch";
+import ffmpeg from 'fluent-ffmpeg';
+import ffmpegPath from 'ffmpeg-static';
+import { Readable } from 'stream';
 
 const BASE_URL = process.env.NODE_ENV === "production"
   ? "http://backend:8079"
   : process.env.NODE_ENV === "test"
     ? "http://backend_staging:8077"
     : "http://localhost:8079";
+
+if (ffmpegPath) {
+  ffmpeg.setFfmpegPath(ffmpegPath);
+} else {
+  throw new Error('ffmpeg path not found');
+}
 
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
@@ -20,16 +29,46 @@ export const action: ActionFunction = async ({ request }) => {
   const targetUrl = `${BASE_URL}${endpoint}`;
   
   try {
-    console.log('Audio type:', audio instanceof Blob);
-    console.log('Audio size:', audio instanceof Blob ? audio.size : 'N/A');
-    const proxyFormData = new FormData();
-    if (audio instanceof Blob) {
-      proxyFormData.append("audio", audio, "audio.webm");
-    } else if (typeof audio === 'string') {
-      proxyFormData.append("audio", new Blob([audio]), "audio.webm");
+    console.log('Audio is Blob:', typeof Blob !== 'undefined' && audio instanceof Blob);
+    console.log('Audio is Buffer:', Buffer.isBuffer(audio));
+    console.log('Audio size:', Buffer.isBuffer(audio) ? (audio as Buffer).length : 'N/A');
+
+    let mp3Buffer: Buffer;
+
+    if (typeof Blob !== 'undefined' && audio instanceof Blob) {
+      const buffer = Buffer.from(await audio.arrayBuffer());
+      mp3Buffer = await new Promise<Buffer>((resolve, reject) => {
+        const chunks: Buffer[] = [];
+        const readableStream = Readable.from(buffer);
+        
+        ffmpeg(readableStream)
+          .toFormat('mp3')
+          .on('error', reject)
+          .on('end', () => resolve(Buffer.concat(chunks)))
+          .pipe()
+          .on('data', (chunk) => chunks.push(chunk));
+      });
+    } else if (Buffer.isBuffer(audio)) {
+      mp3Buffer = await new Promise<Buffer>((resolve, reject) => {
+        const chunks: Buffer[] = [];
+        const readableStream = new Readable();
+        readableStream.push(audio);
+        readableStream.push(null);
+        
+        ffmpeg(readableStream)
+          .toFormat('mp3')
+          .on('error', reject)
+          .on('end', () => resolve(Buffer.concat(chunks)))
+          .pipe()
+          .on('data', (chunk) => chunks.push(chunk));
+      });
     } else {
       throw new Error("Invalid audio format");
     }
+
+    const proxyFormData = new FormData();
+    proxyFormData.append("audio", new Blob([mp3Buffer]), "audio.mp3");
+
     const response = await fetch(targetUrl, {
       method: "POST",
       headers: {

@@ -37,7 +37,7 @@ public class FileService
             throw new UnauthorizedAccessException("Unauthorized access.");
         }
         
-        var fileName = conversationId.ToString() + ".webm";
+        var fileName = conversationId.ToString() + ".mp3";
         
         var filePath = Path.Combine(Directory.GetCurrentDirectory(), "Uploads", fileName);
     

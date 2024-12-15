@@ -76,7 +76,7 @@ public class FileServiceTests
         _mockUserRepository.Setup(repo => repo.GetUserById(userId)).ReturnsAsync(user);
         _mockConversationRepository.Setup(repo => repo.GetConversationById(conversationId)).ReturnsAsync(conversation);
 
-        var filePath = Path.Combine(Directory.GetCurrentDirectory(), "Uploads", conversationId.ToString() + ".webm");
+        var filePath = Path.Combine(Directory.GetCurrentDirectory(), "Uploads", conversationId.ToString() + ".mp3");
         _mockFileOperations.Setup(fo => fo.FileExists(filePath)).Returns(false);
 
         var result = await _fileService.GetAudioFile(userId, conversationId);

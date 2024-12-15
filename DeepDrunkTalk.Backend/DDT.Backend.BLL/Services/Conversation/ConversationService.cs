@@ -13,9 +13,6 @@ public class ConversationService
     private readonly IConversationRepository _conversationRepository;
     private readonly IUserRepository _userRepository; 
     private readonly IQuestionRepository _questionRepository;
-    
-    private static string audioChunksDirectory = @"C:\temp\audio_chunks";  
-    private static string combinedAudioFilePath = @"C:\temp\combined_audio.webm"; 
 
     public ConversationService(IConversationRepository conversationRepository, IUserRepository userRepository, IQuestionRepository questionRepository)
     {

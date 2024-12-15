@@ -11,7 +11,7 @@ let recordedChunks: Blob[] = [];
 const requestMicrophoneAccess = async () => {
   try {
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-    stream.getTracks().forEach(track => track.stop()); 
+    stream.getTracks().forEach(track => track.stop());
     return true;
   } catch (error) {
     console.error('Error accessing microphone:', error);
@@ -182,6 +182,7 @@ export default function Play() {
     "audio/aac",
     "audio/mpeg",
   ];
+
   async function startRecording() {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
@@ -205,7 +206,7 @@ export default function Play() {
       };
 
       mediaRecorder.onstop = async () => {
-        const audioBlob = new Blob(recordedChunks, { type: "audio/webm" });
+        const audioBlob = new Blob(recordedChunks, { type: supportedFormat });
         await sendAudioChunk(audioBlob);
       };
 
@@ -217,25 +218,29 @@ export default function Play() {
     }
   }
 
-  function stopRecording() {
-    if (mediaRecorder && mediaRecorder.state !== "inactive") {
-      mediaRecorder.stop();
-      setIsRecording(false);
-    }
-  }
-
   async function sendAudioChunk(audioBlob: Blob) {
     const token = localStorage.getItem("authToken");
     const conversationId = localStorage.getItem("conversationId");
 
-    if (!token || !conversationId) {
-      console.error("Missing token or conversationId");
+    if (!token) {
+      console.error("Missing token");
       return;
     }
 
+    if (!conversationId) {
+      console.error("Missing conversationId");
+      return;
+    }
+
+    if (!audioBlob) {
+      console.error("Missing audioBlob");
+      return;
+    }
+
+    console.log(`Sending audio chunk with MIME type: ${audioBlob.type} and size: ${audioBlob.size} bytes`);
+
     const formData = new FormData();
     formData.append("endpoint", `/api/conversations/${conversationId}/audio`);
-    formData.append("method", "POST");
     formData.append("authorization", token);
     formData.append("audio", audioBlob);
 
@@ -246,10 +251,22 @@ export default function Play() {
       });
 
       if (!response.ok) {
+        const errorText = await response.text();
+        console.error(`HTTP error! status: ${response.status}, response: ${errorText}`);
         throw new Error(`HTTP error! status: ${response.status}`);
       }
+
+      const responseData = await response.json();
+      console.log("Audio chunk sent successfully:", responseData);
     } catch (error) {
       console.error("Error sending audio:", error);
+    }
+  }
+
+  function stopRecording() {
+    if (mediaRecorder && mediaRecorder.state !== "inactive") {
+      mediaRecorder.stop();
+      setIsRecording(false);
     }
   }
 

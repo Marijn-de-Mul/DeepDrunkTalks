@@ -1,4 +1,4 @@
-import { json, type ActionFunction } from "@remix-run/node";
+import { ActionFunction } from "@remix-run/node";
 import fetch from "node-fetch";
 
 const BASE_URL = process.env.NODE_ENV === "production"
@@ -13,35 +13,44 @@ export const action: ActionFunction = async ({ request }) => {
   const authorization = request.headers.get("authorization");
 
   if (!endpoint || !authorization) {
-    return json({ error: "Missing required parameters" }, { status: 400 });
+    console.error("Missing required parameters: endpoint or authorization");
+    return new Response(JSON.stringify({ error: "Missing required parameters" }), { status: 400 });
   }
 
-  const targetUrl = `${BASE_URL}${endpoint}`;
-  const headers: HeadersInit = {
-    "Authorization": authorization,
-  };
+  const endpointString = endpoint.toString();
+  const normalizedEndpoint = endpointString.startsWith('/') ? endpointString : `/${endpointString}`;
+  const targetUrl = `${BASE_URL}${normalizedEndpoint}`;
+  console.log(`Fetching audio from: ${targetUrl}`);
 
   try {
     const response = await fetch(targetUrl, {
       method: "GET",
-      headers,
-    } as import("node-fetch").RequestInit);
-
-    console.log("Audio fetch status:", response.status);
-
-    if (!response.ok) {
-      return json({ error: "Failed to fetch audio" }, { status: response.status });
-    }
-
-    const audioBlob = await response.blob();
-    return new Response(audioBlob, {
-      status: 200,
       headers: {
-        "Content-Type": response.headers.get("content-type") || "audio/mpeg",
+        "Authorization": authorization,
       },
     });
-  } catch (error) {
-    console.error("Audio fetch error:", error);
-    return json({ error: "Internal Server Error" }, { status: 500 });
+
+    console.log(`Backend response status: ${response.status}`);
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error(`Failed to fetch audio: ${response.status} - ${errorText}`);
+      return new Response(JSON.stringify({ error: `Failed to fetch audio: ${response.statusText}` }), { status: response.status });
+    }
+
+    const contentType = response.headers.get("content-type") || "application/octet-stream";
+    const data = await response.buffer();
+
+    console.log(`Successfully fetched audio. Content-Type: ${contentType}, Size: ${data.length} bytes`);
+
+    return new Response(data, {
+      status: 200,
+      headers: {
+        "Content-Type": contentType,
+      },
+    });
+  } catch (error: any) {
+    console.error("Error fetching audio:", error);
+    return new Response(JSON.stringify({ error: error.message }), { status: 500 });
   }
 };

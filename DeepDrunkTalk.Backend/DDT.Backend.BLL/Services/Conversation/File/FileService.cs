@@ -11,13 +11,16 @@ namespace DDT.Backend.BLL.Services.File
         private readonly IConversationRepository _conversationRepository;
         private readonly IUserRepository _userRepository;
         private readonly IFileOperations _fileOperations;
+        private readonly IFileHandler _fileHandler;
         private readonly ILogger<FileService> _logger;
 
-        public FileService(IConversationRepository conversationRepository, IUserRepository userRepository, IFileOperations fileOperations, ILogger<FileService> logger)
+        public FileService(IConversationRepository conversationRepository, IUserRepository userRepository,
+            IFileOperations fileOperations, IFileHandler fileHandler, ILogger<FileService> logger)
         {
             _conversationRepository = conversationRepository;
             _userRepository = userRepository;
             _fileOperations = fileOperations;
+            _fileHandler = fileHandler;
             _logger = logger;
         }
 
@@ -43,7 +46,7 @@ namespace DDT.Backend.BLL.Services.File
             }
 
             var fileName = conversationId.ToString() + ".mp3";
-            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "Uploads", fileName);
+            var filePath = Path.Combine(_fileHandler.GetUploadsPath(), fileName);
 
             _logger.LogInformation($"Checking file path: {filePath}");
 

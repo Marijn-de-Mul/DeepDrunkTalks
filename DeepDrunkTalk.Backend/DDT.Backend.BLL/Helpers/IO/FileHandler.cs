@@ -6,8 +6,7 @@ namespace DDT.Backend.BLL.Helpers;
 public class FileHandler : IFileHandler
 {
     private static readonly string _uploadsPath;
-
-
+    
     static FileHandler()
     {
         _uploadsPath = Path.Combine(Directory.GetCurrentDirectory(), "Uploads");
@@ -26,4 +25,6 @@ public class FileHandler : IFileHandler
 
         return filePath;
     }
+    
+    public string GetUploadsPath() => _uploadsPath;
 }

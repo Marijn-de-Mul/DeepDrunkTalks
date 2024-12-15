@@ -180,6 +180,9 @@ jobs:
       - name: Extract Playwright Report
         run: tar -xzf playwright-report.tar.gz -C ./
 
+      - name: See Playwright Report
+        run: ls 
+
       - name: Upload Playwright Report
         if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v4

@@ -9,17 +9,19 @@ namespace DDT.Backend.UTL;
 
 public class FileServiceTests
 {
-    private Mock<IConversationRepository> _mockConversationRepository;
-    private Mock<IUserRepository> _mockUserRepository;
-    private Mock<IFileOperations> _mockFileOperations;  
-    private FileService _fileService;
+    private readonly Mock<IConversationRepository> _conversationRepositoryMock;
+    private readonly Mock<IUserRepository> _userRepositoryMock;
+    private readonly Mock<IFileOperations> _fileOperationsMock;
+    private readonly Mock<DDT.Backend.Common.ILogger> _loggerMock;
+    private readonly FileService _fileService;
 
     public FileServiceTests()
     {
-        _mockConversationRepository = new Mock<IConversationRepository>();
-        _mockUserRepository = new Mock<IUserRepository>();
-        _mockFileOperations = new Mock<IFileOperations>();  
-        _fileService = new FileService(_mockConversationRepository.Object, _mockUserRepository.Object, _mockFileOperations.Object);
+        
+        _conversationRepositoryMock = new Mock<IConversationRepository>();
+        _userRepositoryMock = new Mock<IUserRepository>();
+        _fileOperationsMock = new Mock<IFileOperations>();
+        _loggerMock = new Mock<DDT.Backend.Common.ILogger>();
     }
 
     [Fact]
@@ -28,7 +30,7 @@ public class FileServiceTests
         var userId = 1;
         var conversationId = 1;
 
-        _mockUserRepository.Setup(repo => repo.GetUserById(userId)).ReturnsAsync((User)null);
+        _userRepositoryMock.Setup(repo => repo.GetUserById(userId)).ReturnsAsync((User)null);
 
         await Assert.ThrowsAsync<UnauthorizedAccessException>(
             () => _fileService.GetAudioFile(userId, conversationId));
@@ -41,9 +43,9 @@ public class FileServiceTests
         var conversationId = 1;
         var user = new User { UserId = userId };
 
-        _mockUserRepository.Setup(repo => repo.GetUserById(userId)).ReturnsAsync(user);
+        _userRepositoryMock.Setup(repo => repo.GetUserById(userId)).ReturnsAsync(user);
 
-        _mockConversationRepository.Setup(repo => repo.GetConversationById(conversationId))
+        _conversationRepositoryMock.Setup(repo => repo.GetConversationById(conversationId))
             .ReturnsAsync((Conversation)null);
 
         await Assert.ThrowsAsync<InvalidOperationException>(
@@ -58,8 +60,8 @@ public class FileServiceTests
         var user = new User { UserId = userId };
         var conversation = new Conversation { UserId = 2 };  
 
-        _mockUserRepository.Setup(repo => repo.GetUserById(userId)).ReturnsAsync(user);
-        _mockConversationRepository.Setup(repo => repo.GetConversationById(conversationId)).ReturnsAsync(conversation);
+        _userRepositoryMock.Setup(repo => repo.GetUserById(userId)).ReturnsAsync(user);
+        _conversationRepositoryMock.Setup(repo => repo.GetConversationById(conversationId)).ReturnsAsync(conversation);
 
         await Assert.ThrowsAsync<UnauthorizedAccessException>(
             () => _fileService.GetAudioFile(userId, conversationId));
@@ -73,11 +75,11 @@ public class FileServiceTests
         var user = new User { UserId = userId };
         var conversation = new Conversation { UserId = userId };
 
-        _mockUserRepository.Setup(repo => repo.GetUserById(userId)).ReturnsAsync(user);
-        _mockConversationRepository.Setup(repo => repo.GetConversationById(conversationId)).ReturnsAsync(conversation);
+        _userRepositoryMock.Setup(repo => repo.GetUserById(userId)).ReturnsAsync(user);
+        _conversationRepositoryMock.Setup(repo => repo.GetConversationById(conversationId)).ReturnsAsync(conversation);
 
         var filePath = Path.Combine(Directory.GetCurrentDirectory(), "Uploads", conversationId.ToString() + ".mp3");
-        _mockFileOperations.Setup(fo => fo.FileExists(filePath)).Returns(false);
+        _fileOperationsMock.Setup(fo => fo.FileExists(filePath)).Returns(false);
 
         var result = await _fileService.GetAudioFile(userId, conversationId);
 

@@ -5,6 +5,7 @@ export default defineConfig({
   timeout: 60000,
   retries: 2,
   reporter: [['html', { outputFolder: 'playwright-report' }]],
+  workers: 16, 
   
   use: {
     baseURL: (() => {

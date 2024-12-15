@@ -178,10 +178,10 @@ jobs:
           scp -o StrictHostKeyChecking=no root@45.140.142.168:/root/docker/ddt_staging/playwright-report.tar.gz ./playwright-report.tar.gz
 
       - name: Extract Playwright Report
-        run: tar -xzf playwright-report.tar.gz -C ./
+        run: tar -xzf playwright-report.tar.gz -C ./playwright-report
 
       - name: See Playwright Report
-        run: ls 
+        run: ls playwright-report
 
       - name: Upload Playwright Report
         if: ${{ !cancelled() }}

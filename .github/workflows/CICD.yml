@@ -163,7 +163,6 @@ jobs:
             sleep 15
           '
 
-      - name: Install Node
       - uses: actions/setup-node@v4
         with:
           node-version: lts/*

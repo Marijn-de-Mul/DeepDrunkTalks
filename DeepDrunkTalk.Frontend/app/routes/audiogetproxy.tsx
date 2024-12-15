@@ -4,7 +4,7 @@ import fetch from "node-fetch";
 const BASE_URL = process.env.NODE_ENV === "production"
   ? "http://ddt_backend:8079"
   : process.env.NODE_ENV === "test"
-    ? "http://ddt_backend_staging:8077"
+    ? "http://ddt_backend_staging:8079"
     : "http://localhost:8079";
 
 export const action: ActionFunction = async ({ request }) => {

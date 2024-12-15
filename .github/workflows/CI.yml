@@ -159,6 +159,8 @@ jobs:
             
             docker compose up -d
 
+            docker exec ddt_frontend_staging npx playwright install
+
             docker exec ddt_frontend_staging npx playwright test
           '
         env:

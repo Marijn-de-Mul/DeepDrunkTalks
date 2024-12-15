@@ -25,7 +25,7 @@ jobs:
             export DOCKER_BUILDKIT=1
             export DOCKER_CLI_EXPERIMENTAL=enabled
 
-            cd /root/docker/deepdrunktalks
+            cd /root/docker/ddt
 
             docker compose down
 

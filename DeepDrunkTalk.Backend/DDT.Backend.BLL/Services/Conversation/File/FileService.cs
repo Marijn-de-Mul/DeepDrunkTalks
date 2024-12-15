@@ -45,7 +45,7 @@ namespace DDT.Backend.BLL.Services.File
                 throw new UnauthorizedAccessException("Unauthorized access.");
             }
 
-            var fileName = conversationId.ToString() + ".mp3";
+            var fileName = $"{conversationId}.mp3";
             var filePath = Path.Combine(_fileHandler.GetUploadsPath(), fileName);
 
             _logger.LogInformation($"Checking file path: {filePath}");
@@ -59,13 +59,11 @@ namespace DDT.Backend.BLL.Services.File
             var fileStream = _fileOperations.OpenRead(filePath);
             var fileExtension = Path.GetExtension(filePath).ToLowerInvariant();
 
-            AudioFile audioFile = new AudioFile
+            return new AudioFile
             {
                 fileStream = fileStream,
                 fileExtension = fileExtension
             };
-
-            return audioFile;
         }
     }
 }

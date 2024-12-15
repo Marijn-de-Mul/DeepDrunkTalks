@@ -163,33 +163,22 @@ jobs:
             sleep 15
           '
 
-      - name: Archive Playwright Reports on VPS
-        run: |
-          ssh -o StrictHostKeyChecking=no root@45.140.142.168 '
-            cd /root/docker/ddt_staging/playwright-report
-            tar -czf /root/docker/ddt_staging/playwright-report.tar.gz .
-          '
-  
-      - name: Download Playwright Report
-        uses: appleboy/scp-action@v0.1.4
-        with:
-          host: ${{ secrets.VPS_HOST }}
-          username: root
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: 22
-          source: "/root/docker/ddt_staging/playwright-report.tar.gz"
-          target: "./playwright-report.tar.gz"
-  
-      - name: Extract Playwright Report
-        run: tar -xzf playwright-report.tar.gz -C ./
-  
-      - name: Upload Playwright Report
-        if: ${{ always() }}
-        uses: actions/upload-artifact@v4
-        with:
-          name: playwright-report
-          path: ./playwright-report/
-          retention-days: 30
+    - name: Install Node
+    - uses: actions/setup-node@v4
+      with:
+        node-version: lts/*
+    - name: Install dependencies
+      run: npm ci
+    - name: Install Playwright Browsers
+      run: npx playwright install --with-deps
+    - name: Run Playwright tests
+      run: npx playwright test
+    - uses: actions/upload-artifact@v4
+      if: ${{ !cancelled() }}
+      with:
+        name: playwright-report
+        path: playwright-report/
+        retention-days: 30
 
   cd:
     needs: [e2e-tests]

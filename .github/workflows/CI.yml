@@ -136,16 +136,17 @@ jobs:
       - name: (Github) Checkout Code
         uses: actions/checkout@v4
 
-      - name: (Install SSH Client)
-        run: sudo apt-get update && sudo apt-get install -y ssh
-
-      - name: (Run E2E Tests on VPS)
-        uses: appleboy/ssh-action@v0.1.7
+      - name: (SSH) Set up SSH keys
+        uses: webfactory/ssh-agent@v0.5.3
         with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USER }}
-          key: ${{ secrets.VPS_SSH_KEY }}
-          script: |
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: (Docker) SSH into VPS and Deploy Production Environment
+        run: |
+          ssh -o StrictHostKeyChecking=no root@45.140.142.168 '
+            export DOCKER_BUILDKIT=1
+            export DOCKER_CLI_EXPERIMENTAL=enabled
+
             set -e
 
             cd /root/docker/ddt_staging
@@ -159,3 +160,7 @@ jobs:
             docker compose up -d
 
             docker exec ddt_frontend_staging npx playwright test
+          '
+        env:
+          DOCKER_BUILDKIT: 1
+          DOCKER_CLI_EXPERIMENTAL: enabled

@@ -166,3 +166,37 @@ jobs:
         env:
           DOCKER_BUILDKIT: 1
           DOCKER_CLI_EXPERIMENTAL: enabled
+
+  cd:
+    needs: [e2e-tests]
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: (Github) Checkout Code
+        uses: actions/checkout@v4
+
+      - name: (SSH) Set up SSH keys
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: (Docker) SSH into VPS and Deploy Production Environment
+        run: |
+          ssh -o StrictHostKeyChecking=no root@45.140.142.168 '
+            export DOCKER_BUILDKIT=1
+            export DOCKER_CLI_EXPERIMENTAL=enabled
+
+            cd /root/docker/ddt
+
+            docker compose down
+
+            docker compose pull
+            
+            docker image prune -f
+            
+            docker compose up -d
+          '
+        env:
+          DOCKER_BUILDKIT: 1
+          DOCKER_CLI_EXPERIMENTAL: enabled
+

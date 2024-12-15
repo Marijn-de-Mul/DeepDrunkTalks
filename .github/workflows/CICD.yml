@@ -170,12 +170,15 @@ jobs:
 
             docker exec ddt_frontend_staging tar -czf /app/playwright-report.tar.gz -C /app/playwright-report .
 
-            docker cp ddt_frontend_staging:/app/playwright-report /root/docker/ddt_staging/playwright-report
+            docker cp ddt_frontend_staging:/app/playwright-report.tar.gz /root/docker/ddt_staging/playwright-report.tar.gz
           '
         
       - name: Transfer Playwright Report from VPS to GitHub Runner
         run: |
           scp -o StrictHostKeyChecking=no root@45.140.142.168:/root/docker/ddt_staging/playwright-report.tar.gz ./playwright-report.tar.gz
+
+      - name: Create Directory for Playwright Report
+        run: mkdir -p playwright-report
 
       - name: Extract Playwright Report
         run: tar -xzf playwright-report.tar.gz -C ./playwright-report
@@ -190,7 +193,7 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 30
-
+          
   cd:
     needs: [e2e-tests]
     runs-on: ubuntu-latest

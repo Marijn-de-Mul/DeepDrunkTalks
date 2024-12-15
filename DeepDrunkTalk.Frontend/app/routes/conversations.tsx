@@ -33,6 +33,7 @@ export default function Conversations() {
   const observer = useRef<IntersectionObserver | null>(null);
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
   const [conversationToDelete, setConversationToDelete] = useState<number | null>(null);
+  const [isConfirmDeleteAllModalOpen, setIsConfirmDeleteAllModalOpen] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
@@ -210,6 +211,43 @@ export default function Conversations() {
     }
   };
 
+  const deleteAllConversations = async () => {
+    const token = localStorage.getItem("authToken");
+
+    if (!token) {
+      console.error("No auth token found");
+      return;
+    }
+
+    try {
+      const deletePromises = conversations.map(conversation => {
+        return fetch(`/jsonproxy`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            endpoint: `/api/conversations/${conversation.id}`,
+            method: 'DELETE',
+            authorization: token
+          })
+        });
+      });
+
+      const responses = await Promise.all(deletePromises);
+
+      const failedResponses = responses.filter(response => !response.ok);
+      if (failedResponses.length > 0) {
+        console.error("Failed to delete some conversations:", failedResponses);
+      } else {
+        setConversations([]);
+        setAudioUrls({});
+      }
+    } catch (error) {
+      console.error("Error deleting all conversations:", error);
+    }
+  };
+
   const openConfirmModal = (conversationId: number) => {
     setConversationToDelete(conversationId);
     setIsConfirmModalOpen(true);
@@ -225,6 +263,19 @@ export default function Conversations() {
   const handleCancelDelete = () => {
     setIsConfirmModalOpen(false);
     setConversationToDelete(null);
+  };
+
+  const openConfirmDeleteAllModal = () => {
+    setIsConfirmDeleteAllModalOpen(true);
+  };
+
+  const handleConfirmDeleteAll = () => {
+    deleteAllConversations();
+    setIsConfirmDeleteAllModalOpen(false);
+  };
+
+  const handleCancelDeleteAll = () => {
+    setIsConfirmDeleteAllModalOpen(false);
   };
 
   if (!isClient || isLoading) {
@@ -259,116 +310,128 @@ export default function Conversations() {
         </Text>
 
         {conversations.length > 0 ? (
-          <Box
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              padding: "10px",
-              gap: "15px",
-              overflowY: "auto",
-              maxHeight: "calc(100vh - 250px)",
-              width: "90%",
-              borderRadius: "10px",
-              boxShadow: "inset 0 0 10px rgba(0, 0, 0, 0.1)",
-              backgroundColor: "rgba(255, 255, 255, 0.05)",
-            }}
-            data-testid="conversations-list"
-          >
-            {conversations.map((conversation) => (
-              <Box
-                key={conversation.id}
-                data-conversation-id={conversation.id}
-                style={{
-                  width: "100%",
-                  padding: "15px",
-                  border: "1px solid rgba(0, 0, 0, 0.2)",
-                  borderRadius: "10px",
-                  backgroundColor: "rgba(255, 255, 255, 0.1)",
-                  boxShadow: "0 4px 6px rgba(0, 0, 0, 0.15)",
-                }}
-                data-testid="conversations-item"
-              >
-                <Text
-                  data-testid="conversations-item-topic"
+          <>
+            <Button
+              color="red"
+              style={{
+                marginBottom: "20px",
+              }}
+              onClick={openConfirmDeleteAllModal}
+              data-testid="conversations-delete-all"
+            >
+              DELETE ALL CONVERSATIONS
+            </Button>
+            <Box
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                padding: "10px",
+                gap: "15px",
+                overflowY: "auto",
+                maxHeight: "calc(100vh - 300px)",
+                width: "90%",
+                borderRadius: "10px",
+                boxShadow: "inset 0 0 10px rgba(0, 0, 0, 0.1)",
+                backgroundColor: "rgba(255, 255, 255, 0.05)",
+              }}
+              data-testid="conversations-list"
+            >
+              {conversations.map((conversation) => (
+                <Box
+                  key={conversation.id}
+                  data-conversation-id={conversation.id}
                   style={{
-                    fontSize: "1.2em",
-                    fontWeight: "600",
-                    color: "#000",
-                    marginBottom: "5px",
-                  }}
-                >
-                  {conversation.topic || "Untitled Topic"}
-                </Text>
-                <Text
-                  data-testid="conversations-item-question"
-                  style={{
-                    fontSize: "0.9em",
-                    fontWeight: "400",
-                    color: "#333",
-                    marginBottom: "5px",
-                  }}
-                >
-                  {conversation.question || "No question available."}
-                </Text>
-                <Text
-                  data-testid="conversations-item-time"
-                  style={{
-                    fontSize: "0.9em",
-                    fontWeight: "400",
-                    color: "#333",
-                    marginBottom: "10px",
-                  }}
-                >
-                  {conversation.startTime && conversation.endTime
-                    ? `${conversation.startTime.split(" ")[0]} (${conversation.startTime.split(" ")[1].slice(0, 5)} - ${conversation.endTime.split(" ")[1].slice(0, 5)})`
-                    : "No time available"}
-                </Text>
-
-                {audioUrls[conversation.id] ? (
-                  <audio
-                    style={{
-                      width: "100%",
-                      borderRadius: "5px",
-                    }}
-                    controls
-                    src={audioUrls[conversation.id]}
-                    data-testid="conversations-item-audio"
-                  />
-                ) : (
-                  <>
-                    {audioStatus[conversation.id] ? (
-                      <AudioLoader status={audioStatus[conversation.id]} />
-                    ) : (
-                      <Text
-                        data-testid="conversations-item-no-audio"
-                        style={{
-                          fontSize: "0.9em",
-                          fontWeight: "400",
-                          color: "#666",
-                          textAlign: "center",
-                        }}
-                      >
-                        No audio available
-                      </Text>
-                    )}
-                  </>
-                )}
-
-                <Button
-                  color="red"
-                  style={{
-                    marginTop: "10px",
                     width: "100%",
+                    padding: "15px",
+                    border: "1px solid rgba(0, 0, 0, 0.2)",
+                    borderRadius: "10px",
+                    backgroundColor: "rgba(255, 255, 255, 0.1)",
+                    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.15)",
                   }}
-                  onClick={() => openConfirmModal(conversation.id)}
-                  data-testid="conversations-delete"
+                  data-testid="conversations-item"
                 >
-                  DELETE
-                </Button>
-              </Box>
-            ))}
-          </Box>
+                  <Text
+                    data-testid="conversations-item-topic"
+                    style={{
+                      fontSize: "1.2em",
+                      fontWeight: "600",
+                      color: "#000",
+                      marginBottom: "5px",
+                    }}
+                  >
+                    {conversation.topic || "Untitled Topic"}
+                  </Text>
+                  <Text
+                    data-testid="conversations-item-question"
+                    style={{
+                      fontSize: "0.9em",
+                      fontWeight: "400",
+                      color: "#333",
+                      marginBottom: "5px",
+                    }}
+                  >
+                    {conversation.question || "No question available."}
+                  </Text>
+                  <Text
+                    data-testid="conversations-item-time"
+                    style={{
+                      fontSize: "0.9em",
+                      fontWeight: "400",
+                      color: "#333",
+                      marginBottom: "10px",
+                    }}
+                  >
+                    {conversation.startTime && conversation.endTime
+                      ? `${conversation.startTime.split(" ")[0]} (${conversation.startTime.split(" ")[1].slice(0, 5)} - ${conversation.endTime.split(" ")[1].slice(0, 5)})`
+                      : "No time available"}
+                  </Text>
+
+                  {audioUrls[conversation.id] ? (
+                    <audio
+                      style={{
+                        width: "100%",
+                        borderRadius: "5px",
+                      }}
+                      controls
+                      src={audioUrls[conversation.id]}
+                      data-testid="conversations-item-audio"
+                    />
+                  ) : (
+                    <>
+                      {audioStatus[conversation.id] ? (
+                        <AudioLoader status={audioStatus[conversation.id]} />
+                      ) : (
+                        <Text
+                          data-testid="conversations-item-no-audio"
+                          style={{
+                            fontSize: "0.9em",
+                            fontWeight: "400",
+                            color: "#666",
+                            textAlign: "center",
+                          }}
+                        >
+                          No audio available
+                        </Text>
+                      )}
+                    </>
+                  )}
+
+                  <Button
+                    color="red"
+                    style={{
+                      marginTop: "10px",
+                      width: "100%",
+                    }}
+                    onClick={() => openConfirmModal(conversation.id)}
+                    data-testid="conversations-delete"
+                  >
+                    DELETE
+                  </Button>
+                </Box>
+              ))}
+            </Box>
+          </>
         ) : (
           <Box
             style={{
@@ -451,6 +514,30 @@ export default function Conversations() {
             Delete
           </Button>
           <Button onClick={handleCancelDelete}>
+            Cancel
+          </Button>
+        </Box>
+      </Modal>
+
+      <Modal
+        opened={isConfirmDeleteAllModalOpen}
+        onClose={handleCancelDeleteAll}
+        title="Confirm Deletion of All Conversations"
+      >
+        <Text size="sm">
+          Are you sure you want to delete all conversations? This action cannot be undone.
+        </Text>
+        <Box
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            marginTop: "20px",
+          }}
+        >
+          <Button color="red" onClick={handleConfirmDeleteAll}>
+            Delete All
+          </Button>
+          <Button onClick={handleCancelDeleteAll}>
             Cancel
           </Button>
         </Box>

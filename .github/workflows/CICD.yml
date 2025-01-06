@@ -175,7 +175,7 @@ jobs:
         
       - name: Transfer Playwright Report from VPS to GitHub Runner
         run: |
-          scp -o StrictHostKeyChecking=no root@45.140.142.168:/root/docker/ddt_staging/playwright-report.tar.gz ./playwright-report.tar.gz
+          scp -o StrictHostKeyChecking=no -p 4000 root@marijndemul.ddns.net:/root/docker/ddt_staging/playwright-report.tar.gz ./playwright-report.tar.gz
 
       - name: Create Directory for Playwright Report
         run: mkdir -p playwright-report
@@ -209,7 +209,7 @@ jobs:
 
       - name: (Docker) SSH into VPS and Deploy Production Environment
         run: |
-          ssh -o StrictHostKeyChecking=no root@45.140.142.168 '
+          ssh -o StrictHostKeyChecking=no -p 4000 root@marijndemul.ddns.net '
             export DOCKER_BUILDKIT=1
             export DOCKER_CLI_EXPERIMENTAL=enabled
 

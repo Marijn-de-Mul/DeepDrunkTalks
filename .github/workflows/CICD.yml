@@ -144,7 +144,7 @@ jobs:
   
       - name: Deploy to Staging and Run Playwright Tests
         run: |
-          ssh -o StrictHostKeyChecking=no root@45.140.142.168 '
+          ssh -o StrictHostKeyChecking=no -p 4000 root@marijndemul.ddns.net '
             set -e  
   
             export DOCKER_BUILDKIT=1

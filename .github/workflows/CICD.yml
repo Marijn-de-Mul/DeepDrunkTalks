@@ -173,26 +173,26 @@ jobs:
             docker cp ddt_frontend_staging:/app/playwright-report.tar.gz /root/docker/ddt_staging/playwright-report.tar.gz
           '
         
-      - name: Transfer Playwright Report from VPS to GitHub Runner
-        run: |
-          scp -o StrictHostKeyChecking=no -p 4000 root@marijndemul.ddns.net:/root/docker/ddt_staging/playwright-report.tar.gz ./playwright-report.tar.gz
+      # - name: Transfer Playwright Report from VPS to GitHub Runner
+      #   run: |
+      #     scp -o StrictHostKeyChecking=no -p 4000 root@marijndemul.ddns.net:/root/docker/ddt_staging/playwright-report.tar.gz ./playwright-report.tar.gz
 
-      - name: Create Directory for Playwright Report
-        run: mkdir -p playwright-report
+      # - name: Create Directory for Playwright Report
+      #   run: mkdir -p playwright-report
 
-      - name: Extract Playwright Report
-        run: tar -xzf playwright-report.tar.gz -C ./playwright-report
+      # - name: Extract Playwright Report
+      #   run: tar -xzf playwright-report.tar.gz -C ./playwright-report
 
-      - name: See Playwright Report
-        run: ls playwright-report
+      # - name: See Playwright Report
+      #   run: ls playwright-report
 
-      - name: Upload Playwright Report
-        if: ${{ !cancelled() }}
-        uses: actions/upload-artifact@v4
-        with:
-          name: playwright-report
-          path: playwright-report/
-          retention-days: 30
+      # - name: Upload Playwright Report
+      #   if: ${{ !cancelled() }}
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: playwright-report
+      #     path: playwright-report/
+      #     retention-days: 30
           
   cd:
     needs: [e2e-tests]
